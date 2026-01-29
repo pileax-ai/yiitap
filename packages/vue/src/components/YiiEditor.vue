@@ -381,10 +381,9 @@ function buildExtensions() {
             levels: [1, 2, 3, 4, 5],
           },
       paragraph: props.extensions.includes('OParagraph') ? false : {},
-      trailingNode: {
-        node: 'paragraph',
-        notAfter: ['paragraph', 'heading'],
-      },
+      trailingNode: props.title
+        ? { node: 'paragraph', notAfter: ['paragraph', 'heading'],}
+        : { notAfter: [] },
       undoRedo: props.collab.enabled
         ? false
         : { depth: 100, newGroupDelay: 500 },
