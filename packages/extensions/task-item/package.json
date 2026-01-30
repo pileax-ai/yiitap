@@ -1,7 +1,7 @@
 {
 	"name": "@yiitap/extension-task-item",
 	"description": "Task Item",
-	"version": "0.11.1",
+	"version": "0.11.2",
 	"private": false,
 	"author": {
 		"name": "Yiitap",

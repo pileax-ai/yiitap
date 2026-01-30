@@ -1,5 +1,28 @@
 # app-vue
 
+## 0.11.2
+
+### Patch Changes
+
+- Updated dependencies [b8b9e8a]
+  - @yiitap/vue@0.11.2
+  - @yiitap/core@0.11.2
+  - @yiitap/extension-ai-block@0.11.2
+  - @yiitap/extension-callout@0.11.2
+  - @yiitap/extension-char-command@0.11.2
+  - @yiitap/extension-color-highlighter@0.11.2
+  - @yiitap/extension-focus@0.11.2
+  - @yiitap/extension-image@0.11.2
+  - @yiitap/extension-inline-placeholder@0.11.2
+  - @yiitap/extension-placeholder@0.11.2
+  - @yiitap/extension-selection-decoration@0.11.2
+  - @yiitap/extension-shortcut@0.11.2
+  - @yiitap/extension-table@0.11.2
+  - @yiitap/extension-table-wrapper@0.11.2
+  - @yiitap/extension-task-item@0.11.2
+  - @yiitap/extension-video@0.11.2
+  - @yiitap/util-emoji@0.11.2
+
 ## 0.11.1
 
 ### Patch Changes
