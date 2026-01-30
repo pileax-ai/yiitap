@@ -382,7 +382,7 @@ function buildExtensions() {
           },
       paragraph: props.extensions.includes('OParagraph') ? false : {},
       trailingNode: props.title
-        ? { node: 'paragraph', notAfter: ['paragraph', 'heading'],}
+        ? { node: 'paragraph', notAfter: ['paragraph', 'heading'] }
         : { notAfter: [] },
       undoRedo: props.collab.enabled
         ? false
