@@ -265,7 +265,7 @@ const emit = defineEmits<{
   /**
    * Emit when content updates.
    */
-  (e: 'update', payload: { json: Object; html: string }): void
+  (e: 'update', payload: { editor: Editor }): void
 }>()
 
 const { tr } = useI18n()
@@ -294,15 +294,13 @@ const editor = useEditor({
     ready.value = true
     emit('create', editor.value)
   },
-  onUpdate: () => {
+  onUpdate: ({ editor }) => {
     if (!ready.value) return
-    const json = editor.value?.getJSON()
-    const html = editor.value?.getHTML()
-    // console.log('update', json)
-    // console.log('html', html)
+    // const json = editor.getJSON()
+    // const html = editor.getHTML()
 
     // Only emit update when editor is ready
-    emit('update', { json, html })
+    emit('update', { editor })
   },
   onTransaction: ({ editor, transaction }) => {
     emit('transaction', { editor, transaction })
@@ -383,10 +381,9 @@ function buildExtensions() {
             levels: [1, 2, 3, 4, 5],
           },
       paragraph: props.extensions.includes('OParagraph') ? false : {},
-      trailingNode: {
-        node: 'paragraph',
-        notAfter: ['paragraph', 'heading'],
-      },
+      trailingNode: props.title
+        ? { node: 'paragraph', notAfter: ['paragraph', 'heading'] }
+        : { notAfter: [] },
       undoRedo: props.collab.enabled
         ? false
         : { depth: 100, newGroupDelay: 500 },
