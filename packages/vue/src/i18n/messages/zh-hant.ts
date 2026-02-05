@@ -158,6 +158,7 @@ export default {
     small: '小',
     medium: '中',
     large: '大',
+    zoom: '缩放',
   },
   embed: {
     video: '視頻',

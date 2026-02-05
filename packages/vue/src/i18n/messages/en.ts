@@ -167,6 +167,7 @@ export default {
     small: 'Small',
     medium: 'Medium',
     large: 'Large',
+    zoom: 'Zoom',
   },
   embed: {
     video: 'Video',

@@ -1,18 +1,20 @@
 <template>
-  <div v-if="show" class="dialog-overlay o-dialog" @click.self="close">
-    <div class="dialog-box">
-      <div class="dialog-header">
-        <slot name="title">{{ title }}</slot>
-        <o-btn icon="close" class="close" @click="close" />
-      </div>
-      <div class="dialog-body">
-        <slot></slot>
-      </div>
-      <div class="dialog-footer">
-        <slot name="footer"> </slot>
+  <teleport to="body">
+    <div v-if="show" class="dialog-overlay o-dialog" @click.self="close">
+      <div class="dialog-box">
+        <div class="dialog-header">
+          <slot name="title">{{ title }}</slot>
+          <o-btn icon="close" class="close" @click="close" />
+        </div>
+        <div class="dialog-body">
+          <slot></slot>
+        </div>
+        <div class="dialog-footer">
+          <slot name="footer"> </slot>
+        </div>
       </div>
     </div>
-  </div>
+  </teleport>
 </template>
 
 <script setup lang="ts">

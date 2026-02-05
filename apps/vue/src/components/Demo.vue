@@ -383,8 +383,7 @@ function onMode() {
 function onUpdate({ editor }: { editor: Editor }) {
   // Get content of editor
   // console.log(editor.getJSON())
-  console.log(editor.getHTML())
-
+  // console.log(editor.getHTML())
   // markdown
   // const markdown = editor.markdown?.serialize(editor.getJSON())
   // console.log(markdown)

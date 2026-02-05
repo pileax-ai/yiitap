@@ -4,7 +4,8 @@
     class="o-simple-command-btn"
     content-class="dropdown"
     size="medium"
-    trigger="click"
+    :placement="placement"
+    :trigger="trigger"
     :show-arrow="false"
   >
     <template #trigger>
@@ -52,6 +53,14 @@ const props = defineProps({
   editor: {
     type: Object,
   },
+  placement: {
+    type: String,
+    default: 'bottom-start',
+  },
+  trigger: {
+    type: String,
+    default: 'click',
+  },
 })
 const { tr } = useI18n()
 const { run } = useTiptap()
@@ -59,7 +68,7 @@ const popover = ref(null)
 
 const options = computed(() => {
   return [
-    { label: tr('editor.left'), value: 'left', icon: 'format_align_center' },
+    { label: tr('editor.left'), value: 'left', icon: 'format_align_left' },
     {
       label: tr('editor.center'),
       value: 'center',

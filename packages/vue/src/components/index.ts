@@ -1,6 +1,8 @@
 // Button
+export { default as OAlignDropdown } from './buttons/OAlignDropdown.vue'
 export { default as OCodeBlockDownloadDropdown } from './buttons/OCodeBlockDownloadDropdown.vue'
 export { default as OCodeBlockViewDropdown } from './buttons/OCodeBlockViewDropdown.vue'
+export { default as OLinkBtn } from './buttons/OLinkBtn.vue'
 
 // Common
 export { default as OBlockPlaceholder } from './common/OBlockPlaceholder.vue'
@@ -39,6 +41,7 @@ export { default as OCheckbox } from './ui/OCheckbox.vue'
 export { default as ODialog } from './ui/ODialog.vue'
 export { default as ODivider } from './ui/ODivider.vue'
 export { default as OIcon } from './ui/OIcon.vue'
+export { default as OImageViewer } from './ui/OImageViewer.vue'
 export { default as OInput } from './ui/OInput.vue'
 export { default as OList } from './ui/OList.vue'
 export { default as OListItem } from './ui/OListItem.vue'

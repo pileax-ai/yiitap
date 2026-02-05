@@ -6,12 +6,15 @@
         ref="popover"
         placement="bottom-end"
         size="medium"
-        trigger="click"
+        :trigger="trigger"
         :show-arrow="false"
       >
         <template #trigger>
-          <o-command-btn icon="more_horiz" :tooltip="tr('label.more')">
-          </o-command-btn>
+          <o-command-btn
+            icon="more_horiz"
+            :tooltip="tr('label.more')"
+            v-if="isEditable"
+          />
         </template>
         <o-block-menu v-bind="props" @action="onAction" />
       </o-popover>
@@ -22,7 +25,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
-import useI18n from '../../hooks/useI18n'
+import { useI18n, useTiptap } from '../../hooks'
 import { OBlockMenu, OCommandBtn, OPopover } from '../../components/index'
 
 const props = defineProps({
@@ -31,9 +34,15 @@ const props = defineProps({
     type: String,
     default: 'link',
   },
+  trigger: {
+    type: String,
+    default: 'click',
+  },
 })
 const emit = defineEmits(['action'])
+
 const { locale, tr } = useI18n()
+const { isEditable, run } = useTiptap()
 const popover = ref<InstanceType<typeof OPopover>>()
 
 function onSettings() {
