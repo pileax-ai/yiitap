@@ -32,7 +32,7 @@
         <o-block-toolbar v-bind="props" @action="onAction" v-if="isEditable">
           <o-menubar-btn
             icon="subtitles"
-            tooltip="image.caption"
+            :tooltip="tr('image.caption')"
             @click="onCaption"
           />
         </o-block-toolbar>
@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
-import { useTiptap } from '../../hooks'
+import { useI18n, useTiptap } from '../../hooks'
 import {
   OBlockMenu,
   OBlockPlaceholder,
@@ -79,6 +79,7 @@ import {
 
 const props = defineProps(nodeViewProps)
 
+const { tr } = useI18n()
 const { isEditable } = useTiptap()
 const showContextMenu = ref(false)
 const mouseEvent = ref({})
