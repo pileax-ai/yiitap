@@ -10,7 +10,11 @@
         :show-arrow="false"
       >
         <template #trigger>
-          <o-command-btn icon="more_horiz" :tooltip="tr('label.more')" v-if="isEditable" />
+          <o-command-btn
+            icon="more_horiz"
+            :tooltip="tr('label.more')"
+            v-if="isEditable"
+          />
         </template>
         <o-block-menu v-bind="props" @action="onAction" />
       </o-popover>

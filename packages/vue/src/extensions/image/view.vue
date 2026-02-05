@@ -33,9 +33,7 @@
         v-if="src === 'init'"
       />
       <div class="image-panel" v-else>
-        <o-block-toolbar v-bind="props"
-                         trigger="mouseenter"
-                         @action="onAction">
+        <o-block-toolbar v-bind="props" trigger="mouseenter" @action="onAction">
           <template v-if="isEditable">
             <o-menubar-btn
               icon="subtitles"
@@ -43,9 +41,11 @@
               @click.stop="onCaption"
             />
             <o-link-btn :editor="editor" />
-            <o-align-dropdown :editor="editor"
-                              placement="bottom-end"
-                              trigger="mouseenter" />
+            <o-align-dropdown
+              :editor="editor"
+              placement="bottom-end"
+              trigger="mouseenter"
+            />
           </template>
 
           <o-menubar-btn
@@ -129,9 +129,11 @@
       <o-block-menu v-bind="props" @action="onAction" />
     </o-context-menu>
 
-    <o-image-viewer v-model:show="showImageViewer"
-                    :images="images"
-                    :current="currentImageIndex">
+    <o-image-viewer
+      v-model:show="showImageViewer"
+      :images="images"
+      :current="currentImageIndex"
+    >
       <template #title>Run</template>
     </o-image-viewer>
   </o-node-view>
@@ -228,7 +230,8 @@ function onDownload() {
 
 function onPreview() {
   images.value = getEditorImages(props.editor)
-  currentImageIndex.value = images.value.findIndex(e => e.pos === props.getPos()) || 0
+  currentImageIndex.value =
+    images.value.findIndex((e) => e.pos === props.getPos()) || 0
   showImageViewer.value = true
 }
 
@@ -293,7 +296,8 @@ function onImageLoad() {
   if (imageElement.value) {
     naturalWidth.value = imageElement.value.naturalWidth
     naturalHeight.value = imageElement.value.naturalHeight
-    maxWidth.value = imageView.value?.$el?.parentElement.getBoundingClientRect().width ?? 0
+    maxWidth.value =
+      imageView.value?.$el?.parentElement.getBoundingClientRect().width ?? 0
     containerMaxWidth.value =
       document.querySelector('.layout')?.getBoundingClientRect().width ?? 1200
     // console.log('natural', naturalWidth.value, naturalHeight.value, maxWidth.value, containerMaxWidth.value)
@@ -320,7 +324,6 @@ function onImageLoad() {
     containerHeight.value = currentHeight.value
     containerMaxHeight.value = currentHeight.value
   }
-
 }
 
 /**

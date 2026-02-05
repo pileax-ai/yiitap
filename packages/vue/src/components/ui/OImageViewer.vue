@@ -26,13 +26,17 @@
 
       <footer>
         <div class="action-group">
-          <o-btn icon="arrow_back"
-                 :class="{'disabled': currentIndex <= 0}"
-                 @click="onPrevious" />
-          <o-btn icon="arrow_back"
-                 icon-class="rotate-180"
-                 :class="{'disabled': currentIndex >= props.images.length - 1}"
-                 @click="onNext" />
+          <o-btn
+            icon="arrow_back"
+            :class="{ disabled: currentIndex <= 0 }"
+            @click="onPrevious"
+          />
+          <o-btn
+            icon="arrow_back"
+            icon-class="rotate-180"
+            :class="{ disabled: currentIndex >= props.images.length - 1 }"
+            @click="onNext"
+          />
         </div>
         <div class="action-group">
           <o-btn icon="horizontal_rule" @click="zoomOut" />
@@ -51,7 +55,15 @@ import { useCommon } from '../../hooks'
 
 defineOptions({ name: 'ODialog' })
 
-import {ref, defineProps, defineEmits, onMounted, computed, watch, onBeforeUnmount} from 'vue'
+import {
+  ref,
+  defineProps,
+  defineEmits,
+  onMounted,
+  computed,
+  watch,
+  onBeforeUnmount,
+} from 'vue'
 import { OBtn } from '../index'
 
 const props = defineProps({
@@ -65,7 +77,7 @@ const props = defineProps({
   },
   images: {
     type: Array as () => EditorImage[],
-    default: () => []
+    default: () => [],
   },
   current: {
     type: Number,
@@ -88,16 +100,17 @@ const ZOOM_CONFIG = {
   MIN_SCALE: 0.1,
   MAX_SCALE: 10,
   STEP: 0.1,
-  WHEEL_SENSITIVITY: 0.001
+  WHEEL_SENSITIVITY: 0.001,
 }
 
 const currentImage = computed(() => {
   const len = props.images.length
   let value = {}
   if (len > 0) {
-    value = currentIndex.value >= 0 && currentIndex.value < len
-      ? props.images.at(currentIndex.value)
-      : props.images.at(0)
+    value =
+      currentIndex.value >= 0 && currentIndex.value < len
+        ? props.images.at(currentIndex.value)
+        : props.images.at(0)
   }
 
   return value as EditorImage
@@ -106,7 +119,7 @@ const currentImage = computed(() => {
 const imageStyle = computed(() => ({
   transform: `translate(${position.value.x}px, ${position.value.y}px) scale(${scale.value})`,
   transformOrigin: 'center center',
-  cursor: isDragging.value ? 'grabbing' : (scale.value > 1 ? 'grab' : 'default')
+  cursor: isDragging.value ? 'grabbing' : scale.value > 1 ? 'grab' : 'default',
 }))
 
 const scalePercent = computed(() => {
@@ -119,7 +132,10 @@ const onWheel = (event: WheelEvent) => {
   const delta = -event.deltaY * ZOOM_CONFIG.WHEEL_SENSITIVITY
 
   let newScale = scale.value + delta
-  newScale = Math.max(ZOOM_CONFIG.MIN_SCALE, Math.min(ZOOM_CONFIG.MAX_SCALE, newScale))
+  newScale = Math.max(
+    ZOOM_CONFIG.MIN_SCALE,
+    Math.min(ZOOM_CONFIG.MAX_SCALE, newScale)
+  )
 
   if (imageContainerRef.value && imageRef.value) {
     const rect = imageContainerRef.value.getBoundingClientRect()
@@ -141,7 +157,7 @@ const onMouseDown = (event: MouseEvent) => {
   isDragging.value = true
   dragStart.value = {
     x: event.clientX - position.value.x,
-    y: event.clientY - position.value.y
+    y: event.clientY - position.value.y,
   }
 
   document.addEventListener('mousemove', onMouseMove)
@@ -182,7 +198,7 @@ const onPrevious = () => {
 }
 
 const onNext = () => {
-  if (currentIndex.value < props.images.length - 1 ) {
+  if (currentIndex.value < props.images.length - 1) {
     currentIndex.value += 1
     resetZoom()
   }
@@ -202,7 +218,7 @@ const onKeyDown = (event: KeyboardEvent) => {
   event.preventDefault()
   event.stopPropagation()
 
-  switch(event.key) {
+  switch (event.key) {
     case '+':
     case '=':
       event.preventDefault()
@@ -234,10 +250,13 @@ const onKeyDown = (event: KeyboardEvent) => {
   }
 }
 
-watch(() => props.current, (newValue) => {
-  currentIndex.value = newValue
-  resetZoom()
-})
+watch(
+  () => props.current,
+  (newValue) => {
+    currentIndex.value = newValue
+    resetZoom()
+  }
+)
 
 onMounted(() => {
   currentIndex.value = props.current
@@ -313,11 +332,11 @@ onBeforeUnmount(() => {
       height: 48px;
       border-radius: 50%;
       color: rgba(#ffffff, 0.5);
-      background: rgba(0,0,0, 0.3);
+      background: rgba(0, 0, 0, 0.3);
 
       &:hover {
         color: #ffffff;
-        background: rgba(0,0,0, 0.6) !important;
+        background: rgba(0, 0, 0, 0.6) !important;
       }
     }
   }
