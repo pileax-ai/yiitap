@@ -1,5 +1,7 @@
 # @yiitap/extension-char-command
 
+## 0.12.0
+
 ## 0.11.2
 
 ## 0.11.1

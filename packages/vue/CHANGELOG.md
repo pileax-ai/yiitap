@@ -1,5 +1,34 @@
 # @yiitap/vue
 
+## 0.12.0
+
+### Minor Changes
+
+- ed9cf92: image viewer
+- e37ebc3: image resize
+
+### Patch Changes
+
+- Updated dependencies [ed9cf92]
+- Updated dependencies [e37ebc3]
+  - @yiitap/core@0.12.0
+  - @yiitap/vue@0.12.0
+  - @yiitap/extension-ai-block@0.12.0
+  - @yiitap/extension-callout@0.12.0
+  - @yiitap/extension-char-command@0.12.0
+  - @yiitap/extension-color-highlighter@0.12.0
+  - @yiitap/extension-focus@0.12.0
+  - @yiitap/extension-image@0.12.0
+  - @yiitap/extension-inline-placeholder@0.12.0
+  - @yiitap/extension-placeholder@0.12.0
+  - @yiitap/extension-selection-decoration@0.12.0
+  - @yiitap/extension-shortcut@0.12.0
+  - @yiitap/extension-table@0.12.0
+  - @yiitap/extension-table-wrapper@0.12.0
+  - @yiitap/extension-task-item@0.12.0
+  - @yiitap/extension-video@0.12.0
+  - @yiitap/util-emoji@0.12.0
+
 ## 0.11.2
 
 ### Patch Changes

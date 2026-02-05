@@ -1,5 +1,11 @@
 # @yiitap/icon
 
+## 0.12.0
+
+### Minor Changes
+
+- ed9cf92: image viewer
+
 ## 0.11.2
 
 ## 0.11.1
