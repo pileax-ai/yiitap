@@ -33,7 +33,7 @@
         v-if="src === 'init'"
       />
       <div class="image-panel" v-else>
-        <o-block-toolbar v-bind="props" trigger="mouseenter" @action="onAction">
+        <o-block-toolbar v-bind="props" @action="onAction">
           <template v-if="isEditable">
             <o-menubar-btn
               icon="subtitles"
@@ -41,11 +41,7 @@
               @click.stop="onCaption"
             />
             <o-link-btn :editor="editor" />
-            <o-align-dropdown
-              :editor="editor"
-              placement="bottom-end"
-              trigger="mouseenter"
-            />
+            <o-align-dropdown :editor="editor" placement="bottom-end" />
           </template>
 
           <o-menubar-btn
