@@ -9,7 +9,7 @@ const OImage = Image.extend<ImageOptions>({
     return VueNodeViewRenderer(View)
   },
 }).configure({
-  inline: true,
+  inline: true, // Set true to support alignment
 })
 
 export default OImage

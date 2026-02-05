@@ -1,45 +1,5 @@
 <template>
   <section class="page-demo" :class="{ dark: darkMode }">
-    <section class="layout-toolbar">
-      <header>
-        <section class="info">
-          <div class="logo">
-            <a href="https://yiitap.pileax.ai" target="_blank">
-              <img src="/logo.png" alt="Logo" />
-            </a>
-          </div>
-          <div class="title">Yiitap</div>
-          <div class="version">
-            <version-badge package="@yiitap/vue" />
-          </div>
-        </section>
-        <section class="actions">
-          <n-button quaternary @click="onGithub">
-            <o-icon name="github" />
-          </n-button>
-          <n-button quaternary @click="onToggleDrawer">
-            <o-icon name="settings" />
-          </n-button>
-        </section>
-      </header>
-      <div class="toolbar">
-        <o-main-menu
-          :editor="yiiEditor?.editor"
-          :menu="editorOptions.mainMenu"
-          :data-theme="darkMode ? 'dark' : ''"
-        />
-      </div>
-    </section>
-    <section class="layout-content" @scroll="onScroll">
-      <YiiEditor
-        ref="yiiEditor"
-        v-bind="editorOptions"
-        @update="onUpdate"
-        :key="editorKey"
-        v-if="!collaboration || collabReady"
-      />
-    </section>
-
     <n-drawer
       v-model:show="showDrawer"
       :default-width="400"
@@ -120,12 +80,59 @@
       </n-drawer-content>
     </n-drawer>
 
-    <o-doc-toc
-      ref="tocRef"
-      :editor="yiiEditor?.editor"
-      :max-level="3"
-      @doc-scroll="onDocScroll"
-    />
+    <section class="toolbar-container">
+      <header>
+        <section class="info">
+          <div class="logo">
+            <a href="https://yiitap.pileax.ai" target="_blank">
+              <img src="/logo.png" alt="Logo" />
+            </a>
+          </div>
+          <div class="title">Yiitap</div>
+          <div class="version">
+            <version-badge package="@yiitap/vue" />
+          </div>
+        </section>
+        <section class="actions">
+          <n-button quaternary @click="onGithub">
+            <o-icon name="github" />
+          </n-button>
+          <n-button quaternary @click="onToggleDrawer">
+            <o-icon name="settings" />
+          </n-button>
+        </section>
+      </header>
+      <div class="toolbar">
+        <o-main-menu
+          :editor="yiiEditor?.editor"
+          :menu="editorOptions.mainMenu"
+          :data-theme="darkMode ? 'dark' : ''"
+        />
+      </div>
+    </section>
+    <section class="content-container" @scroll="onScroll">
+      <section class="layout page">
+        <YiiEditor
+          ref="yiiEditor"
+          class="layout-content"
+          v-bind="editorOptions"
+          @update="onUpdate"
+          :key="editorKey"
+          v-if="!collaboration || collabReady"
+        />
+
+        <aside class="layout-right">
+          <div class="sticky-top">
+            <o-doc-toc
+              ref="tocRef"
+              :editor="yiiEditor?.editor"
+              :max-level="3"
+              @doc-scroll="onDocScroll"
+            />
+          </div>
+        </aside>
+      </section>
+    </section>
   </section>
 </template>
 
@@ -151,6 +158,7 @@ import * as Y from 'yjs'
 import { getData } from '@/data'
 import VersionBadge from './VersionBadge.vue'
 import 'katex/dist/katex.min.css'
+import type { Editor } from '@tiptap/core'
 
 const emit = defineEmits(['mode'])
 
@@ -276,6 +284,7 @@ const sourceList = computed(() => {
     { label: 'Default', value: 'default' },
     { label: 'Empty', value: 'empty' },
     { label: 'Diagram', value: 'diagram' },
+    { label: 'Image', value: 'image' },
     { label: 'Table', value: 'table' },
   ]
 })
@@ -371,18 +380,18 @@ function onMode() {
   emit('mode', darkMode.value)
 }
 
-function onUpdate({ json, html }: { json: any; html: string }) {
+function onUpdate({ editor }: { editor: Editor }) {
   // Get content of editor
-  // console.log(json)
-  // console.log(html)
+  // console.log(editor.getJSON())
+  console.log(editor.getHTML())
 
   // markdown
-  const markdown = yiiEditor.value?.editor.markdown?.serialize(json)
+  // const markdown = editor.markdown?.serialize(editor.getJSON())
   // console.log(markdown)
 }
 
 function onScroll(event: Event) {
-  // tocRef.value?.onScroll(event)
+  tocRef.value?.onScroll(event)
 }
 
 function onDocScroll(event: Event) {
@@ -455,7 +464,7 @@ onMounted(() => {
   color: var(--yii-color-accent);
   background: var(--yii-bg-color);
 
-  .layout-toolbar {
+  .toolbar-container {
     height: 108px;
     header {
       height: 60px;
@@ -513,20 +522,58 @@ onMounted(() => {
     }
   }
 
-  .layout-content {
+  .content-container {
     position: absolute;
     left: 0;
     right: 0;
     top: 108px;
     bottom: 0;
     overflow: auto;
-  }
 
-  .o-doc-toc {
-    position: absolute;
+    .layout {
+      display: grid;
+      grid-template-rows:
+        auto
+        1fr;
 
-    top: 116px;
-    right: 10px;
+      &.page {
+        grid-template-columns:
+          [full-start] minmax(100px, 1fr)
+          [content-start] minmax(400px, 800px)
+          [content-end] minmax(100px, 1fr)
+          [full-end];
+      }
+
+      &.full {
+        grid-template-columns:
+          [full-start] 100px
+          [content-start] 1fr
+          [content-end] 100px
+          [full-end];
+      }
+
+      &-full {
+        grid-column: full;
+      }
+
+      &-content {
+        grid-column: content;
+      }
+
+      &-right {
+        grid-column: content-end / full-end;
+        grid-row: 1;
+
+        .sticky-top {
+          position: sticky;
+          top: 0;
+        }
+        .o-doc-toc {
+          position: absolute;
+          right: 20px;
+        }
+      }
+    }
   }
 }
 

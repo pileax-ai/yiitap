@@ -54,11 +54,7 @@
     word-wrap: break-word;
     word-break: break-word;
     font-size: 16px;
-    padding: 16px 100px;
-
-    &.page-view {
-      width: 1000px;
-    }
+    padding: 16px 0;
 
     :focus {
       outline: none;
