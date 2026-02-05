@@ -36,8 +36,13 @@
         <o-block-toolbar v-bind="props" @action="onAction" v-if="isEditable">
           <o-menubar-btn
             icon="subtitles"
-            tooltip="image.caption"
-            @click="onCaption"
+            :tooltip="tr('image.caption')"
+            @click.stop="onCaption"
+          />
+          <o-menubar-btn
+            icon="download"
+            :tooltip="tr('label.download')"
+            @click="onDownload"
           />
         </o-block-toolbar>
         <div
@@ -115,7 +120,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch, onUnmounted } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
-import { useTiptap } from '../../hooks'
+import { useCommon, useI18n, useTiptap } from '../../hooks'
 import {
   OBlockMenu,
   OBlockPlaceholder,
@@ -130,6 +135,8 @@ import {
 
 const props = defineProps(nodeViewProps)
 
+const { tr } = useI18n()
+const { downloadImage } = useCommon()
 const { isEditable } = useTiptap()
 const showContextMenu = ref(false)
 const showPopover = ref(false)
@@ -187,6 +194,10 @@ function onCaption() {
   setTimeout(() => {
     captionInput.value?.focus()
   }, 0)
+}
+
+function onDownload() {
+  downloadImage(props.node.attrs.src)
 }
 
 function onCaptionInputBlur() {
@@ -405,6 +416,16 @@ onUnmounted(() => {
   position: relative;
   display: inline-block;
   cursor: pointer;
+  background: none !important;
+
+  &.selection-decoration-blur {
+  }
+
+  &.has-focus {
+    //padding: 0;
+    //border-radius: 2px;
+    background: rgba(172, 206, 247, 0.5) !important;
+  }
 
   &:hover {
     .block-resizer {
