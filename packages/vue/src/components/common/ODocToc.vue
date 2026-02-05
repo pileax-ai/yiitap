@@ -27,6 +27,7 @@
 
       <div class="main-view o-scroll" style="max-width: 480px">
         <div class="toc__title">{{ tr('label.toc') }}</div>
+        <slot name="title"></slot>
         <ul class="toc__list">
           <li
             class="toc__item"

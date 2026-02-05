@@ -1,10 +1,12 @@
 import { BasicFeaturesArticle, BasicFeaturesArticleZh } from './article'
 import { Diagram } from './diagram'
+import { Image, ImageZh } from './image'
 import { Table, TableZh } from './table'
 
 const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
   empty: { en: '', zh: '' },
   diagram: { en: Diagram, zh: Diagram },
+  image: { en: Image, zh: ImageZh },
   table: { en: Table, zh: TableZh },
 }
 
