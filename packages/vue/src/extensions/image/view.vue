@@ -6,11 +6,9 @@
     :class="{
       max: isMax,
       'with-caption': attrs.alt,
-      'with-ratio': attrs.ratio,
       readonly: !editor?.isEditable,
       init: src === 'init',
     }"
-    :size="attrs.size"
     as="div"
     @click="onClick"
   >
@@ -297,6 +295,7 @@ function onImageLoad() {
     containerMaxWidth.value =
       document.querySelector('.layout')?.getBoundingClientRect().width ?? 1200
     // console.log('natural', naturalWidth.value, naturalHeight.value, maxWidth.value, containerMaxWidth.value)
+    // console.log('container', currentContainerHeight.value, containerHeight.value, containerMaxHeight.value)
 
     // Set max width and height
     const aspectRatio = naturalWidth.value / naturalHeight.value
@@ -315,10 +314,21 @@ function onImageLoad() {
         currentHeight.value = naturalHeight.value
       }
       updateImageSize()
+    } else {
+      isMax.value = currentWidth.value > maxWidth.value
     }
-    currentContainerHeight.value = currentHeight.value
-    containerHeight.value = currentHeight.value
+    // console.log('current', currentWidth.value, currentHeight.value, containerHeight.value)
+
+    // container
+    if (containerHeight.value > 0) {
+      currentContainerHeight.value = containerHeight.value
+    } else {
+      currentContainerHeight.value = currentHeight.value
+      containerHeight.value = currentHeight.value
+    }
+
     containerMaxHeight.value = currentHeight.value
+    // console.log('container', currentContainerHeight.value, containerHeight.value, containerMaxHeight.value)
   }
 }
 
@@ -398,9 +408,11 @@ function onResizeEnd() {
 }
 
 function updateImageSize() {
+  console.log('updateImageSize', containerHeight.value)
   props.updateAttributes({
     width: currentWidth.value,
     height: currentHeight.value,
+    containerHeight: containerHeight.value,
   })
 }
 
@@ -422,6 +434,9 @@ onMounted(() => {
   }
   if (attrs.value.height) {
     currentHeight.value = attrs.value.height
+  }
+  if (attrs.value.containerHeight) {
+    containerHeight.value = attrs.value.containerHeight
   }
 })
 

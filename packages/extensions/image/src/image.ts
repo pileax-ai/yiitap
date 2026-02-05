@@ -7,13 +7,9 @@ export const Image = TiptapImage.extend<ImageOptions>({
   addAttributes() {
     return {
       ...this.parent?.(),
-      size: {
-        default: '',
-        rendered: false,
-      }, // small, medium, large
-      ratio: {
-        default: '',
-        rendered: false,
+      containerHeight: {
+        default: 0,
+        rendered: true,
       },
       isDraggable: {
         default: true,
@@ -24,8 +20,7 @@ export const Image = TiptapImage.extend<ImageOptions>({
     }
   },
   renderHTML({ node, HTMLAttributes }) {
-    HTMLAttributes.size = node.attrs.size
-    HTMLAttributes.ratio = node.attrs.ratio
+    HTMLAttributes.containerHeight = node.attrs.containerHeight
 
     return ['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
   },
