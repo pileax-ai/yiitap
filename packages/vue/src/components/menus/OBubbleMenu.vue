@@ -138,7 +138,7 @@ function shouldShow({ editor, element, view, state, oldState, from, to }) {
   }
 
   const includeNodes = ['image']
-  const excludeNodes = ['toc', 'video', 'model-viewer']
+  const excludeNodes = ['image', 'toc', 'video', 'model-viewer']
   const node = selection.node
   const nodeType = node?.type?.name
   // console.log('node', node, nodeType, editor.isActive('table'));

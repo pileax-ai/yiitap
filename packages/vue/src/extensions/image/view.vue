@@ -33,16 +33,30 @@
         v-if="src === 'init'"
       />
       <div class="image-panel" v-else>
-        <o-block-toolbar v-bind="props" @action="onAction" v-if="isEditable">
-          <o-menubar-btn
-            icon="subtitles"
-            :tooltip="tr('image.caption')"
-            @click.stop="onCaption"
-          />
+        <o-block-toolbar v-bind="props"
+                         trigger="mouseenter"
+                         @action="onAction">
+          <template v-if="isEditable">
+            <o-menubar-btn
+              icon="subtitles"
+              :tooltip="tr('image.caption')"
+              @click.stop="onCaption"
+            />
+            <o-link-btn :editor="editor" />
+            <o-align-dropdown :editor="editor"
+                              placement="bottom-end"
+                              trigger="mouseenter" />
+          </template>
+
           <o-menubar-btn
             icon="download"
             :tooltip="tr('label.download')"
             @click="onDownload"
+          />
+          <o-menubar-btn
+            icon="zoom_in"
+            :tooltip="tr('image.zoom')"
+            @click="onPreview"
           />
         </o-block-toolbar>
         <div
@@ -114,6 +128,12 @@
     <o-context-menu v-model="showContextMenu" :event="mouseEvent">
       <o-block-menu v-bind="props" @action="onAction" />
     </o-context-menu>
+
+    <o-image-viewer v-model:show="showImageViewer"
+                    :images="images"
+                    :current="currentImageIndex">
+      <template #title>Run</template>
+    </o-image-viewer>
   </o-node-view>
 </template>
 
@@ -122,12 +142,15 @@ import { computed, ref, onMounted, watch, onUnmounted } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import { useCommon, useI18n, useTiptap } from '../../hooks'
 import {
+  OAlignDropdown,
   OBlockMenu,
   OBlockPlaceholder,
   OBlockPopover,
   OBlockToolbar,
   OContextMenu,
+  OImageViewer,
   OInput,
+  OLinkBtn,
   OMediaInput,
   OMenubarBtn,
   ONodeView,
@@ -137,12 +160,15 @@ const props = defineProps(nodeViewProps)
 
 const { tr } = useI18n()
 const { downloadImage } = useCommon()
-const { isEditable } = useTiptap()
+const { isEditable, getEditorImages } = useTiptap()
 const showContextMenu = ref(false)
 const showPopover = ref(false)
 const mouseEvent = ref({})
 const captionInput = ref(null)
 const showCaptionInput = ref(false)
+const showImageViewer = ref(false)
+const currentImageIndex = ref(0)
+const images = ref<EditorImage[]>([])
 
 // resize
 const imageView = ref<HTMLElement | null>(null)
@@ -198,6 +224,12 @@ function onCaption() {
 
 function onDownload() {
   downloadImage(props.node.attrs.src)
+}
+
+function onPreview() {
+  images.value = getEditorImages(props.editor)
+  currentImageIndex.value = images.value.findIndex(e => e.pos === props.getPos()) || 0
+  showImageViewer.value = true
 }
 
 function onCaptionInputBlur() {
@@ -261,9 +293,10 @@ function onImageLoad() {
   if (imageElement.value) {
     naturalWidth.value = imageElement.value.naturalWidth
     naturalHeight.value = imageElement.value.naturalHeight
-    maxWidth.value = imageView.value?.$el?.getBoundingClientRect().width ?? 0
+    maxWidth.value = imageView.value?.$el?.parentElement.getBoundingClientRect().width ?? 0
     containerMaxWidth.value =
       document.querySelector('.layout')?.getBoundingClientRect().width ?? 1200
+    // console.log('natural', naturalWidth.value, naturalHeight.value, maxWidth.value, containerMaxWidth.value)
 
     // Set max width and height
     const aspectRatio = naturalWidth.value / naturalHeight.value
@@ -287,6 +320,7 @@ function onImageLoad() {
     containerHeight.value = currentHeight.value
     containerMaxHeight.value = currentHeight.value
   }
+
 }
 
 /**

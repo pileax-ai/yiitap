@@ -263,10 +263,26 @@ export default function () {
     view.dispatch(tr)
   }
 
+  function getEditorImages(editor: Editor) {
+    const images: EditorImage[] = []
+
+    editor.state.doc.descendants((node, pos) => {
+      if (node.type.name === 'image') {
+        images.push({
+          pos,
+          attrs: node.attrs,
+        })
+      }
+    })
+
+    return images
+  }
+
   return {
     isEditable,
 
-    run,
     onCommand,
+    run,
+    getEditorImages,
   }
 }

@@ -43,5 +43,10 @@ declare global {
     role: ChatMessageRole
     content: string
   }
+
+  interface EditorImage {
+    pos: number
+    attrs: Record<string, any>
+  }
 }
 export {}
