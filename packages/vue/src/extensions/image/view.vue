@@ -171,7 +171,7 @@ const currentImageIndex = ref(0)
 const images = ref<EditorImage[]>([])
 
 // resize
-const imageView = ref<HTMLElement | null>(null)
+const imageView = ref<InstanceType<typeof ONodeView>>()
 const imageContainer = ref<HTMLElement | null>(null)
 const imageWrapper = ref<HTMLElement | null>(null)
 const imageElement = ref<HTMLImageElement | null>(null)
