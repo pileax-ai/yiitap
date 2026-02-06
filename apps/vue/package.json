@@ -59,6 +59,7 @@
     "@yiitap/extension-table-wrapper": "workspace:*",
     "@yiitap/extension-task-item": "workspace:*",
     "@yiitap/extension-video": "workspace:*",
+    "@yiitap/i18n": "workspace:*",
     "@yiitap/util-emoji": "workspace:*",
     "@yiitap/vue": "workspace:*",
     "@hocuspocus/provider": "^3.4.3",

@@ -10,13 +10,16 @@
         <n-form ref="form" label-placement="left" label-width="auto">
           <h3>General</h3>
           <n-divider />
-          <n-form-item label="Language">
+          <n-form-item label="Language" v-if="false">
             <n-radio-group v-model:value="locale" name="radiogroup1">
               <n-space>
                 <n-radio value="en"> English </n-radio>
                 <n-radio value="zh"> 中文 </n-radio>
               </n-space>
             </n-radio-group>
+          </n-form-item>
+          <n-form-item label="Language">
+            <n-select v-model:value="locale" :options="SupportLanguages" />
           </n-form-item>
           <n-form-item label="Mode">
             <n-switch v-model:value="darkMode" @update:value="onMode">
@@ -153,6 +156,7 @@ import {
   NSwitch,
 } from 'naive-ui'
 import { YiiEditor, ODocToc, OIcon, OMainMenu } from '@yiitap/vue'
+import { SupportLanguages } from '@yiitap/i18n'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
 import { getData } from '@/data'

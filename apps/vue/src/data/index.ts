@@ -16,6 +16,9 @@ const DEFAULT_CONTENT = {
 }
 
 export const getData = (name = 'all', locale: 'en' | 'zh' = 'en') => {
+  if (locale.startsWith('en')) locale = 'en'
+  if (locale.startsWith('zh')) locale = 'zh'
+
   const source = CONTENT_MAP[name] || DEFAULT_CONTENT
-  return source[locale] ?? DEFAULT_CONTENT[locale]
+  return source[locale] ?? DEFAULT_CONTENT[locale] ?? DEFAULT_CONTENT['en']
 }

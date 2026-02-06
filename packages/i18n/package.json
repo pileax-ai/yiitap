@@ -31,8 +31,15 @@
 		"build-types": "tsc --emitDeclarationOnly",
 		"lint": "eslint 'src/**/*.{ts,vue}'",
 		"test": "vitest",
-		"test-ci": "vitest --run"
+		"test-ci": "vitest --run",
+    "generate": "node src/generate/index.js",
+    "generate-zh": "node src/generate/index.js --base=zh-Hans"
 	},
-	"peerDependencies": {},
-	"devDependencies": {}
+	"dependencies": {},
+  "devDependencies": {
+    "@vitalets/google-translate-api": "^9.2.1",
+    "bing-translate-api": "^4.2.0",
+    "http-proxy-agent": "^7.0.2"
+  },
+	"peerDependencies": {}
 }

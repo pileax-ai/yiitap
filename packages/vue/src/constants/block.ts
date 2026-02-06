@@ -271,8 +271,8 @@ export const BlockMenus: BlockOption[] = [
 
 export const AskAiBlocks: BlockOption[] = [
   {
-    label: 'ai.improve_writing',
-    value: 'improve_writing',
+    label: 'ai.improveWriting',
+    value: 'improveWriting',
     icon: 'title',
     color: Color.purple,
     group: 'label.suggested',
@@ -282,8 +282,8 @@ export const AskAiBlocks: BlockOption[] = [
     tips: 'improve',
   },
   {
-    label: 'ai.fix_spelling_grammar',
-    value: 'fix_spelling_grammar',
+    label: 'ai.fixSpellingGrammar',
+    value: 'fixSpellingGrammar',
     icon: 'spellcheck',
     color: Color.purple,
     options: {
@@ -292,8 +292,8 @@ export const AskAiBlocks: BlockOption[] = [
     tips: 'fix',
   },
   {
-    label: 'ai.enrich_with_emoji',
-    value: 'enrich_with_emoji',
+    label: 'ai.enrichWithEmoji',
+    value: 'enrichWithEmoji',
     icon: 'emoji_emotions',
     color: Color.purple,
     options: {
@@ -343,8 +343,8 @@ export const AskAiBlocks: BlockOption[] = [
     ] as BlockOption[],
   },
   {
-    label: 'ai.make_longer',
-    value: 'make_longer',
+    label: 'ai.makeLonger',
+    value: 'makeLonger',
     icon: 'subject',
     color: Color.purple,
     options: {
@@ -354,8 +354,8 @@ export const AskAiBlocks: BlockOption[] = [
     tips: 'long',
   },
   {
-    label: 'ai.make_shorter',
-    value: 'make_shorter',
+    label: 'ai.makeShorter',
+    value: 'makeShorter',
     icon: 'short_text',
     color: Color.purple,
     options: {
@@ -364,8 +364,8 @@ export const AskAiBlocks: BlockOption[] = [
     tips: 'short',
   },
   {
-    label: 'ai.change_tone',
-    value: 'change_tone',
+    label: 'ai.changeTone',
+    value: 'changeTone',
     icon: 'invert_colors',
     color: Color.purple,
     options: {
