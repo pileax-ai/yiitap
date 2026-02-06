@@ -138,6 +138,7 @@ export default {
     splitHorizontal: 'Split Horizontal',
     view: 'View',
     download: 'Download',
+    close: 'Close',
   },
   table: {
     cellBackground: 'Cell Background',

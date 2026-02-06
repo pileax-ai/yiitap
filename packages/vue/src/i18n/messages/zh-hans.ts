@@ -135,6 +135,7 @@ export default {
     splitHorizontal: '水平分割',
     view: '视图',
     download: '下载',
+    close: '关闭',
   },
   table: {
     cellBackground: '单元格背景色',

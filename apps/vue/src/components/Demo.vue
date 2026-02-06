@@ -187,7 +187,7 @@ const collabReady = ref(false)
 
 const editorOptions = computed(() => {
   return {
-    title: true,
+    // title: true,
     collaboration: collaboration.value,
     aiOption: aiOption.value,
     locale: locale.value,
@@ -383,7 +383,7 @@ function onMode() {
 function onUpdate({ editor }: { editor: Editor }) {
   // Get content of editor
   // console.log(editor.getJSON())
-  console.log(editor.getHTML())
+  // console.log(editor.getHTML())
   // markdown
   // const markdown = editor.markdown?.serialize(editor.getJSON())
   // console.log(markdown)
