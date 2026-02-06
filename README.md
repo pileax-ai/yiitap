@@ -55,6 +55,15 @@ pnpm dev
 pnpm build
 ```
 
+## Contributing
+For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTING.md). Contributions are welcome and will be fully credited.
+
+### Contributors
+
+<a href="https://github.com/pileax-ai/yiitap/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=pileax-ai/yiitap" />
+</a>
+
 ## Acknowledgements
 
 - [Tiptap](https://github.com/ueberdosis/tiptap) & [ProseMirror](https://github.com/ProseMirror/prosemirror): Yiitap is built on top of Tiptap and ProseMirror.
