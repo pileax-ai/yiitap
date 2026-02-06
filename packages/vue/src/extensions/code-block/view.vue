@@ -106,6 +106,7 @@ import {
 import { Languages } from '../../constants/language'
 import { uuid } from '../../utils/uuid'
 import { useCommon, useI18n, useTheme, useTiptap } from '../../hooks'
+import type { DialogOption } from '../../types/types'
 
 const props = defineProps(nodeViewProps)
 const { commonDownload } = useCommon()

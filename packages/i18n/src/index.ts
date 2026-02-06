@@ -1,10 +1,12 @@
+import type { Messages } from './types'
+
 import messageEn from './messages/en'
 import messagePl from './messages/pl'
 import messagePtBr from './messages/pt-br'
 import messageZhHans from './messages/zh-hans'
 import messageZhHant from './messages/zh-hant'
 
-const messages: Indexable = {
+const messages: Messages = {
   en: messageEn,
   'en-us': messageEn,
   pl: messagePl,

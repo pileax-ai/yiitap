@@ -560,6 +560,8 @@ importers:
         specifier: ^3.16.0
         version: 3.16.0
 
+  packages/i18n: {}
+
   packages/icon:
     devDependencies:
       fantasticon:
@@ -760,6 +762,9 @@ importers:
       '@yiitap/extension-video':
         specifier: workspace:*
         version: link:../extensions/video
+      '@yiitap/i18n':
+        specifier: workspace:*
+        version: link:../i18n
       '@yiitap/util-emoji':
         specifier: workspace:*
         version: link:../utils/emoji

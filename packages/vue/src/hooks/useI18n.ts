@@ -1,5 +1,5 @@
 import { computed, inject } from 'vue'
-import { getMessage } from '../i18n'
+import { getMessage } from '@yiitap/i18n'
 
 export default function () {
   const locale = inject('locale', { value: 'en' })
