@@ -168,6 +168,8 @@ export default {
     medium: 'Medium',
     large: 'Large',
     zoom: 'Zoom',
+    reposition: 'Reposition',
+    repositionTips: 'Drag image to reposition',
   },
   embed: {
     video: 'Video',
