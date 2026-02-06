@@ -1,5 +1,11 @@
 # @yiitap/extension-image
 
+## 0.13.0
+
+### Minor Changes
+
+- acb2633: Image container height, image reposition
+
 ## 0.12.0
 
 ## 0.11.2

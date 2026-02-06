@@ -1,5 +1,37 @@
 # @yiitap/vue
 
+## 0.13.0
+
+### Minor Changes
+
+- 45516c9: feat: yiitap-i18n
+- acb2633: Image container height, image reposition
+
+### Patch Changes
+
+- f48633f: images alignement
+- Updated dependencies [45516c9]
+- Updated dependencies [f48633f]
+- Updated dependencies [acb2633]
+  - @yiitap/i18n@0.13.0
+  - @yiitap/vue@0.13.0
+  - @yiitap/extension-image@0.13.0
+  - @yiitap/core@0.13.0
+  - @yiitap/extension-ai-block@0.13.0
+  - @yiitap/extension-callout@0.13.0
+  - @yiitap/extension-char-command@0.13.0
+  - @yiitap/extension-color-highlighter@0.13.0
+  - @yiitap/extension-focus@0.13.0
+  - @yiitap/extension-inline-placeholder@0.13.0
+  - @yiitap/extension-placeholder@0.13.0
+  - @yiitap/extension-selection-decoration@0.13.0
+  - @yiitap/extension-shortcut@0.13.0
+  - @yiitap/extension-table@0.13.0
+  - @yiitap/extension-table-wrapper@0.13.0
+  - @yiitap/extension-task-item@0.13.0
+  - @yiitap/extension-video@0.13.0
+  - @yiitap/util-emoji@0.13.0
+
 ## 0.12.0
 
 ### Minor Changes

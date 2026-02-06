@@ -1,5 +1,7 @@
 # @yiitap/extension-focus
 
+## 0.13.0
+
 ## 0.12.0
 
 ## 0.11.2
