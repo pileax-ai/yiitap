@@ -147,7 +147,7 @@ function onClick(item: Indexable, child?: Indexable) {
     case 'translate':
       prompt.value = prompt.value.replace('[LANGUAGE]', child.value)
       break
-    case 'change_tone':
+    case 'changeTone':
       prompt.value = prompt.value.replace('[TONE]', child.value)
       break
     default:

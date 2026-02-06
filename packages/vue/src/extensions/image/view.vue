@@ -434,7 +434,6 @@ function onResizeEnd() {
 }
 
 function updateImageSize() {
-  console.log('updateImageSize', containerHeight.value)
   props.updateAttributes({
     width: currentWidth.value,
     height: currentHeight.value,

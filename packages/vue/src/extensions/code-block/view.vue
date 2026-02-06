@@ -14,11 +14,16 @@
         />
       </div>
       <div class="wrap">
-        <o-code-block-view-dropdown
-          v-model="view"
-          class="editable"
-          v-if="codeView"
-        />
+        <template v-if="codeView">
+          <o-menubar-btn
+            icon="close"
+            :tooltip="tr('label.close')"
+            class="editable"
+            @click="onDialogClose"
+            v-if="codeView === 'splitHorizontal'"
+          />
+          <o-code-block-view-dropdown v-model="view" class="editable" v-else />
+        </template>
         <o-menubar-btn
           :icon="wrapIcon"
           :icon-class="{ 'rotate-270': wrap }"
@@ -49,11 +54,26 @@
         />
       </div>
     </div>
-    <o-dialog v-model:show="showDialog">
-      <template #title>Run</template>
+    <o-dialog
+      v-model:show="dialogOptions.show"
+      v-bind="dialogOptions"
+      @close="onDialogClose"
+    >
+      <template #title>{{ preview }}</template>
 
-      <iframe sandbox="allow-same-origin allow-scripts" :srcdoc="html">
-      </iframe>
+      <template v-if="preview === 'run'">
+        <iframe
+          sandbox="allow-same-origin allow-scripts"
+          :srcdoc="html"
+        ></iframe>
+      </template>
+
+      <template v-else-if="preview === 'mermaid'">
+        <div
+          ref="mermaidMount"
+          class="tiptap ProseMirror mermaid-split-horizontal"
+        />
+      </template>
     </o-dialog>
 
     <pre><node-view-content as="code" :class="{'wrap': wrap}" /></pre>
@@ -86,6 +106,7 @@ import {
 import { Languages } from '../../constants/language'
 import { uuid } from '../../utils/uuid'
 import { useCommon, useI18n, useTheme, useTiptap } from '../../hooks'
+import type { DialogOption } from '../../types/types'
 
 const props = defineProps(nodeViewProps)
 const { commonDownload } = useCommon()
@@ -94,13 +115,18 @@ const { darkMode } = useTheme()
 const { isEditable } = useTiptap()
 
 const copyIcon = ref('content_copy')
-const showDialog = ref(false)
+const dialogOptions = ref<DialogOption>({
+  show: false,
+  fullscreen: false,
+})
+const preview = ref('')
 const html = ref('')
 
 // mermaid
 const mermaidSvg = ref('')
 const error = ref('')
 const view = ref('splitVertical')
+const oldView = ref('')
 const diagramTheme = ref('default')
 
 mermaid.registerLayoutLoaders(elkLayouts)
@@ -211,7 +237,17 @@ function downloadSvg() {
 function onRun() {
   const code = props.node.content.content[0].text
   html.value = buildHtml(code)
-  showDialog.value = true
+  preview.value = 'run'
+  dialogOptions.value = {
+    show: true,
+    fullscreen: false,
+  }
+}
+
+function onDialogClose() {
+  if (preview.value === 'mermaid') {
+    view.value = oldView.value
+  }
 }
 
 function buildHtml(code: string) {
@@ -267,6 +303,13 @@ watch(language, (newValue) => {
 
 watch(darkMode, (newValue) => {
   onRerender()
+})
+
+watch(codeView, (newValue, oldValue) => {
+  if (newValue === 'splitHorizontal') {
+    oldView.value = oldValue
+    preview.value = 'mermaid'
+  }
 })
 
 onMounted(() => {

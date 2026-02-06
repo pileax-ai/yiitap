@@ -26,10 +26,7 @@
       v-if="showPopover"
     >
       <template #header-right>
-        <o-checkbox
-          v-model="openInNewTab"
-          :label="tr('link.open_in_new_tab')"
-        />
+        <o-checkbox v-model="openInNewTab" :label="tr('link.openInNewTab')" />
       </template>
     </o-meta-input>
   </o-popover>

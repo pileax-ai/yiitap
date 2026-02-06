@@ -23,6 +23,7 @@ Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, buil
 🤖 **AI-powered** – Smart features to boost productivity.  
 🧩 **Block-based editing** – Manipulate content via **bubble, floating, main, or side menus**.  
 ✨ **Rich feature set** – Includes **15+ custom extensions** & **50+ UI components**.  
+🌍 **I18n** – Includes **10+ languages**.  
 🌗 Light & Dark mode.  
 🆓 MIT Licensed.
 
@@ -36,7 +37,7 @@ For more detailed information, make sure to check out our [documentation](https:
 
 ## Screenshots
 
-![Screenshot](docs/screenshots/screenshot-main.png)
+![Screenshot](docs/screenshots/screenshot.gif)
 
 ## Development
 ### Install dependencies

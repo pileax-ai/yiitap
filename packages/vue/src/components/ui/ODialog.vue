@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
     <div v-if="show" class="dialog-overlay o-dialog" @click.self="close">
-      <div class="dialog-box">
+      <div class="dialog-box" :class="{ fullscreen: fullscreen }">
         <div class="dialog-header">
           <slot name="title">{{ title }}</slot>
           <o-btn icon="close" class="close" @click="close" />
@@ -21,23 +21,16 @@
 defineOptions({ name: 'ODialog' })
 
 import { defineProps, defineEmits } from 'vue'
+import type { DialogOption } from '../../types/types'
 import { OBtn } from '../index'
 
-const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false,
-  },
-  title: {
-    type: String,
-    default: '',
-  },
-})
+const props = defineProps<DialogOption>()
 
-const emits = defineEmits(['update:show'])
+const emits = defineEmits(['close', 'update:show'])
 
 const close = () => {
   emits('update:show', false)
+  emits('close')
 }
 </script>
 
@@ -67,10 +60,19 @@ const close = () => {
     overflow: auto;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 
+    &.fullscreen {
+      height: 100vh;
+      width: 100vw;
+      max-width: unset;
+      max-height: unset;
+      border-radius: 0;
+    }
+
     .dialog-body {
+      position: relative;
       display: flex;
       flex: 1;
-      padding: 1rem;
+      padding: 0;
       overflow: hidden;
 
       iframe {

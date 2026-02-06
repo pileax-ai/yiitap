@@ -1,0 +1,189 @@
+[
+  {
+    "label": "English (United States)",
+    "value": "en-US",
+    "locale": "en",
+    "prompt_name": "English",
+    "example": "Hello, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "简体中文",
+    "value": "zh-Hans",
+    "locale": "zh-cn",
+    "prompt_name": "Chinese Simplified",
+    "example": "你好，PileaX！",
+    "supported": true
+  },
+  {
+    "label": "繁體中文",
+    "value": "zh-Hant",
+    "locale": "zh-tw",
+    "base": "zh-Hans",
+    "prompt_name": "Chinese Traditional",
+    "example": "你好，PileaX！",
+    "supported": true
+  },
+  {
+    "label": "Português (Brasil)",
+    "value": "pt-BR",
+    "locale": "pt-br",
+    "base": "en-US",
+    "prompt_name": "Portuguese",
+    "example": "Olá, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "Español (España)",
+    "value": "es-ES",
+    "locale": "es",
+    "base": "en-US",
+    "prompt_name": "Spanish",
+    "example": "¡Hola, PileaX!",
+    "supported": false
+  },
+  {
+    "label": "Français (France)",
+    "value": "fr-FR",
+    "locale": "fr",
+    "base": "en-US",
+    "prompt_name": "French",
+    "example": "Bonjour, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "Deutsch (Deutschland)",
+    "value": "de-DE",
+    "locale": "de",
+    "base": "en-US",
+    "prompt_name": "German",
+    "example": "Hallo, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "日本語 (日本)",
+    "value": "ja-JP",
+    "locale": "ja",
+    "base": "en-US",
+    "prompt_name": "Japanese",
+    "example": "こんにちは、PileaX!",
+    "supported": true
+  },
+  {
+    "label": "한국어 (대한민국)",
+    "value": "ko-KR",
+    "locale": "ko",
+    "base": "en-US",
+    "prompt_name": "Korean",
+    "example": "안녕하세요, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "Русский (Россия)",
+    "value": "ru-RU",
+    "locale": "ru",
+    "base": "en-US",
+    "prompt_name": "Russian",
+    "example": "Привет, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "Italiano (Italia)",
+    "value": "it-IT",
+    "locale": "it",
+    "base": "en-US",
+    "prompt_name": "Italian",
+    "example": "Ciao, PileaX!",
+    "supported": false
+  },
+  {
+    "label": "ไทย (ประเทศไทย)",
+    "value": "th-TH",
+    "locale": "th",
+    "base": "en-US",
+    "prompt_name": "Thai",
+    "example": "สวัสดี PileaX!",
+    "supported": false
+  },
+  {
+    "label": "Українська (Україна)",
+    "value": "uk-UA",
+    "locale": "uk",
+    "base": "en-US",
+    "prompt_name": "Ukrainian",
+    "example": "Привет, PileaX!",
+    "supported": false
+  },
+  {
+    "label": "Tiếng Việt (Việt Nam)",
+    "value": "vi-VN",
+    "locale": "vi",
+    "base": "en-US",
+    "prompt_name": "Vietnamese",
+    "example": "Xin chào, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "Română (România)",
+    "value": "ro-RO",
+    "locale": "ro",
+    "base": "en-US",
+    "prompt_name": "Romanian",
+    "example": "Salut, PileaX!",
+    "supported": false
+  },
+  {
+    "label": "Polski (Polish)",
+    "value": "pl-PL",
+    "locale": "pl",
+    "base": "en-US",
+    "prompt_name": "Polish",
+    "example": "Cześć, PileaX!",
+    "supported": true
+  },
+  {
+    "label": "Hindi (India)",
+    "value": "hi-IN",
+    "locale": "hi",
+    "base": "en-US",
+    "prompt_name": "Hindi",
+    "example": "नमस्ते, PileaX!",
+    "supported": false
+  },
+  {
+    "label": "Türkçe",
+    "value": "tr-TR",
+    "locale": "tr",
+    "base": "en-US",
+    "prompt_name": "Türkçe",
+    "example": "Selam!",
+    "supported": false
+  },
+  {
+    "label": "Farsi (Iran)",
+    "value": "fa-IR",
+    "locale": "fa",
+    "base": "en-US",
+    "prompt_name": "Farsi",
+    "example": "سلام, دیفای!",
+    "supported": false
+  },
+  {
+    "label": "Slovensko (Slovenija)",
+    "value": "sl-SI",
+    "locale": "sl",
+    "base": "en-US",
+    "prompt_name": "Slovensko",
+    "example": "Zdravo, PileaX!",
+    "supported": false
+  },
+  {
+    "label": "Bahasa Indonesia",
+    "value": "id-ID",
+    "locale": "id",
+    "base": "en-US",
+    "prompt_name": "Indonesian",
+    "example": "Halo, PileaX!",
+    "supported": true
+  }
+]

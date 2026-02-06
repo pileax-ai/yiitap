@@ -39,6 +39,7 @@
 	"dependencies": {
 		"@floating-ui/dom": "^1.7.4",
 		"@mermaid-js/layout-elk": "^0.2.0",
+    "@yiitap/i18n": "workspace:*",
 		"katex": "^0.16.25",
 		"lowlight": "^3.3.0",
 		"mermaid": "^11.12.0",

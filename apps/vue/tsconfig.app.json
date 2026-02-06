@@ -15,6 +15,14 @@
     "rootDir": "src",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": [
+      "vue-i18n",
+      "@tiptap/markdown",
+      "@yiitap/core",
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "exactOptionalPropertyTypes": false
   }
 }

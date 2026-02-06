@@ -11,12 +11,7 @@
           <h3>General</h3>
           <n-divider />
           <n-form-item label="Language">
-            <n-radio-group v-model:value="locale" name="radiogroup1">
-              <n-space>
-                <n-radio value="en"> English </n-radio>
-                <n-radio value="zh"> 中文 </n-radio>
-              </n-space>
-            </n-radio-group>
+            <n-select v-model:value="locale" :options="SupportLanguages" />
           </n-form-item>
           <n-form-item label="Mode">
             <n-switch v-model:value="darkMode" @update:value="onMode">
@@ -36,7 +31,7 @@
               <template #unchecked> Disable </template>
             </n-switch>
           </n-form-item>
-          <n-form-item label="Source">
+          <n-form-item label="Content">
             <n-select v-model:value="source" :options="sourceList" />
           </n-form-item>
 
@@ -73,8 +68,6 @@
                 placeholder="Provider Token"
               />
             </n-form-item>
-
-            <n-button @click="onSnapshot">Snapshot</n-button>
           </template>
         </n-form>
       </n-drawer-content>
@@ -146,13 +139,11 @@ import {
   NForm,
   NFormItem,
   NInput,
-  NRadio,
-  NRadioGroup,
   NSelect,
-  NSpace,
   NSwitch,
 } from 'naive-ui'
 import { YiiEditor, ODocToc, OIcon, OMainMenu } from '@yiitap/vue'
+import { SupportLanguages } from '@yiitap/i18n'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
 import { getData } from '@/data'
@@ -164,7 +155,7 @@ const emit = defineEmits(['mode'])
 
 const yiiEditor = ref<InstanceType<typeof YiiEditor>>()
 const tocRef = ref<InstanceType<typeof ODocToc>>()
-const locale = ref('en')
+const locale = ref('en-US')
 const darkMode = ref(false)
 const editable = ref(true)
 const source = ref('default')
@@ -187,7 +178,7 @@ const collabReady = ref(false)
 
 const editorOptions = computed(() => {
   return {
-    title: true,
+    // title: true,
     collaboration: collaboration.value,
     aiOption: aiOption.value,
     locale: locale.value,
@@ -315,7 +306,7 @@ const editor = computed(() => {
 
 function init() {
   try {
-    locale.value = localStorage.getItem('yiitap.locale') || 'en'
+    locale.value = localStorage.getItem('yiitap.locale') || 'en-US'
     source.value = localStorage.getItem('yiitap.source') || 'default'
     providerToken.value = localStorage.getItem('yiitap.token') || ''
     collaboration.value =
@@ -360,14 +351,6 @@ function resetCollab() {
   ydoc.value = null
 }
 
-function onSnapshot() {
-  if (ydoc.value) {
-    const snapshot = Y.snapshot(ydoc.value)
-    const snapshotData = Y.encodeSnapshot(snapshot)
-    console.log('snapshot', snapshotData)
-  }
-}
-
 function onToggleDrawer() {
   showDrawer.value = !showDrawer.value
 }
@@ -383,10 +366,14 @@ function onMode() {
 function onUpdate({ editor }: { editor: Editor }) {
   // Get content of editor
   // console.log(editor.getJSON())
-  console.log(editor.getHTML())
+
   // markdown
   // const markdown = editor.markdown?.serialize(editor.getJSON())
   // console.log(markdown)
+
+  if (import.meta.env.DEV) {
+    console.log(editor.getHTML())
+  }
 }
 
 function onScroll(event: Event) {
@@ -447,7 +434,6 @@ watch(editor, (newValue) => {
 })
 
 onMounted(() => {
-  // initialization
   init()
 })
 </script>
