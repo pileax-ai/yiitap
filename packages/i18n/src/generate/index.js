@@ -135,7 +135,7 @@ function serializeToTs(obj, indent = 2, level = 0) {
 // ==================================================
 async function translateText(text, lang) {
   console.log(`➡️ Translating (${lang.value}): ${text}`)
-  await sleep(200 + Math.random() * 600)
+  await sleep(200 + Math.random() * 200)
 
   switch (TRANSLATOR) {
     case 'bing':

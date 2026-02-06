@@ -31,7 +31,7 @@
     "base": "en-US",
     "prompt_name": "Portuguese",
     "example": "Olá, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "Español (España)",
@@ -49,7 +49,7 @@
     "base": "en-US",
     "prompt_name": "French",
     "example": "Bonjour, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "Deutsch (Deutschland)",
@@ -58,7 +58,7 @@
     "base": "en-US",
     "prompt_name": "German",
     "example": "Hallo, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "日本語 (日本)",
@@ -67,7 +67,7 @@
     "base": "en-US",
     "prompt_name": "Japanese",
     "example": "こんにちは、PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "한국어 (대한민국)",
@@ -76,7 +76,7 @@
     "base": "en-US",
     "prompt_name": "Korean",
     "example": "안녕하세요, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "Русский (Россия)",
@@ -85,7 +85,7 @@
     "base": "en-US",
     "prompt_name": "Russian",
     "example": "Привет, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "Italiano (Italia)",
@@ -121,7 +121,7 @@
     "base": "en-US",
     "prompt_name": "Vietnamese",
     "example": "Xin chào, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "Română (România)",
@@ -139,7 +139,7 @@
     "base": "en-US",
     "prompt_name": "Polish",
     "example": "Cześć, PileaX!",
-    "supported": false
+    "supported": true
   },
   {
     "label": "Hindi (India)",
@@ -184,6 +184,6 @@
     "base": "en-US",
     "prompt_name": "Indonesian",
     "example": "Halo, PileaX!",
-    "supported": false
+    "supported": true
   }
 ]

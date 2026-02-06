@@ -61,7 +61,7 @@
     >
       <template #title>{{ preview }}</template>
 
-      <template v-if="preview === 'runHtml'">
+      <template v-if="preview === 'run'">
         <iframe
           sandbox="allow-same-origin allow-scripts"
           :srcdoc="html"

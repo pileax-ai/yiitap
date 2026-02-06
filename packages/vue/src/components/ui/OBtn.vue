@@ -53,6 +53,7 @@ const emit = defineEmits(['click'])
   height: 36px;
   border-radius: 3px;
   box-sizing: border-box;
+  color: var(--yii-color);
 
   &:hover {
     background: var(--yii-hover-bg-color) !important;
@@ -75,6 +76,7 @@ const emit = defineEmits(['click'])
   &__label,
   .label {
     margin-left: 4px;
+    color: var(--yii-tips-color);
   }
 }
 </style>
