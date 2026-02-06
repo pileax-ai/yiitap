@@ -70,13 +70,14 @@ const emit = defineEmits(['click'])
     background: rgba(0, 0, 0, 0.05);
   }
 
+  &:has(.label) {
+    width: unset;
+    padding: 0 4px;
+  }
+
   .content {
     display: none;
     padding: 100px;
   }
-}
-
-.tippy-box[data-theme='tooltip'] {
-  //background: red;
 }
 </style>

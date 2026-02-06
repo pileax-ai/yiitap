@@ -10,6 +10,7 @@
       init: src === 'init',
     }"
     as="div"
+    @contextmenu.prevent="onContextMenu"
     @click="onClick"
   >
     <o-block-popover
@@ -34,6 +35,16 @@
         <o-block-toolbar v-bind="props" @action="onAction">
           <template v-if="isEditable">
             <o-menubar-btn
+              :icon="canDrag ? 'arrow_expand' : 'close'"
+              :icon-class="canDrag ? 'rotate-315' : ''"
+              content-class="with-label"
+              :tooltip="tr('image.repositionTips')"
+              @click.stop="onToggleDrag"
+              v-if="showPositionControls"
+            >
+              <span class="label"> {{ tr('image.reposition') }} </span>
+            </o-menubar-btn>
+            <o-menubar-btn
               icon="subtitles"
               :tooltip="tr('image.caption')"
               @click.stop="onCaption"
@@ -57,9 +68,10 @@
           ref="imageContainer"
           class="image-container"
           :style="containerStyle"
+          @mousedown="onContainerMouseDown"
         >
           <!-- Image -->
-          <div ref="imageWrapper" class="image-wrapper">
+          <div ref="imageWrapper" class="image-wrapper" :style="wrapperStyle">
             <img
               ref="imageElement"
               v-bind="attrs"
@@ -166,7 +178,7 @@ const showImageViewer = ref(false)
 const currentImageIndex = ref(0)
 const images = ref<EditorImage[]>([])
 
-// resize
+// Resize
 const imageView = ref<InstanceType<typeof ONodeView>>()
 const imageContainer = ref<HTMLElement | null>(null)
 const imageWrapper = ref<HTMLElement | null>(null)
@@ -188,6 +200,14 @@ const containerHeight = ref(0)
 const maxWidth = ref(800)
 const maxHeight = ref(400)
 const isMax = ref(false)
+
+// Drag to move
+const dragEnabled = ref(true)
+const isDragging = ref(false)
+const imagePositionY = ref(props.node.attrs.positionY || 0)
+const dragStartY = ref(0)
+const dragStartPositionY = ref(0)
+const showPositionControls = ref(false)
 
 const attrs = computed(() => {
   return props.node.attrs
@@ -239,6 +259,11 @@ function onClick() {
   }
 }
 
+function onContextMenu(e: MouseEvent) {
+  showContextMenu.value = true
+  mouseEvent.value = e
+}
+
 function onAction(action: BlockOption) {
   showContextMenu.value = false
   switch (action.value) {
@@ -271,14 +296,13 @@ const containerStyle = computed(() => {
   }
 })
 
-// 获取缩放光标
 function getResizeCursor() {
   switch (resizeDirection.value) {
     case 'left':
       return 'ew-resize'
     case 'right':
       return 'ew-resize'
-    case 'center':
+    case 'bottom':
       return 'ew-resize'
     default:
       return 'default'
@@ -329,6 +353,7 @@ function onImageLoad() {
 
     containerMaxHeight.value = currentHeight.value
     // console.log('container', currentContainerHeight.value, containerHeight.value, containerMaxHeight.value)
+    checkPositionControls()
   }
 }
 
@@ -393,6 +418,7 @@ function onResizeMove(e: MouseEvent) {
     containerMaxHeight.value = currentHeight.value
   } else {
     currentContainerHeight.value = currentHeight.value
+    resetImagePosition()
   }
 }
 
@@ -416,11 +442,120 @@ function updateImageSize() {
   })
 }
 
+// ------------------------------------------------------------
+// Drag to move
+// ------------------------------------------------------------
+const minPositionY = computed(() => {
+  if (!currentHeight.value || !currentContainerHeight.value) return 0
+  return Math.min(0, currentContainerHeight.value - currentHeight.value)
+})
+
+const wrapperStyle = computed(() => {
+  return {
+    transform: `translateY(${imagePositionY.value}px)`,
+    cursor: canDrag.value ? 'grab' : 'default',
+    transition: isDragging.value ? 'none' : 'transform 0.2s ease',
+  }
+})
+
+const canDrag = computed(() => {
+  return (
+    dragEnabled.value &&
+    isMax.value &&
+    currentContainerHeight.value < currentHeight.value
+  )
+})
+
+function onToggleDrag() {
+  dragEnabled.value = !dragEnabled.value
+}
+
+function checkPositionControls() {
+  if (isMax.value && currentContainerHeight.value < currentHeight.value) {
+    showPositionControls.value = true
+  } else {
+    showPositionControls.value = false
+  }
+}
+
+function resetImagePosition() {
+  if (imagePositionY.value !== 0) {
+    imagePositionY.value = 0
+    updateImagePosition()
+  }
+}
+
+function onContainerMouseDown(event: MouseEvent) {
+  if (!canDrag.value || !showPositionControls.value || isResizing.value) return
+
+  const target = event.target as HTMLElement
+  if (target.closest('.block-resizer')) return
+
+  event.preventDefault()
+  event.stopPropagation()
+
+  isDragging.value = true
+  dragStartY.value = event.clientY
+  dragStartPositionY.value = imagePositionY.value
+
+  document.addEventListener('mousemove', onContainerMouseMove)
+  document.addEventListener('mouseup', onContainerMouseUp)
+  document.body.style.userSelect = 'none'
+  document.body.style.cursor = 'grabbing'
+}
+
+function onContainerMouseMove(event: MouseEvent) {
+  if (!isDragging.value) return
+
+  const deltaY = event.clientY - dragStartY.value
+  let newPosition = dragStartPositionY.value + deltaY
+
+  newPosition = Math.max(minPositionY.value, Math.min(0, newPosition))
+  imagePositionY.value = newPosition
+}
+
+function onContainerMouseUp() {
+  isDragging.value = false
+  document.removeEventListener('mousemove', onContainerMouseMove)
+  document.removeEventListener('mouseup', onContainerMouseUp)
+
+  document.body.style.userSelect = ''
+  document.body.style.cursor = ''
+
+  updateImagePosition()
+}
+
+function updateImagePosition() {
+  props.updateAttributes({
+    positionY: imagePositionY.value,
+  })
+}
+
 watch(
   () => props.node.attrs.height,
   (newHeight) => {
     if (newHeight) {
       currentHeight.value = newHeight
+    }
+  }
+)
+
+watch(
+  () => props.node.attrs.containerHeight,
+  (newContainerHeight) => {
+    if (newContainerHeight) {
+      containerHeight.value = newContainerHeight
+      currentContainerHeight.value = newContainerHeight
+      checkPositionControls()
+    }
+  }
+)
+
+watch(
+  () => props.node.attrs.positionY,
+  (newPositionY) => {
+    if (newPositionY !== undefined) {
+      imagePositionY.value = newPositionY
     }
   }
 )
@@ -466,12 +601,7 @@ onUnmounted(() => {
   cursor: pointer;
   background: none !important;
 
-  &.selection-decoration-blur {
-  }
-
   &.has-focus {
-    //padding: 0;
-    //border-radius: 2px;
     background: rgba(172, 206, 247, 0.5) !important;
   }
 

@@ -9,6 +9,7 @@
         type="text"
         autofocus
         clearable
+        @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="link" class="o-tips" />

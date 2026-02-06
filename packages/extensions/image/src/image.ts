@@ -11,6 +11,10 @@ export const Image = TiptapImage.extend<ImageOptions>({
         default: 0,
         rendered: true,
       },
+      positionY: {
+        default: 0,
+        rendered: true,
+      },
       isDraggable: {
         default: true,
         renderHTML: (attributes) => {
@@ -21,6 +25,7 @@ export const Image = TiptapImage.extend<ImageOptions>({
   },
   renderHTML({ node, HTMLAttributes }) {
     HTMLAttributes.containerHeight = node.attrs.containerHeight
+    HTMLAttributes.positionY = node.attrs.positionY
 
     return ['img', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
   },

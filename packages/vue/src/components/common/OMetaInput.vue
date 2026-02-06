@@ -7,7 +7,14 @@
       </div>
     </section>
     <section class="fields">
-      <o-input ref="input" v-model="value" type="text" autofocus clearable>
+      <o-input
+        ref="input"
+        v-model="value"
+        type="text"
+        autofocus
+        clearable
+        @enter="onConfirm"
+      >
         <template #prefix>
           <o-icon :name="icon" class="o-tips" />
         </template>

@@ -79,12 +79,17 @@ function onAction(item: Indexable) {
   }
 
   .o-command-btn {
+    color: #ffffff;
     &:hover {
       background: rgba(255, 255, 255, 0.2);
     }
 
     .o-icon {
       color: #ffffff;
+    }
+
+    .label {
+      font-size: 0.6rem !important;
     }
   }
 }

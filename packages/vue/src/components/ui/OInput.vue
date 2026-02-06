@@ -10,6 +10,7 @@
         :placeholder="placeholder"
         @focus="emit('focus')"
         @blur="emit('blur')"
+        @keyup.enter="emit('enter')"
       />
     </div>
     <div class="o-input__suffix">
@@ -46,7 +47,7 @@ const props = defineProps({
     default: '',
   },
 })
-const emit = defineEmits(['blur', 'focus', 'update:modelValue'])
+const emit = defineEmits(['blur', 'enter', 'focus', 'update:modelValue'])
 const input = ref<HTMLInputElement | null>(null)
 
 const value = computed({

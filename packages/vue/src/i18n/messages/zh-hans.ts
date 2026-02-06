@@ -165,6 +165,8 @@ export default {
     medium: '中',
     large: '大',
     zoom: '缩放',
+    reposition: '调整位置',
+    repositionTips: '拖动图片以调整位置',
   },
   embed: {
     video: '视频',
