@@ -189,8 +189,8 @@ export class SideMenuView {
     // console.log('update', coords, pos)
     // console.log('update', nodeElement)
 
-    // Todo: Hide the frist node
-    if (!nodeElement || pos <= 0) {
+    // Set pos === 0 if want to hide the frist node
+    if (!nodeElement) {
       return
     }
 

@@ -56,6 +56,7 @@ const nodeType = computed(() => {
 })
 
 const block = computed(() => {
+  // console.log('block', nodeType.value)
   let type = nodeType.value
   if (type === 'heading') {
     return {

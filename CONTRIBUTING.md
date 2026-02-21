@@ -82,7 +82,6 @@ pnpm build
 
 ### Preview
 ```shell
-cd apps/vue
 pnpm preview
 ```
 You may go to http://localhost:4173/yiitap to check if your changes work as expected.
