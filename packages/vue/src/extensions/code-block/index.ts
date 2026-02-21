@@ -18,7 +18,7 @@ lowlight.register('mermaid', mermaidGrammar)
 
 import View from './view.vue'
 
-interface OCodeBlockOptions extends CodeBlockLowlightOptions {
+export interface OCodeBlockOptions extends CodeBlockLowlightOptions {
   diagramTheme: string
 }
 

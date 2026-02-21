@@ -119,7 +119,6 @@ provide('locale', locale)
 // Collaboration
 const editor = ref<Editor>()
 
-
 const content = computed(() => {
   return getData(source.value, locale.value as 'en')
 })
@@ -154,7 +153,6 @@ const aiProviders = computed(() => {
   ]
 })
 
-
 function init() {
   try {
     locale.value = localStorage.getItem('yiitap.locale') || 'en-US'
@@ -166,13 +164,12 @@ function init() {
 
     editor.value = new Editor({
       extensions: [StarterKit],
-      content: 'Demo'
+      content: 'Demo',
     })
   } catch (e) {
     // ignore
   }
 }
-
 
 function onToggleDrawer() {
   showDrawer.value = !showDrawer.value

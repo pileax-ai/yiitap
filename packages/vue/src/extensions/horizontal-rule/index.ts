@@ -1,9 +1,11 @@
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import HorizontalRule from '@tiptap/extension-horizontal-rule'
+import HorizontalRule, {
+  type HorizontalRuleOptions,
+} from '@tiptap/extension-horizontal-rule'
 
 import View from './view.vue'
 
-const OHorizontalRule = HorizontalRule.extend({
+const OHorizontalRule = HorizontalRule.extend<HorizontalRuleOptions>({
   draggable: true,
 
   addNodeView() {
@@ -12,3 +14,5 @@ const OHorizontalRule = HorizontalRule.extend({
 })
 
 export default OHorizontalRule
+
+export type { HorizontalRuleOptions }

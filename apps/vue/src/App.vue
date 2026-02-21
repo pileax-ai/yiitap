@@ -1,7 +1,7 @@
 <template>
   <n-config-provider :theme="theme">
     <Demo @mode="onMode"></Demo>
-<!--    <SimpleEditor @mode="onMode"></SimpleEditor>-->
+    <!--    <SimpleEditor @mode="onMode"></SimpleEditor>-->
   </n-config-provider>
 </template>
 

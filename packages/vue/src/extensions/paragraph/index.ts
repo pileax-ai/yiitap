@@ -1,5 +1,5 @@
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import Paragraph from '@tiptap/extension-paragraph'
+import Paragraph, { type ParagraphOptions } from '@tiptap/extension-paragraph'
 
 import View from './view.vue'
 
@@ -12,4 +12,7 @@ const OParagraph = Paragraph.extend({
     })
   },
 })
+
 export default OParagraph
+
+export type { ParagraphOptions }

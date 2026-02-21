@@ -1,7 +1,7 @@
 /**
  * Blocks
  */
-import { Color } from './color'
+import { BrandColor } from './brand-color'
 
 export const BasicBlocks: BlockOption[] = [
   {
@@ -18,7 +18,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'h1',
     tips: '#',
     icon: 'format_h1',
-    color: Color.blue,
+    color: BrandColor.blue,
     style: true,
     options: { level: 1 },
   },
@@ -28,7 +28,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'h2',
     tips: '##',
     icon: 'format_h2',
-    color: Color.blue,
+    color: BrandColor.blue,
     style: true,
     options: { level: 2 },
   },
@@ -38,7 +38,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'h3',
     tips: '###',
     icon: 'format_h3',
-    color: Color.blue,
+    color: BrandColor.blue,
     style: true,
     options: { level: 3 },
   },
@@ -48,7 +48,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'task',
     tips: '[]',
     icon: 'check_box',
-    color: Color.indigo,
+    color: BrandColor.indigo,
     style: true,
   },
   {
@@ -57,7 +57,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'bullet',
     tips: '-',
     icon: 'format_list_bulleted',
-    color: Color.indigo,
+    color: BrandColor.indigo,
     style: true,
   },
   {
@@ -66,7 +66,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'ordered',
     tips: '1.',
     icon: 'format_list_numbered',
-    color: Color.indigo,
+    color: BrandColor.indigo,
     style: true,
   },
   {
@@ -75,7 +75,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'quote',
     tips: '"',
     icon: 'format_quote_open',
-    color: Color.brown,
+    color: BrandColor.brown,
     style: true,
   },
   {
@@ -84,7 +84,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'details, toggle',
     tips: '>',
     icon: 'toggle_list',
-    color: Color.indigo,
+    color: BrandColor.indigo,
     style: true,
   },
   {
@@ -93,7 +93,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'code',
     tips: '```',
     icon: 'code_braces',
-    color: Color.lightBlue,
+    color: BrandColor.lightBlue,
     style: true,
   },
   {
@@ -101,12 +101,12 @@ export const BasicBlocks: BlockOption[] = [
     value: 'horizontalRule',
     tips: '---',
     icon: 'horizontal_rule',
-    color: Color.blue,
+    color: BrandColor.blue,
   },
   {
     label: 'editor.callout',
     value: 'callout',
-    color: Color.deepOrange,
+    color: BrandColor.deepOrange,
     icon: 'card_text',
     style: false,
   },
@@ -116,7 +116,7 @@ export const BasicBlocks: BlockOption[] = [
     keywords: 'emoji',
     tips: ':',
     icon: 'emoji_emotions',
-    color: Color.blue,
+    color: BrandColor.blue,
   },
 ]
 
@@ -127,7 +127,7 @@ export const CommonBlocks: BlockOption[] = [
     label: 'editor.aiBlock',
     value: 'aiBlock',
     icon: 'auto_awesome',
-    color: Color.purple,
+    color: BrandColor.purple,
     tips: 'ai',
     group: 'label.ai',
   },
@@ -135,7 +135,7 @@ export const CommonBlocks: BlockOption[] = [
     label: 'editor.callout',
     value: 'callout',
     icon: 'card_text',
-    color: Color.deepOrange,
+    color: BrandColor.deepOrange,
     tips: 'callout',
     group: 'label.common',
   },
@@ -144,27 +144,27 @@ export const CommonBlocks: BlockOption[] = [
     value: 'table',
     icon: 'window',
     tips: 'table',
-    color: Color.cyan,
+    color: BrandColor.cyan,
   },
   {
     label: 'editor.codeBlock',
     value: 'codeBlock',
     icon: 'code_braces',
     tips: 'code',
-    color: Color.blue,
+    color: BrandColor.blue,
   },
   {
     label: 'editor.todoList',
     value: 'taskList',
     icon: 'check_box',
     tips: 'task',
-    color: Color.indigo,
+    color: BrandColor.indigo,
   },
   {
     label: 'diagram.name',
     value: 'diagram',
     icon: 'mermaid',
-    color: Color.purple,
+    color: BrandColor.purple,
     tips: 'diagram',
     keywords: 'code, diagram, mermaid',
   },
@@ -172,7 +172,7 @@ export const CommonBlocks: BlockOption[] = [
     label: 'label.image',
     value: 'image',
     icon: 'image',
-    color: Color.amber,
+    color: BrandColor.amber,
     tips: 'image',
     group: 'label.media',
   },
@@ -181,14 +181,14 @@ export const CommonBlocks: BlockOption[] = [
     value: 'video',
     icon: 'videocam',
     tips: 'video',
-    color: Color.purple,
+    color: BrandColor.purple,
   },
   {
     label: 'label.model',
     value: 'modelViewer',
     icon: '3d_rotation',
     tips: 'model',
-    color: Color.purple,
+    color: BrandColor.purple,
   },
 ]
 
@@ -197,7 +197,7 @@ export const AdvancedBlocks: BlockOption[] = [
     label: 'editor.inlineMath',
     value: 'inlineMath',
     icon: 'function',
-    color: Color.blue,
+    color: BrandColor.blue,
     tips: 'math',
     keywords: 'inline, math, equation',
     group: 'label.advanced',
@@ -206,7 +206,7 @@ export const AdvancedBlocks: BlockOption[] = [
     label: 'editor.blockMath',
     value: 'blockMath',
     icon: 'functions',
-    color: Color.indigo,
+    color: BrandColor.indigo,
     tips: 'math',
     keywords: 'block, math, equation',
   },
@@ -223,7 +223,7 @@ export const BlockMenus: BlockOption[] = [
     label: 'editor.duplicate',
     value: 'duplicate',
     icon: 'content_copy',
-    color: Color.blue,
+    color: BrandColor.blue,
     tips: 'Mod+D',
     group: 'label.common',
     filter: 'common',
@@ -232,7 +232,7 @@ export const BlockMenus: BlockOption[] = [
     label: 'label.copy',
     value: 'copy',
     icon: 'copy_all',
-    color: Color.indigo,
+    color: BrandColor.indigo,
     filter: 'common',
   },
   {
@@ -240,7 +240,7 @@ export const BlockMenus: BlockOption[] = [
     value: 'delete',
     icon: 'delete',
     tips: 'Mod+X',
-    color: Color.deepOrange,
+    color: BrandColor.deepOrange,
     filter: 'common',
   },
   {
@@ -248,14 +248,14 @@ export const BlockMenus: BlockOption[] = [
     value: 'replace',
     icon: 'cached',
     tips: 'Mod+R',
-    color: Color.blue,
+    color: BrandColor.blue,
     filter: 'image,video,model',
   },
   {
     label: 'label.color',
     value: 'color',
     icon: 'palette',
-    color: Color.purple,
+    color: BrandColor.purple,
     filter: 'style',
     component: 'OTextColorBoard',
   },
@@ -263,7 +263,7 @@ export const BlockMenus: BlockOption[] = [
     label: 'label.color',
     value: 'callout_color',
     icon: 'palette',
-    color: Color.purple,
+    color: BrandColor.purple,
     filter: 'callout',
     component: 'OCalloutColorBoard',
   },
@@ -274,7 +274,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.improveWriting',
     value: 'improveWriting',
     icon: 'title',
-    color: Color.purple,
+    color: BrandColor.purple,
     group: 'label.suggested',
     options: {
       prompt: 'Improve writing of the following content: [CONTENT]',
@@ -285,7 +285,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.fixSpellingGrammar',
     value: 'fixSpellingGrammar',
     icon: 'spellcheck',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Fix spelling and grammar of the following content: [CONTENT]',
     },
@@ -295,7 +295,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.enrichWithEmoji',
     value: 'enrichWithEmoji',
     icon: 'emoji_emotions',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Enrich the following content with Emoji: [CONTENT]',
     },
@@ -305,7 +305,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.translate',
     value: 'translate',
     icon: 'translate',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Translate the following content to [LANGUAGE]: [CONTENT]',
     },
@@ -346,7 +346,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.makeLonger',
     value: 'makeLonger',
     icon: 'subject',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Make following content longer: [CONTENT]',
     },
@@ -357,7 +357,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.makeShorter',
     value: 'makeShorter',
     icon: 'short_text',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Make following content shorter: [CONTENT]',
     },
@@ -367,7 +367,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.changeTone',
     value: 'changeTone',
     icon: 'invert_colors',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Change tone of the following content to [TONE]: [CONTENT]',
     },
@@ -434,7 +434,7 @@ export const AskAiBlocks: BlockOption[] = [
     label: 'ai.explain',
     value: 'explain',
     icon: 'format_quote_open',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Improve writing of the following content: [CONTENT]',
     },
@@ -448,7 +448,7 @@ export const AiBlocks: BlockOption[] = [
     label: 'ai.summarize',
     value: 'summarize',
     icon: 'notes',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Summarize the following content: [CONTENT]',
     },
@@ -458,7 +458,7 @@ export const AiBlocks: BlockOption[] = [
     label: 'ai.continuation',
     value: 'continuation',
     icon: 'edit_note',
-    color: Color.purple,
+    color: BrandColor.purple,
     options: {
       prompt: 'Continue writing with the content: [CONTENT]',
     },

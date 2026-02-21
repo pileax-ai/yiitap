@@ -6,7 +6,7 @@ import { TextSelection } from '@tiptap/pm/state'
 
 import View from './view.vue'
 
-interface ODetailsOptions extends DetailsOptions {
+export interface ODetailsOptions extends DetailsOptions {
   triggerCharacters: string[]
 }
 

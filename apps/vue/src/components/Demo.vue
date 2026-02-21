@@ -130,7 +130,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, onMounted, watch, shallowRef } from 'vue'
+import { computed, provide, ref, watch, shallowRef, onBeforeMount } from 'vue'
 import {
   NButton,
   NDivider,
@@ -142,7 +142,14 @@ import {
   NSelect,
   NSwitch,
 } from 'naive-ui'
-import { YiiEditor, ODocToc, OIcon, OMainMenu } from '@yiitap/vue'
+import {
+  YiiEditor,
+  ODocToc,
+  OIcon,
+  OMainMenu,
+  InlineMath,
+  OStarterKit,
+} from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
@@ -171,20 +178,55 @@ const ydoc = shallowRef<Y.Doc | null>(null)
 const hpProvider = shallowRef<HocuspocusProvider | null>(null)
 
 const collaboration = ref(false)
-const documentName = ref('282bd672-a100-4d9b-bee1-c6c205187474')
-const providerUrl = ref('ws://localhost:9611')
+const documentName = ref('note@2b590c99-18ad-45bb-a4dd-d1ebdf2adcb3')
+const providerUrl = ref('ws://localhost:9621')
 const providerToken = ref('')
 const collabReady = ref(false)
 
 const editorOptions = computed(() => {
+  const extensions = [
+    OStarterKit.configure({
+      OTable: true,
+    }),
+    'Emoji',
+    InlineMath,
+    'Markdown',
+    'OAiBlock',
+    'OBlockMath',
+    'OColorHighlighter',
+    'ODetails',
+    'OImage',
+    'OShortcut',
+    'OVideo',
+  ] as any[]
+  if (collabReady.value) {
+    extensions.push(
+      {
+        name: 'Collaboration',
+        configure: {
+          document: ydoc.value,
+        },
+      },
+      {
+        name: 'CollaborationCaret',
+        configure: {
+          provider: hpProvider.value,
+          user: {
+            name: 'User Name',
+            color: '#f783ac',
+          },
+        },
+      }
+    )
+  }
+
   return {
     // title: true,
-    collaboration: collaboration.value,
     aiOption: aiOption.value,
     locale: locale.value,
     darkMode: darkMode.value,
     editable: editable.value,
-    content: collaboration.value ? null : content.value,
+    content: collabReady.value ? null : content.value,
     showMainMenu: false,
     showBubbleMenu: true,
     showFloatingMenu: true,
@@ -227,38 +269,8 @@ const editorOptions = computed(() => {
     ],
     collab: {
       enabled: collaboration.value,
-      collaboration: {
-        document: ydoc.value,
-      },
-      collaborationCaret: {
-        provider: hpProvider.value,
-        user: {
-          name: 'User Name',
-          color: '#f783ac',
-        },
-      },
     },
-    extensions: [
-      'Emoji',
-      'InlineMath',
-      'Markdown',
-      'OAiBlock',
-      'OBlockMath',
-      'OBlockquote',
-      'OCallout',
-      'OCodeBlock',
-      // 'OColon',
-      'OColorHighlighter',
-      'ODetails',
-      'OHeading',
-      'OImage',
-      'OLink',
-      'OParagraph',
-      'OShortcut',
-      'OSlash',
-      'OSlashZh',
-      'OVideo',
-    ],
+    extensions: extensions,
   }
 })
 
@@ -425,15 +437,15 @@ watch(
 watch(editor, (newValue) => {
   // Access properties exposed by YiiEditor
   // console.debug('editor', yiiEditor.value?.editor)
-  // console.debug(
-  //   'extensions',
-  //   yiiEditor.value?.editor.extensionManager.extensions
-  // )
+  console.debug(
+    'extensions',
+    yiiEditor.value?.editor.extensionManager.extensions
+  )
   // console.debug('darkMode', yiiEditor.value?.darkMode)
   // console.debug('local', yiiEditor.value?.local)
 })
 
-onMounted(() => {
+onBeforeMount(() => {
   init()
 })
 </script>

@@ -2,7 +2,7 @@
   <o-common-btn
     content-class="o-ai-btn"
     icon="auto_awesome"
-    :color="Color.purple"
+    :color="BrandColor.purple"
     :tooltip="tr('ai.askAi')"
   >
   </o-common-btn>
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import OCommonBtn from '../common/OCommonBtn.vue'
-import { Color } from '../../constants'
+import { BrandColor } from '../../constants'
 import useI18n from '../../hooks/useI18n'
 
 const props = defineProps({

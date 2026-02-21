@@ -33,7 +33,7 @@ import { computed, ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import useTiptap from '../../../hooks/useTiptap'
 import { Blocks } from '../../../constants/block'
-import { Color } from '../../../constants/color'
+import { BrandColor } from '../../../constants/brand-color'
 import DragNodeView from './DragNodeView.vue'
 import { OBtn, OIcon, OPopover } from '../../index'
 
@@ -62,7 +62,7 @@ const block = computed(() => {
   if (type === 'heading') {
     return {
       icon: `format_h${props.node.attrs?.level || 1}`,
-      color: Color.blue,
+      color: BrandColor.blue,
     }
   } else if (type === 'table-wrapper') {
     type = 'table'

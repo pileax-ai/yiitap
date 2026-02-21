@@ -27,7 +27,7 @@ import useI18n from '../../../hooks/useI18n'
 import useTiptap from '../../../hooks/useTiptap'
 import { OBlockMenu, OMenubarBtn } from '../../../components/index'
 import { StyleBlocks } from '../../../constants/block'
-import { Color } from '../../../constants/color'
+import { BrandColor } from '../../../constants/brand-color'
 
 const props = defineProps(nodeViewProps)
 const emit = defineEmits(['action'])
@@ -94,7 +94,7 @@ const items = computed(() => {
       label: 'editor.duplicate',
       value: 'duplicate',
       icon: 'content_copy',
-      color: Color.blue,
+      color: BrandColor.blue,
       tips: 'Ctrl+D',
       group: 'label.common',
     },
@@ -103,7 +103,7 @@ const items = computed(() => {
       value: 'delete',
       icon: 'delete',
       tips: 'Ctrl+D',
-      color: Color.deepOrange,
+      color: BrandColor.deepOrange,
     },
   ]
 })
