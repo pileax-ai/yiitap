@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineEmits } from 'vue'
+import { ref, computed } from 'vue'
 import { Editor } from '@tiptap/core'
 import { OCommandBtn, OIcon, OList, OListItem, OPopover } from '../index'
 

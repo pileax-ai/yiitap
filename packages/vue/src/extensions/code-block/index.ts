@@ -22,7 +22,7 @@ export interface OCodeBlockOptions extends CodeBlockLowlightOptions {
   diagramTheme: string
 }
 
-const OCodeBlockOptions = CodeBlockLowlight.extend<OCodeBlockOptions>({
+const OCodeBlock = CodeBlockLowlight.extend<OCodeBlockOptions>({
   draggable: true,
 
   addOptions() {
@@ -52,4 +52,4 @@ const OCodeBlockOptions = CodeBlockLowlight.extend<OCodeBlockOptions>({
   lowlight,
 })
 
-export default OCodeBlockOptions
+export default OCodeBlock

@@ -158,7 +158,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  instance.value && instance.value.destroy()
+  if (instance.value) {
+    instance.value.destroy()
+  }
 })
 </script>
 

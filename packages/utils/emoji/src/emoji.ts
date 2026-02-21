@@ -1,7 +1,6 @@
 /**
  * Emoji utility
  */
-// @ts-ignore
 import emojiGroups from './data/data-by-group.json'
 
 const emojiList = () => {

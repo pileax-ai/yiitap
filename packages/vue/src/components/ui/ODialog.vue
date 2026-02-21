@@ -20,7 +20,6 @@
 <script setup lang="ts">
 defineOptions({ name: 'ODialog' })
 
-import { defineProps, defineEmits } from 'vue'
 import type { DialogOption } from '../../types/types'
 import { OBtn } from '../index'
 
