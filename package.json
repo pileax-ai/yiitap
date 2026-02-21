@@ -29,7 +29,7 @@
 		"build-packages": "pnpm -r -F '@yiitap/*' run build",
 		"build-app-vue": "pnpm -F 'app-vue' run build",
 		"publish": "pnpm build && pnpm changeset publish",
-		"pre-push": "pnpm lint && pnpm test-ci && pnpm build",
+		"pre-push": "pnpm lint-fix && pnpm test-ci && pnpm build",
 		"preview": "pnpm -F 'app-vue' preview"
 	},
 	"packageManager": "pnpm@10.6.2",

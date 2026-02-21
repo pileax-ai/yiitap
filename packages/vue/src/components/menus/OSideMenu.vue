@@ -46,6 +46,10 @@ const props = defineProps({
     type: String,
     default: `menu`,
   },
+  title: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const menu = ref(null)
@@ -103,9 +107,15 @@ function onEditorTransaction({ editor, transaction }) {
     coords = state.coords
     const n = getNodeFromCoords(coords, editor)
     // console.log('tr', n)
-    if (n.node && n.pos > 0) {
-      node.value = n.node as ProseMirrorNode
-      pos.value = n.pos
+    if (n.node) {
+      const isTitleAtStart = props.title && n.pos === 0
+
+      if (isTitleAtStart) {
+        node.value = null
+      } else if (!props.title || n.pos > 0) {
+        node.value = n.node as ProseMirrorNode
+        pos.value = n.pos
+      }
     }
   }
 }

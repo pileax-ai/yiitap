@@ -236,7 +236,7 @@ export function getNodeFromCoords(
   editor: Editor
 ): NodeInfo {
   const pos = getNodePosFromCoords(coords, editor.view)
-  if (pos && pos >= 0) {
+  if (typeof pos === 'number' && pos >= 0) {
     return {
       node: editor.state.doc.nodeAt(pos),
       pos: pos,

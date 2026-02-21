@@ -315,6 +315,7 @@ const sideMenuOptions = computed(() => {
   return {
     editor: editor.value,
     add: props.sideMenu.add,
+    title: props.title,
     menu: [],
   }
 })
