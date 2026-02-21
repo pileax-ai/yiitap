@@ -82,7 +82,11 @@ const filterOptions = computed(() => {
 })
 
 const selectedOption = computed(() => {
-  return Languages.find((e) => e.value === selectedLanguage.value)
+  let lang = Languages.find((e) => e.value === selectedLanguage.value)
+  if (!lang) {
+    lang = Languages.find((e) => e.ext.includes(selectedLanguage.value))
+  }
+  return lang
 })
 
 function onShow(show: boolean) {

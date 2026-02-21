@@ -62,7 +62,7 @@ export const Shortcut = Extension.create<ShortcutOptions>({
       copy: { enabled: true, keys: ['Mod-c'] },
       duplicate: { enabled: true, keys: ['Mod-d'] },
       delete: { enabled: true, keys: ['Mod-x'] },
-      markdown: { enabled: false },
+      markdown: { enabled: true },
       selectableNodes: [
         'aiBlock',
         'blockquote',
