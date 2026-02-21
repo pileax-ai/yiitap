@@ -1,5 +1,11 @@
 # @yiitap/extension-code-block
 
+## 0.14.0
+
+### Minor Changes
+
+- 1dd0821: extension factory and starter kit
+
 ## 0.13.0
 
 ## 0.12.0

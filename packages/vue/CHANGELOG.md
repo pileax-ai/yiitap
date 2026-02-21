@@ -1,5 +1,41 @@
 # @yiitap/vue
 
+## 0.14.0
+
+### Minor Changes
+
+- 9feb326: vue package
+- 1dd0821: extension factory and starter kit
+
+### Patch Changes
+
+- 5087514: enable side menu for the first node when it is not title
+- 28ddc5b: upgrade eslint
+- ac65a63: fix language search
+- Updated dependencies [5087514]
+- Updated dependencies [28ddc5b]
+- Updated dependencies [9feb326]
+- Updated dependencies [1dd0821]
+- Updated dependencies [ac65a63]
+  - @yiitap/vue@0.14.0
+  - @yiitap/util-emoji@0.14.0
+  - @yiitap/extension-shortcut@0.14.0
+  - @yiitap/i18n@0.14.0
+  - @yiitap/core@0.14.0
+  - @yiitap/extension-ai-block@0.14.0
+  - @yiitap/extension-callout@0.14.0
+  - @yiitap/extension-char-command@0.14.0
+  - @yiitap/extension-color-highlighter@0.14.0
+  - @yiitap/extension-focus@0.14.0
+  - @yiitap/extension-image@0.14.0
+  - @yiitap/extension-inline-placeholder@0.14.0
+  - @yiitap/extension-placeholder@0.14.0
+  - @yiitap/extension-selection-decoration@0.14.0
+  - @yiitap/extension-table@0.14.0
+  - @yiitap/extension-table-wrapper@0.14.0
+  - @yiitap/extension-task-item@0.14.0
+  - @yiitap/extension-video@0.14.0
+
 ## 0.13.0
 
 ### Minor Changes

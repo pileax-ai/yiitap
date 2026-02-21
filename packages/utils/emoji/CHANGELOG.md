@@ -1,5 +1,11 @@
 # @yiitap/util-emoji
 
+## 0.14.0
+
+### Patch Changes
+
+- 28ddc5b: upgrade eslint
+
 ## 0.13.0
 
 ## 0.12.0

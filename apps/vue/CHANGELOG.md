@@ -1,5 +1,24 @@
 # app-vue
 
+## 0.14.0
+
+### Minor Changes
+
+- 9feb326: vue package
+- 1dd0821: extension factory and starter kit
+
+### Patch Changes
+
+- ac65a63: fix language search
+- Updated dependencies [5087514]
+- Updated dependencies [28ddc5b]
+- Updated dependencies [9feb326]
+- Updated dependencies [1dd0821]
+- Updated dependencies [ac65a63]
+  - @yiitap/vue@0.14.0
+  - @yiitap/util-emoji@0.14.0
+  - @yiitap/i18n@0.14.0
+
 ## 0.13.0
 
 ### Minor Changes
