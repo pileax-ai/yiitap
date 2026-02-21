@@ -361,6 +361,7 @@ function resetCollab() {
 
   hpProvider.value = null
   ydoc.value = null
+  collabReady.value = false
 }
 
 function onToggleDrawer() {

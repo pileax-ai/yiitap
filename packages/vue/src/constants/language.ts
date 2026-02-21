@@ -916,6 +916,7 @@ export const Languages: Indexable[] = [
     icon: 'code_blocks',
   },
   { label: 'Thrift', value: 'thrift', ext: ['thrift'], icon: 'code_blocks' },
+  { label: 'TOML', value: 'toml', ext: ['toml'], icon: 'code_blocks' },
   { label: 'TP', value: 'tp', ext: ['tp'], icon: 'code_blocks' },
   { label: 'Twig', value: 'twig', ext: ['twig', 'tpl'], icon: 'code_blocks' },
   {
