@@ -10,7 +10,6 @@ import type {
   CollaborationOptions,
   CollaborationCaretOptions,
   ColorOptions,
-  EmojiOptions,
   FocusOptions,
   FontFamilyOptions,
   HighlightOptions,
@@ -53,7 +52,6 @@ import {
   Color,
   DetailsContent,
   DetailsSummary,
-  Emoji,
   Focus,
   FontFamily,
   Highlight,
@@ -100,15 +98,12 @@ import {
   OTableWrapper,
   OTaskItem,
   OVideo,
-} from './extensions'
 
-// ---------------------------------------------------------
-// Suggestions
-// ---------------------------------------------------------
-import ColonSuggestion from './char-command/colon/suggestion'
-import SlashSuggestion from './char-command/slash/suggestion'
-import EmojiSuggestion from './char-command/emoji/suggestion'
-import { gitHubEmojis } from '@tiptap/extension-emoji'
+  // Suggestions
+  ColonSuggestion,
+  SlashSuggestion,
+  EmojiSuggestion,
+} from './extensions'
 
 // ---------------------------------------------------------
 // Factory
@@ -131,7 +126,6 @@ export interface ExtensionOptions {
   Collaboration: CollaborationOptions
   CollaborationCaret: CollaborationCaretOptions
   Color: ColorOptions
-  Emoji: EmojiOptions
   Focus: FocusOptions
   FontFamily: FontFamilyOptions
   Highlight: HighlightOptions
@@ -197,13 +191,6 @@ export const extensionRegistry: {
   Collaboration: (opts?) => Collaboration.configure(opts),
   CollaborationCaret: (opts?) => CollaborationCaret.configure(opts),
   Color: (opts?) => Color.configure(opts),
-  Emoji: (opts?) =>
-    Emoji.configure({
-      emojis: gitHubEmojis,
-      enableEmoticons: true,
-      suggestion: EmojiSuggestion,
-      ...opts,
-    }),
   Focus: (opts?) => Focus.configure(opts),
   FontFamily: (opts?) => FontFamily.configure(opts),
   Highlight: (opts?) => Highlight.configure({ multicolor: true, ...opts }),
