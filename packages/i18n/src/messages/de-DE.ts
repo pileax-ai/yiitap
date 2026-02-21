@@ -21,10 +21,10 @@ export default {
       friendly: 'Freundlich',
       humorous: 'Humorvoll',
       inspirational: 'Inspirierend',
-      mysterious: 'Geheimnisvoll'
+      mysterious: 'Geheimnisvoll',
     },
     translate: 'Übersetzen nach',
-    write: 'Schreiben Sie etwas'
+    write: 'Schreiben Sie etwas',
   },
   diagram: {
     class: 'Klassendiagramm',
@@ -33,7 +33,7 @@ export default {
     name: 'Textdiagramm',
     sequence: 'Sequenzdiagramm',
     state: 'Zustandsdiagramm',
-    tips: 'Generierung von Diagrammen und Diagrammen aus Text auf ähnliche Weise wie beim Markdown'
+    tips: 'Generierung von Diagrammen und Diagrammen aus Text auf ähnliche Weise wie beim Markdown',
   },
   editor: {
     add: 'Hinzufügen',
@@ -111,7 +111,7 @@ export default {
     unorderedList: 'Ungeordnete Liste',
     url: 'URL',
     video: 'Video einfügen',
-    viewSource: 'Quelle anzeigen'
+    viewSource: 'Quelle anzeigen',
   },
   image: {
     caption: 'Untertitel',
@@ -130,7 +130,7 @@ export default {
     src: 'Bildquelle',
     unlockAspectRatio: 'Seitenverhältnis freischalten',
     width: 'Breite',
-    zoom: 'Zoom'
+    zoom: 'Zoom',
   },
   label: {
     advanced: 'Fortschrittlich',
@@ -147,7 +147,8 @@ export default {
     download: 'Herunterladen',
     edit: 'Bearbeiten',
     empty: 'Leer',
-    emptyTips: 'Drücken Sie die Eingabetaste, um mit einer leeren Notiz fortzufahren, oder wählen Sie Folgendes aus',
+    emptyTips:
+      'Drücken Sie die Eingabetaste, um mit einer leeren Notiz fortzufahren, oder wählen Sie Folgendes aus',
     example: 'Beispiel',
     generate: 'Erzeugen',
     generatedBy: 'Erstellt von',
@@ -180,14 +181,14 @@ export default {
     update: 'Aktualisieren',
     video: 'Video',
     view: 'Sicht',
-    write: 'Schreiben'
+    write: 'Schreiben',
   },
   link: {
     back: 'Zurück zum Hauptmenü',
     edit: 'Link bearbeiten',
     off: 'Link deaktivieren',
     open: 'Link öffnen',
-    openInNewTab: 'In neuem Tab öffnen'
+    openInNewTab: 'In neuem Tab öffnen',
   },
   table: {
     addColumn: 'Spalte hinzufügen',
@@ -200,6 +201,6 @@ export default {
     removeRow: 'Zeile entfernen',
     selectColumn: 'Wählen Sie Spalte aus',
     selectRow: 'Wählen Sie Zeile aus',
-    split: 'Geteilte Zellen'
-  }
+    split: 'Geteilte Zellen',
+  },
 }

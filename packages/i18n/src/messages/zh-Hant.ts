@@ -21,10 +21,10 @@ export default {
       friendly: '友好',
       humorous: '幽默',
       inspirational: '鼓舞人心',
-      mysterious: '神秘'
+      mysterious: '神秘',
     },
     translate: '翻譯成',
-    write: '寫任何東西'
+    write: '寫任何東西',
   },
   diagram: {
     class: '類圖',
@@ -33,7 +33,7 @@ export default {
     name: '文本繪圖',
     sequence: '時序圖',
     state: '狀態圖',
-    tips: '使用Markdown風格文本生成流程圖、順序圖、類圖、狀態圖和甘特圖'
+    tips: '使用Markdown風格文本生成流程圖、順序圖、類圖、狀態圖和甘特圖',
   },
   editor: {
     add: '添加',
@@ -111,7 +111,7 @@ export default {
     unorderedList: '無序列表',
     url: '網址',
     video: '影片',
-    viewSource: '查看資料'
+    viewSource: '查看資料',
   },
   image: {
     caption: '圖片說明',
@@ -130,7 +130,7 @@ export default {
     src: '圖片地址',
     unlockAspectRatio: '解鎖長寬比',
     width: '寬度',
-    zoom: '縮放'
+    zoom: '縮放',
   },
   label: {
     advanced: '進階',
@@ -174,18 +174,18 @@ export default {
     think: '思考',
     toc: '目錄',
     turnInto: '轉成',
-    typeForCommands: '輸入 \'/\' 顯示命令',
+    typeForCommands: "輸入 '/' 顯示命令",
     untitled: '未命名',
     update: '更新',
     video: '影片',
-    view: '視圖'
+    view: '視圖',
   },
   link: {
     back: '返回主菜單',
     edit: '編輯鏈接',
     off: '取消鏈接',
     open: '打開鏈接',
-    openInNewTab: '在新標籤頁打開'
+    openInNewTab: '在新標籤頁打開',
   },
   table: {
     addColumn: '添加列',
@@ -198,6 +198,6 @@ export default {
     removeRow: '刪除行',
     selectColumn: '選擇列',
     selectRow: '選擇行',
-    split: '拆分單元格'
-  }
+    split: '拆分單元格',
+  },
 }

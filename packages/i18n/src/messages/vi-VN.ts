@@ -21,10 +21,10 @@ export default {
       friendly: 'Thân thiện',
       humorous: 'Hài hước',
       inspirational: 'truyền cảm hứng',
-      mysterious: 'Bí ẩn'
+      mysterious: 'Bí ẩn',
     },
     translate: 'Dịch sang',
-    write: 'Viết bất cứ điều gì'
+    write: 'Viết bất cứ điều gì',
   },
   diagram: {
     class: 'Sơ đồ lớp',
@@ -33,7 +33,7 @@ export default {
     name: 'Sơ đồ văn bản',
     sequence: 'Sơ đồ trình tự',
     state: 'Sơ đồ trạng thái',
-    tips: 'Tạo sơ đồ và biểu đồ từ văn bản theo cách tương tự như đánh dấu'
+    tips: 'Tạo sơ đồ và biểu đồ từ văn bản theo cách tương tự như đánh dấu',
   },
   editor: {
     add: 'Thêm vào',
@@ -111,7 +111,7 @@ export default {
     unorderedList: 'Danh sách không có thứ tự',
     url: 'URL',
     video: 'Chèn Video',
-    viewSource: 'Xem nguồn'
+    viewSource: 'Xem nguồn',
   },
   image: {
     caption: 'Đầu đề',
@@ -130,7 +130,7 @@ export default {
     src: 'Nguồn hình ảnh',
     unlockAspectRatio: 'Mở khóa tỷ lệ khung hình',
     width: 'Chiều rộng',
-    zoom: 'Phóng'
+    zoom: 'Phóng',
   },
   label: {
     advanced: 'Trình độ cao',
@@ -147,7 +147,8 @@ export default {
     download: 'Tải xuống',
     edit: 'Biên tập',
     empty: 'Trống',
-    emptyTips: 'Press Enter to continue with an empty note, or select following',
+    emptyTips:
+      'Press Enter to continue with an empty note, or select following',
     example: 'Ví dụ',
     generate: 'Phát ra',
     generatedBy: 'Được tạo bởi',
@@ -175,19 +176,19 @@ export default {
     think: 'Nghĩ',
     toc: 'Mục lục',
     turnInto: 'Biến thành',
-    typeForCommands: 'Nhập \'/\' cho các lệnh',
+    typeForCommands: "Nhập '/' cho các lệnh",
     untitled: 'Không có tiêu đề',
     update: 'Cập nhật',
     video: 'Băng hình',
     view: 'Xem',
-    write: 'Viết'
+    write: 'Viết',
   },
   link: {
     back: 'Quay lại menu chính',
     edit: 'Chỉnh sửa liên kết',
     off: 'Tắt liên kết',
     open: 'Mở liên kết',
-    openInNewTab: 'Mở trong tab mới'
+    openInNewTab: 'Mở trong tab mới',
   },
   table: {
     addColumn: 'Thêm cột',
@@ -200,6 +201,6 @@ export default {
     removeRow: 'Xóa hàng',
     selectColumn: 'Chọn cột',
     selectRow: 'Chọn hàng',
-    split: 'Tách ô'
-  }
+    split: 'Tách ô',
+  },
 }

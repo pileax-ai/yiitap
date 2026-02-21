@@ -21,10 +21,10 @@ export default {
       friendly: 'Ramah',
       humorous: 'Lucu',
       inspirational: 'Inspiratif',
-      mysterious: 'Misterius'
+      mysterious: 'Misterius',
     },
     translate: 'Terjemahkan ke',
-    write: 'Tulis apa saja'
+    write: 'Tulis apa saja',
   },
   diagram: {
     class: 'Diagram Kelas',
@@ -33,7 +33,7 @@ export default {
     name: 'Diagram Teks',
     sequence: 'Diagram Urutan',
     state: 'Diagram Keadaan',
-    tips: 'Pembuatan diagram dan bagan dari teks dengan cara yang mirip dengan penurunan harga'
+    tips: 'Pembuatan diagram dan bagan dari teks dengan cara yang mirip dengan penurunan harga',
   },
   editor: {
     add: 'Menambahkan',
@@ -111,7 +111,7 @@ export default {
     unorderedList: 'Daftar Tidak Berurutan',
     url: 'URL',
     video: 'Sisipkan Video',
-    viewSource: 'Lihat Sumber'
+    viewSource: 'Lihat Sumber',
   },
   image: {
     caption: 'Keterangan',
@@ -130,7 +130,7 @@ export default {
     src: 'Sumber Gambar',
     unlockAspectRatio: 'Buka kunci rasio aspek',
     width: 'Lebar',
-    zoom: 'Perbesar'
+    zoom: 'Perbesar',
   },
   label: {
     advanced: 'Canggih',
@@ -147,7 +147,8 @@ export default {
     download: 'Unduh',
     edit: 'Sunting',
     empty: 'Kosong',
-    emptyTips: 'Tekan Enter untuk melanjutkan dengan catatan kosong, atau pilih berikut',
+    emptyTips:
+      'Tekan Enter untuk melanjutkan dengan catatan kosong, atau pilih berikut',
     example: 'Contoh',
     generate: 'Menghasilkan',
     generatedBy: 'Dihasilkan oleh',
@@ -175,19 +176,19 @@ export default {
     think: 'Memikirkan',
     toc: 'Daftar isi',
     turnInto: 'Berubah menjadi',
-    typeForCommands: 'Ketik \'/\' untuk perintah',
+    typeForCommands: "Ketik '/' untuk perintah",
     untitled: 'Tanpa judul',
     update: 'Memperbarui',
     video: 'Video',
     view: 'Melihat',
-    write: 'Menulis'
+    write: 'Menulis',
   },
   link: {
     back: 'Kembali ke menu utama',
     edit: 'Sunting Tautan',
     off: 'Nonaktifkan Tautan',
     open: 'Buka Tautan',
-    openInNewTab: 'Open in new tab'
+    openInNewTab: 'Open in new tab',
   },
   table: {
     addColumn: 'Tambahkan Kolom',
@@ -200,6 +201,6 @@ export default {
     removeRow: 'Hapus Baris',
     selectColumn: 'Pilih Kolom',
     selectRow: 'Pilih Baris',
-    split: 'Pisahkan Sel'
-  }
+    split: 'Pisahkan Sel',
+  },
 }
