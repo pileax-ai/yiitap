@@ -21,10 +21,10 @@ export default {
       friendly: 'Amigável',
       humorous: 'Bem-humorado',
       inspirational: 'Inspirador',
-      mysterious: 'Misterioso',
+      mysterious: 'Misterioso'
     },
     translate: 'Traduzir para',
-    write: 'Escreva qualquer coisa',
+    write: 'Escreva qualquer coisa'
   },
   diagram: {
     class: 'Diagrama de classes',
@@ -33,7 +33,7 @@ export default {
     name: 'Diagrama de Texto',
     sequence: 'Diagrama de Sequência',
     state: 'Diagrama de Estado',
-    tips: 'Geração de diagrama e gráfico a partir de texto de maneira semelhante ao markdown',
+    tips: 'Geração de diagrama e gráfico a partir de texto de maneira semelhante ao markdown'
   },
   editor: {
     add: 'Adicionar',
@@ -111,7 +111,7 @@ export default {
     unorderedList: 'Lista não ordenada',
     url: 'URL',
     video: 'Inserir vídeo',
-    viewSource: 'Ver fonte',
+    viewSource: 'Ver fonte'
   },
   image: {
     caption: 'Rubrica',
@@ -130,7 +130,7 @@ export default {
     src: 'Fonte da imagem',
     unlockAspectRatio: 'Desbloquear proporção',
     width: 'Largura',
-    zoom: 'Zoom',
+    zoom: 'Zoom'
   },
   label: {
     advanced: 'Avançado',
@@ -147,8 +147,7 @@ export default {
     download: 'Download',
     edit: 'Editar',
     empty: 'Vazio',
-    emptyTips:
-      'Pressione Enter para continuar com uma nota vazia ou selecione o seguinte',
+    emptyTips: 'Pressione Enter para continuar com uma nota vazia ou selecione o seguinte',
     example: 'Exemplo',
     generate: 'Gerar',
     generatedBy: 'Gerado por',
@@ -176,19 +175,19 @@ export default {
     think: 'Pensar',
     toc: 'Índice',
     turnInto: 'Transforme-se em',
-    typeForCommands: "Digite '/' para comandos",
+    typeForCommands: 'Digite \'/\' para comandos',
     untitled: 'Sem título',
     update: 'Atualizar',
     video: 'Vídeo',
     view: 'Visualizar',
-    write: 'Escrever',
+    write: 'Escrever'
   },
   link: {
     back: 'Voltar ao menu principal',
     edit: 'Editar link',
     off: 'Desativar link',
     open: 'Abrir link',
-    openInNewTab: 'Abrir em nova aba',
+    openInNewTab: 'Abrir em nova aba'
   },
   table: {
     addColumn: 'Adicionar coluna',
@@ -201,6 +200,6 @@ export default {
     removeRow: 'Remover linha',
     selectColumn: 'Selecione Coluna',
     selectRow: 'Selecione linha',
-    split: 'Dividir células',
-  },
+    split: 'Dividir células'
+  }
 }

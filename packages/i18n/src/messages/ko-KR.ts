@@ -21,10 +21,10 @@ export default {
       friendly: '친숙한',
       humorous: '유머러스함',
       inspirational: '영감을 주는',
-      mysterious: '신비한',
+      mysterious: '신비한'
     },
     translate: '다음으로 번역하다',
-    write: '무엇이든 쓰세요',
+    write: '무엇이든 쓰세요'
   },
   diagram: {
     class: '클래스 다이어그램',
@@ -33,7 +33,7 @@ export default {
     name: '텍스트 다이어그램',
     sequence: '시퀀스 다이어그램',
     state: '상태 다이어그램',
-    tips: '마크다운과 유사한 방식으로 텍스트에서 다이어그램 및 차트 생성',
+    tips: '마크다운과 유사한 방식으로 텍스트에서 다이어그램 및 차트 생성'
   },
   editor: {
     add: '추가하다',
@@ -111,7 +111,7 @@ export default {
     unorderedList: '순서가 없는 목록',
     url: 'URL',
     video: '비디오 삽입',
-    viewSource: '소스 보기',
+    viewSource: '소스 보기'
   },
   image: {
     caption: '표제',
@@ -130,7 +130,7 @@ export default {
     src: '이미지 소스',
     unlockAspectRatio: '종횡비 잠금 해제',
     width: '너비',
-    zoom: '줌',
+    zoom: '줌'
   },
   label: {
     advanced: '고급의',
@@ -175,19 +175,19 @@ export default {
     think: '생각하다',
     toc: '목차',
     turnInto: '변신하다',
-    typeForCommands: "명령에 '/'를 입력하세요.",
+    typeForCommands: '명령에 \'/\'를 입력하세요.',
     untitled: '제목 없음',
     update: '업데이트',
     video: '동영상',
     view: '보다',
-    write: '쓰다',
+    write: '쓰다'
   },
   link: {
     back: '메인 메뉴로 돌아가기',
     edit: '링크 편집',
     off: '링크 비활성화',
     open: '링크 열기',
-    openInNewTab: '새 탭에서 열기',
+    openInNewTab: '새 탭에서 열기'
   },
   table: {
     addColumn: '열 추가',
@@ -200,6 +200,6 @@ export default {
     removeRow: '행 제거',
     selectColumn: '열 선택',
     selectRow: '행 선택',
-    split: '셀 분할',
-  },
+    split: '셀 분할'
+  }
 }

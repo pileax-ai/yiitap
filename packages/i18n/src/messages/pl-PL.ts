@@ -21,10 +21,10 @@ export default {
       friendly: 'Przyjazny',
       humorous: 'Humorystyczny',
       inspirational: 'Inspirujące',
-      mysterious: 'Tajemniczy',
+      mysterious: 'Tajemniczy'
     },
     translate: 'Przetłumacz na',
-    write: 'Napisz cokolwiek',
+    write: 'Napisz cokolwiek'
   },
   diagram: {
     class: 'Schemat klas',
@@ -33,7 +33,7 @@ export default {
     name: 'Schemat tekstowy',
     sequence: 'Schemat sekwencji',
     state: 'Diagram stanu',
-    tips: 'Generowanie diagramu i wykresu z tekstu w podobny sposób jak przecena',
+    tips: 'Generowanie diagramu i wykresu z tekstu w podobny sposób jak przecena'
   },
   editor: {
     add: 'Dodać',
@@ -111,7 +111,7 @@ export default {
     unorderedList: 'Lista nieuporządkowana',
     url: 'Adres URL',
     video: 'Wstaw wideo',
-    viewSource: 'Zobacz źródło',
+    viewSource: 'Zobacz źródło'
   },
   image: {
     caption: 'Podpis',
@@ -130,7 +130,7 @@ export default {
     src: 'Źródło obrazu',
     unlockAspectRatio: 'Odblokuj proporcje',
     width: 'Szerokość',
-    zoom: 'Brzęczenie',
+    zoom: 'Brzęczenie'
   },
   label: {
     advanced: 'Zaawansowany',
@@ -147,8 +147,7 @@ export default {
     download: 'Pobierać',
     edit: 'Redagować',
     empty: 'Pusty',
-    emptyTips:
-      'Naciśnij Enter, aby kontynuować z pustą notatką, lub wybierz opcję Dalej',
+    emptyTips: 'Naciśnij Enter, aby kontynuować z pustą notatką, lub wybierz opcję Dalej',
     example: 'Przykład',
     generate: 'Spowodować',
     generatedBy: 'Wygenerowane przez',
@@ -181,14 +180,14 @@ export default {
     update: 'Aktualizacja',
     video: 'Wideo',
     view: 'Pogląd',
-    write: 'Pisać',
+    write: 'Pisać'
   },
   link: {
     back: 'Powrót do menu głównego',
     edit: 'Edytuj łącze',
     off: 'Wyłącz łącze',
     open: 'Otwórz łącze',
-    openInNewTab: 'Otwórz w nowej karcie',
+    openInNewTab: 'Otwórz w nowej karcie'
   },
   table: {
     addColumn: 'Dodaj kolumnę',
@@ -201,6 +200,6 @@ export default {
     removeRow: 'Usuń wiersz',
     selectColumn: 'Wybierz Kolumna',
     selectRow: 'Wybierz opcję Wiersz',
-    split: 'Podziel komórki',
-  },
+    split: 'Podziel komórki'
+  }
 }

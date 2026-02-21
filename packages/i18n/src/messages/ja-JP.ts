@@ -21,10 +21,10 @@ export default {
       friendly: 'フレンドリー',
       humorous: 'ユーモラスな',
       inspirational: 'インスピレーションを与える',
-      mysterious: '不思議な',
+      mysterious: '不思議な'
     },
     translate: 'に翻訳する',
-    write: '何でも書いてください',
+    write: '何でも書いてください'
   },
   diagram: {
     class: 'クラス図',
@@ -33,7 +33,7 @@ export default {
     name: 'テキスト図',
     sequence: 'シーケンス図',
     state: '状態図',
-    tips: 'マークダウンと同様の方法でテキストから図やチャートを生成',
+    tips: 'マークダウンと同様の方法でテキストから図やチャートを生成'
   },
   editor: {
     add: '追加',
@@ -111,7 +111,7 @@ export default {
     unorderedList: '順序なしリスト',
     url: 'URL',
     video: 'ビデオの挿入',
-    viewSource: 'ソースを表示',
+    viewSource: 'ソースを表示'
   },
   image: {
     caption: 'キャプション',
@@ -130,7 +130,7 @@ export default {
     src: '画像ソース',
     unlockAspectRatio: 'アスペクト比のロックを解除する',
     width: '幅',
-    zoom: 'ズーム',
+    zoom: 'ズーム'
   },
   label: {
     advanced: '高度な',
@@ -180,14 +180,14 @@ export default {
     update: 'アップデート',
     video: 'ビデオ',
     view: 'ビュー',
-    write: '書く',
+    write: '書く'
   },
   link: {
     back: 'メインメニューに戻る',
     edit: 'リンクの編集',
     off: 'リンクを無効にする',
     open: 'リンクを開く',
-    openInNewTab: '新しいタブで開く',
+    openInNewTab: '新しいタブで開く'
   },
   table: {
     addColumn: '列の追加',
@@ -200,6 +200,6 @@ export default {
     removeRow: '行の削除',
     selectColumn: '列の選択',
     selectRow: '行を選択',
-    split: 'セルの分割',
-  },
+    split: 'セルの分割'
+  }
 }
