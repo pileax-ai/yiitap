@@ -12,6 +12,8 @@
   "dependencies": {
     "@tiptap/extension-mathematics": "^3.16.0",
     "@tiptap/markdown": "^3.16.0",
+    "@tiptap/starter-kit": "^3.16.0",
+    "@tiptap/vue-3": "^3.16.0",
     "@yiitap/i18n": "workspace:*",
     "@yiitap/util-emoji": "workspace:*",
     "@yiitap/vue": "workspace:*",

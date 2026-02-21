@@ -121,6 +121,12 @@ importers:
       '@tiptap/markdown':
         specifier: ^3.16.0
         version: 3.16.0(@tiptap/core@3.16.0(@tiptap/pm@3.16.0))(@tiptap/pm@3.16.0)
+      '@tiptap/starter-kit':
+        specifier: ^3.16.0
+        version: 3.16.0
+      '@tiptap/vue-3':
+        specifier: ^3.16.0
+        version: 3.16.0(@floating-ui/dom@1.7.4)(@tiptap/core@3.16.0(@tiptap/pm@3.16.0))(@tiptap/pm@3.16.0)(vue@3.5.27(typescript@5.9.3))
       '@yiitap/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
