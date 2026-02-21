@@ -4,12 +4,12 @@ import View from './view.vue'
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6
 
-export interface HeadingOptions {
+export interface OHeadingOptions {
   levels: Level[]
   HTMLAttributes: Record<string, any>
 }
 
-const OHeading = Heading.extend<HeadingOptions>({
+const OHeading = Heading.extend<OHeadingOptions>({
   draggable: true,
 
   addNodeView() {

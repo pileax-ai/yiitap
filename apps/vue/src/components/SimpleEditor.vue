@@ -1,5 +1,5 @@
 <template>
-  <section class="page-demo" :class="{ dark: darkMode }">
+  <section class="page-simple-editor" :class="{ dark: darkMode }">
     <n-drawer
       v-model:show="showDrawer"
       :default-width="400"
@@ -25,12 +25,7 @@
               <template #unchecked> Readonly </template>
             </n-switch>
           </n-form-item>
-          <n-form-item label="Collaboration">
-            <n-switch v-model:value="collaboration">
-              <template #checked> Enable </template>
-              <template #unchecked> Disable </template>
-            </n-switch>
-          </n-form-item>
+
           <n-form-item label="Content">
             <n-select v-model:value="source" :options="sourceList" />
           </n-form-item>
@@ -49,26 +44,6 @@
           <n-form-item label="API Key">
             <n-input v-model:value="aiOption.apiKey" placeholder="apiKey" />
           </n-form-item>
-
-          <template v-if="collaboration">
-            <h3>Collaboration</h3>
-            <n-divider />
-            <n-form-item label="Document Name">
-              <n-input
-                v-model:value="documentName"
-                placeholder="Document Name"
-              />
-            </n-form-item>
-            <n-form-item label="Provider URL">
-              <n-input v-model:value="providerUrl" placeholder="Provider URL" />
-            </n-form-item>
-            <n-form-item label="Provider Token">
-              <n-input
-                v-model:value="providerToken"
-                placeholder="Provider Token"
-              />
-            </n-form-item>
-          </template>
         </n-form>
       </n-drawer-content>
     </n-drawer>
@@ -95,42 +70,19 @@
           </n-button>
         </section>
       </header>
-      <div class="toolbar">
-        <o-main-menu
-          :editor="yiiEditor?.editor"
-          :menu="editorOptions.mainMenu"
-          :data-theme="darkMode ? 'dark' : ''"
-        />
-      </div>
     </section>
-    <section class="content-container" @scroll="onScroll">
+    <section class="content-container">
       <section class="layout page">
-        <YiiEditor
-          ref="yiiEditor"
-          class="layout-content"
-          v-bind="editorOptions"
-          @update="onUpdate"
-          :key="editorKey"
-          v-if="!collaboration || collabReady"
-        />
-
-        <aside class="layout-right">
-          <div class="sticky-top">
-            <o-doc-toc
-              ref="tocRef"
-              :editor="yiiEditor?.editor"
-              :max-level="3"
-              @doc-scroll="onDocScroll"
-            />
-          </div>
-        </aside>
+        <div class="layout-content">
+          <editor-content :editor="editor" />
+        </div>
       </section>
     </section>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch, shallowRef, onBeforeMount } from 'vue'
+import { computed, provide, ref, onMounted, watch, shallowRef } from 'vue'
 import {
   NButton,
   NDivider,
@@ -142,26 +94,17 @@ import {
   NSelect,
   NSwitch,
 } from 'naive-ui'
-import {
-  YiiEditor,
-  ODocToc,
-  OIcon,
-  OMainMenu,
-  InlineMath,
-  OStarterKit,
-} from '@yiitap/vue'
+
+import StarterKit from '@tiptap/starter-kit'
+import { Editor, EditorContent } from '@tiptap/vue-3'
+
+import { OIcon } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
-import { HocuspocusProvider } from '@hocuspocus/provider'
-import * as Y from 'yjs'
 import { getData } from '@/data'
 import VersionBadge from './VersionBadge.vue'
-import 'katex/dist/katex.min.css'
-import type { Editor } from '@tiptap/core'
 
 const emit = defineEmits(['mode'])
 
-const yiiEditor = ref<InstanceType<typeof YiiEditor>>()
-const tocRef = ref<InstanceType<typeof ODocToc>>()
 const locale = ref('en-US')
 const darkMode = ref(false)
 const editable = ref(true)
@@ -174,109 +117,7 @@ const showDrawer = ref(false)
 provide('locale', locale)
 
 // Collaboration
-const ydoc = shallowRef<Y.Doc | null>(null)
-const hpProvider = shallowRef<HocuspocusProvider | null>(null)
-
-const collaboration = ref(false)
-const documentName = ref('note@2b590c99-18ad-45bb-a4dd-d1ebdf2adcb3')
-const providerUrl = ref('ws://localhost:9621')
-const providerToken = ref('')
-const collabReady = ref(false)
-
-const editorOptions = computed(() => {
-  const extensions = [
-    OStarterKit.configure({
-      OTable: true,
-    }),
-    'Emoji',
-    InlineMath,
-    'Markdown',
-    'OAiBlock',
-    'OBlockMath',
-    'OColorHighlighter',
-    'ODetails',
-    'OImage',
-    'OShortcut',
-    'OVideo',
-  ] as any[]
-  if (collabReady.value) {
-    extensions.push(
-      {
-        name: 'Collaboration',
-        configure: {
-          document: ydoc.value,
-        },
-      },
-      {
-        name: 'CollaborationCaret',
-        configure: {
-          provider: hpProvider.value,
-          user: {
-            name: 'User Name',
-            color: '#f783ac',
-          },
-        },
-      }
-    )
-  }
-
-  return {
-    // title: true,
-    aiOption: aiOption.value,
-    locale: locale.value,
-    darkMode: darkMode.value,
-    editable: editable.value,
-    content: collabReady.value ? null : content.value,
-    showMainMenu: false,
-    showBubbleMenu: true,
-    showFloatingMenu: true,
-    sideMenu: {
-      show: true,
-      add: 'menu',
-    },
-    pageView: 'page',
-    mainMenu: [
-      'bold',
-      'italic',
-      'text-format-dropdown',
-      'separator',
-      'heading',
-      'font-family',
-      'text-color-dropdown',
-      'color',
-      'background-color',
-      'highlight',
-      'clearFormat',
-      'separator',
-      'align-dropdown',
-      'separator',
-      'horizontalRule',
-      'blockquote',
-      'details',
-      'list-dropdown',
-      'codeBlock',
-      'link',
-      'image',
-      'video',
-      'table',
-      'callout',
-      'emoji',
-      'aiBlock',
-      'separator',
-      'inlineMath',
-      'blockMath',
-      'diagram',
-    ],
-    collab: {
-      enabled: collaboration.value,
-    },
-    extensions: extensions,
-  }
-})
-
-const editorKey = computed(() => {
-  return collaboration.value ? 'collaboration' : 'normal'
-})
+const editor = ref<Editor>()
 
 const content = computed(() => {
   return getData(source.value, locale.value as 'en')
@@ -312,55 +153,22 @@ const aiProviders = computed(() => {
   ]
 })
 
-const editor = computed(() => {
-  return yiiEditor.value?.editor
-})
-
 function init() {
   try {
     locale.value = localStorage.getItem('yiitap.locale') || 'en-US'
     source.value = localStorage.getItem('yiitap.source') || 'default'
-    providerToken.value = localStorage.getItem('yiitap.token') || ''
-    collaboration.value =
-      localStorage.getItem('yiitap.collaboration') === 'true'
     const aiOptionString = localStorage.getItem('yiitap.ai.option')
     if (aiOptionString) {
       aiOption.value = JSON.parse(aiOptionString)
     }
 
-    initCollab()
+    editor.value = new Editor({
+      extensions: [StarterKit],
+      content: 'Demo',
+    })
   } catch (e) {
     // ignore
   }
-}
-
-async function initCollab() {
-  if (!collaboration.value) return
-  resetCollab()
-
-  const doc = new Y.Doc()
-  const provider = new HocuspocusProvider({
-    url: providerUrl.value,
-    name: documentName.value,
-    document: doc, // 使用局部变量
-    token: providerToken.value,
-    onConnect() {
-      console.log('Hocuspocus connected')
-      collabReady.value = true
-    },
-  })
-  ydoc.value = doc
-  hpProvider.value = provider
-}
-
-function resetCollab() {
-  if (hpProvider.value) {
-    hpProvider.value.destroy()
-    ydoc.value?.destroy()
-  }
-
-  hpProvider.value = null
-  ydoc.value = null
 }
 
 function onToggleDrawer() {
@@ -388,42 +196,17 @@ function onUpdate({ editor }: { editor: Editor }) {
   }
 }
 
-function onScroll(event: Event) {
-  tocRef.value?.onScroll(event)
-}
-
 function onDocScroll(event: Event) {
   // If docScroll event not emitted, use tocRef.value?.onScroll(event) to update toc progress when scrolling.
   // console.debug('docScroll', event)
 }
 
 watch(locale, (newValue) => {
-  if (!collaboration.value) {
-    yiiEditor.value?.editor.commands.setContent(content.value, {
-      emitUpdate: true,
-    })
-  }
   localStorage.setItem('yiitap.locale', newValue)
 })
 
 watch(source, (newValue) => {
   localStorage.setItem('yiitap.source', newValue)
-  yiiEditor.value?.editor.commands.setContent(content.value, {
-    emitUpdate: true,
-  })
-})
-
-watch(providerToken, (newValue) => {
-  localStorage.setItem('yiitap.token', newValue)
-})
-
-watch(collaboration, (newValue) => {
-  if (newValue) {
-    initCollab()
-  } else {
-    resetCollab()
-  }
-  localStorage.setItem('yiitap.collaboration', `${newValue}`)
 })
 
 watch(
@@ -437,21 +220,21 @@ watch(
 watch(editor, (newValue) => {
   // Access properties exposed by YiiEditor
   // console.debug('editor', yiiEditor.value?.editor)
-  console.debug(
-    'extensions',
-    yiiEditor.value?.editor.extensionManager.extensions
-  )
+  // console.debug(
+  //   'extensions',
+  //   yiiEditor.value?.editor.extensionManager.extensions
+  // )
   // console.debug('darkMode', yiiEditor.value?.darkMode)
   // console.debug('local', yiiEditor.value?.local)
 })
 
-onBeforeMount(() => {
+onMounted(() => {
   init()
 })
 </script>
 
 <style lang="scss">
-.page-demo {
+.page-simple-editor {
   position: absolute;
   left: 0;
   right: 0;
@@ -601,5 +384,97 @@ onBeforeMount(() => {
   background-color: var(--yii-caption-color);
   width: 4px;
   border-radius: 3px;
+}
+
+/* Basic editor styles */
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+
+  /* List styles */
+  ul,
+  ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+
+    li p {
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+    }
+  }
+
+  /* Heading styles */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+    margin-top: 2.5rem;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1rem;
+  }
+
+  /* Code and preformatted text styles */
+  code {
+    background-color: var(--purple-light);
+    border-radius: 0.4rem;
+    color: var(--black);
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
+
+  pre {
+    background: var(--black);
+    border-radius: 0.5rem;
+    color: var(--white);
+    font-family: 'JetBrainsMono', monospace;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1rem;
+
+    code {
+      background: none;
+      color: inherit;
+      font-size: 0.8rem;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--gray-3);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--gray-2);
+    margin: 2rem 0;
+  }
 }
 </style>

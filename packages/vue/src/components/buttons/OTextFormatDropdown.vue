@@ -74,12 +74,16 @@ const options = computed(() => {
     },
     { label: tr('editor.code'), value: 'code', icon: 'code', separator: true },
     {
-      label: tr('editor.code'),
+      label: tr('editor.subscript'),
       value: 'subscript',
       icon: 'subscript',
       separator: true,
     },
-    { label: tr('editor.code'), value: 'superscript', icon: 'superscript' },
+    {
+      label: tr('editor.superscript'),
+      value: 'superscript',
+      icon: 'superscript',
+    },
   ]
 })
 

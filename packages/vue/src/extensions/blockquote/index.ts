@@ -6,7 +6,7 @@ import { TextSelection } from '@tiptap/pm/state'
 
 import View from './view.vue'
 
-interface OBlockquoteOptions extends BlockquoteOptions {
+export interface OBlockquoteOptions extends BlockquoteOptions {
   triggerCharacters: string[]
 }
 

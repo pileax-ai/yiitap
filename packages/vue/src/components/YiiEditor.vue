@@ -57,27 +57,14 @@ import type { FocusPosition } from '@tiptap/core'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
-import Collaboration from '@tiptap/extension-collaboration'
-import type { CollaborationOptions } from '@tiptap/extension-collaboration'
-import CollaborationCaret from '@tiptap/extension-collaboration-caret'
-import type { CollaborationCaretOptions } from '@tiptap/extension-collaboration-caret'
 
-import { OShortcut } from '../extensions'
 import OMainMenu from './menus/OMainMenu.vue'
 import OBubbleMenu from './menus/OBubbleMenu.vue'
 import OFloatingMenu from './menus/OFloatingMenu.vue'
 import OSideMenu from './menus/OSideMenu.vue'
 
 import useI18n from '../hooks/useI18n'
-import {
-  DefaultExtensionNames,
-  BuiltinExtensionNames,
-  OPlaceholder,
-} from '../extensions'
-import DynamicClass, {
-  DetailsExtensions,
-  TableExtensions,
-} from '../extensions/dynamic'
+import { OPlaceholder, createExtensionList } from '../extensions'
 import { Editor } from '@tiptap/core'
 
 type SideMenuAddType = 'menu' | 'empty'
@@ -89,8 +76,6 @@ interface SideMenuConfig {
 
 interface CollabConfig {
   enabled: boolean
-  collaboration: CollaborationOptions
-  collaborationCaret: CollaborationCaretOptions
 }
 
 const props = defineProps({
@@ -244,8 +229,6 @@ const props = defineProps({
     type: Object as PropType<CollabConfig>,
     default: (): CollabConfig => ({
       enabled: false,
-      collaboration: null,
-      collaborationCaret: null,
     }),
   },
 })
@@ -339,7 +322,7 @@ const sideMenuOptions = computed(() => {
 function buildExtensions() {
   const extensions = []
 
-  // Default block
+  // Default blocks
   if (props.title) {
     extensions.push(
       Document.extend({
@@ -374,13 +357,9 @@ function buildExtensions() {
       document: false,
       horizontalRule: false,
       link: false,
-      blockquote: props.extensions.includes('OBlockquote') ? false : {},
-      heading: props.extensions.includes('OHeading')
-        ? false
-        : {
-            levels: [1, 2, 3, 4, 5],
-          },
-      paragraph: props.extensions.includes('OParagraph') ? false : {},
+      blockquote: false,
+      heading: false,
+      paragraph: false,
       trailingNode: props.title
         ? { node: 'paragraph', notAfter: ['paragraph', 'heading'] }
         : { notAfter: [] },
@@ -391,60 +370,8 @@ function buildExtensions() {
   )
 
   // User custom extension
-  // console.debug('default', DefaultExtensions)
-  const list = DefaultExtensionNames.concat(props.extensions)
-  for (const item of list) {
-    if (typeof item === 'string') {
-      // builtin extension
-      if (!BuiltinExtensionNames.includes(item)) {
-        continue
-      }
-
-      switch (item) {
-        case 'ODetails':
-          extensions.push(...DetailsExtensions)
-          break
-        case 'Table':
-          extensions.push(...TableExtensions)
-          break
-        default:
-          try {
-            const extension = new DynamicClass(item)
-            extensions.push(extension)
-            // console.debug('dynamic extension', item, extension)
-          } catch (e) {
-            console.error(e.message)
-          }
-          break
-      }
-    } else {
-      // user provide extension
-      extensions.push(item)
-    }
-  }
-
-  // collab
-  if (props.collab.enabled) {
-    extensions.push(
-      Collaboration.configure(props.collab.collaboration),
-      CollaborationCaret.configure(props.collab.collaborationCaret)
-    )
-  }
-
-  // shortcut
-  if (list.includes('OShortcut')) {
-    if (list.includes('Markdown')) {
-      extensions.push(
-        OShortcut.configure({
-          markdown: {
-            enabled: true,
-          },
-        })
-      )
-    } else {
-      extensions.push(OShortcut)
-    }
-  }
+  const userExtensions = createExtensionList(props.extensions)
+  extensions.push(...userExtensions)
 
   return extensions
 }

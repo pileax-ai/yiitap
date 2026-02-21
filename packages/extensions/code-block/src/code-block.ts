@@ -22,3 +22,5 @@ export const CodeBlock = CodeBlockLowlight.extend<CodeBlockLowlightOptions>({
     }
   },
 })
+
+export type { CodeBlockLowlightOptions }

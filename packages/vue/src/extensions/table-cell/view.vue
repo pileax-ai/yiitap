@@ -26,7 +26,7 @@
             </div>
             <o-common-btn
               icon="add_circle"
-              :color="Color.blue"
+              :color="BrandColor.blue"
               :tooltip="tr('table.addRow')"
               placement="left"
               @click.stop="runCommand('tableAddRow')"
@@ -62,7 +62,7 @@ import { OBlockPopover, OCommandBtn, OCommonBtn } from '../../components/index'
 
 import useI18n from '../../hooks/useI18n'
 import useTiptap from '../../hooks/useTiptap'
-import { Color } from '../../constants/color'
+import { BrandColor } from '../../constants/brand-color'
 
 const props = defineProps(nodeViewProps)
 

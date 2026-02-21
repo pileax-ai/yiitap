@@ -1,4 +1,4 @@
 export * from './ai'
 export * from './block'
-export * from './color'
+export * from './brand-color'
 export * from './menu'
