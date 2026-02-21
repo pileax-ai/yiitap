@@ -188,8 +188,8 @@ const editorOptions = computed(() => {
     OStarterKit.configure({
       OTable: true,
     }),
-    'Emoji',
     InlineMath,
+    'OColon',
     'Markdown',
     'OAiBlock',
     'OBlockMath',
@@ -436,14 +436,16 @@ watch(
 )
 
 watch(editor, (newValue) => {
-  // Access properties exposed by YiiEditor
-  // console.debug('editor', yiiEditor.value?.editor)
-  console.debug(
-    'extensions',
-    yiiEditor.value?.editor.extensionManager.extensions
-  )
-  // console.debug('darkMode', yiiEditor.value?.darkMode)
-  // console.debug('local', yiiEditor.value?.local)
+  if (import.meta.env.DEV) {
+    // Access properties exposed by YiiEditor
+    // console.debug('editor', yiiEditor.value?.editor)
+    console.debug(
+      'extensions',
+      yiiEditor.value?.editor.extensionManager.extensions
+    )
+    // console.debug('darkMode', yiiEditor.value?.darkMode)
+    // console.debug('local', yiiEditor.value?.local)
+  }
 })
 
 onBeforeMount(() => {

@@ -43,7 +43,6 @@ import Collaboration, {
 import CollaborationCaret, {
   type CollaborationCaretOptions,
 } from '@tiptap/extension-collaboration-caret'
-import Emoji, { type EmojiOptions } from '@tiptap/extension-emoji'
 import Highlight, { type HighlightOptions } from '@tiptap/extension-highlight'
 import { type HorizontalRuleOptions } from '@tiptap/extension-horizontal-rule'
 import Image, { type ImageOptions } from '@tiptap/extension-image'
@@ -83,6 +82,11 @@ import {
   SlashCommand as OSlashCommand,
   SlashZhCommand as OSlashZhCommand,
 } from '@yiitap/extension-char-command'
+import {
+  ColonSuggestion,
+  SlashSuggestion,
+  EmojiSuggestion,
+} from './char-command'
 
 // Extension local
 import OAiBlock from './ai-block'
@@ -148,7 +152,6 @@ export {
   Details,
   DetailsContent,
   DetailsSummary,
-  Emoji,
   Focus,
   FontFamily,
   Highlight,
@@ -199,6 +202,11 @@ export {
   OTableWrapper,
   OTaskItem,
   OVideo,
+
+  // Suggestions
+  ColonSuggestion,
+  SlashSuggestion,
+  EmojiSuggestion,
 }
 
 export type {
@@ -209,7 +217,6 @@ export type {
   CollaborationOptions,
   CollaborationCaretOptions,
   ColorOptions,
-  EmojiOptions,
   FocusOptions,
   FontFamilyOptions,
   HighlightOptions,
