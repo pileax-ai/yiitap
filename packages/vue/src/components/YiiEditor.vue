@@ -243,7 +243,7 @@ const emit = defineEmits<{
   /**
    * Emit when content transaction.
    */
-  (e: 'transaction', payload: { editor: Editor; transaction: Object }): void
+  (e: 'transaction', payload: { editor: Editor; transaction: object }): void
 
   /**
    * Emit when content updates.

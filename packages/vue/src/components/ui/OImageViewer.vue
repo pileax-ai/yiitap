@@ -55,15 +55,7 @@ import { useCommon } from '../../hooks'
 
 defineOptions({ name: 'ODialog' })
 
-import {
-  ref,
-  defineProps,
-  defineEmits,
-  onMounted,
-  computed,
-  watch,
-  onBeforeUnmount,
-} from 'vue'
+import { ref, onMounted, computed, watch, onBeforeUnmount } from 'vue'
 import { OBtn } from '../index'
 
 const props = defineProps({

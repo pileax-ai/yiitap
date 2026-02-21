@@ -6,11 +6,7 @@
       :key="index"
       @click="selectItem(index)"
     >
-      <img
-        v-if="item.fallbackImage"
-        :src="item.fallbackImage"
-        align="absmiddle"
-      />
+      <img v-if="item.fallbackImage" :src="item.fallbackImage" align="middle" />
       <template v-else>
         {{ item.emoji }}
       </template>
@@ -19,11 +15,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     items: {
-      type: Array,
+      type: Array as () => Indexable[],
       required: true,
     },
 

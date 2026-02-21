@@ -61,7 +61,6 @@ const props = defineProps({
 
 const backToMain = ref(false)
 
-// @ts-ignore
 const options = ref({
   placement: 'right' as 'left' | 'right',
   offset: 168,
@@ -100,7 +99,7 @@ const showBack = computed(() => {
 })
 
 const dynamicMenu = computed(() => {
-  let menu = props.menu
+  const menu = props.menu
   return menu.length > 0 ? menu : DefaultFloating
 })
 
