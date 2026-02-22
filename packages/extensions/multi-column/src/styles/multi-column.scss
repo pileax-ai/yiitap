@@ -1,0 +1,124 @@
+// ----------------------------------------------------
+//  Multi-column
+// ----------------------------------------------------
+.resize-cursor {
+  cursor: col-resize;
+  user-select: none !important;
+  -webkit-user-select: none;
+}
+
+div[data-type="column-container"] {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  margin: 16px 0;
+  user-drag: none;
+  -webkit-user-drag: none;
+
+  // Change column background on container hover or focus
+  &:hover,
+  &.has-focus {
+    div[data-type="column"] {
+      background-color: rgba(100, 106, 115, 0.08);
+    }
+  }
+
+  div[data-type="column"] {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    border-radius: 4px;
+    margin: 0 -4px;
+    padding: 0 4px;
+    //padding: 12px;
+    background-color: rgba(100, 106, 115, 0.02);
+    transition: background-color 0.2s ease;
+
+    // Remove top margin for the first element or element after resize-handle
+    > :not(div.grid-resize-handle):nth-child(1),
+    > div.grid-resize-handle + :nth-child(2) {
+      margin-top: 0;
+    }
+
+    // Remove bottom margin for the last element
+    > :nth-last-child(1) {
+      margin-bottom: 0;
+    }
+
+    .grid-resize-handle {
+      position: absolute;
+      right: -7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      z-index: 20;
+      background-color: var(--yii-resize-handle-color);
+      pointer-events: none;
+
+      .circle-button {
+        position: relative;
+        top: -16px;
+        left: -11px;
+        width: 16px;
+        height: 16px;
+        background-color: var(--yii-resize-handle-color);
+        border: 4px solid var(--yii-bg-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: auto;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+
+        &:hover {
+          transform: scale(1.35);
+        }
+
+        .plus {
+          position: relative;
+          width: 8px;
+          height: 8px;
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+          &::before {
+            width: 8px;
+            height: 2px;
+          }
+
+          &::after {
+            width: 2px;
+            height: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ----------------------------------------------------
+//  Multi-column drop cursor
+// ----------------------------------------------------
+.column-dropcursor {
+  background-color: skyblue !important;
+  z-index: 9999 !important;
+  width: 4px !important;
+  opacity: 1 !important;
+}
+
+body:has(.hide-native-dropcursor) {
+  .prosemirror-dropcursor-block {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+}

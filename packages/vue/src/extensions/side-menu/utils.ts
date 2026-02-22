@@ -230,7 +230,12 @@ export type NodeInfo = {
   pos: number
 }
 
-export function getNodeFromCoords(
+/**
+ * Get top level node
+ * @param coords
+ * @param editor
+ */
+export function getTopNodeFromCoords(
   coords: { left: number; top: number },
   editor: Editor
 ): NodeInfo {
@@ -245,5 +250,56 @@ export function getNodeFromCoords(
       node: null,
       pos: pos,
     }
+  }
+}
+
+export function getNodeFromCoords(
+  coords: { left: number; top: number },
+  editor: Editor
+): NodeInfo {
+  const { view, state } = editor
+
+  const posResult = view.posAtCoords({
+    left: coords.left,
+    top: coords.top,
+  })
+
+  // Return null if coordinates are outside the editor or no position found
+  if (!posResult || posResult.pos === null) {
+    return { node: null, pos: -1 }
+  }
+
+  const { pos } = posResult
+  const $pos = state.doc.resolve(pos)
+
+  /**
+   * If depth is 0, we are at the top level (doc).
+   * We need at least depth 1 to have a valid block node inside the editor.
+   */
+  let depth = $pos.depth
+
+  if (depth === 0) {
+    // Attempt to find the first child node at the root if possible
+    const node = state.doc.nodeAt(pos) || state.doc.firstChild
+    return {
+      node: node,
+      pos: 0,
+    }
+  }
+
+  let node = $pos.node(depth)
+
+  /**
+   * If the resolved node is a text node, move up to the parent block.
+   * Also ensure we don't go above depth 1.
+   */
+  if (node.isText && depth > 0) {
+    depth -= 1
+    node = $pos.node(depth)
+  }
+
+  return {
+    node: node,
+    pos: $pos.before(depth),
   }
 }

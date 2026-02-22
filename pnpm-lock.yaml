@@ -341,6 +341,19 @@ importers:
         specifier: ^3.16.0
         version: 3.16.0
 
+  packages/extensions/multi-column:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.16.0
+        version: 3.16.0(@tiptap/pm@3.16.0)
+      '@tiptap/pm':
+        specifier: ^3.16.0
+        version: 3.16.0
+    devDependencies:
+      sass:
+        specifier: ^1.69.5
+        version: 1.97.3
+
   packages/extensions/placeholder:
     dependencies:
       '@tiptap/core':
@@ -628,6 +641,9 @@ importers:
       '@yiitap/extension-inline-placeholder':
         specifier: workspace:*
         version: link:../extensions/inline-placeholder
+      '@yiitap/extension-multi-column':
+        specifier: workspace:*
+        version: link:../extensions/multi-column
       '@yiitap/extension-placeholder':
         specifier: workspace:*
         version: link:../extensions/placeholder

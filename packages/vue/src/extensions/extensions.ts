@@ -70,6 +70,16 @@ import type { CalloutOptions } from '@yiitap/extension-callout'
 import OColorHighlighter from '@yiitap/extension-color-highlighter'
 import OFocus from '@yiitap/extension-focus'
 import OInlinePlaceholder from '@yiitap/extension-inline-placeholder'
+import {
+  Column,
+  ColumnContainer,
+  MultiColumn,
+  ColumnDropCursor,
+} from '@yiitap/extension-multi-column'
+import type {
+  MultiColumnOptions,
+  ColumnDropCursorOptions,
+} from '@yiitap/extension-multi-column'
 import OPlaceholder from '@yiitap/extension-placeholder'
 import OSelectionDecoration from '@yiitap/extension-selection-decoration'
 import OShortcut, { type ShortcutOptions } from '@yiitap/extension-shortcut'
@@ -185,10 +195,10 @@ export {
   OColorHighlighter,
   ODetails,
   OFocus,
-  OInlinePlaceholder,
   OHeading,
   OHorizontalRule,
   OImage,
+  OInlinePlaceholder,
   OLink,
   OParagraph,
   OPlaceholder,
@@ -202,6 +212,12 @@ export {
   OTableWrapper,
   OTaskItem,
   OVideo,
+
+  // Column
+  Column,
+  ColumnContainer,
+  MultiColumn,
+  ColumnDropCursor,
 
   // Suggestions
   ColonSuggestion,
@@ -243,6 +259,8 @@ export type {
   OCodeBlockOptions,
   ODetailsOptions,
   OHeadingOptions,
+  ColumnDropCursorOptions,
+  MultiColumnOptions,
   ParagraphOptions,
   ShortcutOptions,
 }

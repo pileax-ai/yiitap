@@ -79,6 +79,7 @@ export default {
     left: 'Left align',
     lineHeight: 'Line Height',
     list: 'List',
+    multiColumn: 'Multi-Column',
     noColor: 'No Color',
     orderedList: 'Ordered List',
     outdent: 'Decrease indentation',

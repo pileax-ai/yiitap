@@ -29,6 +29,7 @@ import { SideMenu } from './side-menu'
 import {
   SideMenuPluginKey,
   getNodeFromCoords,
+  getTopNodeFromCoords,
 } from '../../extensions/side-menu'
 import { AddNode, DragNode } from '../index'
 import { type DecorationWithType, Editor } from '@tiptap/core'
@@ -105,9 +106,9 @@ function onEditorTransaction({ editor, transaction }) {
   const state = SideMenuPluginKey.getState(props.editor.view.state)
   if (state) {
     coords = state.coords
-    const n = getNodeFromCoords(coords, editor)
-    // console.log('tr', n)
+    const n = getTopNodeFromCoords(coords, editor)
     if (n.node) {
+      // console.log('side-menu', n.node.type.name)
       const isTitleAtStart = props.title && n.pos === 0
 
       if (isTitleAtStart) {

@@ -210,6 +210,14 @@ export const AdvancedBlocks: BlockOption[] = [
     tips: 'math',
     keywords: 'block, math, equation',
   },
+  {
+    label: 'editor.multiColumn',
+    value: 'multiColumn',
+    icon: 'view_column',
+    color: BrandColor.amber,
+    tips: 'column',
+    keywords: 'column,columns',
+  },
 ]
 
 export const Blocks: BlockOption[] = [

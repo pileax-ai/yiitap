@@ -79,6 +79,7 @@ export default {
     left: 'Выравнивание по левому краю',
     lineHeight: 'Высота линии',
     list: 'Список',
+    multiColumn: 'Многоколоночный',
     noColor: 'Нет цвета',
     orderedList: 'Упорядоченный список',
     outdent: 'Уменьшить отступ',

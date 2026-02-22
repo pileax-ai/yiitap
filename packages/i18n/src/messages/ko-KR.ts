@@ -79,6 +79,7 @@ export default {
     left: '왼쪽 정렬',
     lineHeight: '라인 높이',
     list: '목록',
+    multiColumn: '다중 열',
     noColor: '색상 없음',
     orderedList: '주문 목록',
     outdent: '들여쓰기 줄이기',

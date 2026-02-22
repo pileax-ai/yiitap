@@ -79,6 +79,7 @@ export default {
     left: 'Alinhar à esquerda',
     lineHeight: 'Altura da linha',
     list: 'Lista',
+    multiColumn: 'Multicoluna',
     noColor: 'Sem cor',
     orderedList: 'Lista ordenada',
     outdent: 'Diminuir recuo',

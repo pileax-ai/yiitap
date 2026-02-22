@@ -79,6 +79,7 @@ export default {
     left: 'Linksbündig',
     lineHeight: 'Zeilenhöhe',
     list: 'Liste',
+    multiColumn: 'Mehrspaltig',
     noColor: 'Keine Farbe',
     orderedList: 'Geordnete Liste',
     outdent: 'Einzug verkleinern',

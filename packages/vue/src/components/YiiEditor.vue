@@ -335,6 +335,7 @@ function buildExtensions() {
   }
   extensions.push(
     OPlaceholder.configure({
+      includeChildren: true,
       placeholder: ({ editor, node, pos }) => {
         if (node.type.name === 'heading') {
           const level = node.attrs.level
@@ -438,4 +439,5 @@ defineExpose({
 @use '../style/tiptap';
 @use '../style/yiitap';
 @import '../../../icon/dist/yiitap-icon.css';
+@import '@yiitap/extension-multi-column/dist/style.css';
 </style>

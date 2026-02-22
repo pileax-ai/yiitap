@@ -79,6 +79,7 @@ export default {
     left: '左揃え',
     lineHeight: '線の高さ',
     list: 'リスト',
+    multiColumn: '複数列',
     noColor: '色なし',
     orderedList: '順序付きリスト',
     outdent: 'インデントを減らす',
