@@ -79,6 +79,7 @@ export default {
     left: 'Aligner à gauche',
     lineHeight: 'Hauteur de ligne',
     list: 'Liste',
+    multiColumn: 'Multi-colonnes',
     noColor: 'Aucune couleur',
     orderedList: 'Liste ordonnée',
     outdent: "Diminuer l'indentation",

@@ -66,7 +66,12 @@ const block = computed(() => {
   } else if (type === 'table-wrapper') {
     type = 'table'
   }
-  return Blocks.find((e) => e.value === type) || { icon: 'title' }
+  return (
+    Blocks.find((e) => e.value === type) ||
+    Blocks.find((e) => e.keywords?.split(',').includes(type)) || {
+      icon: 'title',
+    }
+  )
 })
 
 function onDragStart(event: DragEvent) {

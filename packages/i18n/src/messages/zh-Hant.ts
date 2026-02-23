@@ -79,6 +79,7 @@ export default {
     left: '左對齊',
     lineHeight: '行高',
     list: '列表',
+    multiColumn: '分欄',
     noColor: '無色',
     orderedList: '有序列表',
     outdent: '減少縮進',

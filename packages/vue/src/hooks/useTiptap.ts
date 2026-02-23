@@ -73,9 +73,6 @@ export default function () {
       case 'codeBlock':
         commands.toggleCodeBlock({ language: 'bash' })
         break
-      // case 'columns':
-      // 	commands.setColumns(2)
-      // 	break
       case 'color':
         focus.setColor(options.color).run()
         break
@@ -168,6 +165,9 @@ export default function () {
       // case 'modelViewerUpdate':
       // 	focus.setModelViewer(options).run()
       // 	break
+      case 'multiColumn':
+        commands.insertMultiColumn(2)
+        break
       case 'orderedList':
         focus.toggleOrderedList().run()
         break

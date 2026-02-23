@@ -116,6 +116,7 @@ export default {
         'diagram',
         'emoji',
         'inlineMath',
+        'multiColumn',
         'taskList',
       ]
       if (blocks.includes(item.value)) {

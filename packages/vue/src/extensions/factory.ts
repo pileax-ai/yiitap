@@ -36,6 +36,8 @@ import type {
   OCodeBlockOptions,
   ODetailsOptions,
   OHeadingOptions,
+  ColumnDropCursorOptions,
+  MultiColumnOptions,
   ParagraphOptions,
   ShortcutOptions,
 } from './extensions'
@@ -99,6 +101,12 @@ import {
   OTaskItem,
   OVideo,
 
+  // Column
+  Column,
+  ColumnContainer,
+  MultiColumn,
+  ColumnDropCursor,
+
   // Suggestions
   ColonSuggestion,
   SlashSuggestion,
@@ -159,6 +167,8 @@ export interface ExtensionOptions {
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
   OLink: LinkOptions
+  OMultiColumn: MultiColumnOptions
+  OColumnDropCursor: ColumnDropCursorOptions
   OParagraph: ParagraphOptions
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
@@ -248,9 +258,27 @@ export const extensionRegistry: {
   OImage: (opts?) => OImage.configure(opts),
   OInlinePlaceholder: (opts?) => OInlinePlaceholder.configure(opts),
   OLink: (opts?) => OLink.configure({ openOnClick: false, ...opts }),
+  OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
   OParagraph: (opts?) => OParagraph.configure(opts),
   OSelectionDecoration: (opts?) => OSelectionDecoration.configure(opts),
-  OShortcut: (opts?) => OShortcut.configure(opts),
+  OShortcut: (opts?) =>
+    OShortcut.configure({
+      selectableNodes: [
+        'aiBlock',
+        'blockquote',
+        'callout',
+        'codeBlock',
+        'column',
+        'columns',
+        'heading',
+        'listItem',
+        'paragraph',
+        'tableCell',
+        'tableHeader',
+        'taskItem',
+      ],
+      ...opts,
+    }),
   OVideo: (opts?) => OVideo.configure(opts),
 
   // Groups (returning arrays)
@@ -268,6 +296,12 @@ export const extensionRegistry: {
     }),
     DetailsContent,
     DetailsSummary,
+  ],
+  OMultiColumn: (opts?) => [
+    ColumnContainer,
+    Column,
+    MultiColumn.configure(opts),
+    ColumnDropCursor,
   ],
   OTable: (opts?) => [
     OTableWrapper,

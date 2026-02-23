@@ -79,6 +79,7 @@ export default {
     left: 'Wyrównaj do lewej',
     lineHeight: 'Wysokość linii',
     list: 'Lista',
+    multiColumn: 'Wielokolumnowe',
     noColor: 'Brak koloru',
     orderedList: 'Zamówiona lista',
     outdent: 'Zmniejsz wcięcie',

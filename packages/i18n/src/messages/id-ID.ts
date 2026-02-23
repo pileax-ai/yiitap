@@ -79,6 +79,7 @@ export default {
     left: 'Rata kiri',
     lineHeight: 'Tinggi Garis',
     list: 'Daftar',
+    multiColumn: 'Multi-Kolom',
     noColor: 'Tanpa Warna',
     orderedList: 'Daftar Pesanan',
     outdent: 'Kurangi lekukan',

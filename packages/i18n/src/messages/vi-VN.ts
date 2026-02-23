@@ -79,6 +79,7 @@ export default {
     left: 'Căn trái',
     lineHeight: 'Chiều cao dòng',
     list: 'Danh sách',
+    multiColumn: 'Nhiều cột',
     noColor: 'không màu',
     orderedList: 'Danh sách đặt hàng',
     outdent: 'Giảm thụt lề',

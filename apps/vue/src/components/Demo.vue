@@ -196,6 +196,7 @@ const editorOptions = computed(() => {
     'OColorHighlighter',
     'ODetails',
     'OImage',
+    'OMultiColumn',
     'OShortcut',
     'OVideo',
   ] as any[]
@@ -266,6 +267,7 @@ const editorOptions = computed(() => {
       'inlineMath',
       'blockMath',
       'diagram',
+      'multiColumn',
     ],
     collab: {
       enabled: collaboration.value,
@@ -288,6 +290,7 @@ const sourceList = computed(() => {
     { label: 'Empty', value: 'empty' },
     { label: 'Diagram', value: 'diagram' },
     { label: 'Image', value: 'image' },
+    { label: 'MultiColumn', value: 'multiColumn' },
     { label: 'Table', value: 'table' },
   ]
 })
@@ -386,6 +389,7 @@ function onUpdate({ editor }: { editor: Editor }) {
 
   if (import.meta.env.DEV) {
     console.log(editor.getHTML())
+    console.log(editor.getJSON())
   }
 }
 

@@ -39,11 +39,7 @@ const commands: Indexable = computed(() => {
     clearFormat: { icon: 'format_clear', tooltip: tr('editor.removeFormat') },
     code: { icon: 'code', tooltip: tr('editor.code') },
     codeBlock: { icon: 'code_braces', tooltip: tr('editor.codeBlock') },
-    columns: {
-      icon: 'splitscreen_vertical_add',
-      tooltip: 'Column',
-      rotate: true,
-    },
+    multiColumn: { icon: 'view_column', tooltip: tr('editor.multiColumn') },
     // details: { icon: 'toggle_list', tooltip: tr('editor.toggleList') },
     horizontalRule: { icon: 'horizontal_rule', tooltip: tr('editor.hr') },
     italic: { icon: 'format_italic', tooltip: tr('editor.italic') },
