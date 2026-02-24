@@ -1,5 +1,12 @@
 # @yiitap/extension-color-highlighter
 
+## 0.15.0
+
+### Minor Changes
+
+- ad1588c: simplify node view
+- 134d7d6: audio extension, side menu
+
 ## 0.14.0
 
 ## 0.13.0

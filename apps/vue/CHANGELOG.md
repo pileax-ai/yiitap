@@ -1,5 +1,21 @@
 # app-vue
 
+## 0.15.0
+
+### Minor Changes
+
+- 458a0bd: multi-column extension
+- 134d7d6: audio extension, side menu
+
+### Patch Changes
+
+- Updated dependencies [458a0bd]
+- Updated dependencies [ad1588c]
+- Updated dependencies [134d7d6]
+  - @yiitap/i18n@0.15.0
+  - @yiitap/vue@0.15.0
+  - @yiitap/util-emoji@0.15.0
+
 ## 0.14.0
 
 ### Minor Changes

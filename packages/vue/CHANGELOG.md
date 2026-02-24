@@ -1,5 +1,37 @@
 # @yiitap/vue
 
+## 0.15.0
+
+### Minor Changes
+
+- 458a0bd: multi-column extension
+- ad1588c: simplify node view
+- 134d7d6: audio extension, side menu
+
+### Patch Changes
+
+- Updated dependencies [458a0bd]
+- Updated dependencies [ad1588c]
+- Updated dependencies [134d7d6]
+  - @yiitap/extension-multi-column@0.15.0
+  - @yiitap/i18n@0.15.0
+  - @yiitap/vue@0.15.0
+  - @yiitap/extension-color-highlighter@0.15.0
+  - @yiitap/extension-selection-decoration@0.15.0
+  - @yiitap/extension-inline-placeholder@0.15.0
+  - @yiitap/extension-table-wrapper@0.15.0
+  - @yiitap/extension-char-command@0.15.0
+  - @yiitap/extension-placeholder@0.15.0
+  - @yiitap/extension-task-item@0.15.0
+  - @yiitap/extension-ai-block@0.15.0
+  - @yiitap/extension-shortcut@0.15.0
+  - @yiitap/extension-callout@0.15.0
+  - @yiitap/extension-image@0.15.0
+  - @yiitap/extension-table@0.15.0
+  - @yiitap/extension-video@0.15.0
+  - @yiitap/core@0.15.0
+  - @yiitap/util-emoji@0.15.0
+
 ## 0.14.0
 
 ### Minor Changes
