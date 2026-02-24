@@ -4,6 +4,13 @@
 	width: 100%;
   padding-inline: 54px;
 
+  &.is-dragging {
+    .ProseMirror-selectednode {
+      outline: unset !important;
+      background: unset !important;
+    }
+  }
+
 	// common
 	// --------------------------------------------------
 	* {

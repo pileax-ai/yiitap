@@ -229,8 +229,8 @@ export class SideMenuView {
 
 const onDragStart = (e: DragEvent, editor: Editor) => {
   if (!e.dataTransfer) return
-
-  const view = editor.view
+  
+  const { view } = editor
   const viewBox = view.dom.getBoundingClientRect()
   const coords = {
     left: viewBox.left + viewBox.width / 2, // take middle of editor
@@ -249,6 +249,8 @@ const onDragStart = (e: DragEvent, editor: Editor) => {
   view.dispatch(
     view.state.tr.setSelection(NodeSelection.create(view.state.doc, pos))
   )
+  view.dom.classList.add('is-dragging')
+
   setDragImage(view, pos)
   const selectedSlice = view.state.selection.content()
   const { dom, text } = view.serializeForClipboard(selectedSlice)
@@ -263,6 +265,9 @@ const onDragStart = (e: DragEvent, editor: Editor) => {
 }
 
 const onDragEnd = (e: DragEvent, editor: Editor) => {
+  const { view } = editor
+  view.dom.classList.remove('is-dragging')
+
   unsetDragImage()
 }
 
