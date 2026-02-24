@@ -37,7 +37,6 @@ import type {
   ODetailsOptions,
   ColumnDropCursorOptions,
   MultiColumnOptions,
-  ParagraphOptions,
   ShortcutOptions,
 } from './extensions'
 
@@ -87,7 +86,6 @@ import {
   OImage,
   OInlinePlaceholder,
   OLink,
-  OParagraph,
   OSelectionDecoration,
   OShortcut,
   OSlashCommand,
@@ -166,7 +164,6 @@ export interface ExtensionOptions {
   OLink: LinkOptions
   OMultiColumn: MultiColumnOptions
   OColumnDropCursor: ColumnDropCursorOptions
-  OParagraph: ParagraphOptions
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
   OVideo: { allowFullscreen?: boolean; HTMLAttributes?: Record<string, any> }
@@ -255,7 +252,6 @@ export const extensionRegistry: {
   OInlinePlaceholder: (opts?) => OInlinePlaceholder.configure(opts),
   OLink: (opts?) => OLink.configure({ openOnClick: false, ...opts }),
   OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
-  OParagraph: (opts?) => OParagraph.configure(opts),
   OSelectionDecoration: (opts?) => OSelectionDecoration.configure(opts),
   OShortcut: (opts?) =>
     OShortcut.configure({

@@ -108,7 +108,6 @@ import ODetails, { type ODetailsOptions } from './details'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
-import OParagraph, { type ParagraphOptions } from './paragraph'
 import OTableCell from './table-cell'
 import OTableHeader from './table-header'
 import OTableWrapper from './table-wrapper'
@@ -140,7 +139,6 @@ export const DefaultExtensionNames = [
   'OCodeBlock',
   'OHorizontalRule',
   'OLink',
-  'OParagraph',
   'OSelectionDecoration',
   'OSlash',
   'OSlashZh',
@@ -197,7 +195,6 @@ export {
   OImage,
   OInlinePlaceholder,
   OLink,
-  OParagraph,
   OPlaceholder,
   OSelectionDecoration,
   OShortcut,
@@ -257,6 +254,5 @@ export type {
   ODetailsOptions,
   ColumnDropCursorOptions,
   MultiColumnOptions,
-  ParagraphOptions,
   ShortcutOptions,
 }

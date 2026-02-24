@@ -360,7 +360,6 @@ function buildExtensions() {
       horizontalRule: false,
       link: false,
       blockquote: false,
-      paragraph: false,
       trailingNode: props.title
         ? { node: 'paragraph', notAfter: ['paragraph', 'heading'] }
         : { notAfter: [] },
