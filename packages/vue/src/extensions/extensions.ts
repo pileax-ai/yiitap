@@ -68,7 +68,6 @@ import UniqueID, { type UniqueIDOptions } from '@tiptap/extension-unique-id'
 import type { AiBlockOptions } from '@yiitap/extension-ai-block'
 import type { CalloutOptions } from '@yiitap/extension-callout'
 import OColorHighlighter from '@yiitap/extension-color-highlighter'
-import OFocus from '@yiitap/extension-focus'
 import OInlinePlaceholder from '@yiitap/extension-inline-placeholder'
 import {
   Column,
@@ -190,7 +189,6 @@ export {
   OColonCommand,
   OColorHighlighter,
   ODetails,
-  OFocus,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,

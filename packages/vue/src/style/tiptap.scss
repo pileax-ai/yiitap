@@ -594,24 +594,6 @@
   }
 }
 
-//  table resizer
-// --------------------------------------------------
-.resize-cursor {
-	//cursor: ew-resize;
-	cursor: col-resize;
-}
-
-.column-resize-handle {
-	position: absolute;
-	top: 0;
-	right: -2px;
-	bottom: -2px;
-	width: 4px;
-	pointer-events: none;
-	background-color: #adf;
-	//z-index: 20000;
-}
-
 // ----------------------------------------------------
 //  Dark
 // ----------------------------------------------------

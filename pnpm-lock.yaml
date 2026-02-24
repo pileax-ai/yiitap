@@ -299,15 +299,6 @@ importers:
         specifier: ^3.16.0
         version: 3.16.0
 
-  packages/extensions/focus:
-    dependencies:
-      '@tiptap/core':
-        specifier: ^3.16.0
-        version: 3.16.0(@tiptap/pm@3.16.0)
-      '@tiptap/pm':
-        specifier: ^3.16.0
-        version: 3.16.0
-
   packages/extensions/image:
     dependencies:
       '@tiptap/core':
@@ -632,9 +623,6 @@ importers:
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
-      '@yiitap/extension-focus':
-        specifier: workspace:*
-        version: link:../extensions/focus
       '@yiitap/extension-image':
         specifier: workspace:*
         version: link:../extensions/image
