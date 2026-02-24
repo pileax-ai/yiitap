@@ -229,12 +229,21 @@ export class SideMenuView {
 
 const onDragStart = (e: DragEvent, editor: Editor) => {
   if (!e.dataTransfer) return
-  
+
   const { view } = editor
   const viewBox = view.dom.getBoundingClientRect()
+
+  // const VERTICAL_OFFSET = 5
+  // const coords0 = {
+  //   left: viewBox.left + viewBox.width / 2, // take middle of editor
+  //   top: e.clientY - VERTICAL_OFFSET,
+  // }
+
+  // Use coords stored in side menu
+  const menuState = SideMenuPluginKey.getState(view.state)
   const coords = {
-    left: viewBox.left + viewBox.width / 2, // take middle of editor
-    top: e.clientY,
+    left: menuState.coords.left, // take middle of editor
+    top: menuState.coords.top,
   }
 
   const pos = getNodePosFromCoords(coords, view)
