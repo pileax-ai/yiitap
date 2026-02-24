@@ -69,7 +69,7 @@
 		"overrides": {
 			"prosemirror-model": "1.25.4",
 			"prosemirror-state": "1.4.4",
-			"prosemirror-view": "1.41.5"
+			"prosemirror-view": "1.41.6"
 		},
 		"patchedDependencies": {
 			"@changesets/assemble-release-plan@6.0.9": "patches/@changesets__assemble-release-plan@6.0.9.patch"
