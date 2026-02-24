@@ -16,7 +16,7 @@ export const findColors = (doc: Node): DecorationSet => {
       const from = position + index
       const to = from + color.length
       const decoration = Decoration.inline(from, to, {
-        class: 'color',
+        class: 'color-highlighter',
         style: `--color: ${color}`,
       })
 
