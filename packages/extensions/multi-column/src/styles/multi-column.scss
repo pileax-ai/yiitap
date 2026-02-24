@@ -31,8 +31,7 @@ div[data-type="column-container"] {
     border-radius: 4px;
     margin: 0 -4px;
     padding: 0 4px;
-    //padding: 12px;
-    background-color: rgba(100, 106, 115, 0.02);
+    background-color: transparent;
     transition: background-color 0.2s ease;
 
     // Remove top margin for the first element or element after resize-handle

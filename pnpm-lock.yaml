@@ -411,30 +411,6 @@ importers:
         specifier: ^3.16.0
         version: 3.16.0
 
-  packages/extensions/trailing-node:
-    dependencies:
-      '@tiptap/core':
-        specifier: ^3.16.0
-        version: 3.16.0(@tiptap/pm@3.16.0)
-      '@tiptap/pm':
-        specifier: ^3.16.0
-        version: 3.16.0
-
-  packages/extensions/unique-id:
-    dependencies:
-      '@tiptap/core':
-        specifier: ^3.16.0
-        version: 3.16.0(@tiptap/pm@3.16.0)
-      '@tiptap/pm':
-        specifier: ^3.16.0
-        version: 3.16.0
-      '@types/uuid':
-        specifier: ^10.0.0
-        version: 10.0.0
-      uuid:
-        specifier: ^10.0.0
-        version: 10.0.0
-
   packages/extensions/video:
     dependencies:
       '@tiptap/core':
