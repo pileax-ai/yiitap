@@ -136,6 +136,8 @@ export default {
   label: {
     advanced: '进阶',
     ai: 'AI',
+    audio: '音频',
+    audioAdd: '添加音频',
     back: '返回',
     basic: '基础',
     basicBlocks: '基础块',
@@ -154,6 +156,7 @@ export default {
     generatedBy: '生成自',
     help: '帮助',
     image: '图片',
+    imageAdd: '添加图片',
     link: '链接',
     linkAddress: '链接地址',
     media: '多媒体',
@@ -179,6 +182,7 @@ export default {
     untitled: '未命名',
     update: '更新',
     video: '视频',
+    videoAdd: '添加视频',
     view: '视图',
   },
   link: {

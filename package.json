@@ -19,6 +19,7 @@
 		"dev-react": "pnpm -F 'app-react' dev",
 		"i18n-generate": "pnpm -F '@yiitap/i18n' generate",
 		"i18n-generate-zh": "pnpm -F '@yiitap/i18n' generate-zh",
+		"icon": "pnpm -F '@yiitap/icon' build",
 		"test": "pnpm --if-present -r run test",
 		"test-ci": "pnpm --if-present -r run test-ci",
 		"test-libs": "pnpm -F '@yiitap/*' run test",

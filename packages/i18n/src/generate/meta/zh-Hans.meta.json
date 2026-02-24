@@ -72,6 +72,7 @@
   "editor.left": "413f48cc",
   "editor.lineHeight": "17169fd8",
   "editor.list": "3712972d",
+  "editor.multiColumn": "2820712c",
   "editor.noColor": "86b2e3c9",
   "editor.orderedList": "f4c65092",
   "editor.outdent": "5a12c3b2",
@@ -124,6 +125,8 @@
   "image.zoom": "05853d9c",
   "label.advanced": "fa11f8c0",
   "label.ai": "0a40e3c9",
+  "label.audio": "726dd5df",
+  "label.audioAdd": "e6531c80",
   "label.back": "5f411223",
   "label.basic": "0796ba76",
   "label.basicBlocks": "746a71b2",
@@ -184,5 +187,6 @@
   "table.selectColumn": "c9397e93",
   "table.selectRow": "b2997ed7",
   "table.split": "488d0742",
-  "editor.multiColumn": "2820712c"
+  "label.imageAdd": "b89fb3f9",
+  "label.videoAdd": "57e40c75"
 }

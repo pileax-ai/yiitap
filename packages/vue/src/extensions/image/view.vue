@@ -28,7 +28,7 @@
 
       <o-block-placeholder
         icon="image"
-        placeholder="Add an image"
+        :placeholder="tr('label.imageAdd')"
         v-if="src === 'init'"
       />
       <div class="image-panel" v-else>

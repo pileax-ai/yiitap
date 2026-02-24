@@ -189,6 +189,7 @@ const editorOptions = computed(() => {
       OTable: true,
     }),
     InlineMath,
+    'OAudio',
     'OColon',
     'Markdown',
     'OAiBlock',
@@ -256,18 +257,13 @@ const editorOptions = computed(() => {
       'details',
       'list-dropdown',
       'codeBlock',
-      'link',
-      'image',
-      'video',
       'table',
       'callout',
       'emoji',
       'aiBlock',
       'separator',
-      'inlineMath',
-      'blockMath',
-      'diagram',
-      'multiColumn',
+      'audio',
+      'extension-dropdown',
     ],
     collab: {
       enabled: collaboration.value,
@@ -289,6 +285,7 @@ const sourceList = computed(() => {
     { label: 'Default', value: 'default' },
     { label: 'Empty', value: 'empty' },
     { label: 'Diagram', value: 'diagram' },
+    { label: 'Audio', value: 'audio' },
     { label: 'Image', value: 'image' },
     { label: 'MultiColumn', value: 'multiColumn' },
     { label: 'Table', value: 'table' },
@@ -388,8 +385,8 @@ function onUpdate({ editor }: { editor: Editor }) {
   // console.log(markdown)
 
   if (import.meta.env.DEV) {
-    console.log(editor.getHTML())
-    console.log(editor.getJSON())
+    // console.log(editor.getHTML())
+    // console.log(editor.getJSON())
   }
 }
 

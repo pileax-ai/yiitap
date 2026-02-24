@@ -53,6 +53,7 @@ export default defineConfig({
         'vue',
         // /^@tiptap\/.*/,
         // /^@yiitap\/.*/,
+        '@tiptap/extension-audio',
         '@tiptap/extension-mathematics',
         '@tiptap/markdown',
         '@yiitap/i18n',

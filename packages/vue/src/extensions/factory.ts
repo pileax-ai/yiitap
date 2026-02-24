@@ -31,6 +31,7 @@ import type {
 
   // Yiitap
   AiBlockOptions,
+  AudioOptions,
   CalloutOptions,
   OBlockquoteOptions,
   OCodeBlockOptions,
@@ -75,6 +76,7 @@ import {
 
   // Yiitap
   OAiBlock,
+  OAudio,
   OBlockMath,
   OBlockquote,
   OCallout,
@@ -150,6 +152,7 @@ export interface ExtensionOptions {
 
   // Yiitap Custom Extensions
   OAiBlock: AiBlockOptions
+  OAudio: AudioOptions
   OBlockMath: BlockMathOptions
   OColon: { suggestion?: any; HTMLAttributes?: Record<string, any> }
   OSlash: { suggestion?: any; HTMLAttributes?: Record<string, any> }
@@ -235,6 +238,7 @@ export const extensionRegistry: {
 
   // Yiitap
   OAiBlock: (opts?) => OAiBlock.configure(opts),
+  OAudio: (opts?) => OAudio.configure(opts),
   OBlockMath: (opts?) => OBlockMath.configure(opts),
   OColon: (opts?) =>
     OColonCommand.configure({ suggestion: ColonSuggestion, ...opts }),

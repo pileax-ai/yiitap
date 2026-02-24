@@ -24,7 +24,7 @@
 
       <o-block-placeholder
         icon="videocam"
-        placeholder="Add a video"
+        :placeholder="tr('label.videoAdd')"
         v-if="src === 'init'"
       />
       <div class="video-container" v-else>
@@ -156,6 +156,7 @@ onMounted(() => {
   display: inline-block;
   cursor: pointer;
   width: 100%;
+  margin: 3px 0;
 
   .video-container {
     position: relative;

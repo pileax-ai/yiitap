@@ -33,6 +33,9 @@ export default function () {
       case 'aiBlock':
         focus.toggleAiBlock().run()
         break
+      case 'audio':
+        focus.setAudio({ src: '//init.mp3' }).run()
+        break
       case 'highlight':
         if (options.color) {
           commands.setHighlight({ color: options.color })
@@ -240,10 +243,6 @@ export default function () {
             src: 'init',
           })
           .run()
-      // 	break
-      // case 'videoUpdate':
-      // 	focus.setVideo(options).run()
-      // 	break
     }
   }
 

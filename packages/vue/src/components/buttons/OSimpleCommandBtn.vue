@@ -33,13 +33,13 @@ const { tr } = useI18n()
 const commands: Indexable = computed(() => {
   return {
     aiViewer: { icon: 'auto_awesome', tooltip: tr('label.ai') },
+    audio: { icon: 'music_cast', tooltip: tr('label.ai') },
     blockquote: { icon: 'format_quote_open', tooltip: tr('editor.blockquote') },
     bold: { icon: 'format_bold', tooltip: tr('editor.bold') },
     callout: { icon: 'card_text', tooltip: tr('editor.callout') },
     clearFormat: { icon: 'format_clear', tooltip: tr('editor.removeFormat') },
     code: { icon: 'code', tooltip: tr('editor.code') },
     codeBlock: { icon: 'code_braces', tooltip: tr('editor.codeBlock') },
-    multiColumn: { icon: 'view_column', tooltip: tr('editor.multiColumn') },
     // details: { icon: 'toggle_list', tooltip: tr('editor.toggleList') },
     horizontalRule: { icon: 'horizontal_rule', tooltip: tr('editor.hr') },
     italic: { icon: 'format_italic', tooltip: tr('editor.italic') },
@@ -49,6 +49,7 @@ const commands: Indexable = computed(() => {
     inlineMathDelete: { icon: 'close', tooltip: tr('editor.delete') },
     linkUnset: { icon: 'link_off', tooltip: tr('link.off') },
     modelViewer: { icon: '3d_rotation', tooltip: tr('label.modelViewer') },
+    multiColumn: { icon: 'view_column', tooltip: tr('editor.multiColumn') },
     strike: {
       icon: 'format_strikethrough',
       tooltip: tr('editor.strikethrough'),
