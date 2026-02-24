@@ -35,8 +35,8 @@
 		"test-ci": "vitest --run"
 	},
 	"peerDependencies": {
-		"@tiptap/core": "^3.16.0",
-		"@tiptap/pm": "^3.16.0"
+		"@tiptap/core": "^3.20.0",
+		"@tiptap/pm": "^3.20.0"
 	},
 	"devDependencies": {
 		"sass": "^1.69.5"

@@ -51,11 +51,20 @@ import {
 } from '../../../components/index'
 import { BasicBlocks, CommonBlocks } from '../../../constants/block'
 import {
-  EmptyParagraph,
-  EmptyListItem,
-  EmptyTaskItem,
+  EmptyAiBlock,
+  EmptyAudio,
+  EmptyBlockquote,
+  EmptyCallout,
+  EmptyCodeblock,
   EmptyDetails,
   EmptyDiagram,
+  EmptyEmoji,
+  EmptyImage,
+  EmptyListItem,
+  EmptyParagraph,
+  EmptyTable,
+  EmptyTaskItem,
+  EmptyVideo,
 } from '../../../constants/empty-block'
 
 const props = defineProps(nodeViewProps)
@@ -65,31 +74,22 @@ const { run } = useTiptap()
 const view = ref('main')
 
 function onClick(item) {
-  const chain = props.editor.chain()
   let content = null
   switch (item.value) {
     case 'aiBlock':
-      content = {
-        content: EmptyParagraph,
-        attrs: { icon: '💡' },
-      }
+      content = EmptyAiBlock
+      break
+    case 'audio':
+      content = EmptyAudio
       break
     case 'blockquote':
-      content = {
-        content: EmptyParagraph,
-      }
+      content = EmptyBlockquote
       break
     case 'callout':
-      content = {
-        content: EmptyParagraph,
-        attrs: { icon: '💡' },
-      }
+      content = EmptyCallout
       break
     case 'codeBlock':
-      content = {
-        content: [],
-        attrs: { language: 'shell' },
-      }
+      content = EmptyCodeblock
       break
     case 'details':
       content = EmptyDetails
@@ -98,10 +98,7 @@ function onClick(item) {
       content = EmptyDiagram
       break
     case 'emoji':
-      content = {
-        type: 'paragraph',
-        content: [{ type: 'text', text: ':' }],
-      }
+      content = EmptyEmoji
       break
     case 'heading':
       content = {
@@ -113,6 +110,7 @@ function onClick(item) {
       break
     case 'paragraph':
       content = {
+        type: 'paragraph',
         content: [],
       }
       break
@@ -128,43 +126,35 @@ function onClick(item) {
       }
       break
     case 'table':
-      setTimeout(() => {
-        chain
-          .insertContentAt(newPos.value, {
-            type: 'paragraph',
-            content: [],
-          })
-          .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-          .focus()
-          .run()
-      }, 1)
-      emit('action', item)
-      return
+      content = EmptyTable
+      break
     case 'image':
-      content = {
-        type: 'paragraph',
-        content: [{ type: item.value, attrs: { src: 'init' } }],
-      }
+      content = EmptyImage
       break
     case 'model-viewer':
       content = { attrs: { src: 'init' } }
+      break
+    case 'video':
+      content = EmptyVideo
       break
     default:
       break
   }
 
-  // add new node
+  // Add new node
   if (content) {
-    const insertPos = newPos.value
-    // console.log('add', props.getPos(), newPos.value, insertPos)
     content.type = content.type || item.value
-    setTimeout(() => {
-      if (isEmpty.value) {
-        chain.insertContent(content).focus().run()
-      } else {
-        chain.insertContentAt(insertPos, content).focus().run()
-      }
-    }, 1)
+    const insertPos = isEmpty.value ? newPos.value + 1 : newPos.value
+    const focusPosition = item.value === 'emoji' ? insertPos + 2 : insertPos + 1
+
+    requestAnimationFrame(() => {
+      props.editor
+        .chain()
+        .insertContentAt(insertPos, content)
+        .focus(focusPosition)
+        .scrollIntoView()
+        .run()
+    })
   }
   emit('action', item)
 }
@@ -177,6 +167,10 @@ const newPos = computed(() => {
   // console.log('node', props.getPos(), props.node)
   return isEmpty.value ? props.getPos() : props.getPos() + props.node.nodeSize
 })
+
+const getNewPos = () => {
+  return isEmpty.value ? props.getPos() : props.getPos() + props.node.nodeSize
+}
 </script>
 
 <style lang="scss">

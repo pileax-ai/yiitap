@@ -99,6 +99,7 @@ import {
 
 // Extension local
 import OAiBlock from './ai-block'
+import OAudio, { type AudioOptions } from './audio'
 import OBlockMath from './block-math'
 import OBlockquote, { type OBlockquoteOptions } from './blockquote'
 import OCallout from './callout'
@@ -181,6 +182,7 @@ export {
 
   // Yiitap
   OAiBlock,
+  OAudio,
   OBlockMath,
   OBlockquote,
   OCallout,
@@ -246,6 +248,7 @@ export type {
 
   // Yiitap
   AiBlockOptions,
+  AudioOptions,
   CalloutOptions,
   OBlockquoteOptions,
   OCodeBlockOptions,

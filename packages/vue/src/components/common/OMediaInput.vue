@@ -1,7 +1,7 @@
 <template>
   <section class="o-media-input">
     <section class="fields">
-      <div class="o-media-title">Link</div>
+      <div class="o-media-title">{{ tr('label.link') }}</div>
       <o-input
         ref="input"
         v-model="value"

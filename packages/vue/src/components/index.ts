@@ -2,6 +2,7 @@
 export { default as OAlignDropdown } from './buttons/OAlignDropdown.vue'
 export { default as OCodeBlockDownloadDropdown } from './buttons/OCodeBlockDownloadDropdown.vue'
 export { default as OCodeBlockViewDropdown } from './buttons/OCodeBlockViewDropdown.vue'
+export { default as OExtensionDropdown } from './buttons/OExtensionDropdown.vue'
 export { default as OLinkBtn } from './buttons/OLinkBtn.vue'
 
 // Common

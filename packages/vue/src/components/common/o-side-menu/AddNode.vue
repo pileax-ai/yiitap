@@ -69,14 +69,18 @@ function addEmpty() {
       },
     ],
   }
-  const chain = props.editor.chain()
-  setTimeout(() => {
-    if (isEmpty.value) {
-      chain.insertContent(content).focus().run()
-    } else {
-      chain.insertContentAt(newPos.value, content).focus().run()
-    }
-  }, 1)
+
+  const insertPos = isEmpty.value ? newPos.value + 1 : newPos.value
+  const focusPosition = insertPos + 2
+
+  requestAnimationFrame(() => {
+    props.editor
+      .chain()
+      .insertContentAt(insertPos, content)
+      .focus(focusPosition)
+      .scrollIntoView()
+      .run()
+  })
 }
 
 function onAction() {

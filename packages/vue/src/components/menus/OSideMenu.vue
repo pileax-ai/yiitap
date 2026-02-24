@@ -108,7 +108,6 @@ function onEditorTransaction({ editor, transaction }) {
     coords = state.coords
     const n = getTopNodeFromCoords(coords, editor)
     if (n.node) {
-      // console.log('side-menu', n.node.type.name)
       const isTitleAtStart = props.title && n.pos === 0
 
       if (isTitleAtStart) {
@@ -117,6 +116,7 @@ function onEditorTransaction({ editor, transaction }) {
         node.value = n.node as ProseMirrorNode
         pos.value = n.pos
       }
+      // console.log('side-menu', n.node.type.name, pos.value)
     }
   }
 }

@@ -19,6 +19,7 @@
 		"dev-react": "pnpm -F 'app-react' dev",
 		"i18n-generate": "pnpm -F '@yiitap/i18n' generate",
 		"i18n-generate-zh": "pnpm -F '@yiitap/i18n' generate-zh",
+		"icon": "pnpm -F '@yiitap/icon' build",
 		"test": "pnpm --if-present -r run test",
 		"test-ci": "pnpm --if-present -r run test-ci",
 		"test-libs": "pnpm -F '@yiitap/*' run test",
@@ -68,7 +69,7 @@
 		"overrides": {
 			"prosemirror-model": "1.25.4",
 			"prosemirror-state": "1.4.4",
-			"prosemirror-view": "1.41.5"
+			"prosemirror-view": "1.41.6"
 		},
 		"patchedDependencies": {
 			"@changesets/assemble-release-plan@6.0.9": "patches/@changesets__assemble-release-plan@6.0.9.patch"
