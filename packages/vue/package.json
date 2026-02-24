@@ -74,7 +74,6 @@
 		"@yiitap/extension-callout": "workspace:*",
 		"@yiitap/extension-char-command": "workspace:*",
 		"@yiitap/extension-color-highlighter": "workspace:*",
-		"@yiitap/extension-focus": "workspace:*",
 		"@yiitap/extension-image": "workspace:*",
 		"@yiitap/extension-inline-placeholder": "workspace:*",
 		"@yiitap/extension-multi-column": "workspace:*",

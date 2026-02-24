@@ -35,10 +35,8 @@ import type {
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,
-  OHeadingOptions,
   ColumnDropCursorOptions,
   MultiColumnOptions,
-  ParagraphOptions,
   ShortcutOptions,
 } from './extensions'
 
@@ -84,12 +82,10 @@ import {
   OColorHighlighter,
   OColonCommand,
   ODetails,
-  OHeading,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
   OLink,
-  OParagraph,
   OSelectionDecoration,
   OShortcut,
   OSlashCommand,
@@ -162,14 +158,12 @@ export interface ExtensionOptions {
   OCallout: CalloutOptions
   OCodeBlock: OCodeBlockOptions
   OColorHighlighter: any
-  OHeading: OHeadingOptions
   OHorizontalRule: HorizontalRuleOptions
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
   OLink: LinkOptions
   OMultiColumn: MultiColumnOptions
   OColumnDropCursor: ColumnDropCursorOptions
-  OParagraph: ParagraphOptions
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
   OVideo: { allowFullscreen?: boolean; HTMLAttributes?: Record<string, any> }
@@ -253,13 +247,11 @@ export const extensionRegistry: {
   OCallout: (opts?) => OCallout.configure(opts),
   OCodeBlock: (opts?) => OCodeBlock.configure(opts),
   OColorHighlighter: (opts?) => OColorHighlighter.configure(opts),
-  OHeading: (opts?) => OHeading.configure(opts),
   OHorizontalRule: (opts?) => OHorizontalRule.configure(opts),
   OImage: (opts?) => OImage.configure(opts),
   OInlinePlaceholder: (opts?) => OInlinePlaceholder.configure(opts),
   OLink: (opts?) => OLink.configure({ openOnClick: false, ...opts }),
   OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
-  OParagraph: (opts?) => OParagraph.configure(opts),
   OSelectionDecoration: (opts?) => OSelectionDecoration.configure(opts),
   OShortcut: (opts?) =>
     OShortcut.configure({

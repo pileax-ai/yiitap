@@ -68,7 +68,6 @@ import UniqueID, { type UniqueIDOptions } from '@tiptap/extension-unique-id'
 import type { AiBlockOptions } from '@yiitap/extension-ai-block'
 import type { CalloutOptions } from '@yiitap/extension-callout'
 import OColorHighlighter from '@yiitap/extension-color-highlighter'
-import OFocus from '@yiitap/extension-focus'
 import OInlinePlaceholder from '@yiitap/extension-inline-placeholder'
 import {
   Column,
@@ -105,11 +104,9 @@ import OBlockquote, { type OBlockquoteOptions } from './blockquote'
 import OCallout from './callout'
 import OCodeBlock, { type OCodeBlockOptions } from './code-block'
 import ODetails, { type ODetailsOptions } from './details'
-import OHeading, { type OHeadingOptions } from './heading'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
-import OParagraph, { type ParagraphOptions } from './paragraph'
 import OTableCell from './table-cell'
 import OTableHeader from './table-header'
 import OTableWrapper from './table-wrapper'
@@ -139,10 +136,8 @@ export const DefaultExtensionNames = [
   'OBlockquote',
   'OCallout',
   'OCodeBlock',
-  'OHeading',
   'OHorizontalRule',
   'OLink',
-  'OParagraph',
   'OSelectionDecoration',
   'OSlash',
   'OSlashZh',
@@ -194,13 +189,10 @@ export {
   OColonCommand,
   OColorHighlighter,
   ODetails,
-  OFocus,
-  OHeading,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
   OLink,
-  OParagraph,
   OPlaceholder,
   OSelectionDecoration,
   OShortcut,
@@ -258,9 +250,7 @@ export type {
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,
-  OHeadingOptions,
   ColumnDropCursorOptions,
   MultiColumnOptions,
-  ParagraphOptions,
   ShortcutOptions,
 }

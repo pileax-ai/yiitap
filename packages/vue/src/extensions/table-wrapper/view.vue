@@ -1,9 +1,5 @@
 <template>
-  <o-node-view
-    v-bind="props"
-    class="o-table-wrapper-view"
-    :class="{ 'side-node-enabled': enableSideNode }"
-  >
+  <o-node-view v-bind="props" class="o-table-wrapper-view">
     <node-view-content as="table" />
   </o-node-view>
 </template>
@@ -14,7 +10,6 @@ import { NodeViewContent, nodeViewProps } from '@tiptap/vue-3'
 import { ONodeView } from '../../components/index'
 
 const props = defineProps(nodeViewProps)
-const enableSideNode = inject('sideNode', { value: false })
 const showPopover = ref(false)
 
 const isFocused = computed(() => {

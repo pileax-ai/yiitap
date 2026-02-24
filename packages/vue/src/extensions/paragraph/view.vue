@@ -14,10 +14,6 @@ const props = defineProps(nodeViewProps)
 <style lang="scss">
 .o-paragraph-view {
   position: relative;
-
-  .o-side-node {
-    top: 2px;
-  }
 }
 
 .o-paragraph-view:has(.o-block-placeholder) {

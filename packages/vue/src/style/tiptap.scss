@@ -1,18 +1,15 @@
 // Tiptap Styles
 // ====================================================
 .ProseMirror {
-	//width: 100%;
+	width: 100%;
   padding-inline: 54px;
 
-	// placehoder
-	// --------------------------------------------------
-	.is-empty::before {
-		content: attr(data-placeholder);
-		float: left;
-		color: #ced4da;
-		pointer-events: none;
-		height: 0;
-	}
+  &.is-dragging {
+    .ProseMirror-selectednode {
+      outline: unset !important;
+      background: unset !important;
+    }
+  }
 
 	// common
 	// --------------------------------------------------
@@ -20,20 +17,13 @@
 		caret-color: currentColor;
 	}
 
-	blockquote {
-		margin: 4px 0;
-	}
-
-	h1, h2, h3, h4, h5 {
-		margin: 1rem 0 1px 0;
-
-		&:first-child {
-			margin-top: 0;
-		}
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+  .is-empty::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #ced4da;
+    pointer-events: none;
+    height: 0;
+  }
 
 	// paragraph
 	// --------------------------------------------------
@@ -52,6 +42,7 @@
 		border-radius: 0 4px 4px 0;
 		color: var(--yii-blockquote-color);
 		background: var(--yii-blockquote-bg-color);
+    margin: 4px 0;
 		padding: 2px 10px 2px;
 
 		p {
@@ -182,7 +173,7 @@
 
 	// color-highlighter
 	// --------------------------------------------------
-	.color {
+	.color-highlighter {
 		white-space: nowrap;
 
 		&::before {
@@ -201,17 +192,22 @@
 
 	//  heading
 	// --------------------------------------------------
-	.o-heading-view {
-		color: var(--yii-color-accent);
-	}
 	h1, h2, h3, h4, h5 {
 		font-weight: 600;
 		line-height: 1.3;
+    margin: 1rem 0 1px 0;
 		padding: 3px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
 	}
 
 	h1 {
-		font-size: 40px;
+		font-size: 2.5rem;
 		line-height: 1.2;
 
 		&:first-child {
@@ -231,6 +227,7 @@
 	h5 {
 		font-size: 1rem;
 	}
+
 	mark {
 		color: unset;
     border-radius: 0.4rem;
@@ -242,7 +239,6 @@
 	//  image
 	// --------------------------------------------------
 	img {
-		//max-width: 100%;
 		border-radius: 3px;
 
 		&[sizes="small"] {
@@ -261,12 +257,12 @@
 	//  link
 	// --------------------------------------------------
 	a {
-		color: #2196f3;
+		color: var(--yii-link-color);
 		text-decoration: none;
 		word-break: break-all;
 
 		&:hover {
-			color: #2196f3;
+			color: var(--yii-link-color);
 			cursor: pointer;
 			text-decoration: underline;
 		}
@@ -341,10 +337,6 @@
 	.o-table-wrapper-view, table {
 		padding: 20px 0 0 20px;
 		margin: -20px 0 0 -20px;
-
-		&.side-node-enabled {
-			margin: -10px 0 10px -20px;
-		}
 
 		&:hover, &:has(.active) {
 			.table-handler, .col-handler, .row-handler {
@@ -552,7 +544,7 @@
 		}
 	}
 
-  //  selection
+  // selection
   // --------------------------------------------------
   .selection-decoration-blur {
     padding: 0;
@@ -607,24 +599,6 @@
     user-select: none;
     white-space: nowrap;
   }
-}
-
-//  table resizer
-// --------------------------------------------------
-.resize-cursor {
-	//cursor: ew-resize;
-	cursor: col-resize;
-}
-
-.column-resize-handle {
-	position: absolute;
-	top: 0;
-	right: -2px;
-	bottom: -2px;
-	width: 4px;
-	pointer-events: none;
-	background-color: #adf;
-	//z-index: 20000;
 }
 
 // ----------------------------------------------------
