@@ -255,13 +255,11 @@ const { tr } = useI18n()
 const darkModeAlt = ref(false)
 const isEditable = ref(true)
 const localeAlt = ref('en')
-const sideNodeAlt = ref(false)
 const aiOptionAlt = ref<AiOption>()
 const ready = ref(false)
 provide('darkMode', darkModeAlt)
 provide('isEditable', isEditable)
 provide('locale', localeAlt)
-provide('sideNode', sideNodeAlt)
 provide('aiOption', aiOptionAlt)
 
 const customExtensions = computed(() => {
@@ -411,7 +409,6 @@ onBeforeMount(() => {
   aiOptionAlt.value = props.aiOption
   darkModeAlt.value = props.darkMode
   localeAlt.value = props.locale
-  sideNodeAlt.value = !props.sideMenu.show && props.showSideNode
 })
 
 defineExpose({

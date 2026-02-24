@@ -1,7 +1,7 @@
 // Tiptap Styles
 // ====================================================
 .ProseMirror {
-	//width: 100%;
+	width: 100%;
   padding-inline: 54px;
 
 	// placehoder
@@ -339,10 +339,6 @@
 	.o-table-wrapper-view, table {
 		padding: 20px 0 0 20px;
 		margin: -20px 0 0 -20px;
-
-		&.side-node-enabled {
-			margin: -10px 0 10px -20px;
-		}
 
 		&:hover, &:has(.active) {
 			.table-handler, .col-handler, .row-handler {
