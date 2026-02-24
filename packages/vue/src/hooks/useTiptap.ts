@@ -1,6 +1,6 @@
 import { computed, ref, inject } from 'vue'
 import type { ChainedCommands, Editor, SingleCommands } from '@tiptap/core'
-import type { Level } from '@/extensions/heading'
+import type { Level } from '@tiptap/extension-heading'
 import { InlinePlaceholderKey } from '@yiitap/extension-placeholder'
 import { EmptyDiagram } from '../constants/empty-block'
 
@@ -106,7 +106,6 @@ export default function () {
         break
       case 'heading':
         focus.toggleHeading(options as { level: Level }).run()
-        // commands.toggleHeading(options)
         break
       case 'horizontalRule':
         focus.setHorizontalRule().run()

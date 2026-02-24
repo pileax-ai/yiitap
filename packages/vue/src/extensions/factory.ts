@@ -35,7 +35,6 @@ import type {
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,
-  OHeadingOptions,
   ColumnDropCursorOptions,
   MultiColumnOptions,
   ParagraphOptions,
@@ -84,7 +83,6 @@ import {
   OColorHighlighter,
   OColonCommand,
   ODetails,
-  OHeading,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -162,7 +160,6 @@ export interface ExtensionOptions {
   OCallout: CalloutOptions
   OCodeBlock: OCodeBlockOptions
   OColorHighlighter: any
-  OHeading: OHeadingOptions
   OHorizontalRule: HorizontalRuleOptions
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
@@ -253,7 +250,6 @@ export const extensionRegistry: {
   OCallout: (opts?) => OCallout.configure(opts),
   OCodeBlock: (opts?) => OCodeBlock.configure(opts),
   OColorHighlighter: (opts?) => OColorHighlighter.configure(opts),
-  OHeading: (opts?) => OHeading.configure(opts),
   OHorizontalRule: (opts?) => OHorizontalRule.configure(opts),
   OImage: (opts?) => OImage.configure(opts),
   OInlinePlaceholder: (opts?) => OInlinePlaceholder.configure(opts),

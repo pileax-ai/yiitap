@@ -201,9 +201,6 @@
 
 	//  heading
 	// --------------------------------------------------
-	.o-heading-view {
-		color: var(--yii-color-accent);
-	}
 	h1, h2, h3, h4, h5 {
 		font-weight: 600;
 		line-height: 1.3;
@@ -211,7 +208,7 @@
 	}
 
 	h1 {
-		font-size: 40px;
+		font-size: 2.5rem;
 		line-height: 1.2;
 
 		&:first-child {
@@ -231,6 +228,7 @@
 	h5 {
 		font-size: 1rem;
 	}
+
 	mark {
 		color: unset;
     border-radius: 0.4rem;

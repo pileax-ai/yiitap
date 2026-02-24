@@ -105,7 +105,6 @@ import OBlockquote, { type OBlockquoteOptions } from './blockquote'
 import OCallout from './callout'
 import OCodeBlock, { type OCodeBlockOptions } from './code-block'
 import ODetails, { type ODetailsOptions } from './details'
-import OHeading, { type OHeadingOptions } from './heading'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
@@ -139,7 +138,6 @@ export const DefaultExtensionNames = [
   'OBlockquote',
   'OCallout',
   'OCodeBlock',
-  'OHeading',
   'OHorizontalRule',
   'OLink',
   'OParagraph',
@@ -195,7 +193,6 @@ export {
   OColorHighlighter,
   ODetails,
   OFocus,
-  OHeading,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -258,7 +255,6 @@ export type {
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,
-  OHeadingOptions,
   ColumnDropCursorOptions,
   MultiColumnOptions,
   ParagraphOptions,
