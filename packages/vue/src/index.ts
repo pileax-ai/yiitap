@@ -10,9 +10,12 @@ const YiiEditorPlugin = {
   },
 }
 
+// Yiitap
 export { YiiEditor, YiiEditorPlugin }
-
 export * from './components'
 export * from './constants'
 export * from './hooks'
 export * from './extensions'
+
+// Tiptap
+export * from '@tiptap/core'

@@ -21,14 +21,12 @@ export const DefaultMenu = [
   'list-dropdown',
   'codeBlock',
   'link',
-  'image',
-  'video',
-  'modelViewer',
   'table',
   'callout',
   'emoji',
-  'columns',
   'aiBlock',
+  'separator',
+  'extension-dropdown',
 ]
 
 /**
@@ -63,6 +61,7 @@ export const DefaultBubble = [
   'bold',
   'strike',
   'text-color-dropdown',
+  'highlight',
   'clearFormat',
   'separator',
   'ai',
@@ -113,17 +112,6 @@ export const TableBubble = [
   'align-group',
 ]
 
-export const TableWrapperBubble = [
-  'table-group',
-  'separator',
-  'bold',
-  'italic',
-  'font-family',
-  'text-color-dropdown',
-  'separator',
-  'align-group',
-]
-
 /**
  * Floating Menu
  */
@@ -136,8 +124,6 @@ export const DefaultFloating = [
   'separator',
   'align-dropdown',
 ]
-
-export const TableFloating = ['table-group', 'separator', 'align-group']
 
 export const DefaultEmbedServices = {
   video: ['youtube', 'youku', 'bilibili', 'qqvideo'],

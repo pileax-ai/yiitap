@@ -32,20 +32,20 @@ const { tr } = useI18n()
 
 const commands: Indexable = computed(() => {
   return {
-    aiViewer: { icon: 'auto_awesome', tooltip: tr('label.ai') },
-    audio: { icon: 'music_cast', tooltip: tr('label.ai') },
+    aiBlock: { icon: 'auto_awesome', tooltip: tr('editor.aiBlock') },
+    audio: { icon: 'music_cast', tooltip: tr('label.audio') },
+    blockMath: { icon: 'functions', tooltip: tr('editor.blockMath') },
     blockquote: { icon: 'format_quote_open', tooltip: tr('editor.blockquote') },
     bold: { icon: 'format_bold', tooltip: tr('editor.bold') },
     callout: { icon: 'card_text', tooltip: tr('editor.callout') },
     clearFormat: { icon: 'format_clear', tooltip: tr('editor.removeFormat') },
     code: { icon: 'code', tooltip: tr('editor.code') },
     codeBlock: { icon: 'code_braces', tooltip: tr('editor.codeBlock') },
-    // details: { icon: 'toggle_list', tooltip: tr('editor.toggleList') },
+    diagram: { icon: 'mermaid', tooltip: tr('diagram.name') },
     horizontalRule: { icon: 'horizontal_rule', tooltip: tr('editor.hr') },
     italic: { icon: 'format_italic', tooltip: tr('editor.italic') },
     image: { icon: 'image', tooltip: tr('editor.photo') },
     inlineMath: { icon: 'function', tooltip: tr('editor.inlineMath') },
-    blockMath: { icon: 'functions', tooltip: tr('editor.blockMath') },
     inlineMathDelete: { icon: 'close', tooltip: tr('editor.delete') },
     linkUnset: { icon: 'link_off', tooltip: tr('link.off') },
     modelViewer: { icon: '3d_rotation', tooltip: tr('label.modelViewer') },
@@ -56,8 +56,6 @@ const commands: Indexable = computed(() => {
     },
     underline: { icon: 'format_underlined', tooltip: tr('editor.underline') },
     video: { icon: 'videocam', tooltip: tr('editor.video') },
-    aiBlock: { icon: 'auto_awesome', tooltip: tr('editor.aiBlock') },
-    diagram: { icon: 'mermaid', tooltip: tr('diagram.name') },
   }
 })
 const command: Indexable = computed(() => {

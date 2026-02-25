@@ -150,13 +150,13 @@ import {
   InlineMath,
   OStarterKit,
 } from '@yiitap/vue'
+import type { Editor } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
 import { getData } from '@/data'
 import VersionBadge from './VersionBadge.vue'
 import 'katex/dist/katex.min.css'
-import type { Editor } from '@tiptap/core'
 
 const emit = defineEmits(['mode'])
 
@@ -262,7 +262,6 @@ const editorOptions = computed(() => {
       'emoji',
       'aiBlock',
       'separator',
-      'audio',
       'extension-dropdown',
     ],
     collab: {
@@ -342,7 +341,7 @@ async function initCollab() {
   const provider = new HocuspocusProvider({
     url: providerUrl.value,
     name: documentName.value,
-    document: doc, // 使用局部变量
+    document: doc,
     token: providerToken.value,
     onConnect() {
       console.log('Hocuspocus connected')

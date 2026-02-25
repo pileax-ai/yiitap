@@ -10,7 +10,7 @@
       <o-command-btn
         icon="extension"
         content-class="o-extension-dropdown dropdown"
-        :tooltip="tr('editor.textFormat')"
+        :tooltip="tr('label.more')"
       >
         <o-icon name="arrow_drop_down" class="arrow" />
       </o-command-btn>
@@ -63,14 +63,19 @@ const popover = ref<InstanceType<typeof OPopover>>()
 const options = computed(() => {
   return [
     {
-      label: tr('editor.photo'),
+      label: tr('label.image'),
       value: 'image',
       icon: 'image',
     },
     {
-      label: tr('editor.video'),
+      label: tr('label.video'),
       value: 'video',
       icon: 'videocam',
+    },
+    {
+      label: tr('label.audio'),
+      value: 'audio',
+      icon: 'music_cast',
     },
     {
       label: tr('editor.inlineMath'),
