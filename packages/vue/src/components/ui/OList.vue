@@ -37,5 +37,9 @@ const props = defineProps({
       background: var(--yii-hover-bg-color);
     }
   }
+
+  .group {
+    padding: 0 8px;
+  }
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <teleport to="body">
-    <div v-if="show" class="dialog-overlay o-dialog" @click.self="close">
+    <div
+      class="dialog-overlay o-dialog"
+      :class="dialogClass"
+      @click.self="close"
+      v-if="show"
+    >
       <div class="dialog-box" :class="{ fullscreen: fullscreen }">
         <div class="dialog-header">
           <slot name="title">{{ title }}</slot>
@@ -10,7 +15,7 @@
           <slot></slot>
         </div>
         <div class="dialog-footer">
-          <slot name="footer"> </slot>
+          <slot name="footer"></slot>
         </div>
       </div>
     </div>
@@ -94,7 +99,8 @@ const close = () => {
     }
 
     .dialog-header {
-      padding: 0.5rem 1rem;
+      height: 40px;
+      padding: 0 1rem;
       color: var(--yii-tips-color);
       background: var(--yii-pre-tool-bg-color);
 

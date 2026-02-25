@@ -46,7 +46,7 @@
             </o-menubar-btn>
             <o-menubar-btn
               icon="subtitles"
-              :tooltip="tr('image.caption')"
+              :tooltip="tr('label.caption')"
               @click.stop="onCaption"
             />
             <o-link-btn :editor="editor" />

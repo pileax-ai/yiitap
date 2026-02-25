@@ -7,7 +7,13 @@ import { fileURLToPath } from 'url'
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => ['model-viewer'].includes(tag),
+        },
+      },
+    }),
     Inspect({
       build: true,
       outputDir: '.analysis/inspect',

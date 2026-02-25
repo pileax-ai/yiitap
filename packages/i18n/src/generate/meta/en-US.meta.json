@@ -106,7 +106,6 @@
   "editor.url": "e6b391a8",
   "editor.video": "5fe8fd40",
   "editor.viewSource": "89babd10",
-  "image.caption": "272ba7d1",
   "image.height": "eec6c4bd",
   "image.large": "3a69b34c",
   "image.link": "97e7c9a7",
@@ -145,6 +144,7 @@
   "label.generatedBy": "065bf91c",
   "label.help": "6a26f548",
   "label.image": "be53a054",
+  "label.imageAdd": "06c0d8d1",
   "label.link": "97e7c9a7",
   "label.linkAddress": "3982cb7c",
   "label.media": "3b563524",
@@ -171,6 +171,7 @@
   "label.untitled": "911af7aa",
   "label.update": "06933067",
   "label.video": "34e2d198",
+  "label.videoAdd": "f9cc4ae0",
   "label.view": "4351cfeb",
   "label.write": "1129c0e4",
   "link.back": "eddf80dd",
@@ -189,6 +190,7 @@
   "table.selectColumn": "53baa16c",
   "table.selectRow": "1953384c",
   "table.split": "3068f60f",
-  "label.imageAdd": "06c0d8d1",
-  "label.videoAdd": "f9cc4ae0"
+  "label.caption": "272ba7d1",
+  "label.model3d": "7fcbcc46",
+  "label.model3dAdd": "7eadb104"
 }

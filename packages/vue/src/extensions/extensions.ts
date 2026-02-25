@@ -108,6 +108,7 @@ import ODetails, { type ODetailsOptions } from './details'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
+import OModelViewer from './model-viewer'
 import OTableCell from './table-cell'
 import OTableHeader from './table-header'
 import OTableWrapper from './table-wrapper'
@@ -195,6 +196,7 @@ export {
   OImage,
   OInlinePlaceholder,
   OLink,
+  OModelViewer,
   OPlaceholder,
   OSelectionDecoration,
   OShortcut,
