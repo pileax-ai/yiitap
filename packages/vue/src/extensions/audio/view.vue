@@ -31,7 +31,7 @@
         <o-block-toolbar v-bind="props" @action="onAction" v-if="isEditable">
           <o-menubar-btn
             icon="subtitles"
-            :tooltip="tr('image.caption')"
+            :tooltip="tr('label.caption')"
             @click="onCaption"
             v-if="false"
           />

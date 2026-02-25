@@ -33,7 +33,7 @@ const { tr } = useI18n()
 const commands: Indexable = computed(() => {
   return {
     aiBlock: { icon: 'auto_awesome', tooltip: tr('editor.aiBlock') },
-    audio: { icon: 'music_cast', tooltip: tr('label.audio') },
+    audio: { icon: 'graphic_eq', tooltip: tr('label.audio') },
     blockMath: { icon: 'functions', tooltip: tr('editor.blockMath') },
     blockquote: { icon: 'format_quote_open', tooltip: tr('editor.blockquote') },
     bold: { icon: 'format_bold', tooltip: tr('editor.bold') },

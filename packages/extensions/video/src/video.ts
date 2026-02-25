@@ -31,7 +31,6 @@ export const Video = Node.create({
 
   addAttributes() {
     return {
-      // small, medium, large
       caption: {
         default: '',
         rendered: false,

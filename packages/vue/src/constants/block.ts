@@ -191,7 +191,7 @@ export const CommonBlocks: BlockOption[] = [
     color: BrandColor.teal,
   },
   {
-    label: 'label.model',
+    label: 'label.model3d',
     value: 'modelViewer',
     icon: '3d_rotation',
     tips: 'model',
@@ -264,7 +264,7 @@ export const BlockMenus: BlockOption[] = [
     icon: 'cached',
     tips: 'Mod+R',
     color: BrandColor.blue,
-    filter: 'audio,image,video,model',
+    filter: 'audio,image,video,modelViewer',
   },
   {
     label: 'label.color',

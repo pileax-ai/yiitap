@@ -159,11 +159,13 @@ export default function () {
       case 'linkUnset':
         focus.extendMarkRange('link').unsetLink().run()
         break
-      // case 'modelViewer':
-      // 	focus.setModelViewer({
-      // 		src: 'init',
-      // 	}).run()
-      // 	break
+      case 'modelViewer':
+        focus
+          .setModelViewer({
+            src: 'init',
+          })
+          .run()
+        break
       // case 'modelViewerUpdate':
       // 	focus.setModelViewer(options).run()
       // 	break

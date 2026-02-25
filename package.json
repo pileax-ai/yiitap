@@ -67,6 +67,7 @@
 			]
 		},
 		"overrides": {
+			"layout-base": "2.0.1",
 			"prosemirror-model": "1.25.4",
 			"prosemirror-state": "1.4.4",
 			"prosemirror-view": "1.41.6"

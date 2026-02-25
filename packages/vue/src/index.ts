@@ -14,8 +14,9 @@ const YiiEditorPlugin = {
 export { YiiEditor, YiiEditorPlugin }
 export * from './components'
 export * from './constants'
-export * from './hooks'
 export * from './extensions'
+export * from './hooks'
+export * from './utils'
 
 // Tiptap
 export * from '@tiptap/core'

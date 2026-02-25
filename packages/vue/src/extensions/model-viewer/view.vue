@@ -1,7 +1,7 @@
 <template>
   <o-node-view
     v-bind="props"
-    class="o-video-view"
+    class="o-model-viewer-view"
     :class="{
       readonly: !editor?.isEditable,
       init: src === 'init',
@@ -23,22 +23,38 @@
       </template>
 
       <o-block-placeholder
-        icon="videocam"
-        :placeholder="tr('label.videoAdd')"
+        icon="3d_rotation"
+        :placeholder="tr('label.model3dAdd')"
         v-if="src === 'init'"
       />
-      <div class="video-container" v-else>
-        <div class="video-cover"></div>
-        <o-block-toolbar v-bind="props" @action="onAction" v-if="isEditable">
+      <div class="model-viewer-container" v-else>
+        <o-block-toolbar v-bind="props" @action="onAction">
+          <template v-if="isEditable">
+            <o-menubar-btn
+              icon="subtitles"
+              :tooltip="tr('label.caption')"
+              @click="onCaption"
+            />
+          </template>
+
           <o-menubar-btn
-            icon="subtitles"
-            :tooltip="tr('label.caption')"
-            @click="onCaption"
+            icon="zoom_in"
+            :tooltip="tr('image.zoom')"
+            @click="onPreview"
           />
         </o-block-toolbar>
-        <video v-bind="node.attrs" draggable="true" data-drag-handle controls>
-          <source v-bind="node.attrs" />
-        </video>
+
+        <model-viewer
+          v-bind="node.attrs"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          seamless-poster
+          shadow-intensity="1"
+          camera-controls
+          enable-pan
+        >
+        </model-viewer>
+
         <div class="caption" @click="onCaption">
           <o-input
             ref="captionInput"
@@ -58,6 +74,26 @@
     <o-context-menu v-model="showContextMenu" :event="mouseEvent">
       <o-block-menu v-bind="props" @action="onAction" />
     </o-context-menu>
+
+    <o-dialog
+      v-model:show="dialogOptions.show"
+      v-bind="dialogOptions"
+      :title="tr('label.model3d')"
+      dialog-class="model-viewer-dialog"
+    >
+      <div class="model-viewer-container">
+        <model-viewer
+          v-bind="node.attrs"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          seamless-poster
+          shadow-intensity="1"
+          camera-controls
+          enable-pan
+        >
+        </model-viewer>
+      </div>
+    </o-dialog>
   </o-node-view>
 </template>
 
@@ -71,11 +107,13 @@ import {
   OBlockPopover,
   OBlockToolbar,
   OContextMenu,
+  ODialog,
   OInput,
   OMediaInput,
   OMenubarBtn,
   ONodeView,
 } from '../../components/index'
+import type { DialogOption } from '../../types/types'
 
 const props = defineProps(nodeViewProps)
 
@@ -86,6 +124,11 @@ const mouseEvent = ref({})
 const captionInput = ref(null)
 const showCaptionInput = ref(false)
 const showPopover = ref(false)
+
+const dialogOptions = ref<DialogOption>({
+  show: false,
+  fullscreen: true,
+})
 
 const caption = computed({
   get() {
@@ -125,6 +168,10 @@ function onCaptionInputBlur() {
   showCaptionInput.value = false
 }
 
+function onPreview() {
+  dialogOptions.value.show = true
+}
+
 function onClick() {
   if (src.value === 'init') {
     onShowPopover(true)
@@ -151,18 +198,17 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.o-video-view {
+.o-model-viewer-view {
   position: relative;
-  display: inline-block;
+  display: block;
   cursor: pointer;
   width: 100%;
-  margin: 3px 0;
+  margin: 6px 0;
 
-  .video-container {
+  .model-viewer-container {
     position: relative;
     overflow: hidden;
     min-height: 40px;
-    //background: red;
 
     .o-block-toolbar {
       position: absolute;
@@ -172,19 +218,10 @@ onMounted(() => {
       z-index: 1;
     }
 
-    .video-covers {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: red;
-      z-index: 0;
-    }
-
-    video {
-      max-height: 100%;
-      max-width: 100%;
+    model-viewer {
+      display: block;
+      width: 100%;
+      height: 400px;
       border-radius: 3px;
       object-fit: cover;
       vertical-align: middle;
@@ -214,6 +251,25 @@ onMounted(() => {
         font-size: 0.8rem;
         color: var(--yii-caption-color);
       }
+    }
+  }
+}
+
+.model-viewer-dialog {
+  .model-viewer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    model-viewer {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 3px;
+      object-fit: cover;
+      vertical-align: middle;
     }
   }
 }

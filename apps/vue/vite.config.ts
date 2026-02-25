@@ -6,7 +6,13 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => ['model-viewer'].includes(tag),
+        },
+      },
+    }),
     Inspect({
       build: true,
       outputDir: '.analysis/inspect',
@@ -40,37 +46,49 @@ export default defineConfig({
   },
   build: {
     sourcemap: false,
+    modulePreload: {
+      polyfill: false,
+    },
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('vue')) {
-              return 'vendor-framework' // Split React/Vue
-            }
-            if (
-              /(naive-ui|vooks|vue-uc|@css-render|@juggle\/resize-observer)/i.test(
-                id
-              )
-            ) {
+            if (/(naive-ui)/i.test(id)) {
               return 'vendor-ui'
             }
+            if (
+              id.includes('@google/model-viewer') ||
+              id.includes('@monogrid/gainmap-js') ||
+              id.includes('three')
+            ) {
+              return 'vendor-model-viewer'
+            }
+
             if (id.includes('@yiitap') || id.includes('@tiptap')) {
               return 'vendor-core'
             }
-            if (id.includes('lodash') || id.includes('moment')) {
+            if (id.includes('markdown-it') || id.includes('openai')) {
+              return 'vendor-extensions'
+            }
+            if (
+              id.includes('lodash') ||
+              id.includes('moment') ||
+              id.includes('highlight') ||
+              id.includes('chevrotain')
+            ) {
               return 'vendor-utils'
             }
             if (id.includes('katex')) {
               return 'vendor-katex'
             }
-            if (id.includes('mermaid')) {
+            if (id.includes('mermaid') || id.includes('d3')) {
               return 'vendor-mermaid'
-            }
-            if (id.includes('cytoscape')) {
-              return 'vendor-cytoscape'
             }
             if (id.includes('elk')) {
               return 'vendor-elk'
+            }
+            if (id.includes('cytoscape')) {
+              return 'vendor-cytoscape'
             }
             if (id.includes('prosemirror')) {
               return 'vendor-prosemirror'

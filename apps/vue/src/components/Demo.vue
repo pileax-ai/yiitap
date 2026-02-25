@@ -142,6 +142,7 @@ import {
   NSelect,
   NSwitch,
 } from 'naive-ui'
+import '@google/model-viewer'
 import {
   YiiEditor,
   ODocToc,
@@ -149,6 +150,7 @@ import {
   OMainMenu,
   InlineMath,
   OStarterKit,
+  removeHtmlAttributes,
 } from '@yiitap/vue'
 import type { Editor } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
@@ -186,7 +188,7 @@ const collabReady = ref(false)
 const editorOptions = computed(() => {
   const extensions = [
     OStarterKit.configure({
-      OTable: true,
+      UniqueID: true,
     }),
     InlineMath,
     'OAudio',
@@ -197,6 +199,7 @@ const editorOptions = computed(() => {
     'OColorHighlighter',
     'ODetails',
     'OImage',
+    'OModelViewer',
     'OMultiColumn',
     'OShortcut',
     'OVideo',
@@ -262,6 +265,7 @@ const editorOptions = computed(() => {
       'emoji',
       'aiBlock',
       'separator',
+      'modelViewer',
       'extension-dropdown',
     ],
     collab: {
@@ -286,6 +290,7 @@ const sourceList = computed(() => {
     { label: 'Diagram', value: 'diagram' },
     { label: 'Audio', value: 'audio' },
     { label: 'Image', value: 'image' },
+    { label: 'ModelViewer', value: 'modelViewer' },
     { label: 'MultiColumn', value: 'multiColumn' },
     { label: 'Table', value: 'table' },
   ]
@@ -384,8 +389,8 @@ function onUpdate({ editor }: { editor: Editor }) {
   // console.log(markdown)
 
   if (import.meta.env.DEV) {
-    // console.log(editor.getHTML())
-    // console.log(editor.getJSON())
+    console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
+    console.debug(editor.getJSON())
   }
 }
 

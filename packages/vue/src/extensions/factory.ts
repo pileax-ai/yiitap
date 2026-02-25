@@ -88,6 +88,7 @@ import {
   OImage,
   OInlinePlaceholder,
   OLink,
+  OModelViewer,
   OSelectionDecoration,
   OShortcut,
   OSlashCommand,
@@ -165,6 +166,7 @@ export interface ExtensionOptions {
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
   OLink: LinkOptions
+  OModelViewer: { HTMLAttributes?: Record<string, any> }
   OMultiColumn: MultiColumnOptions
   OColumnDropCursor: ColumnDropCursorOptions
   OShortcut: ShortcutOptions
@@ -251,11 +253,12 @@ export const extensionRegistry: {
   OCallout: (opts?) => OCallout.configure(opts),
   OCodeBlock: (opts?) => OCodeBlock.configure(opts),
   OColorHighlighter: (opts?) => OColorHighlighter.configure(opts),
+  OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
   OHorizontalRule: (opts?) => OHorizontalRule.configure(opts),
   OImage: (opts?) => OImage.configure(opts),
   OInlinePlaceholder: (opts?) => OInlinePlaceholder.configure(opts),
   OLink: (opts?) => OLink.configure({ openOnClick: false, ...opts }),
-  OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
+  OModelViewer: (opts?) => OModelViewer.configure(opts),
   OSelectionDecoration: (opts?) => OSelectionDecoration.configure(opts),
   OShortcut: (opts?) =>
     OShortcut.configure({

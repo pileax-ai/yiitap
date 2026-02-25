@@ -19,6 +19,9 @@
     <o-list hoverable clickable>
       <template v-for="(item, index) in options" :key="index">
         <o-divider v-if="item.separator" />
+        <div class="group o-tips" v-if="item.group && false">
+          {{ item.group }}
+        </div>
         <o-list-item
           :class="{ 'is-active': editor?.isActive(item.value) }"
           @click="onSelect(item.value)"
@@ -63,9 +66,22 @@ const popover = ref<InstanceType<typeof OPopover>>()
 const options = computed(() => {
   return [
     {
+      label: tr('editor.multiColumn'),
+      value: 'multiColumn',
+      icon: 'view_column',
+    },
+    {
+      label: tr('diagram.name'),
+      value: 'diagram',
+      icon: 'mermaid',
+      separator: true,
+    },
+    {
       label: tr('label.image'),
       value: 'image',
       icon: 'image',
+      group: tr('label.media'),
+      separator: true,
     },
     {
       label: tr('label.video'),
@@ -75,7 +91,12 @@ const options = computed(() => {
     {
       label: tr('label.audio'),
       value: 'audio',
-      icon: 'music_cast',
+      icon: 'graphic_eq',
+    },
+    {
+      label: tr('label.model3d'),
+      value: 'modelViewer',
+      icon: '3d_rotation',
     },
     {
       label: tr('editor.inlineMath'),
@@ -87,18 +108,6 @@ const options = computed(() => {
       label: tr('editor.blockMath'),
       value: 'blockMath',
       icon: 'functions',
-    },
-    {
-      label: tr('diagram.name'),
-      value: 'diagram',
-      icon: 'mermaid',
-      separator: true,
-    },
-    {
-      label: tr('editor.multiColumn'),
-      value: 'multiColumn',
-      icon: 'view_column',
-      separator: true,
     },
   ]
 })
