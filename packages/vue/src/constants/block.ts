@@ -326,12 +326,17 @@ export const AskAiBlocks: BlockOption[] = [
     },
     children: [
       {
-        label: 'language.chinese_simplified',
+        label: 'language.english',
+        value: 'English',
+        icon: 'language',
+      },
+      {
+        label: 'language.chineseSimplified',
         value: 'Simplified Chinese',
         icon: 'language',
       },
       {
-        label: 'language.chinese_traditional',
+        label: 'language.chineseTraditional',
         value: 'Traditional Chinese',
         icon: 'language',
       },
@@ -353,6 +358,41 @@ export const AskAiBlocks: BlockOption[] = [
       {
         label: 'language.korean',
         value: 'Korean',
+        icon: 'language',
+      },
+      {
+        label: 'language.portuguese',
+        value: 'Portuguese',
+        icon: 'language',
+      },
+      {
+        label: 'language.spanish',
+        value: 'Spanish',
+        icon: 'language',
+      },
+      {
+        label: 'language.russian',
+        value: 'Russian',
+        icon: 'language',
+      },
+      {
+        label: 'language.italian',
+        value: 'Italian',
+        icon: 'language',
+      },
+      {
+        label: 'language.vietnamese',
+        value: 'Vietnamese',
+        icon: 'language',
+      },
+      {
+        label: 'language.polish',
+        value: 'Polish',
+        icon: 'language',
+      },
+      {
+        label: 'language.indonesian',
+        value: 'Indonesian',
         icon: 'language',
       },
     ] as BlockOption[],

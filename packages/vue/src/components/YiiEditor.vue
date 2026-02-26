@@ -43,6 +43,7 @@
 /**
  * YiiEditor is a full-featured block-based editor for Vue.
  */
+
 defineOptions({ name: 'YiiEditor' })
 
 import {
@@ -57,6 +58,7 @@ import type { FocusPosition } from '@tiptap/core'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
+import type { AiOptions } from '@yiitap/core'
 
 import OMainMenu from './menus/OMainMenu.vue'
 import OBubbleMenu from './menus/OBubbleMenu.vue'
@@ -217,8 +219,8 @@ const props = defineProps({
     default: 'page',
     validator: (value: string) => ['page', 'full'].includes(value),
   },
-  aiOption: {
-    type: Object as PropType<AiOption>,
+  aiOptions: {
+    type: Object as PropType<AiOptions>,
     default: () => {},
   },
 
@@ -255,12 +257,12 @@ const { tr } = useI18n()
 const darkModeAlt = ref(false)
 const isEditable = ref(true)
 const localeAlt = ref('en')
-const aiOptionAlt = ref<AiOption>()
+const aiOptionsAlt = ref<AiOptions>()
 const ready = ref(false)
 provide('darkMode', darkModeAlt)
 provide('isEditable', isEditable)
 provide('locale', localeAlt)
-provide('aiOption', aiOptionAlt)
+provide('aiOptions', aiOptionsAlt)
 
 const customExtensions = computed(() => {
   return buildExtensions()
@@ -299,6 +301,7 @@ const bubbleMenuOptions = computed(() => {
   return {
     editor: editor.value,
     menu: props.bubbleMenu,
+    aiOptions: props.aiOptions,
   }
 })
 
@@ -389,9 +392,9 @@ watch(
 )
 
 watch(
-  () => props.aiOption,
+  () => props.aiOptions,
   (newValue) => {
-    aiOptionAlt.value = newValue
+    aiOptionsAlt.value = newValue
   },
   { deep: true }
 )
@@ -406,7 +409,7 @@ watch(
 
 onBeforeMount(() => {
   isEditable.value = props.editable
-  aiOptionAlt.value = props.aiOption
+  aiOptionsAlt.value = props.aiOptions
   darkModeAlt.value = props.darkMode
   localeAlt.value = props.locale
 })

@@ -17,7 +17,19 @@ export const getProviderProp = (name: string, prop: string) => {
   return provider ? provider[prop] : null
 }
 
+const WRITING_PROMPT = `
+# Role
+World-class Writing Expert and Editor.
+
+# Core Task
+Rewrite and optimize the user's input for clarity, flow, and impact while strictly adhering to the specified language and tone.
+
+# Constraints
+- Language: Respond ONLY in the language specified by: [LANG_CODE].
+- Formatting: Use Markdown for structure.
+- Output: Provide the optimized text directly. Do not include any meta-talk, explanations, suggestions, or introductory/concluding remarks.
+`
+
 export const Prompts: Indexable = {
-  writing:
-    'You are a professional writing assistant. Please answer in [LANGUAGE].',
+  writing: WRITING_PROMPT,
 }

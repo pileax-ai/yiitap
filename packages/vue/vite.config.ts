@@ -69,7 +69,6 @@ export default defineConfig({
         'lowlight',
         'markdown-it',
         'mermaid',
-        'openai',
         'yjs',
       ],
       output: {
@@ -88,7 +87,6 @@ export default defineConfig({
             mermaid: 'Mermaid',
             katex: 'Katex',
             'markdown-it': 'MarkdownIt',
-            openai: 'OpenAI',
           }
           if (map[id]) return map[id]
 

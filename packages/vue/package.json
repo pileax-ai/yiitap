@@ -101,7 +101,6 @@
 		"lowlight": "^3.3.0",
 		"markdown-it": "^14.1.1",
 		"mermaid": "^11.12.0",
-		"openai": "^4.88.0",
 		"vue": "^3.3.8"
 	},
 	"devDependencies": {
