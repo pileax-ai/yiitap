@@ -146,7 +146,7 @@ import {
 import { useAi, useI18n, useNodeView, useTheme, useTiptap } from '../../hooks'
 import { AiBlocks, getProviderProp, Prompts } from '../../constants'
 import { AiMessageChunks } from '../../constants/data'
-import {htmlToJSON, toJSON} from '../../utils/convert'
+import { htmlToJSON, toJSON } from '../../utils/convert'
 
 const props = defineProps(nodeViewProps)
 const { md } = useAi()
@@ -340,7 +340,6 @@ function setContent(pos: number, json: Record<string, any>) {
 
   scrollIntoView()
 }
-
 
 function scrollIntoView() {
   const content = props.node.content

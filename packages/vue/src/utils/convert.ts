@@ -8,7 +8,10 @@ export const toJSON = (editor: Editor, html: string): Record<string, any> => {
   return generateJSON(html, editor.extensionManager.extensions)
 }
 
-export const htmlToJSON = (editor: Editor, html: string): Record<string, any> => {
+export const htmlToJSON = (
+  editor: Editor,
+  html: string
+): Record<string, any> => {
   const element = document.createElement('div')
   element.innerHTML = html
 

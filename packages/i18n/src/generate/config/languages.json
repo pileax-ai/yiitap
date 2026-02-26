@@ -155,7 +155,7 @@
     "value": "tr-TR",
     "locale": "tr",
     "base": "en-US",
-    "prompt_name": "Türkçe",
+    "prompt_name": "Turkish",
     "example": "Selam!",
     "supported": false
   },

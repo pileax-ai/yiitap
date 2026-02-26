@@ -2,6 +2,7 @@
   <section class="o-ai-menu tiptap-toolbar" v-if="editor">
     <o-block-popover
       v-model="showPopover"
+      :offset="[-4, 10]"
       placement="bottom-start"
       tippy-class="ai-menu-popover"
       content-class=""
@@ -18,20 +19,27 @@
         </div>
         <section class="view-output" v-if="view === 'output'">
           <div class="action-container">
-            <div>
+            <div style="display: flex">
               <o-icon name="auto_awesome" class="o-tips" />
+              <div style="padding: 0 4px">
+                {{ tr(selectItem.label) }}
+
+                <span v-if="selectItem.child?.label"
+                  >: {{ tr(selectItem.child.label) }}
+                </span>
+              </div>
             </div>
             <div class="actions">
               <o-common-btn
                 icon="arrow_back"
                 icon-class="rotate-90"
-                tooltip="Confirm"
+                :tooltip="tr('label.confirm')"
                 :loading="generating"
                 @click="onConfirm"
               />
               <o-common-btn
                 icon="close"
-                tooltip="Cancel"
+                :tooltip="tr('label.cancel')"
                 @click="onCancel"
                 v-if="!generating"
               />
@@ -105,7 +113,7 @@ const emit = defineEmits(['confirm'])
 
 const { onStreamingChatCompletion } = props.aiOptions
 const { md } = useAi()
-const { languageName, tr } = useI18n()
+const { locale, tr } = useI18n()
 const inputRef = ref<InstanceType<typeof OInput>>()
 const showPopover = ref(false)
 const filterTerm = ref('')
@@ -114,9 +122,10 @@ const view = ref('main')
 const prompt = ref('')
 const generating = ref(false)
 const isDebug = ref(false)
+const selectItem = ref<Indexable>({})
 
 const systemMessage = computed((): ChatMessage => {
-  const prompt = Prompts.writing.replace('[LANGUAGE]', languageName.value)
+  const prompt = Prompts.writing.replace('[LANG_CODE]', locale.value)
   return {
     role: 'system',
     content: prompt,
@@ -125,12 +134,17 @@ const systemMessage = computed((): ChatMessage => {
 const messages = ref<ChatMessage[]>([
   {
     role: 'system',
-    content: 'You are an assistant. Please answer in [LANGUAGE].',
+    content: '',
   },
 ])
 
 const items = computed(() => {
-  return AskAiBlocks.filter((item) => item.value.indexOf(filterTerm.value) >= 0)
+  const term = filterTerm.value.toLowerCase()
+  return AskAiBlocks.filter(
+    (item) =>
+      item.value.toLowerCase().indexOf(term) >= 0 ||
+      item.tips?.indexOf(term) >= 0
+  )
 })
 
 function getSelectedText() {
@@ -160,6 +174,10 @@ function onClick(item: Indexable, child?: Indexable) {
       break
   }
   filterTerm.value = tr(item.label)
+  selectItem.value = {
+    ...item,
+    child: child,
+  }
   onGenerate()
 
   return true
