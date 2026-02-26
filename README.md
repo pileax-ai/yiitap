@@ -36,7 +36,7 @@ Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, buil
 - [Live Demo](https://yiitap.pileax.ai/demo/vue)
 - Full Example: [Live](https://pileax-ai.github.io/yiitap/) | [Source](https://github.com/pileax-ai/yiitap/blob/main/apps/vue/src/components/Demo.vue)
 
-For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an [issue](issues/new/choose).
+For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an [issue](https://github.com/pileax-ai/yiitap/issues/new/choose).
 
 ## Screenshots
 

@@ -36,7 +36,7 @@ Yiitap 是一个AI驱动、Notion风格的块级编辑器。🔥
 - [在线演示](https://yiitap.pileax.ai/demo/vue)
 - 完整示例: [在线查看](https://pileax-ai.github.io/yiitap/) | [源码](https://github.com/pileax-ai/yiitap/blob/main/apps/vue/src/components/Demo.vue)
 
-如需更详细的信息，请务必查看我们的[文档](https://yiitap.pileax.ai/guide/getting-started)。如果您在使用过程中遇到任何问题或有改进建议，欢迎提交 [issue](issues/new/choose)。
+如需更详细的信息，请务必查看我们的[文档](https://yiitap.pileax.ai/guide/getting-started)。如果您在使用过程中遇到任何问题或有改进建议，欢迎提交 [issue](https://github.com/pileax-ai/yiitap/issues/new/choose)。
 
 ## 截图
 
