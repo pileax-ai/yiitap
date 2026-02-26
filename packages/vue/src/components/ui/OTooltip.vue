@@ -10,6 +10,7 @@
       v-if="isVisible"
       ref="contentRef"
       class="o-tooltip-content"
+      @click.stop.prevent
     >
       <slot></slot>
       <div ref="arrowRef" class="o-tooltip-arrow"></div>
