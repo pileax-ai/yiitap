@@ -73,7 +73,20 @@ const eventHandlers = computed(() => {
     handlers.focusout = hide
   }
   if (props.trigger.includes('click')) {
-    handlers.click = () => (isVisible.value ? hide() : show())
+    handlers.click = () => {
+      // If already visible, hide immediately. Otherwise, show.
+      if (isVisible.value) {
+        hide(true)
+      } else {
+        show()
+      }
+    }
+  } else {
+    // Even if 'click' is not in props.trigger,
+    // we listen to it to allow "click to close" while in hover mode
+    handlers.click = () => {
+      if (isVisible.value) hide(true)
+    }
   }
   return handlers
 })
@@ -126,15 +139,22 @@ const show = () => {
   }, props.delay)
 }
 
-const hide = () => {
+const hide = (immediate = false) => {
   if (timer) clearTimeout(timer)
-  timer = setTimeout(() => {
+
+  const performHide = () => {
     isVisible.value = false
     if (cleanup) {
       cleanup()
       cleanup = null
     }
-  }, 150) // Small buffer for "interactive" feel
+  }
+
+  if (immediate) {
+    performHide()
+  } else {
+    timer = setTimeout(performHide, 150) // Keep the buffer for hover
+  }
 }
 
 onUnmounted(() => {
