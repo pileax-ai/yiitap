@@ -1,5 +1,38 @@
 # @yiitap/vue
 
+## 0.16.0
+
+### Minor Changes
+
+- 43b35d2: menu buttons and default menus config
+- 1805f92: model-viewer extension
+- 7c4e02b: ai options, ai block
+
+### Patch Changes
+
+- Updated dependencies [43b35d2]
+- Updated dependencies [1805f92]
+- Updated dependencies [7c4e02b]
+  - @yiitap/vue@0.16.0
+  - @yiitap/extension-model-viewer@0.16.0
+  - @yiitap/extension-video@0.16.0
+  - @yiitap/i18n@0.16.0
+  - @yiitap/extension-ai-block@0.16.0
+  - @yiitap/core@0.16.0
+  - @yiitap/extension-callout@0.16.0
+  - @yiitap/extension-char-command@0.16.0
+  - @yiitap/extension-color-highlighter@0.16.0
+  - @yiitap/extension-image@0.16.0
+  - @yiitap/extension-inline-placeholder@0.16.0
+  - @yiitap/extension-multi-column@0.16.0
+  - @yiitap/extension-placeholder@0.16.0
+  - @yiitap/extension-selection-decoration@0.16.0
+  - @yiitap/extension-shortcut@0.16.0
+  - @yiitap/extension-table@0.16.0
+  - @yiitap/extension-table-wrapper@0.16.0
+  - @yiitap/extension-task-item@0.16.0
+  - @yiitap/util-emoji@0.16.0
+
 ## 0.15.0
 
 ### Minor Changes

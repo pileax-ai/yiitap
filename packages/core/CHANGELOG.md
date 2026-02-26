@@ -1,5 +1,11 @@
 # @yiitap/core
 
+## 0.16.0
+
+### Minor Changes
+
+- 7c4e02b: ai options, ai block
+
 ## 0.15.0
 
 ### Minor Changes

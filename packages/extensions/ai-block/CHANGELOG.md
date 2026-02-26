@@ -1,5 +1,16 @@
 # @yiitap/extension-ai-block
 
+## 0.16.0
+
+### Minor Changes
+
+- 7c4e02b: ai options, ai block
+
+### Patch Changes
+
+- Updated dependencies [7c4e02b]
+  - @yiitap/core@0.16.0
+
 ## 0.15.0
 
 ### Minor Changes

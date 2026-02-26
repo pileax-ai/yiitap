@@ -1,5 +1,12 @@
 # @yiitap/i18n
 
+## 0.16.0
+
+### Minor Changes
+
+- 1805f92: model-viewer extension
+- 7c4e02b: ai options, ai block
+
 ## 0.15.0
 
 ### Minor Changes
