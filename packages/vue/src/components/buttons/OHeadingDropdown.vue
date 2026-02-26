@@ -1,5 +1,5 @@
 <template>
-  <o-popover
+  <o-popover-new
     ref="popover"
     class="o-simple-command-btn"
     content-class="dropdown"
@@ -33,7 +33,7 @@
         </o-list-item>
       </template>
     </o-list>
-  </o-popover>
+  </o-popover-new>
 </template>
 
 <script setup lang="ts">
@@ -45,7 +45,7 @@ import {
   OIcon,
   OList,
   OListItem,
-  OPopover,
+  OPopoverNew,
 } from '../index'
 
 import useI18n from '../../hooks/useI18n'
