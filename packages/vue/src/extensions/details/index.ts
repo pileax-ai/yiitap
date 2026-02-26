@@ -53,8 +53,8 @@ const ODetails = Details.extend<ODetailsOptions>({
             ),
           ])
 
-          // Replace current node to blockquote
-          tr.replaceRangeWith(blockStart, blockEnd, detailsNode)
+          // Replace current node to details
+          tr.replaceRangeWith(blockStart, blockEnd - 1, detailsNode)
 
           // Selection
           const selection = TextSelection.near(tr.doc.resolve(blockStart + 2))

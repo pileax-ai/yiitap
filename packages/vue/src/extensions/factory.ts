@@ -242,16 +242,16 @@ export const extensionRegistry: {
   OAiBlock: (opts?) => OAiBlock.configure(opts),
   OAudio: (opts?) => OAudio.configure(opts),
   OBlockMath: (opts?) => OBlockMath.configure(opts),
+  OBlockquote: (opts?) =>
+    OBlockquote.configure({ triggerCharacters: ['"', '“', '”'], ...opts }),
+  OCallout: (opts?) => OCallout.configure(opts),
+  OCodeBlock: (opts?) => OCodeBlock.configure(opts),
   OColon: (opts?) =>
     OColonCommand.configure({ suggestion: ColonSuggestion, ...opts }),
   OSlash: (opts?) =>
     OSlashCommand.configure({ suggestion: SlashSuggestion, ...opts }),
   OSlashZh: (opts?) =>
     OSlashZhCommand.configure({ suggestion: SlashSuggestion, ...opts }),
-  OBlockquote: (opts?) =>
-    OBlockquote.configure({ triggerCharacters: ['"', '“', '”'], ...opts }),
-  OCallout: (opts?) => OCallout.configure(opts),
-  OCodeBlock: (opts?) => OCodeBlock.configure(opts),
   OColorHighlighter: (opts?) => OColorHighlighter.configure(opts),
   OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
   OHorizontalRule: (opts?) => OHorizontalRule.configure(opts),
