@@ -7,7 +7,7 @@ import { MultiColumn, MultiColumnZh } from './multi-column'
 import { Table, TableZh } from './table'
 
 const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
-  empty: { en: '', zh: '' },
+  empty: { en: '<p></p>', zh: '<p></p>' },
   audio: { en: Audio, zh: AudioZh },
   diagram: { en: Diagram, zh: Diagram },
   image: { en: Image, zh: ImageZh },

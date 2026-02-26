@@ -270,6 +270,15 @@ importers:
         specifier: workspace:*
         version: link:../../core
 
+  packages/extensions/blockquote:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.20.0
+        version: 3.20.0(@tiptap/pm@3.20.0)
+      '@tiptap/extension-blockquote':
+        specifier: ^3.20.0
+        version: 3.20.0(@tiptap/core@3.20.0(@tiptap/pm@3.20.0))
+
   packages/extensions/callout:
     dependencies:
       '@tiptap/core':
@@ -504,9 +513,6 @@ importers:
       '@tiptap/extension-audio':
         specifier: ^3.20.0
         version: 3.20.0(@tiptap/core@3.20.0(@tiptap/pm@3.20.0))
-      '@tiptap/extension-blockquote':
-        specifier: ^3.20.0
-        version: 3.20.0(@tiptap/core@3.20.0(@tiptap/pm@3.20.0))
       '@tiptap/extension-bubble-menu':
         specifier: ^3.20.0
         version: 3.20.0(@tiptap/core@3.20.0(@tiptap/pm@3.20.0))(@tiptap/pm@3.20.0)
@@ -609,6 +615,9 @@ importers:
       '@yiitap/extension-ai-block':
         specifier: workspace:*
         version: link:../extensions/ai-block
+      '@yiitap/extension-blockquote':
+        specifier: workspace:*
+        version: link:../extensions/blockquote
       '@yiitap/extension-callout':
         specifier: workspace:*
         version: link:../extensions/callout

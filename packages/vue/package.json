@@ -39,7 +39,6 @@
 	"dependencies": {
 		"@floating-ui/dom": "^1.7.4",
 		"@tiptap/core": "^3.20.0",
-		"@tiptap/extension-blockquote": "^3.20.0",
 		"@tiptap/extension-bubble-menu": "^3.20.0",
 		"@tiptap/extension-code-block-lowlight": "^3.20.0",
 		"@tiptap/extension-collaboration": "^3.20.0",
@@ -71,6 +70,7 @@
 		"@tiptap/vue-3": "^3.20.0",
 		"@yiitap/core": "workspace:*",
 		"@yiitap/extension-ai-block": "workspace:*",
+		"@yiitap/extension-blockquote": "workspace:*",
 		"@yiitap/extension-callout": "workspace:*",
 		"@yiitap/extension-char-command": "workspace:*",
 		"@yiitap/extension-color-highlighter": "workspace:*",
