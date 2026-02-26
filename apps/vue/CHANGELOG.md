@@ -1,5 +1,15 @@
 # app-vue
 
+## 0.16.1
+
+### Patch Changes
+
+- c80a3ec: add triggerCharacters option to blockquote
+- Updated dependencies [c80a3ec]
+  - @yiitap/vue@0.16.1
+  - @yiitap/i18n@0.16.1
+  - @yiitap/util-emoji@0.16.1
+
 ## 0.16.0
 
 ### Minor Changes

@@ -1,7 +1,7 @@
 {
 	"name": "@yiitap/extension-blockquote",
 	"description": "blockquote extension",
-	"version": "0.16.0",
+	"version": "0.16.1",
 	"private": false,
 	"author": {
 		"name": "Yiitap",
@@ -33,8 +33,8 @@
 		"test-ci": "vitest --run"
 	},
 	"dependencies": {
-    "@tiptap/extension-blockquote": "^3.20.0"
-  },
+		"@tiptap/extension-blockquote": "^3.20.0"
+	},
 	"peerDependencies": {
 		"@tiptap/core": "^3.20.0"
 	},
