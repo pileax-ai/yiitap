@@ -2,9 +2,19 @@
  * Convert
  */
 import { Editor, generateJSON } from '@tiptap/core'
+import { DOMParser } from '@tiptap/pm/model'
 
 export const toJSON = (editor: Editor, html: string): Record<string, any> => {
   return generateJSON(html, editor.extensionManager.extensions)
+}
+
+export const htmlToJSON = (editor: Editor, html: string): Record<string, any> => {
+  const element = document.createElement('div')
+  element.innerHTML = html
+
+  const doc = DOMParser.fromSchema(editor.schema).parse(element)
+
+  return doc.toJSON()
 }
 
 export const systemKeymap = () => {

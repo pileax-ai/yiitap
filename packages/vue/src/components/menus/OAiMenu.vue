@@ -74,7 +74,7 @@ import type { AiOptions, ChatMessage } from '@yiitap/core'
 import { useAi, useI18n } from '../../hooks'
 import { AskAiBlocks, Prompts } from '../../constants'
 import { AiMessageChunks } from '../../constants/data'
-import { toJSON } from '../../utils/convert'
+import { htmlToJSON } from '../../utils/convert'
 
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 
@@ -103,6 +103,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['confirm'])
 
+const { onStreamingChatCompletion } = props.aiOptions
 const { md } = useAi()
 const { languageName, tr } = useI18n()
 const inputRef = ref<InstanceType<typeof OInput>>()
@@ -170,7 +171,7 @@ function onCancel() {
 }
 
 function onConfirm() {
-  const json = toJSON(props.editor, output.value)
+  const json = htmlToJSON(props.editor, output.value)
   let totalSize = 0
   for (const nodeJson of json.content) {
     const newNode = ProseMirrorNode.fromJSON(props.editor.schema, nodeJson)
@@ -212,14 +213,14 @@ async function onAiGenerate() {
     messages.value.unshift(systemMessage.value)
   }
 
-  if (!props.aiOptions.onStreamingChatCompletion) {
+  if (!onStreamingChatCompletion) {
     OToast.error('AI Completion method not implemented.')
     generating.value = false
     return
   }
 
   try {
-    const fullMessage = await props.aiOptions.onStreamingChatCompletion(
+    const fullMessage = await onStreamingChatCompletion(
       messages.value,
       (chunk) => {
         aiMessage += chunk

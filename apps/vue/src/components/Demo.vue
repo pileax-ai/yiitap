@@ -397,8 +397,8 @@ function onUpdate({ editor }: { editor: Editor }) {
   // console.log(markdown)
 
   if (import.meta.env.DEV) {
-    console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
-    console.debug(editor.getJSON())
+    // console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
+    // console.debug(editor.getJSON())
   }
 }
 

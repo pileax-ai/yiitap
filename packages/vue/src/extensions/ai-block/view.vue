@@ -126,6 +126,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 import { NodeViewContent, nodeViewProps } from '@tiptap/vue-3'
 import type { ChatMessage } from '@yiitap/core'
 import {
@@ -145,7 +146,7 @@ import {
 import { useAi, useI18n, useNodeView, useTheme, useTiptap } from '../../hooks'
 import { AiBlocks, getProviderProp, Prompts } from '../../constants'
 import { AiMessageChunks } from '../../constants/data'
-import { toJSON } from '../../utils/convert'
+import {htmlToJSON, toJSON} from '../../utils/convert'
 
 const props = defineProps(nodeViewProps)
 const { md } = useAi()
@@ -155,7 +156,7 @@ const { theme } = useTheme()
 const { isEditable } = useTiptap()
 
 const { getPos } = props
-const { onStreamingChatCompletion } = props.extension.options
+const { provider, onStreamingChatCompletion } = props.extension.options
 const inputRef = ref(null)
 const promptInput = ref('')
 const showContextMenu = ref(false)
@@ -166,6 +167,9 @@ const updateView = ref('')
 const updateInputRef = ref(null)
 const generating = ref(false)
 const isDebug = ref(false)
+
+let lastUpdateTime = 0
+const UPDATE_INTERVAL = 100
 
 const systemMessage = computed((): ChatMessage => {
   const prompt = Prompts.writing.replace('[LANGUAGE]', languageName.value)
@@ -235,7 +239,7 @@ function onUpdate() {
 }
 
 function onGenerate() {
-  // aiProvider.value = aiOption.value.provider
+  aiProvider.value = provider.provider
   prompt.value = promptInput.value
   time.value = Date.now()
   generating.value = true
@@ -274,19 +278,32 @@ async function onAiGenerate() {
           ...messages.value.slice(0, -1),
           { role: 'assistant', content: aiMessage },
         ]
-        const json = toJSON(props.editor, md.render(aiMessage))
-        setContent(pos, json)
+
+        // Update
+        const now = Date.now()
+        if (now - lastUpdateTime > UPDATE_INTERVAL) {
+          updateEditor(pos, aiMessage)
+          lastUpdateTime = now
+        }
       }
     )
-    // messages.value.push({role: 'assistant', content: fullMessage})
+
+    // Make sure last update
+    updateEditor(pos, aiMessage)
   } catch (e) {
     // Remove last use message if failed
     messages.value.pop()
     console.error(e)
     OToast.error(tr('ai.error'))
-    // OFloatingToast.error(tr('ai.error'))
   }
   generating.value = false
+}
+
+function updateEditor(pos: number, fullMarkdown: string) {
+  const renderedHtml = md.render(fullMarkdown)
+  const json = htmlToJSON(props.editor, renderedHtml)
+
+  setContent(pos, json)
 }
 
 async function onAiGenerateMock() {
@@ -324,11 +341,12 @@ function setContent(pos: number, json: Record<string, any>) {
   scrollIntoView()
 }
 
+
 function scrollIntoView() {
   const content = props.node.content
   const lastContent = content.lastChild
-  if (lastContent && lastContent.attrs['data-id']) {
-    const dataId = lastContent.attrs['data-id']
+  if (lastContent && lastContent.attrs['id']) {
+    const dataId = lastContent.attrs['id']
     const element = document.querySelector(`[data-id="${dataId}"]`)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'center' })
