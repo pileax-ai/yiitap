@@ -1,6 +1,6 @@
-# Yiitap
+**English** | [简体中文](README_zh.md)
 
-Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, built on top of [tiptap](https://tiptap.dev).🔥
+<h1 align="center">Yiitap</h1>
 
 <p align="center">
     <a href="https://github.com/pileax-ai/yiitap/actions/workflows/build.yml" alt="Build Status">
@@ -13,7 +13,10 @@ Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, buil
         <img src="https://img.shields.io/github/commit-activity/m/yiitap/yiitap" /></a>
     <a href="https://github.com/pileax-ai/yiitap/blob/main/LICENSE" alt="License">
         <img src="https://img.shields.io/npm/l/@yiitap/vue.svg" /></a>
+    <a href="https://github.com/pileax-ai/yiitap/stargazers"><img src="https://img.shields.io/github/stars/pileax-ai/yiitap" alt="stars"></a>
 </p>
+
+Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, built on top of [tiptap](https://tiptap.dev).🔥
 
 ## Features
 
@@ -33,27 +36,12 @@ Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, buil
 - [Live Demo](https://yiitap.pileax.ai/demo/vue)
 - Full Example: [Live](https://pileax-ai.github.io/yiitap/) | [Source](https://github.com/pileax-ai/yiitap/blob/main/apps/vue/src/components/Demo.vue)
 
-For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an issue.
+For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an [issue](issues/new/choose).
 
 ## Screenshots
 
 ![Screenshot](docs/screenshots/screenshot.gif)
 
-## Development
-### Install dependencies
-```shell
-pnpm install
-```
-
-### Run demo
-```shell
-pnpm dev
-```
-
-### Build
-```shell
-pnpm build
-```
 
 ## Contributing
 For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTING.md). Contributions are welcome and will be fully credited.
@@ -67,7 +55,7 @@ For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTI
 ## Acknowledgements
 
 - [Tiptap](https://github.com/ueberdosis/tiptap) & [ProseMirror](https://github.com/ProseMirror/prosemirror): Yiitap is built on top of Tiptap and ProseMirror.
-- [BlockNote](https://github.com/TypeCellOS/BlockNote): A React Rich Text Editor that's block-based (Notion style) and extensible..
+- [BlockNote](https://github.com/TypeCellOS/BlockNote): A React Rich Text Editor that's block-based and extensible..
 
 ## License
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
