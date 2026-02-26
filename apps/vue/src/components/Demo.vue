@@ -148,19 +148,23 @@ import {
   ODocToc,
   OIcon,
   OMainMenu,
-  InlineMath,
+  OAiBlock,
   OStarterKit,
   removeHtmlAttributes,
+  type AiOptions,
 } from '@yiitap/vue'
 import type { Editor } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
 import { getData } from '@/data'
+import useAi from '@/hooks/useAi'
 import VersionBadge from './VersionBadge.vue'
 import 'katex/dist/katex.min.css'
 
 const emit = defineEmits(['mode'])
+
+const { aiOption, onStreamingChatCompletion } = useAi()
 
 const yiiEditor = ref<InstanceType<typeof YiiEditor>>()
 const tocRef = ref<InstanceType<typeof ODocToc>>()
@@ -168,10 +172,6 @@ const locale = ref('en-US')
 const darkMode = ref(false)
 const editable = ref(true)
 const source = ref('default')
-const aiOption = ref<AiOption>({
-  provider: 'deepseek',
-  apiKey: '',
-})
 const showDrawer = ref(false)
 provide('locale', locale)
 
@@ -185,16 +185,25 @@ const providerUrl = ref('ws://localhost:9621')
 const providerToken = ref('')
 const collabReady = ref(false)
 
+const aiOptions = computed(() => {
+  return {
+    provider: {
+      provider: aiOption.value.provider,
+    },
+    onStreamingChatCompletion: onStreamingChatCompletion,
+  } as AiOptions
+})
+
 const editorOptions = computed(() => {
   const extensions = [
     OStarterKit.configure({
       UniqueID: true,
     }),
-    InlineMath,
+    OAiBlock.configure(aiOptions.value),
+    'InlineMath',
+    'Markdown',
     'OAudio',
     'OColon',
-    'Markdown',
-    'OAiBlock',
     'OBlockMath',
     'OColorHighlighter',
     'ODetails',
@@ -226,8 +235,7 @@ const editorOptions = computed(() => {
   }
 
   return {
-    // title: true,
-    aiOption: aiOption.value,
+    aiOptions: aiOptions.value,
     locale: locale.value,
     darkMode: darkMode.value,
     editable: editable.value,

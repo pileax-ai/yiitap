@@ -1,7 +1,12 @@
 <template>
   <section v-if="editor">
     <bubble-menu :editor="editor" :should-show="shouldShow" :options="options">
-      <o-ai-menu :editor="editor" @confirm="onAiConfirm" v-if="showAi" />
+      <o-ai-menu
+        :editor="editor"
+        :ai-options="aiOptions"
+        @confirm="onAiConfirm"
+        v-if="showAi"
+      />
       <o-inline-math-menu :editor="editor" v-else-if="showInlineMath" />
       <section class="tiptap-toolbar" :class="menuClass" v-else>
         <template v-if="showBack">
@@ -33,7 +38,7 @@
 /**
  * @see https://tiptap.dev/docs/editor/extensions/functionality/bubble-menu
  */
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, type PropType } from 'vue'
 import { Editor, getMarkRange, isTextSelection } from '@tiptap/core'
 import { BubbleMenu } from '@tiptap/vue-3/menus'
 import {
@@ -52,6 +57,7 @@ import {
   TableBubble,
 } from '../../constants/menu'
 import { ODivider, OMenubarBtn, OAiMenu, OInlineMathMenu } from '../index'
+import type { AiOptions } from '@yiitap/core'
 
 const props = defineProps({
   editor: {
@@ -72,6 +78,10 @@ const props = defineProps({
   menuClass: {
     type: String,
     default: ``,
+  },
+  aiOptions: {
+    type: Object as PropType<AiOptions>,
+    default: () => {},
   },
 })
 const { tr } = useI18n()

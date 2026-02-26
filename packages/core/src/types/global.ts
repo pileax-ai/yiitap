@@ -30,20 +30,6 @@ declare global {
     children?: BlockOption[]
   }
 
-  interface AiOption {
-    provider: string
-    baseURL?: string
-    apiKey: string
-    config?: Indexable
-  }
-
-  type ChatMessageRole = 'system' | 'user' | 'assistant'
-
-  interface ChatMessage {
-    role: ChatMessageRole
-    content: string
-  }
-
   interface EditorImage {
     pos: number
     attrs: Record<string, any>

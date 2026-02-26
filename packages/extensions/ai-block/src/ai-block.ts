@@ -1,13 +1,8 @@
-import {
-  Node,
-  findParentNode,
-  mergeAttributes,
-  JSONContent,
-} from '@tiptap/core'
+import { Node, mergeAttributes } from '@tiptap/core'
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
-import { TextSelection } from '@tiptap/pm/state'
+import type { AiOptions } from '@yiitap/core'
 
-export interface AiBlockOptions {
+export interface AiBlockOptions extends AiOptions {
   HTMLAttributes: Record<string, any>
 }
 
@@ -45,6 +40,10 @@ export const AiBlock = Node.create<AiBlockOptions>({
 
   addOptions() {
     return {
+      provider: {
+        provider: '',
+      },
+      onStreamingChatCompletion: undefined,
       HTMLAttributes: {},
     }
   },

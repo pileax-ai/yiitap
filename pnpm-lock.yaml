@@ -266,6 +266,9 @@ importers:
       '@tiptap/pm':
         specifier: ^3.20.0
         version: 3.20.0
+      '@yiitap/core':
+        specifier: workspace:*
+        version: link:../../core
 
   packages/extensions/callout:
     dependencies:
@@ -669,9 +672,6 @@ importers:
       mermaid:
         specifier: ^11.12.0
         version: 11.12.3
-      openai:
-        specifier: ^4.88.0
-        version: 4.104.0(encoding@0.1.13)(ws@8.19.0)
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7

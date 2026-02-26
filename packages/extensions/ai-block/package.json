@@ -35,7 +35,8 @@
 	"dependencies": {},
 	"peerDependencies": {
 		"@tiptap/core": "^3.20.0",
-		"@tiptap/pm": "^3.20.0"
+		"@tiptap/pm": "^3.20.0",
+		"@yiitap/core": "workspace:*"
 	},
 	"devDependencies": {}
 }

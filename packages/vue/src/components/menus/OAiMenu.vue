@@ -68,8 +68,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, type PropType } from 'vue'
 import { Editor } from '@tiptap/core'
+import type { AiOptions, ChatMessage } from '@yiitap/core'
 import { useAi, useI18n } from '../../hooks'
 import { AskAiBlocks, Prompts } from '../../constants'
 import { AiMessageChunks } from '../../constants/data'
@@ -95,10 +96,14 @@ const props = defineProps({
     type: String,
     default: ``,
   },
+  aiOptions: {
+    type: Object as PropType<AiOptions>,
+    default: () => {},
+  },
 })
 const emit = defineEmits(['confirm'])
 
-const { md, aiOption, createStreamingChatCompletion } = useAi()
+const { md } = useAi()
 const { languageName, tr } = useI18n()
 const inputRef = ref<InstanceType<typeof OInput>>()
 const showPopover = ref(false)
@@ -207,8 +212,14 @@ async function onAiGenerate() {
     messages.value.unshift(systemMessage.value)
   }
 
+  if (!props.aiOptions.onStreamingChatCompletion) {
+    OToast.error('AI Completion method not implemented.')
+    generating.value = false
+    return
+  }
+
   try {
-    const fullMessage = await createStreamingChatCompletion(
+    const fullMessage = await props.aiOptions.onStreamingChatCompletion(
       messages.value,
       (chunk) => {
         aiMessage += chunk

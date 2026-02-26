@@ -127,6 +127,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { NodeViewContent, nodeViewProps } from '@tiptap/vue-3'
+import type { ChatMessage } from '@yiitap/core'
 import {
   OBlockList,
   OBlockMenu,
@@ -147,13 +148,14 @@ import { AiMessageChunks } from '../../constants/data'
 import { toJSON } from '../../utils/convert'
 
 const props = defineProps(nodeViewProps)
-const { md, aiOption, createStreamingChatCompletion } = useAi()
+const { md } = useAi()
 const { languageName, tr } = useI18n()
 const { isFocused, bind, unbind, checkFocus } = useNodeView()
 const { theme } = useTheme()
 const { isEditable } = useTiptap()
 
 const { getPos } = props
+const { onStreamingChatCompletion } = props.extension.options
 const inputRef = ref(null)
 const promptInput = ref('')
 const showContextMenu = ref(false)
@@ -233,7 +235,7 @@ function onUpdate() {
 }
 
 function onGenerate() {
-  aiProvider.value = aiOption.value.provider
+  // aiProvider.value = aiOption.value.provider
   prompt.value = promptInput.value
   time.value = Date.now()
   generating.value = true
@@ -257,10 +259,16 @@ async function onAiGenerate() {
     messages.value.unshift(systemMessage.value)
   }
 
+  if (!onStreamingChatCompletion) {
+    OToast.error('AI Completion method not implemented.')
+    generating.value = false
+    return
+  }
+
   try {
-    const fullMessage = await createStreamingChatCompletion(
+    const fullMessage = await onStreamingChatCompletion(
       messages.value,
-      (chunk) => {
+      (chunk: string) => {
         aiMessage += chunk
         messages.value = [
           ...messages.value.slice(0, -1),
