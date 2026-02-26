@@ -141,7 +141,6 @@ import {
   OBtn,
   OBtnGroup,
   OToast,
-  OFloatingToast,
 } from '../../components'
 import { useAi, useI18n, useNodeView, useTheme, useTiptap } from '../../hooks'
 import { AiBlocks, getProviderProp, Prompts } from '../../constants'
