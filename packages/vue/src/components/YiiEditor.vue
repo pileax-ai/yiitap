@@ -338,6 +338,16 @@ function buildExtensions() {
     OPlaceholder.configure({
       includeChildren: true,
       placeholder: ({ editor, node, pos }) => {
+        const $pos = editor.state.doc.resolve(pos)
+
+        // Do NOT show inside table
+        for (let d = $pos.depth; d > 0; d--) {
+          const ancestorName = $pos.node(d).type.name
+          if (['tableCell', 'tableHeader', 'table'].includes(ancestorName)) {
+            return ''
+          }
+        }
+
         if (node.type.name === 'heading') {
           const level = node.attrs.level
           return pos > 0 ? `H${level}` : tr('label.untitled')

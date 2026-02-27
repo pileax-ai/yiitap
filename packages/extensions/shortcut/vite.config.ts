@@ -29,6 +29,7 @@ export default mergeConfig(
           '@tiptap/markdown',
           '@tiptap/pm/model',
           '@tiptap/pm/state',
+          '@tiptap/pm/tables',
           '@tiptap/extension-document',
         ],
         output: {
@@ -44,6 +45,7 @@ export default mergeConfig(
             '@tiptap/markdown': 'TiptapMarkdown',
             '@tiptap/pm/model': 'TiptapPmModel',
             '@tiptap/pm/state': 'TiptapPmState',
+            '@tiptap/pm/tables': 'TiptapPmTables',
             '@tiptap/extension-document': 'TiptapExtensionDocument',
           },
         },

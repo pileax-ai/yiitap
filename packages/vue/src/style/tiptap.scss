@@ -338,8 +338,9 @@
 		padding: 20px 0 0 20px;
 		margin: -20px 0 0 -20px;
 
+
 		&:hover, &:has(.active) {
-			.table-handler, .col-handler, .row-handler {
+      .o-table-cell-handler .indicator {
 				visibility: visible;
 			}
 		}
@@ -349,129 +350,12 @@
 			margin: 4px 0;
 		}
 
-		th:not(:first-child), td:not(:first-child) {
-			.row-handler {
-				visibility: hidden;
-			}
-		}
-
 		.selectedCell {
 			//border: solid 1px red !important;
 		}
 
 		.selectedCell:after {
 			//background: transparent!important;
-		}
-
-		.o-command-btn {
-			//background: transparent!important;
-		}
-
-		.indicator {
-			position: absolute;
-			top: 0;
-			left: 0;
-			display: flex;
-			color: #cccccc;
-		}
-
-		.col-handler {
-			position: absolute;
-			height: 9px;
-			top: -10px;
-			left: 0;
-			right: 0;
-			z-index: 1001;
-			cursor: pointer;
-			background: var(--yii-table-handler-bg-color);
-			visibility: hidden;
-
-			&:hover, &.active {
-				background: #2172e0;
-			}
-
-			.indicator {
-				width: 100%;
-				height: 20px;
-				padding-bottom: 4px;
-				justify-content: center;
-				align-items: end;
-			}
-
-			.add {
-				position: absolute;
-				top: -30px;
-				right: -15px;
-				height: 30px;
-				width: 30px;
-				z-index: 1002;
-				//background: red;
-				line-height: 0.3;
-
-				&:hover {
-					.o-command-btn {
-						visibility: visible;
-					}
-					.indicator {
-						visibility: hidden;
-					}
-				}
-
-				.o-command-btn {
-					font-size: 20px;
-					cursor: pointer;
-					visibility: hidden;
-				}
-			}
-		}
-
-		.row-handler {
-			position: absolute;
-			width: 9px;
-			top: 0;
-			left: -10px;
-			bottom: 0;
-			z-index: 1001;
-			cursor: pointer;
-			background: var(--yii-table-handler-bg-color);
-			visibility: hidden;
-
-			&:hover, &.active {
-				background: #2172e0;
-			}
-
-			.indicator {
-				height: 100%;
-				width: 20px;
-				padding-right: 4px;
-				justify-content: flex-end;
-				align-items: center;
-			}
-
-			.add {
-				position: absolute;
-				left: -30px;
-				bottom: -15px;
-				height: 30px;
-				width: 30px;
-				z-index: 1002;
-				line-height: 0;
-
-				&:hover {
-					.o-command-btn {
-						visibility: visible;
-					}
-					.indicator {
-						visibility: hidden;
-					}
-				}
-
-				.o-command-btn {
-					font-size: 20px;
-					cursor: pointer;
-					visibility: hidden;
-				}
-			}
 		}
 	}
 
@@ -521,6 +405,16 @@
 				pointer-events: none;
 			}
 		}
+
+    .column-resize-handle {
+      background-color: dodgerblue;
+      bottom: -1px;
+      pointer-events: none;
+      position: absolute;
+      right: -1px;
+      top: 0;
+      width: 2px;
+    }
 	}
 
 	&.yiitap-dragging-preview {

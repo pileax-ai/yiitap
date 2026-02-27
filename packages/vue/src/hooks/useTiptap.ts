@@ -197,10 +197,18 @@ export default function () {
           .run()
         break
       case 'tableAddColumn':
+      case 'tableAddColumnAfter':
         focus.addColumnAfter().run()
         break
+      case 'tableAddColumnBefore':
+        focus.addColumnBefore().run()
+        break
       case 'tableAddRow':
+      case 'tableAddRowAfter':
         focus.addRowAfter().run()
+        break
+      case 'tableAddRowBefore':
+        focus.addRowBefore().run()
         break
       case 'tableCellAttribute':
         focus.setCellAttribute(options.name, options.value).run()

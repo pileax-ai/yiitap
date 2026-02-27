@@ -6,144 +6,97 @@
     :style="{ background: node.attrs.background }"
   >
     <template v-if="isEditable">
-      <o-block-popover
+      <o-table-cell-handler
         v-model="showColPopover"
-        placement="top"
-        tippy-class="o-column-popover"
-        :offset="[0, 20]"
-        hide-click-outside
+        :offset="[0, 8]"
+        :tooltip="tr('table.addColumn')"
+        placement="bottom"
+        column
+        @add="runCommand('tableAddColumn')"
+        v-if="showColumnHandler"
       >
-        <section
-          class="col-handler"
-          :class="{ active: showColPopover }"
-          @click="onClickColHandler"
-        >
-          <div class="add">
-            <div class="indicator">
-              <svg width="3" height="3" viewBox="0 0 3 3" fill="none">
-                <circle cx="1.5" cy="1.5" r="1.5" fill="#BBBFC4"></circle>
-              </svg>
-            </div>
-            <o-common-btn
-              icon="add_circle"
-              :color="BrandColor.blue"
-              :tooltip="tr('table.addColumn')"
-              @click.stop="runCommand('tableAddColumn')"
-            />
-          </div>
-        </section>
-        <template #popover-content>
-          <o-command-btn
-            icon="select_all"
-            :tooltip="tr('table.selectColumn')"
-            @click="selectColumn"
-          />
-          <o-command-btn
-            icon="delete"
-            :tooltip="tr('table.removeColumn')"
-            @click="runCommand('tableDeleteColumn')"
-          />
-        </template>
-      </o-block-popover>
+        <o-list hoverable clickable>
+          <template v-for="(item, index) in columnActions" :key="index">
+            <o-list-item @click="runCommand(item.value)">
+              {{ item.label }}
+              <template #prefix>
+                <o-icon :name="item.icon" :class="item.class" />
+              </template>
+            </o-list-item>
+          </template>
+        </o-list>
+      </o-table-cell-handler>
 
-      <o-block-popover
+      <o-table-cell-handler
         v-model="showRowPopover"
-        placement="left-start"
-        tippy-class="o-row-popover"
-        :offset="[-6, 26]"
-        hide-click-outside
+        :offset="[0, 10]"
+        :tooltip="tr('table.addRow')"
+        placement="right-start"
+        :tooltip-offset="[0, 2]"
+        tooltip-placement="left"
+        row
+        @add="runCommand('tableAddRow')"
+        v-if="showRowHandler"
       >
-        <section
-          class="row-handler"
-          :class="{ active: showRowPopover }"
-          @click="onClickRowHandler"
-        >
-          <div class="add">
-            <div class="indicator">
-              <svg width="3" height="3" viewBox="0 0 3 3" fill="none">
-                <circle cx="1.5" cy="1.5" r="1.5" fill="#BBBFC4"></circle>
-              </svg>
-            </div>
-            <o-common-btn
-              icon="add_circle"
-              :color="BrandColor.blue"
-              :tooltip="tr('table.addRow')"
-              placement="left"
-              @click.stop="runCommand('tableAddRow')"
-            />
-          </div>
-        </section>
-        <template #popover-content>
-          <o-command-btn
-            icon="select_all"
-            placement="left"
-            :tooltip="tr('table.selectRow')"
-            @click="selectRow"
-          />
-          <o-command-btn
-            icon="delete"
-            placement="left"
-            :tooltip="tr('table.removeRow')"
-            @click="runCommand('tableDeleteRow')"
-          />
-        </template>
-      </o-block-popover>
+        <o-list hoverable clickable>
+          <template
+            v-for="(item, index) in rowActions.filter(
+              (r) => r.value !== 'tableAddRowBefore'
+            )"
+            :key="index"
+          >
+            <o-list-item @click="runCommand(item.value)">
+              {{ item.label }}
+              <template #prefix>
+                <o-icon :name="item.icon" :class="item.class" />
+              </template>
+            </o-list-item>
+          </template>
+        </o-list>
+      </o-table-cell-handler>
     </template>
-
     <node-view-content />
   </node-view-wrapper>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { NodeViewWrapper, NodeViewContent, nodeViewProps } from '@tiptap/vue-3'
 
-import { OBlockPopover, OCommandBtn, OCommonBtn } from '../../components/index'
+import {
+  OIcon,
+  OList,
+  OListItem,
+  OTableCellHandler,
+} from '../../components/index'
 
-import { useI18n, useTiptap } from '../../hooks'
-import { BrandColor } from '../../constants/brand-color'
+import { useI18n, useTable } from '../../hooks'
 
 const props = defineProps(nodeViewProps)
 
 const { tr } = useI18n()
-const { isEditable, run } = useTiptap()
+const {
+  showColPopover,
+  showRowPopover,
+  columnActions,
+  rowActions,
+  isEditable,
+  cellInfo,
+  initProps,
+  runCommand,
+} = useTable()
 
-const showColPopover = ref(false)
-const showRowPopover = ref(false)
+const showColumnHandler = ref(false)
+const showRowHandler = ref(false)
 
-function onClickColHandler() {
-  setTimeout(() => {
-    showColPopover.value = true
-  }, 0)
-}
-
-function onClickRowHandler() {
-  showRowPopover.value = true
-}
-
-function selectColumn() {
-  showColPopover.value = false
-  runCommand('tableSelectColumn', {
-    pos: props.getPos(),
+onMounted(() => {
+  initProps({
+    getPos: props.getPos,
+    editor: props.editor,
   })
-}
-
-function selectRow() {
-  runCommand('tableSelectRow', {
-    pos: props.getPos(),
-  })
-}
-
-function runCommand(command: string, options: Indexable = {}) {
-  if (command === 'tableDeleteRow') {
-    showRowPopover.value = false
-  } else if (command === 'tableDeleteColumn') {
-    showColPopover.value = false
-  }
-  setTimeout(() => {
-    run(props.editor, command, options)
-  }, 0)
-}
+  showColumnHandler.value = cellInfo.value.rowIndex === 0
+  showRowHandler.value = cellInfo.value.colIndex === 0
+})
 </script>
 
 <style lang="scss">
@@ -151,20 +104,5 @@ function runCommand(command: string, options: Indexable = {}) {
   position: relative;
   padding-top: 20px;
   z-index: 0;
-}
-
-.o-column-popover {
-  .popover-content {
-    min-width: unset !important;
-    display: flex;
-    justify-content: center;
-  }
-}
-
-.o-row-popover {
-  min-width: unset !important;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }
 </style>

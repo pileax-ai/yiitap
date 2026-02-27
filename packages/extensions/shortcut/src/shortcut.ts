@@ -1,6 +1,7 @@
 import { Extension } from '@tiptap/core'
 import { Markdown } from '@tiptap/markdown'
 import { Node as ProseMirrorNode, Fragment, Slice } from '@tiptap/pm/model'
+import { CellSelection } from '@tiptap/pm/tables'
 import {
   Plugin,
   PluginKey,
@@ -243,11 +244,21 @@ export const Shortcut = Extension.create<ShortcutOptions>({
   addKeyboardShortcuts() {
     const shortcuts: Record<string, (props: { editor: any }) => boolean> = {}
 
+    const isCellSelection = (selection: any): selection is CellSelection => {
+      return selection instanceof CellSelection || (selection.cells && selection.cells.length > 0)
+    }
+
     // Copy selected nodes
     if (this.options.copy?.enabled) {
       const keys = this.options.copy.keys ?? ['Mod-c']
       for (const key of keys) {
-        shortcuts[key] = ({ editor }) => editor.commands.copySelected()
+        shortcuts[key] = ({ editor }) => {
+          // Do NOT handle table
+          if (isCellSelection(editor.state.selection)) {
+            return false
+          }
+          return editor.commands.copySelected()
+        }
       }
     }
 
