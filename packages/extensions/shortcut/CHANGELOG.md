@@ -1,5 +1,11 @@
 # @yiitap/extension-shortcut
 
+## 0.16.2
+
+### Patch Changes
+
+- 62db47f: table handlers
+
 ## 0.16.1
 
 ## 0.16.0

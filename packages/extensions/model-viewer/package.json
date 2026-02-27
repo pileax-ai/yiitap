@@ -1,7 +1,7 @@
 {
 	"name": "@yiitap/extension-model-viewer",
 	"description": "3D model viewer extension",
-	"version": "0.16.1",
+	"version": "0.16.2",
 	"private": false,
 	"author": {
 		"name": "Yiitap",

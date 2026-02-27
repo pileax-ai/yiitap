@@ -1,5 +1,11 @@
 # @yiitap/extension-multi-column
 
+## 0.16.2
+
+### Patch Changes
+
+- ead1978: remove isolating in multi-column
+
 ## 0.16.1
 
 ## 0.16.0

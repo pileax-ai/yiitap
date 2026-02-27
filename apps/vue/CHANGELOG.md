@@ -1,5 +1,15 @@
 # app-vue
 
+## 0.16.2
+
+### Patch Changes
+
+- Updated dependencies [62db47f]
+- Updated dependencies [ead1978]
+  - @yiitap/i18n@0.16.2
+  - @yiitap/vue@0.16.2
+  - @yiitap/util-emoji@0.16.2
+
 ## 0.16.1
 
 ### Patch Changes

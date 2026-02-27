@@ -1,5 +1,34 @@
 # @yiitap/vue
 
+## 0.16.2
+
+### Patch Changes
+
+- 62db47f: table handlers
+- ead1978: remove isolating in multi-column
+- Updated dependencies [62db47f]
+- Updated dependencies [ead1978]
+  - @yiitap/extension-shortcut@0.16.2
+  - @yiitap/i18n@0.16.2
+  - @yiitap/vue@0.16.2
+  - @yiitap/extension-multi-column@0.16.2
+  - @yiitap/core@0.16.2
+  - @yiitap/extension-ai-block@0.16.2
+  - @yiitap/extension-blockquote@0.16.2
+  - @yiitap/extension-callout@0.16.2
+  - @yiitap/extension-char-command@0.16.2
+  - @yiitap/extension-color-highlighter@0.16.2
+  - @yiitap/extension-image@0.16.2
+  - @yiitap/extension-inline-placeholder@0.16.2
+  - @yiitap/extension-model-viewer@0.16.2
+  - @yiitap/extension-placeholder@0.16.2
+  - @yiitap/extension-selection-decoration@0.16.2
+  - @yiitap/extension-table@0.16.2
+  - @yiitap/extension-table-wrapper@0.16.2
+  - @yiitap/extension-task-item@0.16.2
+  - @yiitap/extension-video@0.16.2
+  - @yiitap/util-emoji@0.16.2
+
 ## 0.16.1
 
 ### Patch Changes

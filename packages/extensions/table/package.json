@@ -1,7 +1,7 @@
 {
 	"name": "@yiitap/extension-table",
 	"description": "Table extension",
-	"version": "0.16.1",
+	"version": "0.16.2",
 	"private": false,
 	"author": {
 		"name": "Yiitap",
