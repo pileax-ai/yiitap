@@ -9,7 +9,6 @@ export const Column = Node.create<ColumnOptions>({
   group: 'block',
   content: 'block+',
   defining: true,
-  isolating: true,
   selectable: true,
 
   addAttributes() {

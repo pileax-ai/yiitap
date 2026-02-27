@@ -8,7 +8,6 @@ export const ColumnContainer = Node.create<ColumnContainerOptions>({
   name: 'columns',
   group: 'block',
   content: 'column*',
-  isolating: true,
   selectable: true,
   inline: false,
 
