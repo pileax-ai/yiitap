@@ -245,7 +245,10 @@ export const Shortcut = Extension.create<ShortcutOptions>({
     const shortcuts: Record<string, (props: { editor: any }) => boolean> = {}
 
     const isCellSelection = (selection: any): selection is CellSelection => {
-      return selection instanceof CellSelection || (selection.cells && selection.cells.length > 0)
+      return (
+        selection instanceof CellSelection ||
+        (selection.cells && selection.cells.length > 0)
+      )
     }
 
     // Copy selected nodes
