@@ -20,6 +20,18 @@ export const htmlToJSON = (
   return doc.toJSON()
 }
 
+export const htmlToJSON0 = (
+  editor: Editor,
+  html: string
+): Record<string, any> => {
+  const element = document.createElement('div')
+  element.innerHTML = html
+
+  const doc = DOMParser.fromSchema(editor.schema).parse(element)
+
+  return doc.toJSON()
+}
+
 export const systemKeymap = () => {
   const isMac =
     typeof navigator !== 'undefined' &&

@@ -77,14 +77,13 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, type PropType } from 'vue'
-import { Editor } from '@tiptap/core'
+import {Editor} from '@tiptap/core'
+import {Fragment} from '@tiptap/pm/model'
 import type { AiOptions, ChatMessage } from '@yiitap/core'
 import { useAi, useI18n } from '../../hooks'
 import { AskAiBlocks, Prompts } from '../../constants'
 import { AiMessageChunks } from '../../constants/data'
 import { htmlToJSON } from '../../utils/convert'
-
-import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 
 import {
   OBlockPopover,
@@ -190,21 +189,22 @@ function onCancel() {
 
 function onConfirm() {
   const json = htmlToJSON(props.editor, output.value)
-  let totalSize = 0
-  for (const nodeJson of json.content) {
-    const newNode = ProseMirrorNode.fromJSON(props.editor.schema, nodeJson)
-    totalSize += newNode.nodeSize
-  }
+
+  const { from } = props.editor.state.selection
+  const fragment = Fragment.fromJSON(props.editor.schema, json.content)
+  const totalSize = fragment.size
+
   props.editor
     .chain()
     .focus()
     .deleteSelection()
-    .insertContent(json.content)
+    .insertContent(output.value, { updateSelection: true })
     .setTextSelection({
-      from: props.editor.state.selection.from,
-      to: props.editor.state.selection.from + totalSize + 1,
+      from: from,
+      to: from + totalSize,
     })
     .run()
+
   reset()
   showPopover.value = false
   setTimeout(() => {
@@ -255,8 +255,9 @@ async function onAiGenerate() {
     messages.value.pop()
     console.error(e)
     OToast.error(tr('ai.error'))
+  } finally {
+    generating.value = false
   }
-  generating.value = false
 }
 
 async function onAiGenerateMock() {
