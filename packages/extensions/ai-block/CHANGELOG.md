@@ -1,5 +1,12 @@
 # @yiitap/extension-ai-block
 
+## 0.16.3
+
+### Patch Changes
+
+- Updated dependencies [6c3a854]
+  - @yiitap/core@0.16.3
+
 ## 0.16.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yiitap/core
 
+## 0.16.3
+
+### Patch Changes
+
+- 6c3a854: fix bugs
+
 ## 0.16.2
 
 ## 0.16.1
