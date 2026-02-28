@@ -17,7 +17,12 @@
           @mouseleave="onContentMouseLeave"
         >
           <slot></slot>
-          <div v-if="arrow" ref="arrowRef" class="o-popover-arrow" :style="arrowStyles"></div>
+          <div
+            v-if="arrow"
+            ref="arrowRef"
+            class="o-popover-arrow"
+            :style="arrowStyles"
+          ></div>
         </div>
       </Transition>
     </Teleport>
@@ -25,15 +30,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, onUnmounted, type PropType, type CSSProperties } from 'vue'
+import {
+  ref,
+  watch,
+  computed,
+  nextTick,
+  onUnmounted,
+  type PropType,
+  type CSSProperties,
+} from 'vue'
 import {
   computePosition,
   autoUpdate,
-  offset,
   flip,
   shift,
   arrow as arrowModifier,
-  type Placement
+  type Placement,
 } from '@floating-ui/dom'
 import { useTheme } from '../../hooks'
 
@@ -41,7 +53,9 @@ const props = defineProps({
   disable: { type: Boolean, default: false },
   arrow: { type: Boolean, default: false },
   offset: {
-    type: [Number, Object] as PropType<number | { mainAxis?: number; crossAxis?: number }>,
+    type: [Number, Object] as PropType<
+      number | { mainAxis?: number; crossAxis?: number }
+    >,
     default: 10,
   },
   placement: { type: String as PropType<Placement>, default: 'bottom-start' },
@@ -127,16 +141,22 @@ const onContentMouseLeave = () => {
 const updatePosition = async () => {
   if (!triggerRef.value || !contentRef.value) return
 
-  const referenceEl = props.event ? {
-    getBoundingClientRect() {
-      return {
-        width: 0, height: 0,
-        x: props.event!.clientX, y: props.event!.clientY,
-        top: props.event!.clientY, left: props.event!.clientX,
-        right: props.event!.clientX, bottom: props.event!.clientY,
+  const referenceEl = props.event
+    ? {
+        getBoundingClientRect() {
+          return {
+            width: 0,
+            height: 0,
+            x: props.event!.clientX,
+            y: props.event!.clientY,
+            top: props.event!.clientY,
+            left: props.event!.clientX,
+            right: props.event!.clientX,
+            bottom: props.event!.clientY,
+          }
+        },
       }
-    }
-  } : triggerRef.value
+    : triggerRef.value
 
   const { x, y, placement, middlewareData } = await computePosition(
     referenceEl as any,
@@ -147,7 +167,9 @@ const updatePosition = async () => {
         offset(props.offset),
         flip(),
         shift({ padding: 5 }),
-        props.arrow && arrowRef.value ? arrowModifier({ element: arrowRef.value }) : null,
+        props.arrow && arrowRef.value
+          ? arrowModifier({ element: arrowRef.value })
+          : null,
       ].filter(Boolean) as any,
     }
   )
@@ -161,7 +183,12 @@ const updatePosition = async () => {
   if (props.arrow && middlewareData.arrow) {
     const { x: ax, y: ay } = middlewareData.arrow
     const side = placement.split('-')[0]
-    const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[side]!
+    const staticSide = {
+      top: 'bottom',
+      right: 'left',
+      bottom: 'top',
+      left: 'right',
+    }[side]!
     arrowStyles.value = {
       left: ax != null ? `${ax}px` : '',
       top: ay != null ? `${ay}px` : '',
@@ -172,7 +199,10 @@ const updatePosition = async () => {
 
 const handleOutsideClick = (e: MouseEvent) => {
   const target = e.target as HTMLElement
-  if (!wrapperRef.value?.contains(target) && !contentRef.value?.contains(target)) {
+  if (
+    !wrapperRef.value?.contains(target) &&
+    !contentRef.value?.contains(target)
+  ) {
     setShow(false, true) // 点击外部应立即消失
   }
 }
@@ -231,15 +261,15 @@ defineExpose({ setShow })
 .o-popover {
   min-width: 180px;
   padding: 8px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2),
-  0 2px 2px rgba(0, 0, 0, 0.14),
-  0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 1px 5px rgba(0, 0, 0, 0.2),
+    0 2px 2px rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12);
   border-radius: 6px;
   color: var(--yii-color);
   background: var(--yii-tippy-popover-bg-color);
   z-index: 2000;
   pointer-events: auto;
-
 
   &-arrow {
     position: absolute;
@@ -252,16 +282,25 @@ defineExpose({ setShow })
 
 .shift-away-enter-active,
 .shift-away-leave-active {
-  transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1),
-  transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition:
+    opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .shift-away-enter-from,
 .shift-away-leave-to {
   opacity: 0;
-  &[data-placement^='top'] { transform: translateY(10px); }
-  &[data-placement^='bottom'] { transform: translateY(-10px); }
-  &[data-placement^='left'] { transform: translateX(10px); }
-  &[data-placement^='right'] { transform: translateX(-10px); }
+  &[data-placement^='top'] {
+    transform: translateY(10px);
+  }
+  &[data-placement^='bottom'] {
+    transform: translateY(-10px);
+  }
+  &[data-placement^='left'] {
+    transform: translateX(10px);
+  }
+  &[data-placement^='right'] {
+    transform: translateX(-10px);
+  }
 }
 </style>

@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="triggerRef"
-    class="o-tooltip"
-    v-on="eventHandlers"
-  >
+  <div ref="triggerRef" class="o-tooltip" v-on="eventHandlers">
     <slot name="trigger"></slot>
 
     <div
@@ -23,34 +19,33 @@ import { ref, onUnmounted, watch, type PropType, nextTick, computed } from 'vue'
 import {
   computePosition,
   autoUpdate,
-  offset,
   flip,
   shift,
   arrow,
-  type Placement
+  type Placement,
 } from '@floating-ui/dom'
 
 const props = defineProps({
   placement: {
     type: String,
-    default: 'top'
+    default: 'top',
   },
   trigger: {
     type: String,
-    default: 'mouseenter focus'
+    default: 'mouseenter focus',
   },
   delay: {
     type: Number,
-    default: 100
+    default: 100,
   },
   duration: {
     type: Number,
-    default: 150
+    default: 150,
   },
   offset: {
     type: Array as PropType<number[]>,
-    default: () => [0, 10]
-  }
+    default: () => [0, 10],
+  },
 })
 
 const triggerRef = ref<HTMLElement>()
@@ -63,7 +58,7 @@ let timer: ReturnType<typeof setTimeout> | null = null
 
 // Event logic mapping
 const eventHandlers = computed(() => {
-  const handlers: Record<string, Function> = {}
+  const handlers: Record<string, () => void> = {}
   if (props.trigger.includes('mouseenter')) {
     handlers.mouseenter = show
     handlers.mouseleave = hide
@@ -100,12 +95,12 @@ const updatePosition = () => {
       offset(props.offset[1]),
       flip(),
       shift({ padding: 5 }),
-      arrow({ element: arrowRef.value! })
-    ]
+      arrow({ element: arrowRef.value! }),
+    ],
   }).then(({ x, y, placement, middlewareData }) => {
     Object.assign(contentRef.value!.style, {
       left: `${x}px`,
-      top: `${y}px`
+      top: `${y}px`,
     })
 
     // Arrow positioning
@@ -115,13 +110,13 @@ const updatePosition = () => {
         top: 'bottom',
         right: 'left',
         bottom: 'top',
-        left: 'right'
+        left: 'right',
       }[placement.split('-')[0]] as string
 
       Object.assign(arrowRef.value.style, {
         left: ax != null ? `${ax}px` : '',
         top: ay != null ? `${ay}px` : '',
-        [staticSide]: '-4px' // Half of arrow height
+        [staticSide]: '-4px', // Half of arrow height
       })
     }
   })

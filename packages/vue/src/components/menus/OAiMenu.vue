@@ -77,8 +77,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, type PropType } from 'vue'
-import {Editor} from '@tiptap/core'
-import {Fragment} from '@tiptap/pm/model'
+import { Editor } from '@tiptap/core'
+import { Fragment } from '@tiptap/pm/model'
 import type { AiOptions, ChatMessage } from '@yiitap/core'
 import { useAi, useI18n } from '../../hooks'
 import { AskAiBlocks, Prompts } from '../../constants'
