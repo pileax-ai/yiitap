@@ -28,7 +28,6 @@ export { default as OTableCellHandler } from './common/OTableCellHandler.vue'
 export { default as OTableGrid } from './common/OTableGrid.vue'
 export { default as OTableCellBackground } from './common/OTableCellBackground.vue'
 export { default as OTextColorBoard } from './common/OTextColorBoard.vue'
-export { OFloatingToast } from './common/OFloatingToast'
 export { OToast } from './common/OToast'
 
 // Node
@@ -48,6 +47,7 @@ export { default as OInput } from './ui/OInput.vue'
 export { default as OList } from './ui/OList.vue'
 export { default as OListItem } from './ui/OListItem.vue'
 export { default as OPopover } from './ui/OPopover.vue'
+export { default as OPopoverNew } from './ui/OPopover.new.vue'
 export { default as OTextarea } from './ui/OTextarea.vue'
 export { default as OTooltip } from './ui/OTooltip.vue'
 

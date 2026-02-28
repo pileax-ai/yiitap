@@ -1,12 +1,11 @@
 <template>
-  <o-popover
+  <o-popover-new
     ref="popover"
     class="o-simple-command-btn"
     content-class="dropdown"
     size="medium"
     :placement="placement"
     :trigger="trigger"
-    :show-arrow="false"
   >
     <template #trigger>
       <o-command-btn
@@ -38,13 +37,13 @@
         </o-list-item>
       </template>
     </o-list>
-  </o-popover>
+  </o-popover-new>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Editor } from '@tiptap/core'
-import { OCommandBtn, OIcon, OList, OListItem, OPopover } from '../index'
+import { OCommandBtn, OIcon, OList, OListItem, OPopoverNew } from '../index'
 
 import useI18n from '../../hooks/useI18n'
 import useTiptap from '../../hooks/useTiptap'
