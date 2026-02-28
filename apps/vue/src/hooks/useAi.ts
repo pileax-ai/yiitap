@@ -1,5 +1,6 @@
 import { ref, watch, onMounted, type Ref } from 'vue'
 import OpenAI from 'openai'
+import type { ChatMessage } from '@yiitap/vue'
 import { getProviderProp } from '../constants'
 
 export default function () {

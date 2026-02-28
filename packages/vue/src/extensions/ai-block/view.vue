@@ -92,7 +92,7 @@
               <o-btn icon="auto_awesome" @click="onUpdate">
                 <span class="label">
                   {{ tr('label.generatedBy') }}
-                  {{ getProviderProp(aiProvider, 'name') || 'AI' }}
+                  {{ aiProvider || 'AI' }}
                 </span>
               </o-btn>
             </div>
@@ -294,8 +294,9 @@ async function onAiGenerate() {
     messages.value.pop()
     console.error(e)
     OToast.error(tr('ai.error'))
+  } finally {
+    generating.value = false
   }
-  generating.value = false
 }
 
 function updateEditor(pos: number, fullMarkdown: string) {
