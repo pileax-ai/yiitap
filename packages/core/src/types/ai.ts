@@ -4,12 +4,22 @@ export interface AiProvider {
   modelType?: string
 }
 
+export type CompletionOptions = {
+  messages: any[]
+  onChunk: (chunk: string) => void
+  options?: {
+    id?: string
+    type?: string
+  }
+}
+
 export interface AiOptions {
   provider: AiProvider
-  onStreamingChatCompletion?: (
-    messages: any[],
-    onChunk: (chunk: string) => void
-  ) => Promise<string>
+  onStreamingChatCompletion?: ({
+    messages,
+    onChunk,
+    options,
+  }: CompletionOptions) => Promise<string>
 }
 
 export type ChatMessageRole = 'system' | 'user' | 'assistant'

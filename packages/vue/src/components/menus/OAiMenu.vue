@@ -238,17 +238,17 @@ async function onAiGenerate() {
   }
 
   try {
-    const fullMessage = await onStreamingChatCompletion(
-      messages.value,
-      (chunk) => {
+    const fullMessage = await onStreamingChatCompletion({
+      messages: messages.value,
+      onChunk: (chunk) => {
         aiMessage += chunk
         messages.value = [
           ...messages.value.slice(0, -1),
           { role: 'assistant', content: aiMessage },
         ]
         output.value = md.render(aiMessage)
-      }
-    )
+      },
+    })
     // messages.value.push({role: 'assistant', content: fullMessage})
   } catch (e) {
     // Remove last use message if failed

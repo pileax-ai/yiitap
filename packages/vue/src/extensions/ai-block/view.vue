@@ -269,9 +269,13 @@ async function onAiGenerate() {
   }
 
   try {
-    const fullMessage = await onStreamingChatCompletion(
-      messages.value,
-      (chunk: string) => {
+    const fullMessage = await onStreamingChatCompletion({
+      messages: messages.value,
+      options: {
+        id: props.node.attrs.id,
+        type: 'ai-block',
+      },
+      onChunk: (chunk: string) => {
         aiMessage += chunk
         messages.value = [
           ...messages.value.slice(0, -1),
@@ -284,8 +288,8 @@ async function onAiGenerate() {
           updateEditor(pos, aiMessage)
           lastUpdateTime = now
         }
-      }
-    )
+      },
+    })
 
     // Make sure last update
     updateEditor(pos, aiMessage)

@@ -42,6 +42,7 @@ import {
 import {
   computePosition,
   autoUpdate,
+  offset as Offset,
   flip,
   shift,
   arrow as arrowModifier,
@@ -164,7 +165,7 @@ const updatePosition = async () => {
     {
       placement: props.placement,
       middleware: [
-        offset(props.offset),
+        Offset(props.offset),
         flip(),
         shift({ padding: 5 }),
         props.arrow && arrowRef.value

@@ -19,6 +19,7 @@ import { ref, onUnmounted, watch, type PropType, nextTick, computed } from 'vue'
 import {
   computePosition,
   autoUpdate,
+  offset as Offset,
   flip,
   shift,
   arrow,
@@ -92,7 +93,7 @@ const updatePosition = () => {
   computePosition(triggerRef.value, contentRef.value, {
     placement: props.placement as Placement,
     middleware: [
-      offset(props.offset[1]),
+      Offset(props.offset[1]),
       flip(),
       shift({ padding: 5 }),
       arrow({ element: arrowRef.value! }),

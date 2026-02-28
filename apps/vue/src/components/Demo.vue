@@ -184,6 +184,7 @@ const documentName = ref('note@2b590c99-18ad-45bb-a4dd-d1ebdf2adcb3')
 const providerUrl = ref('ws://localhost:9621')
 const providerToken = ref('')
 const collabReady = ref(false)
+const DEBUG = false
 
 const aiOptions = computed(() => {
   return {
@@ -396,9 +397,9 @@ function onUpdate({ editor }: { editor: Editor }) {
   // const markdown = editor.markdown?.serialize(editor.getJSON())
   // console.log(markdown)
 
-  if (import.meta.env.DEV) {
-    // console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
-    // console.debug(editor.getJSON())
+  if (import.meta.env.DEV && DEBUG) {
+    console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
+    console.debug(editor.getJSON())
   }
 }
 
