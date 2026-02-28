@@ -1,5 +1,5 @@
 <template>
-  <o-popover-new
+  <o-popover
     ref="popover"
     class="o-simple-command-btn"
     content-class="dropdown"
@@ -37,13 +37,13 @@
         </o-list-item>
       </template>
     </o-list>
-  </o-popover-new>
+  </o-popover>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Editor } from '@tiptap/core'
-import { OCommandBtn, OIcon, OList, OListItem, OPopoverNew } from '../index'
+import { OCommandBtn, OIcon, OList, OListItem, OPopover } from '../index'
 
 import useI18n from '../../hooks/useI18n'
 import useTiptap from '../../hooks/useTiptap'
