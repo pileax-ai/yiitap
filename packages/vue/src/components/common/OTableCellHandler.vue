@@ -251,6 +251,10 @@ onMounted(() => {
     align-items: center;
     visibility: hidden;
 
+    &.active {
+      visibility: visible;
+    }
+
     .handler {
       display: inline-flex;
       justify-content: center;

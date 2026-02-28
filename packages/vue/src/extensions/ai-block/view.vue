@@ -92,7 +92,7 @@
               <o-btn icon="auto_awesome" @click="onUpdate">
                 <span class="label">
                   {{ tr('label.generatedBy') }}
-                  {{ getProviderProp(aiProvider, 'name') || 'AI' }}
+                  {{ aiProvider || 'AI' }}
                 </span>
               </o-btn>
             </div>
@@ -141,7 +141,6 @@ import {
   OBtn,
   OBtnGroup,
   OToast,
-  OFloatingToast,
 } from '../../components'
 import { useAi, useI18n, useNodeView, useTheme, useTiptap } from '../../hooks'
 import { AiBlocks, getProviderProp, Prompts } from '../../constants'
@@ -270,9 +269,13 @@ async function onAiGenerate() {
   }
 
   try {
-    const fullMessage = await onStreamingChatCompletion(
-      messages.value,
-      (chunk: string) => {
+    const fullMessage = await onStreamingChatCompletion({
+      messages: messages.value,
+      options: {
+        id: props.node.attrs.id,
+        type: 'ai-block',
+      },
+      onChunk: (chunk: string) => {
         aiMessage += chunk
         messages.value = [
           ...messages.value.slice(0, -1),
@@ -285,8 +288,8 @@ async function onAiGenerate() {
           updateEditor(pos, aiMessage)
           lastUpdateTime = now
         }
-      }
-    )
+      },
+    })
 
     // Make sure last update
     updateEditor(pos, aiMessage)
@@ -295,8 +298,9 @@ async function onAiGenerate() {
     messages.value.pop()
     console.error(e)
     OToast.error(tr('ai.error'))
+  } finally {
+    generating.value = false
   }
-  generating.value = false
 }
 
 function updateEditor(pos: number, fullMarkdown: string) {

@@ -355,13 +355,19 @@ export const Shortcut = Extension.create<ShortcutOptions>({
             const { state } = view
             const { selection } = state
             const { $from } = selection
+
+            // parent node
             const parentNodeType = $from.parent.type.name
             if (parentNodeType === 'codeBlock') {
-              console.log('Inside codeBlock', text)
+              // console.log('Inside codeBlock', text)
               const tr = state.tr.insertText(text, selection.from, selection.to)
               view.dispatch(tr.scrollIntoView())
               return true
             }
+
+            // current node
+            const currentNode = $from.node($from.depth)
+            const isCurrentNodeEmpty = currentNode.content.size === 0
 
             // Paste html
             if (html) {
@@ -392,7 +398,7 @@ export const Shortcut = Extension.create<ShortcutOptions>({
 
                 // console.log('Parsed html: ', html, json, fragment)
                 const slice = new Slice(fragment, 0, 0)
-                if (insertAfter) {
+                if (insertAfter && !isCurrentNodeEmpty) {
                   // Insert multiple nodes after current node
                   const pos = $from.end()
                   const tr = view.state.tr.insert(pos, fragment)

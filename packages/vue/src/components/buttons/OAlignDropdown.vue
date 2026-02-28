@@ -6,7 +6,6 @@
     size="medium"
     :placement="placement"
     :trigger="trigger"
-    :show-arrow="false"
   >
     <template #trigger>
       <o-command-btn

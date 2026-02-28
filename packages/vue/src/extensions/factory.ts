@@ -226,9 +226,12 @@ export const extensionRegistry: {
     UniqueID.configure({
       attributeName: 'id',
       types: [
+        'aiBlock',
         'blockquote',
+        'blockMath',
         'codeBlock',
         'callout',
+        'details',
         'heading',
         'image',
         'paragraph',

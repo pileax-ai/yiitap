@@ -1,5 +1,6 @@
 import { ref, watch, onMounted, type Ref } from 'vue'
 import OpenAI from 'openai'
+import { type ChatMessage, type CompletionOptions } from '@yiitap/vue'
 import { getProviderProp } from '../constants'
 
 export default function () {
@@ -24,11 +25,14 @@ export default function () {
     // console.log('sdk', sdk.value)
   }
 
-  const onStreamingChatCompletion = async (
-    messages: ChatMessage[],
-    onChunk: (chunk: string) => void
-  ) => {
-    // console.log('messages', messages)
+  const onStreamingChatCompletion = async ({
+    messages,
+    onChunk,
+    options,
+  }: CompletionOptions) => {
+    // console.table(messages)
+    // console.info('options', options)
+
     if (!sdk.value) {
       throw new Error('AI SDK is not initialized, please check AI options.')
     }
