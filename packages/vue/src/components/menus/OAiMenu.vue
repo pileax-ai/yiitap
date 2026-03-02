@@ -187,7 +187,9 @@ function onCancel() {
 }
 
 function onConfirm() {
-  const json = JSON.parse(JSON.stringify(htmlToJSON(props.editor, output.value)))
+  const json = JSON.parse(
+    JSON.stringify(htmlToJSON(props.editor, output.value))
+  )
   const node = props.editor.schema.nodeFromJSON(json)
   const { from } = props.editor.state.selection
   const totalSize = node.content.size
