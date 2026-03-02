@@ -78,7 +78,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, type PropType } from 'vue'
 import { Editor } from '@tiptap/core'
-import { Fragment } from '@tiptap/pm/model'
 import type { AiOptions, ChatMessage } from '@yiitap/core'
 import { useAi, useI18n } from '../../hooks'
 import { AskAiBlocks, Prompts } from '../../constants'
@@ -188,17 +187,16 @@ function onCancel() {
 }
 
 function onConfirm() {
-  const json = htmlToJSON(props.editor, output.value)
-
+  const json = JSON.parse(JSON.stringify(htmlToJSON(props.editor, output.value)))
+  const node = props.editor.schema.nodeFromJSON(json)
   const { from } = props.editor.state.selection
-  const fragment = Fragment.fromJSON(props.editor.schema, json.content)
-  const totalSize = fragment.size
+  const totalSize = node.content.size
 
   props.editor
     .chain()
     .focus()
     .deleteSelection()
-    .insertContent(output.value, { updateSelection: true })
+    .insertContent(json, { updateSelection: true })
     .setTextSelection({
       from: from,
       to: from + totalSize,
