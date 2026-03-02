@@ -1,6 +1,6 @@
 {
   "name": "@yiitap/vue-preset",
-  "version": "0.16.3",
+  "version": "0.17.0",
   "description": "Preset package that bundles all dependencies for @yiitap/vue",
   "keywords": [],
   "author": {
@@ -11,7 +11,10 @@
   "main": "index.js",
   "module": "index.js",
   "types": "index.d.ts",
-  "files": ["index.js", "index.d.ts"],
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
