@@ -1,7 +1,6 @@
 <template>
   <n-config-provider :theme="theme">
     <Demo @mode="onMode"></Demo>
-    <!--    <SimpleEditor @mode="onMode"></SimpleEditor>-->
   </n-config-provider>
 </template>
 
@@ -9,7 +8,6 @@
 import { computed, ref } from 'vue'
 import { NConfigProvider, darkTheme } from 'naive-ui'
 import Demo from './components/Demo.vue'
-import SimpleEditor from './components/SimpleEditor.vue'
 
 const darkMode = ref(false)
 const theme = computed(() => {

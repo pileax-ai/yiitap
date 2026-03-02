@@ -57,13 +57,8 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
-        // /^@tiptap\/.*/,
-        // /^@yiitap\/.*/,
-        '@tiptap/extension-audio',
-        '@tiptap/extension-mathematics',
-        '@tiptap/markdown',
-        '@yiitap/i18n',
-        '@yiitap/util-emoji',
+        /^@tiptap\/.*/,
+        /^@yiitap\/.*/,
         '@mermaid-js/layout-elk',
         'katex',
         'lowlight',
