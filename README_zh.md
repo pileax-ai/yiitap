@@ -1,4 +1,4 @@
-[English](/) | **简体中文**
+[English](https://github.com/pileax-ai/yiitap) | **简体中文**
 
 <h1 align="center">Yiitap</h1>
 
