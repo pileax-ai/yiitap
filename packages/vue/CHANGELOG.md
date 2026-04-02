@@ -1,5 +1,32 @@
 # @yiitap/vue
 
+## 0.17.1
+
+### Patch Changes
+
+- 72705eb: fix list item Enter key behavior
+- Updated dependencies [72705eb]
+  - @yiitap/extension-multi-column@0.17.1
+  - @yiitap/vue@0.17.1
+  - @yiitap/core@0.17.1
+  - @yiitap/extension-ai-block@0.17.1
+  - @yiitap/extension-blockquote@0.17.1
+  - @yiitap/extension-callout@0.17.1
+  - @yiitap/extension-char-command@0.17.1
+  - @yiitap/extension-color-highlighter@0.17.1
+  - @yiitap/extension-image@0.17.1
+  - @yiitap/extension-inline-placeholder@0.17.1
+  - @yiitap/extension-model-viewer@0.17.1
+  - @yiitap/extension-placeholder@0.17.1
+  - @yiitap/extension-selection-decoration@0.17.1
+  - @yiitap/extension-shortcut@0.17.1
+  - @yiitap/extension-table@0.17.1
+  - @yiitap/extension-table-wrapper@0.17.1
+  - @yiitap/extension-task-item@0.17.1
+  - @yiitap/extension-video@0.17.1
+  - @yiitap/i18n@0.17.1
+  - @yiitap/util-emoji@0.17.1
+
 ## 0.17.0
 
 ### Minor Changes

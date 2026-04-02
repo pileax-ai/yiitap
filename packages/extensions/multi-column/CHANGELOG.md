@@ -1,5 +1,11 @@
 # @yiitap/extension-multi-column
 
+## 0.17.1
+
+### Patch Changes
+
+- 72705eb: fix list item Enter key behavior
+
 ## 0.17.0
 
 ## 0.16.3

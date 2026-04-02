@@ -1,5 +1,14 @@
 # app-vue
 
+## 0.17.1
+
+### Patch Changes
+
+- Updated dependencies [72705eb]
+  - @yiitap/vue@0.17.1
+  - @yiitap/vue-preset@0.17.1
+  - @yiitap/i18n@0.17.1
+
 ## 0.17.0
 
 ### Minor Changes
