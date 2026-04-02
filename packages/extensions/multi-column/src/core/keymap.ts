@@ -6,6 +6,7 @@ import {
   newlineInCode,
   createParagraphNear,
 } from '@tiptap/pm/commands'
+import { splitListItem } from '@tiptap/pm/schema-list'
 import { keymap } from '@tiptap/pm/keymap'
 import { ResolvedPos } from '@tiptap/pm/model'
 
@@ -54,8 +55,12 @@ export const columnsKeymap = keymap({
     }
 
     // 2. Otherwise, fall back to the standard column enter behavior
+    const { listItem, taskItem } = state.schema.nodes
+
     return chainCommands(
       newlineInCode,
+      ...(listItem ? [splitListItem(listItem)] : []),
+      ...(taskItem ? [splitListItem(taskItem)] : []),
       createParagraphNear,
       liftEmptyBlock,
       splitBlock
