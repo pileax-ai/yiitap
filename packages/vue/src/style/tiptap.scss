@@ -383,10 +383,6 @@
 			box-sizing: border-box;
 			position: relative;
 
-			p {
-				margin: 2px 0 !important;
-			}
-
 			&.has-focus {
 				background: var(--yii-table-focus-bg-color);
 			}
