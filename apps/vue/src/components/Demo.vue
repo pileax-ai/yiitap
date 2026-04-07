@@ -332,7 +332,6 @@ const editor = computed(() => {
 function init() {
   try {
     locale.value = localStorage.getItem('yiitap.locale') || 'en-US'
-    source.value = localStorage.getItem('yiitap.source') || 'default'
     providerToken.value = localStorage.getItem('yiitap.token') || ''
     collaboration.value =
       localStorage.getItem('yiitap.collaboration') === 'true'
@@ -341,9 +340,20 @@ function init() {
       aiOption.value = JSON.parse(aiOptionString)
     }
 
+    initSource()
     initCollab()
   } catch (e) {
     // ignore
+  }
+}
+
+function initSource() {
+  const urlParams = new URLSearchParams(window.location.search)
+  const s = urlParams.get('source')
+  if (s && sourceList.value.find(i => i.value === s)) {
+    source.value = s
+  } else {
+    source.value = localStorage.getItem('yiitap.source') || 'default'
   }
 }
 
