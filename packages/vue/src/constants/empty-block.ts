@@ -96,6 +96,13 @@ export const EmptyListItem = [
   },
 ]
 
+export const EmptyModelViewer = {
+  type: 'modelViewer',
+  attrs: {
+    src: 'init',
+  },
+}
+
 export const EmptyTable = {
   type: 'table',
   content: Array.from({ length: 3 }, () => ({

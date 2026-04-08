@@ -61,6 +61,7 @@ import {
   EmptyEmoji,
   EmptyImage,
   EmptyListItem,
+  EmptyModelViewer,
   EmptyParagraph,
   EmptyTable,
   EmptyTaskItem,
@@ -131,8 +132,8 @@ function onClick(item) {
     case 'image':
       content = EmptyImage
       break
-    case 'model-viewer':
-      content = { attrs: { src: 'init' } }
+    case 'modelViewer':
+      content = EmptyModelViewer
       break
     case 'video':
       content = EmptyVideo
