@@ -350,7 +350,7 @@ function init() {
 function initSource() {
   const urlParams = new URLSearchParams(window.location.search)
   const s = urlParams.get('source')
-  if (s && sourceList.value.find(i => i.value === s)) {
+  if (s && sourceList.value.find((i) => i.value === s)) {
     source.value = s
   } else {
     source.value = localStorage.getItem('yiitap.source') || 'default'
