@@ -44,11 +44,11 @@ For more detailed information, make sure to check out our [documentation](https:
 
 ### Multi-column
 
-<video src="docs/screenshots/multi-column.mp4" muted autoplay loop style="max-width: 100%;"></video>
+<video src="https://raw.githubusercontent.com/pileax-ai/yiitap/refs/heads/main/docs/screenshots/multi-column.mp4" muted autoplay loop style="max-width: 100%;"></video>
 
 ### Table
 
-<video src="docs/screenshots/table.mp4" muted autoplay loop style="max-width: 100%;"></video>
+<video src="https://raw.githubusercontent.com/pileax-ai/yiitap/refs/heads/main/docs/screenshots/table.mp4" muted autoplay loop style="max-width: 100%;"></video>
 
 ## Contributing
 For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTING.md). Contributions are welcome and will be fully credited.
