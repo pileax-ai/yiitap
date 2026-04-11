@@ -581,16 +581,14 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-.o-node-view:has(.o-image-view.max) {
-  p {
-    max-width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+p:has(.o-image-view.max) {
+  max-width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 
-    .o-image-view {
-      align-self: center;
-    }
+  .o-image-view {
+    align-self: center;
   }
 }
 
