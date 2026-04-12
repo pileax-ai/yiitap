@@ -45,11 +45,11 @@ Yiitap 是一个AI驱动、Notion风格的块级编辑器。🔥
 
 ### 分栏
 
-<video src="https://raw.githubusercontent.com/pileax-ai/yiitap/refs/heads/main/docs/screenshots/multi-column.mp4" muted autoplay loop style="max-width: 100%;"></video>
+![Multi-column](https://yiitap.pileax.ai/screenshots/multi-column.gif)
 
 ### 表格
 
-<video src="https://raw.githubusercontent.com/pileax-ai/yiitap/refs/heads/main/docs/screenshots/table.mp4" muted autoplay loop style="max-width: 100%;"></video>
+![Table](https://yiitap.pileax.ai/screenshots/table.gif)
 
 ## 贡献
 如果您希望贡献代码，请参阅我们的[贡献指南](CONTRIBUTING.md)。我们欢迎所有贡献，并将对贡献者给予完整署名。

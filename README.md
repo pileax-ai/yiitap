@@ -44,11 +44,11 @@ For more detailed information, make sure to check out our [documentation](https:
 
 ### Multi-column
 
-![](https://raw.githubusercontent.com/pileax-ai/yiitap/refs/heads/main/docs/screenshots/multi-column.mp4)
+![Multi-column](https://yiitap.pileax.ai/screenshots/multi-column.gif)
 
 ### Table
 
-![](docs/screenshots/table.mp4)
+![Table](https://yiitap.pileax.ai/screenshots/table.gif)
 
 ## Contributing
 For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTING.md). Contributions are welcome and will be fully credited.
