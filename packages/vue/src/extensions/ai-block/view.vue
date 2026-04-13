@@ -171,7 +171,7 @@ let lastUpdateTime = 0
 const UPDATE_INTERVAL = 100
 
 const systemMessage = computed((): ChatMessage => {
-  const prompt = Prompts.writing.replace('[LANGUAGE]', languageName.value)
+  const prompt = Prompts.writing.replace('[LANG_CODE]', languageName.value)
   return {
     role: 'system',
     content: prompt,
