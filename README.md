@@ -47,20 +47,27 @@ For more detailed information, make sure to check out our [documentation](https:
   <img src="https://yiitap.pileax.ai/screenshots/ai_menu-en.png" width="400" />
 </p>
 
-![AI Menu](https://yiitap.pileax.ai/screenshots/ai.gif)
-
+<p align="center">
+  <img src="https://yiitap.pileax.ai/screenshots/ai.gif" width="480" style="border-radius: 8px;" />
+</p>
 
 ### AI Block
 
-![AI Block](https://yiitap.pileax.ai/screenshots/ai-block.gif)
+<p align="center">
+  <img src="https://yiitap.pileax.ai/screenshots/ai-block.gif" width="480" style="border-radius: 8px;" />
+</p>
 
 ### Multi-column
 
-![Multi-column](https://yiitap.pileax.ai/screenshots/multi-column.gif)
+<p align="center">
+  <img src="https://yiitap.pileax.ai/screenshots/multi-column.gif" width="480" style="border-radius: 8px;" />
+</p>
 
 ### Table
 
-![Table](https://yiitap.pileax.ai/screenshots/table.gif)
+<p align="center">
+  <img src="https://yiitap.pileax.ai/screenshots/table.gif" width="480" style="border-radius: 8px;" />
+</p>
 
 ## Contributing
 For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTING.md). Contributions are welcome and will be fully credited.
