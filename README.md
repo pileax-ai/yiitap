@@ -48,25 +48,25 @@ For more detailed information, make sure to check out our [documentation](https:
 </p>
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/ai.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/ai.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ### AI Block
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/ai-block.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/ai-block.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ### Multi-column
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/multi-column.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/multi-column.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ### Table
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/table.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/table.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ## Contributing

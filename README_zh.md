@@ -48,26 +48,26 @@ Yiitap 是一个AI驱动、Notion风格的块级编辑器。🔥
 </p>
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/ai.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/ai.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 
 ### AI块
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/ai-block.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/ai-block.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ### 分栏
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/multi-column.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/multi-column.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ### 表格
 
 <p align="center">
-  <img src="https://yiitap.pileax.ai/screenshots/table.gif" width="480" style="border-radius: 8px;" />
+  <img src="https://yiitap.pileax.ai/screenshots/table.gif" width="600" style="border-radius: 8px;" />
 </p>
 
 ## 贡献
