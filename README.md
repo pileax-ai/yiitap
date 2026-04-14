@@ -42,6 +42,18 @@ For more detailed information, make sure to check out our [documentation](https:
 
 ![Screenshot](docs/screenshots/screenshot.gif)
 
+### AI Menu
+<p align="center">
+  <img src="https://yiitap.pileax.ai/screenshots/ai_menu-en.png" width="400" />
+</p>
+
+![AI Menu](https://yiitap.pileax.ai/screenshots/ai.gif)
+
+
+### AI Block
+
+![AI Block](https://yiitap.pileax.ai/screenshots/ai-block.gif)
+
 ### Multi-column
 
 ![Multi-column](https://yiitap.pileax.ai/screenshots/multi-column.gif)
