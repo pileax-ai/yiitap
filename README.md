@@ -1,6 +1,9 @@
 **English** | [简体中文](README_zh.md)
 
 <h1 align="center">Yiitap</h1>
+<p align="center">
+  ⚡ Build AI-native Notion-like editors in minutes
+</p>
 
 <p align="center">
     <a href="https://github.com/pileax-ai/yiitap/actions/workflows/build.yml" alt="Build Status">
@@ -16,29 +19,12 @@
     <a href="https://github.com/pileax-ai/yiitap/stargazers"><img src="https://img.shields.io/github/stars/pileax-ai/yiitap" alt="stars"></a>
 </p>
 
-Yiitap is an AI powered, Notion-style WYSIWYG rich-text block-based editor, built on top of [tiptap](https://tiptap.dev).🔥
+Yiitap is an AI-powered, Notion-style WYSIWYG rich-text block-based editor, built on top of [tiptap](https://tiptap.dev).🔥
 
-## Features
 
-🚀 **Supports Vue & React** – Seamless integration with both frameworks.  
-📝 **Modern Notion-style editor** – Clean, intuitive, and distraction-free.  
-🔧 **Highly customizable & extensible** – Built on **Tiptap** & **ProseMirror**.  
-🤖 **AI-powered** – Smart features to boost productivity.  
-🧩 **Block-based editing** – Manipulate content via **bubble, floating, main, or side menus**.  
-✨ **Rich feature set** – Includes **15+ custom extensions** & **50+ UI components**.  
-🌍 **I18n** – Includes **10+ languages**.  
-🌗 Light & Dark mode.  
-🆓 MIT Licensed.
+## Demo
 
-## Quick start
-
-- [Guide to Yiitap](https://yiitap.pileax.ai/guide/getting-started)
-- [Live Demo](https://yiitap.pileax.ai/demo/vue)
-- Full Example: [Live](https://pileax-ai.github.io/yiitap/) | [Source](https://github.com/pileax-ai/yiitap/blob/main/apps/vue/src/components/Demo.vue)
-
-For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an [issue](https://github.com/pileax-ai/yiitap/issues/new/choose).
-
-## Screenshots
+> AI + Block Editor in action
 
 ![Screenshot](docs/screenshots/screenshot.gif)
 
@@ -68,6 +54,47 @@ For more detailed information, make sure to check out our [documentation](https:
 <p align="center">
   <img src="https://yiitap.pileax.ai/screenshots/table.gif" width="600" style="border-radius: 8px;" />
 </p>
+
+
+## Key Features
+
+🚀 **Supports Vue & React** – Seamless integration with both frameworks.  
+🤖 **AI-powered** – Built-in AI capabilities to supercharge content creation and productivity.    
+📝 **Markdown-friendly** - Paste Markdown and copy Markdown natively.
+📝 **Modern Notion-style Editor** – Clean, intuitive, and distraction-free writing experience.  
+🔧 **Highly Customizable & Extensible** – Based on **Tiptap** & **ProseMirror**.  
+🧩 **Block-based Editing** – Flexible content manipulation via **bubble, floating, main, and side menus**.   
+✨ **Rich Extensions** – **15+ custom extensions** & **50+ UI components**.  
+🌍 **I18n** – Built-in support for **10+ languages**.  
+🌗 Light & Dark mode.  
+🆓 MIT Licensed.
+
+
+## Use Cases
+
+🧠 AI Chat Editor (like ChatGPT UI)  
+📝 Writing tools (Notion-like)  
+📚 Knowledge base editors  
+✍️ Markdown editors  
+🧪 AI-powered content apps
+
+## Quick start
+
+### Installation
+
+```shell
+pnpm install @yiitap/vue @yiitap/vue-preset
+```
+
+### Guide
+
+- 👉 [Guide to Yiitap](https://yiitap.pileax.ai/guide/getting-started)
+- 👉 [Live Demo](https://yiitap.pileax.ai/demo/vue)
+- Full Example: [Live](https://pileax-ai.github.io/yiitap/) | [Source](https://github.com/pileax-ai/yiitap/blob/main/apps/vue/src/components/Demo.vue)
+
+For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an [issue](https://github.com/pileax-ai/yiitap/issues/new/choose).
+
+
 
 ## Contributing
 For those who'd like to contribute code, see our [Contribution Guide](CONTRIBUTING.md). Contributions are welcome and will be fully credited.
