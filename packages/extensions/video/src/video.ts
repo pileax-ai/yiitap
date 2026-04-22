@@ -1,4 +1,9 @@
-import { Node, nodeInputRule, mergeAttributes } from '@tiptap/core'
+import {
+  Node,
+  nodeInputRule,
+  mergeAttributes,
+  type CommandProps,
+} from '@tiptap/core'
 
 export const inputRegex = /(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/
 
@@ -6,6 +11,7 @@ declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     video: {
       setVideo: (options: any) => ReturnType
+      uploadVideo: (file: File) => ReturnType
     }
   }
 }
@@ -100,6 +106,27 @@ export const Video = Node.create({
             type: this.name,
             attrs: options,
           })
+        },
+      uploadVideo:
+        (file: File) =>
+        ({ editor }: CommandProps) => {
+          const onUpload = (editor.storage as any).uploadManager?.onUpload
+          if (!onUpload) {
+            console.warn(
+              'onUpload callback is not defined in UploadManager extension options.'
+            )
+            return false
+          }
+
+          onUpload(file, 'video')
+            .then((url: string) => {
+              editor.commands.setVideo({ src: url })
+            })
+            .catch((err: Error) => {
+              console.error('Upload failed:', err)
+            })
+
+          return true
         },
     }
   },

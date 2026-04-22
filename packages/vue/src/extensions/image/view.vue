@@ -19,9 +19,10 @@
       show-arrow
     >
       <template #popover-content>
-        <o-media-input
+        <o-media-form
           :val="src === 'init' ? '' : src"
           type="image"
+          :on-upload="onUpload"
           @input="onInput"
         />
       </template>
@@ -159,13 +160,14 @@ import {
   OImageViewer,
   OInput,
   OLinkBtn,
-  OMediaInput,
+  OMediaForm,
   OMenubarBtn,
   ONodeView,
 } from '../../components/index'
 
 const props = defineProps(nodeViewProps)
 
+const onUpload = (props.editor.storage as any).uploadManager?.onUpload
 const { tr } = useI18n()
 const { downloadImage } = useCommon()
 const { isEditable, getEditorImages } = useTiptap()

@@ -15,9 +15,10 @@
       :placement="src === 'init' ? 'bottom' : 'top'"
     >
       <template #popover-content>
-        <o-media-input
+        <o-media-form
           :val="src === 'init' ? '' : src"
-          type="video"
+          type="model"
+          :on-upload="onUpload"
           @input="onInput"
         />
       </template>
@@ -109,7 +110,7 @@ import {
   OContextMenu,
   ODialog,
   OInput,
-  OMediaInput,
+  OMediaForm,
   OMenubarBtn,
   ONodeView,
 } from '../../components/index'
@@ -117,6 +118,7 @@ import type { DialogOption } from '../../types/types'
 
 const props = defineProps(nodeViewProps)
 
+const onUpload = (props.editor.storage as any).uploadManager?.onUpload
 const { tr } = useI18n()
 const { isEditable } = useTiptap()
 const showContextMenu = ref(false)

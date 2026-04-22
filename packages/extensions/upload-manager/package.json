@@ -1,6 +1,6 @@
 {
-	"name": "@yiitap/i18n",
-	"description": "Yiitap i18n",
+	"name": "@yiitap/extension-upload-manager",
+	"description": "Upload manager extension",
 	"version": "0.17.1",
 	"private": false,
 	"author": {
@@ -22,8 +22,7 @@
 	},
 	"files": [
 		"dist",
-		"src",
-		"types"
+		"src"
 	],
 	"scripts": {
 		"build": "pnpm build-lib && pnpm build-types",
@@ -31,17 +30,11 @@
 		"build-types": "tsc --emitDeclarationOnly",
 		"lint": "eslint 'src/**/*.{ts,vue}'",
 		"test": "vitest",
-		"test-ci": "vitest --run",
-		"generate": "node src/generate/index.js",
-		"generate-zh": "node src/generate/index.js --base=zh-Hans"
+		"test-ci": "vitest --run"
 	},
 	"dependencies": {},
-	"devDependencies": {
-    "@google-cloud/translate": "^9.3.0",
-		"@vitalets/google-translate-api": "^9.2.1",
-		"bing-translate-api": "^4.2.0",
-    "dotenv": "^17.2.4",
-		"http-proxy-agent": "^7.0.2"
+	"peerDependencies": {
+		"@tiptap/core": "^3.20.0"
 	},
-	"peerDependencies": {}
+	"devDependencies": {}
 }

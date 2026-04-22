@@ -1,4 +1,6 @@
 import fs from 'node:fs'
+import dotenv from 'dotenv'
+import { v2 as GoogleTranslate } from '@google-cloud/translate'
 import googleTranslateApi from '@vitalets/google-translate-api'
 import bingTranslateApi from 'bing-translate-api'
 import path from 'node:path'
@@ -8,11 +10,21 @@ import { HttpProxyAgent } from 'http-proxy-agent'
 import languages from './config/languages.json' with { type: 'json' }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const agent = new HttpProxyAgent('http://127.0.0.1:7890')
+dotenv.config({
+  path: path.resolve(__dirname, '../../../../.env'),
+})
 
-const ARGS = parseArgs(process.argv)
-
+// ==================================================
+// Config
+// ==================================================
 const TRANSLATOR = 'google'
+const TRANSLATOR_INTERVAL = 100 // translate interval
+const HttpProxy = 'http://127.0.0.1:7890' // leave blank if proxy is not required
+
+// ==================================================
+// Constants
+// ==================================================
+const ARGS = parseArgs(process.argv)
 const BASE_LANG = ARGS.base || 'en-US'
 const MANUAL_LANGS = ['en-US', 'zh-Hans']
 const TARGET_LANGS = languages.filter(
@@ -23,6 +35,10 @@ const LOCALE_DIR = path.join(__dirname, '../messages')
 const BASE_LANG_FILE = path.join(LOCALE_DIR, `${BASE_LANG}.ts`)
 const META_DIR = path.join(__dirname, 'meta')
 const BASE_META_FILE = path.join(META_DIR, `${BASE_LANG}.meta.json`)
+
+let googleTranslateClient = null
+let TRANSLATE_ERROR = false
+let TRANSLATE_ERROR_MSG = ''
 
 // ==================================================
 // Utility
@@ -135,30 +151,76 @@ function serializeToTs(obj, indent = 2, level = 0) {
 // ==================================================
 async function translateText(text, lang) {
   console.log(`➡️ Translating (${lang.value}): ${text}`)
-  await sleep(200 + Math.random() * 200)
+  // Return blank text if translate failed, and try next time
+  if (TRANSLATE_ERROR) {
+    return ''
+  }
+
+  await sleep(TRANSLATOR_INTERVAL + Math.random() * TRANSLATOR_INTERVAL * 2)
 
   switch (TRANSLATOR) {
-    case 'bing':
-      return bintTranslate(text, lang)
+    case 'bing-free':
+      return bingFreeTranslate(text, lang)
+    case 'google-free':
+      return googleFreeTranslate(text, lang)
     default:
       return googleTranslate(text, lang)
   }
 }
 
+function initGoogleTranslate() {
+  if (!googleTranslateClient) {
+    let fetchOptions = {}
+    if (HttpProxy) {
+      const agent = new HttpProxyAgent(HttpProxy)
+      fetchOptions = { agent }
+    }
+
+    googleTranslateClient = new GoogleTranslate.Translate({
+      key: process.env.GOOGLE_API_KEY,
+      requestOptions: fetchOptions,
+    })
+  }
+}
+
 async function googleTranslate(text, lang) {
   try {
+    initGoogleTranslate()
+
+    const [result] = await googleTranslateClient.translate(text, {
+      to: lang.value,
+      format: 'text',
+    })
+    return result
+  } catch (err) {
+    console.error(`❌ Translation failed：`, err.message)
+    TRANSLATE_ERROR = true
+    TRANSLATE_ERROR_MSG = err.message
+    return '' // Return blank text if failed
+  }
+}
+
+async function googleFreeTranslate(text, lang) {
+  try {
+    let fetchOptions = {}
+    if (HttpProxy) {
+      const agent = new HttpProxyAgent(HttpProxy)
+      fetchOptions = { agent }
+    }
     const res = await googleTranslateApi.translate(text, {
       to: lang.value,
-      fetchOptions: { agent },
+      fetchOptions: fetchOptions,
     })
     return res.text
   } catch (err) {
     console.error(`❌ Translation failed：`, err.message)
-    return text // Return original text if failed
+    TRANSLATE_ERROR = true
+    TRANSLATE_ERROR_MSG = err.message
+    return '' // Return blank text if failed
   }
 }
 
-async function bintTranslate(text, lang) {
+async function bingFreeTranslate(text, lang) {
   try {
     const res = await bingTranslateApi.translate(
       text,
@@ -168,7 +230,9 @@ async function bintTranslate(text, lang) {
     return res.translation
   } catch (err) {
     console.error(`❌ Translation failed：`, err.message)
-    return text // Return original text if failed
+    TRANSLATE_ERROR = true
+    TRANSLATE_ERROR_MSG = err.message
+    return '' // Return blank text if failed
   }
 }
 

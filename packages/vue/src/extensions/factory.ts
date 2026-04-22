@@ -39,6 +39,7 @@ import type {
   ColumnDropCursorOptions,
   MultiColumnOptions,
   ShortcutOptions,
+  UploadManagerOptions,
 } from './extensions'
 
 // ---------------------------------------------------------
@@ -99,6 +100,7 @@ import {
   OTableWrapper,
   OTaskItem,
   OVideo,
+  OUploadManager,
 
   // Column
   Column,
@@ -172,6 +174,7 @@ export interface ExtensionOptions {
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
   OVideo: { allowFullscreen?: boolean; HTMLAttributes?: Record<string, any> }
+  OUploadManager: UploadManagerOptions
 
   // Groups
   ODetails: ODetailsOptions
@@ -282,6 +285,7 @@ export const extensionRegistry: {
       ...opts,
     }),
   OVideo: (opts?) => OVideo.configure(opts),
+  OUploadManager: (opts?) => OUploadManager.configure(opts),
 
   // Groups (returning arrays)
   Table: (opts?) => [

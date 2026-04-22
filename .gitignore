@@ -4,6 +4,7 @@ node_modules
 dist
 .analysis
 *.iml
+.env
 
 packages/docs/.vitepress/cache
 packages/*/dist

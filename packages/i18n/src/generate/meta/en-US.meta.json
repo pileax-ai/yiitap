@@ -207,5 +207,17 @@
   "table.removeRow": "d312b9cc",
   "table.selectColumn": "53baa16c",
   "table.selectRow": "1953384c",
-  "table.split": "3068f60f"
+  "table.split": "3068f60f",
+  "label.linkPlaceholder.image": "9ce38727",
+  "label.linkPlaceholder.model": "f97989d7",
+  "label.linkPlaceholder.video": "3bd174f2",
+  "label.upload": "91412465",
+  "label.uploader.failed": "299cb00a",
+  "label.uploader.notConfigured": "bab14c88",
+  "label.uploader.tips": "618f609d",
+  "label.uploader.uploading": "3f1c5b00",
+  "table.insertAbove": "e3801b01",
+  "table.insertBelow": "30058206",
+  "table.insertLeft": "fb18b055",
+  "table.insertRight": "badd06a1"
 }
