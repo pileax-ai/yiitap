@@ -1,4 +1,9 @@
-import { Node, nodeInputRule, mergeAttributes } from '@tiptap/core'
+import {
+  Node,
+  nodeInputRule,
+  mergeAttributes,
+  type CommandProps,
+} from '@tiptap/core'
 
 export const inputRegex = /(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/
 
@@ -6,6 +11,7 @@ declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     modelViewer: {
       setModelViewer: (options: any) => ReturnType
+      uploadModel: (file: File) => ReturnType
     }
   }
 }
@@ -105,6 +111,27 @@ export const ModelViewer = Node.create({
             type: this.name,
             attrs: options,
           })
+        },
+      uploadModel:
+        (file: File) =>
+        ({ editor }: CommandProps) => {
+          const onUpload = (editor.storage as any).uploadManager?.onUpload
+          if (!onUpload) {
+            console.warn(
+              'onUpload callback is not defined in UploadManager extension options.'
+            )
+            return false
+          }
+
+          onUpload(file, 'image')
+            .then((url: string) => {
+              editor.commands.setModelViewer({ src: url })
+            })
+            .catch((err: Error) => {
+              console.error('Upload failed:', err)
+            })
+
+          return true
         },
     }
   },

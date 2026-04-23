@@ -2,6 +2,7 @@ import { BasicFeaturesArticle, BasicFeaturesArticleZh } from './article'
 import { Audio, AudioZh } from './audio'
 import { Diagram } from './diagram'
 import { Image, ImageZh } from './image'
+import { Media, MediaZh } from './media'
 import { ModelViewer, ModelViewerZh } from './model-viewer'
 import { MultiColumn, MultiColumnZh } from './multi-column'
 import { Table, TableZh } from './table'
@@ -11,6 +12,7 @@ const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
   audio: { en: Audio, zh: AudioZh },
   diagram: { en: Diagram, zh: Diagram },
   image: { en: Image, zh: ImageZh },
+  media: { en: Media, zh: MediaZh },
   modelViewer: { en: ModelViewer, zh: ModelViewerZh },
   multiColumn: { en: MultiColumn, zh: MultiColumnZh },
   table: { en: Table, zh: TableZh },

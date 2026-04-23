@@ -152,3 +152,33 @@ body {
 	}
 }
 
+.o-text {
+  &-error {
+    color: var(--yii-brand-red);
+  }
+  &-warning {
+    color: var(--yii-brand-orange);
+  }
+  &-success {
+    color: var(--yii-brand-green);
+  }
+}
+
+
+.o-loading {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--yii-border-color);
+  border-top-color: var(--yii-brand-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-sizing: border-box;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -149,6 +149,7 @@ import {
   OIcon,
   OMainMenu,
   OAiBlock,
+  OUploadManager,
   OStarterKit,
   removeHtmlAttributes,
   type AiOptions,
@@ -184,7 +185,7 @@ const documentName = ref('note@2b590c99-18ad-45bb-a4dd-d1ebdf2adcb3')
 const providerUrl = ref('ws://localhost:9621')
 const providerToken = ref('')
 const collabReady = ref(false)
-const DEBUG = false
+const DEBUG = true
 
 const aiOptions = computed(() => {
   return {
@@ -201,6 +202,9 @@ const editorOptions = computed(() => {
       UniqueID: true,
     }),
     OAiBlock.configure(aiOptions.value),
+    OUploadManager.configure({
+      onUpload: onUpload,
+    }),
     'InlineMath',
     'Markdown',
     'OAudio',
@@ -299,6 +303,7 @@ const sourceList = computed(() => {
     { label: 'Diagram', value: 'diagram' },
     { label: 'Audio', value: 'audio' },
     { label: 'Image', value: 'image' },
+    { label: 'Media', value: 'media' },
     { label: 'ModelViewer', value: 'modelViewer' },
     { label: 'MultiColumn', value: 'multiColumn' },
     { label: 'Table', value: 'table' },
@@ -393,6 +398,22 @@ function onToggleDrawer() {
 
 function onGithub() {
   window.open('https://github.com/pileax-ai/yiitap', '_blank')
+}
+
+function onUpload(file: File, type: string): Promise<string> {
+  console.log('onUpload', file, type)
+  return new Promise((resolve, reject) => {
+    // Upload mock
+    setTimeout(() => {
+      try {
+        // Create a temporary local URL for the file
+        const url = URL.createObjectURL(file)
+        resolve(url)
+      } catch (error) {
+        reject(new Error('Failed to generate mock URL'))
+      }
+    }, 1000)
+  })
 }
 
 function onMode() {
