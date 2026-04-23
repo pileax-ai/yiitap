@@ -1,11 +1,12 @@
-import { computed, inject } from 'vue'
-
 export default function () {
   const commonDownload = (type: string, fileName: string, text: string) => {
     const options = {
-      type: 'text/plain',
+      type: type,
     }
     switch (type) {
+      case 'code':
+        options.type = 'text/plain'
+        break
       case 'svg':
         options.type = 'image/svg+xml;charset=utf-8'
         break
@@ -42,6 +43,26 @@ export default function () {
     }
   }
 
+  const downloadFile = async (fileUrl: string, fileName: string) => {
+    try {
+      const response = await fetch(fileUrl)
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+
+      const link = document.createElement('a')
+      link.href = url
+      link.download = fileName
+
+      document.body.appendChild(link)
+      link.click()
+
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      window.open(fileUrl, '_blank')
+    }
+  }
+
   const getFileNameFromUrl = (url: string, defaultExt = 'png') => {
     try {
       const urlObj = new URL(url)
@@ -62,5 +83,6 @@ export default function () {
   return {
     commonDownload,
     downloadImage,
+    downloadFile,
   }
 }

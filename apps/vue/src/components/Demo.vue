@@ -212,6 +212,7 @@ const editorOptions = computed(() => {
     'OBlockMath',
     'OColorHighlighter',
     'ODetails',
+    'OEmbed',
     'OImage',
     'OModelViewer',
     'OMultiColumn',
@@ -401,7 +402,6 @@ function onGithub() {
 }
 
 function onUpload(file: File, type: string): Promise<string> {
-  console.log('onUpload', file, type)
   return new Promise((resolve, reject) => {
     // Upload mock
     setTimeout(() => {

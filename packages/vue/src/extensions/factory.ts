@@ -85,6 +85,7 @@ import {
   OColorHighlighter,
   OColonCommand,
   ODetails,
+  OEmbed,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -164,6 +165,7 @@ export interface ExtensionOptions {
   OCallout: CalloutOptions
   OCodeBlock: OCodeBlockOptions
   OColorHighlighter: any
+  OEmbed: { HTMLAttributes?: Record<string, any> }
   OHorizontalRule: HorizontalRuleOptions
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
@@ -235,6 +237,7 @@ export const extensionRegistry: {
         'codeBlock',
         'callout',
         'details',
+        'embed',
         'heading',
         'image',
         'paragraph',
@@ -254,6 +257,7 @@ export const extensionRegistry: {
   OCodeBlock: (opts?) => OCodeBlock.configure(opts),
   OColon: (opts?) =>
     OColonCommand.configure({ suggestion: ColonSuggestion, ...opts }),
+  OEmbed: (opts?) => OEmbed.configure(opts),
   OSlash: (opts?) =>
     OSlashCommand.configure({ suggestion: SlashSuggestion, ...opts }),
   OSlashZh: (opts?) =>

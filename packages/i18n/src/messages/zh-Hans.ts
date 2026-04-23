@@ -150,6 +150,8 @@ export default {
     cut: '剪切',
     download: '下载',
     edit: '编辑',
+    embed: '嵌入',
+    embedAdd: '嵌入 (PDF、视频、音乐...)',
     empty: '空白页面',
     emptyTips: '按回车开始编辑，或从下方选择',
     example: '示例',

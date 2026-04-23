@@ -150,6 +150,8 @@ export default {
     cut: 'Cięcie',
     download: 'Pobierać',
     edit: 'Redagować',
+    embed: 'Osadzać',
+    embedAdd: 'Osadź (pliki PDF, Youtube, Google Docs, Spotify...)',
     empty: 'Pusty',
     emptyTips:
       'Naciśnij Enter, aby kontynuować z pustą notatką, lub wybierz opcję Dalej',

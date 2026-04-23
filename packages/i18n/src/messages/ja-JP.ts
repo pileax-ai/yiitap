@@ -150,6 +150,8 @@ export default {
     cut: 'カット',
     download: 'ダウンロード',
     edit: '編集',
+    embed: '埋め込み',
+    embedAdd: '埋め込み（PDF、YouTube、Googleドキュメント、Spotifyなど）',
     empty: '空の',
     emptyTips: 'Enter を押して空のメモを続行するか、次を選択してください',
     example: '例',

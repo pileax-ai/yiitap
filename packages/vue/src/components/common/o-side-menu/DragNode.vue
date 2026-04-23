@@ -48,7 +48,7 @@ const nodeType = computed(() => {
   const content = props.node?.content?.content
   if (content?.length > 0) {
     const first = content[0]
-    if (first.type.name === 'image') {
+    if (first.type.name === 'image' || first.type.name === 'embed') {
       return first.type.name
     }
   }

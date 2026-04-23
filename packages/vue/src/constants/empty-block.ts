@@ -72,6 +72,13 @@ export const EmptyDiagram = {
   ],
 }
 
+export const EmptyEmbed = {
+  type: 'embed',
+  attrs: {
+    src: 'init',
+  },
+}
+
 export const EmptyEmoji = {
   type: 'paragraph',
   content: [{ type: 'text', text: ':' }],

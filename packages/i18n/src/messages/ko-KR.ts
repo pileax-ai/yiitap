@@ -150,6 +150,8 @@ export default {
     cut: '자르다',
     download: '다운로드',
     edit: '편집하다',
+    embed: '포함시키다',
+    embedAdd: '삽입 (PDF, 유튜브, 구글 문서, 스포티파이 등)',
     empty: '비어 있는',
     emptyTips: '빈 메모를 계속하려면 Enter를 누르거나 다음을 선택하세요.',
     example: '예',
