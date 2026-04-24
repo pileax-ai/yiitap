@@ -152,6 +152,7 @@ import {
   OUploadManager,
   OStarterKit,
   removeHtmlAttributes,
+  DefaultBlockMenuOptions,
   type AiOptions,
 } from '@yiitap/vue'
 import type { Editor } from '@yiitap/vue'
@@ -252,6 +253,10 @@ const editorOptions = computed(() => {
     sideMenu: {
       show: true,
       add: 'menu',
+      addMenuOptions: {
+        ...DefaultBlockMenuOptions,
+        modelViewer: false,
+      },
     },
     pageView: 'page',
     mainMenu: [

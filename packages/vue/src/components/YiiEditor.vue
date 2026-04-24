@@ -74,6 +74,7 @@ type SideMenuAddType = 'menu' | 'empty'
 interface SideMenuConfig {
   show: boolean
   add: SideMenuAddType
+  addMenuOptions: Record<string, boolean> | null
 }
 
 interface CollabConfig {
@@ -152,6 +153,7 @@ const props = defineProps({
     default: (): SideMenuConfig => ({
       show: true,
       add: 'menu',
+      addMenuOptions: null,
     }),
   },
   /**
@@ -316,6 +318,7 @@ const sideMenuOptions = computed(() => {
   return {
     editor: editor.value,
     add: props.sideMenu.add,
+    addMenuOptions: props.sideMenu.addMenuOptions,
     title: props.title,
     menu: [],
   }

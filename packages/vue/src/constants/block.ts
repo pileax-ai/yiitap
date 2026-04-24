@@ -526,3 +526,8 @@ export const AiBlocks: BlockOption[] = [
     },
   },
 ]
+
+export const DefaultBlockMenuOptions: Record<string, boolean> =
+  Object.fromEntries(
+    [...BasicBlocks, ...CommonBlocks].map((block) => [block.value, true])
+  )

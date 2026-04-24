@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, type PropType, ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import AddNodeView from './AddNodeView.vue'
 import { OBtn, OIcon, OPopover } from '../../index'
@@ -30,6 +30,10 @@ const props = defineProps({
   add: {
     type: String,
     default: 'menu',
+  },
+  addMenuOptions: {
+    type: Object as PropType<Record<string, boolean> | null>,
+    default: null,
   },
 })
 const popover = ref<InstanceType<typeof OPopover>>()

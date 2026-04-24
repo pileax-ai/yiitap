@@ -5,8 +5,8 @@
   >
     <section class="view-main" v-if="view === 'main'">
       <o-list hoverable clickable>
-        <template v-if="items.length">
-          <template v-for="(item, index) in items" :key="index">
+        <template v-if="filteredItem.length">
+          <template v-for="(item, index) in filteredItem" :key="index">
             <template v-if="item.group">
               <o-divider v-if="index > 0" />
               <div class="group o-tips">{{ tr(item.group) }}</div>
@@ -49,7 +49,7 @@ import useI18n from '../../../hooks/useI18n'
 import useTiptap from '../../../hooks/useTiptap'
 import { ODivider, OIcon, OList, OListItem } from '../../../components/index'
 import { BasicBlocks } from '../../../constants/block'
-import { EmptyDiagram } from '../../../constants/empty-block'
+import { isExtensionInstalled } from '../../../utils'
 
 export default {
   props: {
@@ -162,6 +162,11 @@ export default {
     },
   },
   computed: {
+    filteredItem() {
+      return this.items.filter((item) =>
+        isExtensionInstalled(this.editor, item.value)
+      )
+    },
     basicBlocks() {
       return BasicBlocks.slice(1)
     },
