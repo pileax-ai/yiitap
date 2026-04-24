@@ -101,6 +101,13 @@ export default function () {
       case 'duplicateSelected':
         commands.duplicateSelected()
         break
+      case 'embed':
+        focus
+          .setEmbed({
+            src: 'init',
+          })
+          .run()
+        break
       case 'emoji':
         commands.insertContent(':')
         break

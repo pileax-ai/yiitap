@@ -58,12 +58,14 @@ const error = ref(null)
 
 const accept = computed(() => {
   switch (props.type) {
-    case 'video':
-      return 'video/*,.mp4,.webm,.ogg'
+    case 'image':
+      return 'image/*,.jpg,.jpeg,.png,.gif,.webp,.svg'
     case 'model':
       return '.glb,.gltf'
+    case 'video':
+      return 'video/*,.mp4,.webm,.ogg'
     default:
-      return 'image/*,.jpg,.jpeg,.png,.gif,.webp,.svg'
+      return '*'
   }
 })
 
@@ -97,6 +99,12 @@ const onInput = (e: Event) => {
 const processFile = (file: File) => {
   error.value = null
   selectedFile.value = file
+
+  if (props.type === 'embed') {
+    emit('input', '', file)
+    return
+  }
+
   if (props.onUpload) {
     props
       .onUpload(file, props.type)

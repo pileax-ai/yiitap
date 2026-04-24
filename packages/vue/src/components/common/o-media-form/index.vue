@@ -1,25 +1,28 @@
 <template>
   <section class="o-media-form">
-    <header class="tabs">
-      <template v-for="(item, index) in tabs" :key="index">
-        <div
-          class="tab"
-          :class="{ active: item.value === currentTab }"
-          @click="currentTab = item.value"
-        >
-          {{ item.label }}
+    <header class="tab-container">
+      <div class="tabs">
+        <template v-for="(item, index) in tabs" :key="index">
+          <div
+            class="tab"
+            :class="{ active: item.value === currentTab }"
+            @click="currentTab = item.value"
+          >
+            {{ item.label }}
+          </div>
+        </template>
+      </div>
+      <div>
+        <div class="type">
+          {{ tr(`label.${type}`) }}
         </div>
-      </template>
+      </div>
     </header>
 
     <section class="tab-panels">
       <template v-for="(item, index) in tabs" :key="index">
         <div class="tab-panel" v-if="item.value === currentTab">
-          <component
-            :is="item.component"
-            v-bind="props"
-            @input="emit('input', $event)"
-          />
+          <component :is="item.component" v-bind="props" @input="onInput" />
         </div>
       </template>
     </section>
@@ -38,6 +41,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  tab: {
+    type: String,
+    default: 'upload',
+  },
   type: {
     type: String,
     default: '',
@@ -49,7 +56,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['input'])
 
-const currentTab = ref('upload')
+const currentTab = ref(props.tab)
 const { tr } = useI18n()
 
 const tabs = computed(() => {
@@ -58,6 +65,10 @@ const tabs = computed(() => {
     { label: tr('label.link'), value: 'link', component: Link },
   ]
 })
+
+function onInput(url: string, file?: File) {
+  emit('input', url, file)
+}
 </script>
 
 <style lang="scss">
@@ -68,10 +79,15 @@ const tabs = computed(() => {
 .o-media-form {
   min-width: 500px;
 
-  .tabs {
+  .tab-container {
     display: flex;
+    justify-content: space-between;
     border-bottom: solid 1px var(--yii-border-color);
     padding: 0 16px;
+
+    .tabs {
+      display: flex;
+    }
 
     .tab {
       color: var(--yii-tips-color);
@@ -89,6 +105,14 @@ const tabs = computed(() => {
         color: var(--yii-color);
         border-bottom: solid 2px var(--yii-color);
       }
+    }
+
+    .type {
+      padding: 0 6px;
+      margin-top: 2px;
+      color: var(--yii-tips-color);
+      background: var(--yii-active-bg-color);
+      border-radius: 2px;
     }
   }
 

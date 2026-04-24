@@ -150,6 +150,8 @@ export default {
     cut: 'Corte',
     download: 'Download',
     edit: 'Editar',
+    embed: 'Incorporar',
+    embedAdd: 'Incorporar (PDFs, YouTube, Google Docs, Spotify...)',
     empty: 'Vazio',
     emptyTips:
       'Pressione Enter para continuar com uma nota vazia ou selecione o seguinte',

@@ -2,12 +2,12 @@
   <o-node-view
     ref="imageView"
     v-bind="props"
-    class="o-image-view"
+    class="o-embed-view"
     :class="{
       max: isMax,
       'with-caption': attrs.alt,
       readonly: !editor?.isEditable,
-      init: src === 'init',
+      init: src === 'init' || attrs.type,
     }"
     as="div"
     @contextmenu.prevent="onContextMenu"
@@ -21,36 +21,45 @@
       <template #popover-content>
         <o-media-form
           :val="src === 'init' ? '' : src"
-          type="image"
+          tab="link"
+          type="embed"
           :on-upload="onUpload"
           @input="onInput"
         />
       </template>
 
       <o-block-placeholder
-        icon="image"
-        :placeholder="tr('label.imageAdd')"
+        icon="embed"
+        :placeholder="tr('label.embedAdd')"
         v-if="src === 'init'"
-      />
+      >
+        <template #right>
+          <div class="o-loading" v-if="uploading"></div>
+        </template>
+      </o-block-placeholder>
+      <o-block-placeholder
+        class="attachment"
+        icon="attachment"
+        :placeholder="caption"
+        tooltip
+        v-else-if="attrs.type"
+      >
+        <template #right>
+          <o-menubar-btn
+            icon="download"
+            :tooltip="tr('label.download')"
+            @click="onDownload"
+          />
+        </template>
+      </o-block-placeholder>
       <div class="image-panel" v-else>
         <o-block-toolbar v-bind="props" @action="onAction">
           <template v-if="isEditable">
-            <o-menubar-btn
-              :icon="canDrag ? 'arrow_expand' : 'close'"
-              :icon-class="canDrag ? 'rotate-315' : ''"
-              content-class="with-label"
-              :tooltip="tr('image.repositionTips')"
-              @click.stop="onToggleDrag"
-              v-if="showPositionControls"
-            >
-              <span class="label"> {{ tr('image.reposition') }} </span>
-            </o-menubar-btn>
             <o-menubar-btn
               icon="subtitles"
               :tooltip="tr('label.caption')"
               @click.stop="onCaption"
             />
-            <o-link-btn :editor="editor" />
             <o-align-dropdown :editor="editor" placement="bottom-end" />
           </template>
 
@@ -63,6 +72,7 @@
             icon="zoom_in"
             :tooltip="tr('image.zoom')"
             @click="onPreview"
+            v-if="false"
           />
         </o-block-toolbar>
         <div
@@ -71,13 +81,14 @@
           :style="containerStyle"
           @mousedown="onContainerMouseDown"
         >
-          <!-- Image -->
+          <!-- iframe -->
           <div ref="imageWrapper" class="image-wrapper" :style="wrapperStyle">
-            <img
+            <iframe
               ref="imageElement"
               v-bind="attrs"
               draggable="true"
               data-drag-handle
+              allowfullscreen
               @load="onImageLoad"
             />
           </div>
@@ -159,17 +170,18 @@ import {
   OContextMenu,
   OImageViewer,
   OInput,
-  OLinkBtn,
   OMediaForm,
   OMenubarBtn,
   ONodeView,
 } from '../../components/index'
+import { reduceUrlMeta } from '../../utils/embed'
+import { MediaTypes } from '@yiitap/extension-embed'
 
 const props = defineProps(nodeViewProps)
 
 const onUpload = (props.editor.storage as any).uploadManager?.onUpload
 const { tr } = useI18n()
-const { downloadImage } = useCommon()
+const { downloadFile } = useCommon()
 const { isEditable, getEditorImages } = useTiptap()
 const showContextMenu = ref(false)
 const showPopover = ref(false)
@@ -215,6 +227,15 @@ const attrs = computed(() => {
   return props.node.attrs
 })
 
+const uploading = computed({
+  get() {
+    return props.node.attrs.uploading
+  },
+  set(value) {
+    props.updateAttributes({ uploading: value })
+  },
+})
+
 const src = computed({
   get() {
     return props.node.attrs.src
@@ -226,10 +247,10 @@ const src = computed({
 
 const caption = computed({
   get() {
-    return props.node.attrs.title
+    return props.node.attrs.caption
   },
   set(value) {
-    props.updateAttributes({ title: value })
+    props.updateAttributes({ caption: value })
   },
 })
 
@@ -241,7 +262,7 @@ function onCaption() {
 }
 
 function onDownload() {
-  downloadImage(props.node.attrs.src)
+  downloadFile(src.value, caption.value)
 }
 
 function onPreview() {
@@ -275,8 +296,21 @@ function onAction(action: BlockOption) {
   }
 }
 
-function onInput(value: string) {
-  src.value = value
+function onInput(value: string, file?: File) {
+  if (value) {
+    const meta = reduceUrlMeta(value)
+    if (MediaTypes.includes(meta.type)) {
+      props.editor.commands.setEmbedMedia(meta.url, meta.type, attrs.value.id)
+    } else {
+      src.value = meta.url
+    }
+  }
+
+  // upload file
+  if (file) {
+    uploading.value = true
+    props.editor.commands.uploadFile(file, attrs.value.id)
+  }
   onShowPopover(false)
 }
 
@@ -314,8 +348,8 @@ function getResizeCursor() {
 // Init size when image loaded
 function onImageLoad() {
   if (imageElement.value) {
-    naturalWidth.value = imageElement.value.naturalWidth
-    naturalHeight.value = imageElement.value.naturalHeight
+    naturalWidth.value = props.node.attrs.width || 800
+    naturalHeight.value = props.node.attrs.height || 450
     maxWidth.value =
       imageView.value?.$el?.parentElement.getBoundingClientRect().width ?? 0
     containerMaxWidth.value =
@@ -456,6 +490,7 @@ const wrapperStyle = computed(() => {
     transform: `translateY(${imagePositionY.value}px)`,
     cursor: canDrag.value ? 'grab' : 'default',
     transition: isDragging.value ? 'none' : 'transform 0.2s ease',
+    height: '100%',
   }
 })
 
@@ -562,7 +597,7 @@ watch(
 )
 
 onMounted(() => {
-  onShowPopover(src.value === 'init')
+  onShowPopover(src.value === 'init' && !uploading.value)
 
   // Init size
   if (attrs.value.width) {
@@ -583,18 +618,18 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-p:has(.o-image-view.max) {
+p:has(.o-embed-view.max) {
   max-width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 
-  .o-image-view {
+  .o-embed-view {
     align-self: center;
   }
 }
 
-.o-image-view {
+.o-embed-view {
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -665,7 +700,7 @@ p:has(.o-image-view.max) {
     min-height: 100px;
 
     .image-wrapper {
-      img {
+      iframe {
         width: 100%;
         height: 100%;
         transition: all 0.2s ease;
@@ -673,6 +708,10 @@ p:has(.o-image-view.max) {
         object-fit: cover;
         display: block;
         user-select: none;
+
+        box-sizing: border-box;
+        overflow: hidden;
+        border: 0;
       }
     }
 
@@ -708,7 +747,7 @@ p:has(.o-image-view.max) {
         top: unset;
         bottom: 8px;
         width: 100%;
-        height: 6px;
+        height: 4px;
         justify-content: center;
         cursor: row-resize;
 

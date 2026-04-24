@@ -150,6 +150,8 @@ export default {
     cut: 'Memotong',
     download: 'Unduh',
     edit: 'Sunting',
+    embed: 'Menanamkan',
+    embedAdd: 'Sematkan (PDF, YouTube, Google Docs, Spotify...)',
     empty: 'Kosong',
     emptyTips:
       'Tekan Enter untuk melanjutkan dengan catatan kosong, atau pilih berikut',

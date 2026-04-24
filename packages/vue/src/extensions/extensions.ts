@@ -108,6 +108,7 @@ import OBlockquote, { type OBlockquoteOptions } from './blockquote'
 import OCallout from './callout'
 import OCodeBlock, { type OCodeBlockOptions } from './code-block'
 import ODetails, { type ODetailsOptions } from './details'
+import OEmbed from './embed'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
@@ -195,6 +196,7 @@ export {
   OColonCommand,
   OColorHighlighter,
   ODetails,
+  OEmbed,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,

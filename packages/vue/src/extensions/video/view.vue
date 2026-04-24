@@ -148,7 +148,6 @@ function onShowPopover(value: boolean) {
 }
 
 onMounted(() => {
-  console.log('src', src.value)
   onShowPopover(src.value === 'init')
 })
 </script>

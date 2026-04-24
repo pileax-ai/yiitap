@@ -197,6 +197,13 @@ export const CommonBlocks: BlockOption[] = [
     tips: 'model',
     color: BrandColor.purple,
   },
+  {
+    label: 'label.embed',
+    value: 'embed',
+    icon: 'embed',
+    tips: 'embed',
+    color: BrandColor.brown,
+  },
 ]
 
 export const AdvancedBlocks: BlockOption[] = [
@@ -264,7 +271,7 @@ export const BlockMenus: BlockOption[] = [
     icon: 'cached',
     tips: 'Mod+R',
     color: BrandColor.blue,
-    filter: 'audio,image,video,modelViewer',
+    filter: 'audio,image,video,modelViewer,embed',
   },
   {
     label: 'label.color',

@@ -59,6 +59,7 @@ import {
   EmptyDetails,
   EmptyDiagram,
   EmptyEmoji,
+  EmptyEmbed,
   EmptyImage,
   EmptyListItem,
   EmptyModelViewer,
@@ -100,6 +101,9 @@ function onClick(item) {
       break
     case 'emoji':
       content = EmptyEmoji
+      break
+    case 'embed':
+      content = EmptyEmbed
       break
     case 'heading':
       content = {

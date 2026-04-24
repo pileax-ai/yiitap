@@ -150,6 +150,8 @@ export default {
     cut: 'Cắt',
     download: 'Tải xuống',
     edit: 'Biên tập',
+    embed: 'Nhúng',
+    embedAdd: 'Nhúng (PDF, Youtube, Google Docs, Spotify...)',
     empty: 'Trống',
     emptyTips:
       'Press Enter to continue with an empty note, or select following',

@@ -99,6 +99,11 @@ const options = computed(() => {
       icon: '3d_rotation',
     },
     {
+      label: tr('label.embed'),
+      value: 'embed',
+      icon: 'embed',
+    },
+    {
       label: tr('editor.inlineMath'),
       value: 'inlineMath',
       icon: 'function',

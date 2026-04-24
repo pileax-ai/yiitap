@@ -150,6 +150,8 @@ export default {
     cut: 'Schneiden',
     download: 'Herunterladen',
     edit: 'Bearbeiten',
+    embed: 'Einbetten',
+    embedAdd: 'Einbetten (PDFs, YouTube, Google Docs, Spotify...)',
     empty: 'Leer',
     emptyTips:
       'Drücken Sie die Eingabetaste, um mit einer leeren Notiz fortzufahren, oder wählen Sie Folgendes aus',

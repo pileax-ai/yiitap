@@ -306,6 +306,15 @@ importers:
         specifier: ^3.20.0
         version: 3.22.4
 
+  packages/extensions/embed:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.20.0
+        version: 3.22.4(@tiptap/pm@3.22.4)
+      '@tiptap/pm':
+        specifier: ^3.20.0
+        version: 3.22.4
+
   packages/extensions/image:
     dependencies:
       '@tiptap/core':
@@ -630,6 +639,9 @@ importers:
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
+      '@yiitap/extension-embed':
+        specifier: workspace:*
+        version: link:../extensions/embed
       '@yiitap/extension-image':
         specifier: workspace:*
         version: link:../extensions/image
@@ -832,6 +844,9 @@ importers:
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
+      '@yiitap/extension-embed':
+        specifier: workspace:*
+        version: link:../extensions/embed
       '@yiitap/extension-image':
         specifier: workspace:*
         version: link:../extensions/image

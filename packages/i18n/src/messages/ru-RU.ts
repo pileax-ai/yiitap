@@ -150,6 +150,8 @@ export default {
     cut: 'Резать',
     download: 'Скачать',
     edit: 'Редактировать',
+    embed: 'Встроить',
+    embedAdd: 'Встраивание (PDF-файлов, YouTube, Google Docs, Spotify...)',
     empty: 'Пустой',
     emptyTips:
       'Нажмите Enter, чтобы продолжить с пустой заметки, или выберите следующее',
