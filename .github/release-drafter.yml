@@ -29,6 +29,7 @@ categories:
       - 'ci'
       - 'chore'
       - 'docs'
+      - 'dependencies'
       - 'refactor'
       - 'release'
     collapse-after: 5

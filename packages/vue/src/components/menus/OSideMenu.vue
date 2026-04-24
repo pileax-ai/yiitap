@@ -8,7 +8,11 @@
       :tippy-options="tippyOptions"
     >
       <section class="container">
-        <add-node v-bind="nodeProps" v-if="node" />
+        <add-node
+          v-bind="nodeProps"
+          :add-menu-options="addMenuOptions"
+          v-if="node"
+        />
         <drag-node
           v-bind="nodeProps"
           @dragstart="onDragStart"
@@ -21,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, type PropType } from 'vue'
 import type { Ref } from 'vue'
 import { Node as ProseMirrorNode } from '@tiptap/pm/model'
 import { SideMenu } from './side-menu'
@@ -46,6 +50,10 @@ const props = defineProps({
   add: {
     type: String,
     default: `menu`,
+  },
+  addMenuOptions: {
+    type: Object as PropType<Record<string, boolean> | null>,
+    default: null,
   },
   title: {
     type: Boolean,
