@@ -1,5 +1,43 @@
 # @yiitap/vue
 
+## 0.18.0
+
+### Minor Changes
+
+- 333f275: extension: upload-manager
+- e409e43: feat: add menu options
+- 7266c02: feat: embed extension
+
+### Patch Changes
+
+- 6769987: Improve examples
+- Updated dependencies [333f275]
+- Updated dependencies [e409e43]
+- Updated dependencies [6769987]
+- Updated dependencies [7266c02]
+  - @yiitap/extension-upload-manager@0.18.0
+  - @yiitap/extension-model-viewer@0.18.0
+  - @yiitap/extension-image@0.18.0
+  - @yiitap/extension-video@0.18.0
+  - @yiitap/i18n@0.18.0
+  - @yiitap/vue@0.18.0
+  - @yiitap/extension-embed@0.18.0
+  - @yiitap/core@0.18.0
+  - @yiitap/extension-ai-block@0.18.0
+  - @yiitap/extension-blockquote@0.18.0
+  - @yiitap/extension-callout@0.18.0
+  - @yiitap/extension-char-command@0.18.0
+  - @yiitap/extension-color-highlighter@0.18.0
+  - @yiitap/extension-inline-placeholder@0.18.0
+  - @yiitap/extension-multi-column@0.18.0
+  - @yiitap/extension-placeholder@0.18.0
+  - @yiitap/extension-selection-decoration@0.18.0
+  - @yiitap/extension-shortcut@0.18.0
+  - @yiitap/extension-table@0.18.0
+  - @yiitap/extension-table-wrapper@0.18.0
+  - @yiitap/extension-task-item@0.18.0
+  - @yiitap/util-emoji@0.18.0
+
 ## 0.17.1
 
 ### Patch Changes

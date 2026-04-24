@@ -1,5 +1,11 @@
 # @yiitap/extension-model-viewer
 
+## 0.18.0
+
+### Minor Changes
+
+- 333f275: extension: upload-manager
+
 ## 0.17.1
 
 ## 0.17.0

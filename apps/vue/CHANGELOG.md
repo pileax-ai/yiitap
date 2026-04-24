@@ -1,5 +1,24 @@
 # app-vue
 
+## 0.18.0
+
+### Minor Changes
+
+- 333f275: extension: upload-manager
+- e409e43: feat: add menu options
+- 7266c02: feat: embed extension
+
+### Patch Changes
+
+- 6769987: Improve examples
+- Updated dependencies [333f275]
+- Updated dependencies [e409e43]
+- Updated dependencies [6769987]
+- Updated dependencies [7266c02]
+  - @yiitap/vue-preset@0.18.0
+  - @yiitap/i18n@0.18.0
+  - @yiitap/vue@0.18.0
+
 ## 0.17.1
 
 ### Patch Changes

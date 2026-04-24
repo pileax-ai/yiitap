@@ -1,5 +1,12 @@
 # @yiitap/i18n
 
+## 0.18.0
+
+### Minor Changes
+
+- 333f275: extension: upload-manager
+- 7266c02: feat: embed extension
+
 ## 0.17.1
 
 ## 0.17.0

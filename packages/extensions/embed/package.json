@@ -1,7 +1,7 @@
 {
 	"name": "@yiitap/extension-embed",
 	"description": "Embed extension",
-	"version": "0.17.1",
+	"version": "0.18.0",
 	"private": false,
 	"author": {
 		"name": "Yiitap",
@@ -32,8 +32,7 @@
 		"test": "vitest",
 		"test-ci": "vitest --run"
 	},
-	"dependencies": {
-	},
+	"dependencies": {},
 	"peerDependencies": {
 		"@tiptap/core": "^3.20.0",
 		"@tiptap/pm": "^3.20.0"

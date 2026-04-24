@@ -1,7 +1,7 @@
 {
 	"name": "@yiitap/i18n",
 	"description": "Yiitap i18n",
-	"version": "0.17.1",
+	"version": "0.18.0",
 	"private": false,
 	"author": {
 		"name": "Yiitap",
@@ -37,10 +37,10 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-    "@google-cloud/translate": "^9.3.0",
+		"@google-cloud/translate": "^9.3.0",
 		"@vitalets/google-translate-api": "^9.2.1",
 		"bing-translate-api": "^4.2.0",
-    "dotenv": "^17.2.4",
+		"dotenv": "^17.2.4",
 		"http-proxy-agent": "^7.0.2"
 	},
 	"peerDependencies": {}

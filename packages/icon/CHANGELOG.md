@@ -1,5 +1,11 @@
 # @yiitap/icon
 
+## 0.18.0
+
+### Minor Changes
+
+- 7266c02: feat: embed extension
+
 ## 0.17.1
 
 ## 0.17.0
