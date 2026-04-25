@@ -113,6 +113,23 @@ div[data-type="column-container"] {
       }
     }
   }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+
+    div[data-type="column"] {
+      flex: 1 1 100%;
+      margin: 0;
+    }
+  }
+}
+
+.ProseMirror[contenteditable='false'] {
+  div[data-type="column-container"] {
+    .grid-resize-handle {
+      display: none;
+    }
+  }
 }
 
 // ----------------------------------------------------
