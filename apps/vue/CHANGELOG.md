@@ -1,5 +1,14 @@
 # app-vue
 
+## 0.18.1
+
+### Patch Changes
+
+- Updated dependencies [52eee7a]
+  - @yiitap/vue@0.18.1
+  - @yiitap/vue-preset@0.18.1
+  - @yiitap/i18n@0.18.1
+
 ## 0.18.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@yiitap/vue-preset",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "description": "Preset package that bundles all dependencies for @yiitap/vue",
   "keywords": [],
   "author": {

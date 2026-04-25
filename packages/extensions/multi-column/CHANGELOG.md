@@ -1,5 +1,11 @@
 # @yiitap/extension-multi-column
 
+## 0.18.1
+
+### Patch Changes
+
+- f92c707: improve: multi-column readonly mode, responsive
+
 ## 0.18.0
 
 ## 0.17.1
