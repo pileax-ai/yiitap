@@ -154,6 +154,7 @@ import {
   removeHtmlAttributes,
   DefaultBlockMenuOptions,
   type AiOptions,
+  type SideMenuAddType,
 } from '@yiitap/vue'
 import type { Editor } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
@@ -246,13 +247,13 @@ const editorOptions = computed(() => {
     locale: locale.value,
     darkMode: darkMode.value,
     editable: editable.value,
-    content: collabReady.value ? null : content.value,
+    content: collabReady.value ? '' : content.value,
     showMainMenu: false,
     showBubbleMenu: true,
     showFloatingMenu: true,
     sideMenu: {
       show: true,
-      add: 'menu',
+      add: 'menu' as SideMenuAddType,
       addMenuOptions: {
         ...DefaultBlockMenuOptions,
         modelViewer: false,

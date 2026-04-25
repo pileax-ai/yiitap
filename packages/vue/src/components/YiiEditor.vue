@@ -54,7 +54,7 @@ import {
   watch,
   type PropType,
 } from 'vue'
-import type { FocusPosition } from '@tiptap/core'
+import { Editor, type FocusPosition } from '@tiptap/core'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
@@ -66,10 +66,12 @@ import OFloatingMenu from './menus/OFloatingMenu.vue'
 import OSideMenu from './menus/OSideMenu.vue'
 
 import useI18n from '../hooks/useI18n'
-import { OPlaceholder, createExtensionList } from '../extensions'
-import { Editor } from '@tiptap/core'
-
-type SideMenuAddType = 'menu' | 'empty'
+import {
+  OPlaceholder,
+  createExtensionList,
+  type AnyExtension,
+} from '../extensions'
+import { type SideMenuAddType } from '../types/types'
 
 interface SideMenuConfig {
   show: boolean
@@ -170,7 +172,7 @@ const props = defineProps({
    * <a href="https://github.com/pileax-ai/yiitap/blob/main/packages/vue/src/extensions/index.ts" target="_blank">BuiltinExtensions</a>.
    */
   extensions: {
-    type: Array as () => string[],
+    type: Array as () => AnyExtension[],
     default: () => [],
   },
   /**
