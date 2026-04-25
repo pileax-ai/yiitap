@@ -49,6 +49,11 @@ const props = defineProps({
     type: String,
     default: 'bottom-start',
   },
+  /**
+   * Triggers
+   * [mouseenter, focus, click]
+   * @see https://atomiks.github.io/tippyjs/#triggers
+   */
   trigger: {
     type: String,
     default: 'mouseenter focus',

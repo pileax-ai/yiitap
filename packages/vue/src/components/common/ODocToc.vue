@@ -4,12 +4,14 @@
       ref="popover"
       tippy-class="o-toc-popover"
       placement="left-start"
+      :trigger="trigger"
       :offset="[0, -50]"
       :delay="0"
       :duration="100"
     >
       <template #trigger>
-        <div class="mini-view">
+        <o-btn icon="menu" v-if="button" />
+        <div class="mini-view" v-else>
           <ul class="toc__list">
             <template v-for="(heading, index) in headings" :key="index">
               <li
@@ -57,7 +59,7 @@ defineOptions({ name: 'ODocToc' })
 
 import { ref, watch, type PropType } from 'vue'
 import { Editor } from '@tiptap/core'
-import { OPopover } from '../../components'
+import { OPopover, OBtn } from '../../components'
 import useI18n from '../../hooks/useI18n'
 
 interface Heading {
@@ -72,6 +74,17 @@ const props = defineProps({
    */
   editor: {
     type: Editor,
+  },
+  trigger: {
+    type: String,
+    default: 'mouseenter focus',
+  },
+  /**
+   * Show as button
+   */
+  button: {
+    type: Boolean,
+    default: false,
   },
   /**
    * The max level of heading should be shown
@@ -142,6 +155,10 @@ function onUpdate() {
  */
 function onScroll(event: Event) {
   for (const heading of headings.value) {
+    if (!heading.text) {
+      continue
+    }
+
     const element = document.querySelector(`[data-id="${heading.id}"]`)
     if (!element) continue
 
@@ -192,9 +209,11 @@ defineExpose({
   .mini-view {
     border-radius: 4px;
     padding: 15px;
+    cursor: pointer;
   }
 
   &__title {
+    font-size: 1rem;
     font-weight: bold;
   }
 
@@ -216,19 +235,19 @@ defineExpose({
     }
   }
   &__item {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     padding: 2px 0;
     .heading {
-      color: #646a73 !important;
+      color: var(--yii-color);
 
       &:hover {
-        color: #1976d2 !important;
+        color: var(--yii-link-color);
         text-decoration: none !important;
         cursor: pointer;
       }
 
       &.selected {
-        color: #1976d2 !important;
+        color: var(--yii-link-color);
       }
     }
     &--2 {
