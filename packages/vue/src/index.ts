@@ -17,6 +17,7 @@ export * from './constants'
 export * from './extensions'
 export * from './hooks'
 export * from './utils'
+export * from './types/types'
 export * from '@yiitap/core'
 
 // Tiptap
