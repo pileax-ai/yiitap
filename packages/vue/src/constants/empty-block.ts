@@ -112,13 +112,22 @@ export const EmptyModelViewer = {
 
 export const EmptyTable = {
   type: 'table',
-  content: Array.from({ length: 3 }, () => ({
-    type: 'tableRow',
-    content: Array.from({ length: 3 }, () => ({
-      type: 'tableCell',
-      content: [{ type: 'paragraph' }], // Cells must contain at least one paragraph
+  content: [
+    {
+      type: 'tableRow',
+      content: Array.from({ length: 3 }, () => ({
+        type: 'tableHeader', // Use tableHeader for the first row
+        content: [{ type: 'paragraph' }],
+      })),
+    },
+    ...Array.from({ length: 2 }, () => ({
+      type: 'tableRow',
+      content: Array.from({ length: 2 }, () => ({
+        type: 'tableCell',
+        content: [{ type: 'paragraph' }], // Cells must contain at least one paragraph
+      })),
     })),
-  })),
+  ],
 }
 
 export const EmptyTaskItem = [
