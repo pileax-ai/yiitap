@@ -7,6 +7,27 @@
   >
     <template v-if="isEditable">
       <o-table-cell-handler
+        v-model="showColPopover"
+        :offset="[0, 8]"
+        :tooltip="tr('table.addColumn')"
+        placement="bottom"
+        column
+        @add="runCommand('tableAddColumn')"
+        v-if="showColumnHandler"
+      >
+        <o-list hoverable clickable>
+          <template v-for="(item, index) in columnActions" :key="index">
+            <o-list-item @click="runCommand(item.value)">
+              {{ item.label }}
+              <template #prefix>
+                <o-icon :name="item.icon" :class="item.class" />
+              </template>
+            </o-list-item>
+          </template>
+        </o-list>
+      </o-table-cell-handler>
+
+      <o-table-cell-handler
         v-model="showRowPopover"
         :offset="[0, 10]"
         :tooltip="tr('table.addRow')"
@@ -53,13 +74,16 @@ const props = defineProps(nodeViewProps)
 
 const { tr } = useI18n()
 const {
+  showColPopover,
   showRowPopover,
+  columnActions,
   rowActions,
   isEditable,
   cellInfo,
   initProps,
   runCommand,
 } = useTable()
+const showColumnHandler = ref(false)
 const showRowHandler = ref(false)
 
 onMounted(() => {
@@ -67,6 +91,7 @@ onMounted(() => {
     getPos: props.getPos,
     editor: props.editor,
   })
+  showColumnHandler.value = cellInfo.value.rowIndex === 0
   showRowHandler.value = cellInfo.value.colIndex === 0
 })
 </script>
