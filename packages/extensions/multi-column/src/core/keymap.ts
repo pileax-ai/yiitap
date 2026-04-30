@@ -54,6 +54,13 @@ export const columnsKeymap = keymap({
       return false
     }
 
+    // 2. Code block ```
+    const { $from } = state.selection
+    const lineText = $from.nodeBefore?.isText ? $from.nodeBefore.text : ''
+    if (lineText && lineText.endsWith('```')) {
+      return false
+    }
+
     // 2. Otherwise, fall back to the standard column enter behavior
     const { listItem, taskItem } = state.schema.nodes
 
