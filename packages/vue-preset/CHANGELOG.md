@@ -1,5 +1,32 @@
 # @yiitap/vue-preset
 
+## 0.18.2
+
+### Patch Changes
+
+- Updated dependencies [b3d02c5]
+  - @yiitap/extension-multi-column@0.18.2
+  - @yiitap/core@0.18.2
+  - @yiitap/extension-ai-block@0.18.2
+  - @yiitap/extension-blockquote@0.18.2
+  - @yiitap/extension-callout@0.18.2
+  - @yiitap/extension-char-command@0.18.2
+  - @yiitap/extension-color-highlighter@0.18.2
+  - @yiitap/extension-embed@0.18.2
+  - @yiitap/extension-image@0.18.2
+  - @yiitap/extension-inline-placeholder@0.18.2
+  - @yiitap/extension-model-viewer@0.18.2
+  - @yiitap/extension-placeholder@0.18.2
+  - @yiitap/extension-selection-decoration@0.18.2
+  - @yiitap/extension-shortcut@0.18.2
+  - @yiitap/extension-table@0.18.2
+  - @yiitap/extension-table-wrapper@0.18.2
+  - @yiitap/extension-task-item@0.18.2
+  - @yiitap/extension-upload-manager@0.18.2
+  - @yiitap/extension-video@0.18.2
+  - @yiitap/i18n@0.18.2
+  - @yiitap/util-emoji@0.18.2
+
 ## 0.18.1
 
 ### Patch Changes

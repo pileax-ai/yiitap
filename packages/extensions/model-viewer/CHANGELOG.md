@@ -1,5 +1,7 @@
 # @yiitap/extension-model-viewer
 
+## 0.18.2
+
 ## 0.18.1
 
 ## 0.18.0

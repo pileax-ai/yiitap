@@ -1,5 +1,16 @@
 # app-vue
 
+## 0.18.2
+
+### Patch Changes
+
+- 0a237ce: slash command options
+- Updated dependencies [0a237ce]
+- Updated dependencies [ef06ac4]
+  - @yiitap/vue@0.18.2
+  - @yiitap/vue-preset@0.18.2
+  - @yiitap/i18n@0.18.2
+
 ## 0.18.1
 
 ### Patch Changes

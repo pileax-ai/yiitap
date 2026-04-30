@@ -1,5 +1,11 @@
 # @yiitap/extension-multi-column
 
+## 0.18.2
+
+### Patch Changes
+
+- b3d02c5: fix: ``` is not working
+
 ## 0.18.1
 
 ### Patch Changes
