@@ -95,8 +95,8 @@ import {
   SlashZhCommand as OSlashZhCommand,
 } from '@yiitap/extension-char-command'
 import {
+  createSlashSuggestion,
   ColonSuggestion,
-  SlashSuggestion,
   EmojiSuggestion,
 } from './char-command'
 
@@ -222,8 +222,8 @@ export {
   ColumnDropCursor,
 
   // Suggestions
+  createSlashSuggestion,
   ColonSuggestion,
-  SlashSuggestion,
   EmojiSuggestion,
 }
 

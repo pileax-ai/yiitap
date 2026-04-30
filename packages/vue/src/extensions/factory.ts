@@ -110,8 +110,8 @@ import {
   ColumnDropCursor,
 
   // Suggestions
+  createSlashSuggestion,
   ColonSuggestion,
-  SlashSuggestion,
   EmojiSuggestion,
 } from './extensions'
 
@@ -259,9 +259,9 @@ export const extensionRegistry: {
     OColonCommand.configure({ suggestion: ColonSuggestion, ...opts }),
   OEmbed: (opts?) => OEmbed.configure(opts),
   OSlash: (opts?) =>
-    OSlashCommand.configure({ suggestion: SlashSuggestion, ...opts }),
+    OSlashCommand.configure({ suggestion: createSlashSuggestion(), ...opts }),
   OSlashZh: (opts?) =>
-    OSlashZhCommand.configure({ suggestion: SlashSuggestion, ...opts }),
+    OSlashZhCommand.configure({ suggestion: createSlashSuggestion(), ...opts }),
   OColorHighlighter: (opts?) => OColorHighlighter.configure(opts),
   OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
   OHorizontalRule: (opts?) => OHorizontalRule.configure(opts),

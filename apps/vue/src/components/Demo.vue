@@ -153,6 +153,7 @@ import {
   OStarterKit,
   removeHtmlAttributes,
   DefaultBlockMenuOptions,
+  createSlashSuggestion,
   type AiOptions,
   type SideMenuAddType,
 } from '@yiitap/vue'
@@ -202,6 +203,12 @@ const editorOptions = computed(() => {
   const extensions = [
     OStarterKit.configure({
       UniqueID: true,
+      OSlash: {
+        suggestion: createSlashSuggestion({
+          // exclude: ['modelViewer'],
+          // customFilter: (item) => item.value !== 'heading',
+        }),
+      },
     }),
     OAiBlock.configure(aiOptions.value),
     OUploadManager.configure({

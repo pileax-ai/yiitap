@@ -66,6 +66,7 @@ import OFloatingMenu from './menus/OFloatingMenu.vue'
 import OSideMenu from './menus/OSideMenu.vue'
 
 import useI18n from '../hooks/useI18n'
+import { isExtensionInstalled } from '../utils'
 import {
   OPlaceholder,
   createExtensionList,
@@ -357,7 +358,10 @@ function buildExtensions() {
           const level = node.attrs.level
           return pos > 0 ? `H${level}` : tr('label.untitled')
         } else if (node.type.name === 'paragraph') {
-          return tr('label.typeForCommands')
+          const isSlashActive =
+            isExtensionInstalled(editor, 'slash-command') ||
+            isExtensionInstalled(editor, 'slash-zh-command')
+          return isSlashActive ? tr('label.typeForCommands') : ''
         } else {
           return ''
         }
