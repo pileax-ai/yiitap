@@ -358,7 +358,8 @@ function buildExtensions() {
           const level = node.attrs.level
           return pos > 0 ? `H${level}` : tr('label.untitled')
         } else if (node.type.name === 'paragraph') {
-          const isSlashActive = isExtensionInstalled(editor, 'slash-command') ||
+          const isSlashActive =
+            isExtensionInstalled(editor, 'slash-command') ||
             isExtensionInstalled(editor, 'slash-zh-command')
           return isSlashActive ? tr('label.typeForCommands') : ''
         } else {

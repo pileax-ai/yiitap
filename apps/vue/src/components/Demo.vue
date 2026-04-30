@@ -205,10 +205,10 @@ const editorOptions = computed(() => {
       UniqueID: true,
       OSlash: {
         suggestion: createSlashSuggestion({
-          exclude: ['modelViewer'],
-          customFilter: (item) => item.value !== 'heading'
-        })
-      }
+          // exclude: ['modelViewer'],
+          // customFilter: (item) => item.value !== 'heading',
+        }),
+      },
     }),
     OAiBlock.configure(aiOptions.value),
     OUploadManager.configure({

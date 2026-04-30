@@ -20,22 +20,20 @@ export const createSlashSuggestion = (options: SlashSuggestionOptions = {}) => {
 
   return {
     items: ({ query }: { query: string }) => {
-      return Blocks.filter(
-        (item) => {
-          // 1. Filter out excluded items
-          if (exclude.includes(item.value)) return false
+      return Blocks.filter((item) => {
+        // 1. Filter out excluded items
+        if (exclude.includes(item.value)) return false
 
-          // 2. Apply custom filter if provided
-          if (customFilter && !customFilter(item)) return false
+        // 2. Apply custom filter if provided
+        if (customFilter && !customFilter(item)) return false
 
-          // 3. Apply search logic
-          const searchTerm = query.toLowerCase()
-          return (
-            item.value.toLowerCase().includes(searchTerm) ||
-            item.keywords?.toLowerCase().includes(searchTerm)
-          )
-        }
-      )
+        // 3. Apply search logic
+        const searchTerm = query.toLowerCase()
+        return (
+          item.value.toLowerCase().includes(searchTerm) ||
+          item.keywords?.toLowerCase().includes(searchTerm)
+        )
+      })
     },
     render: () => {
       let component: VueRenderer
@@ -95,5 +93,3 @@ export const createSlashSuggestion = (options: SlashSuggestionOptions = {}) => {
     },
   }
 }
-
-
