@@ -228,7 +228,6 @@ export default {
 .slash-tippy {
   .tippy-content {
     border-radius: 8px;
-    background: red;
   }
 }
 </style>

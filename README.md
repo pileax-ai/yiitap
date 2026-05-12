@@ -60,7 +60,8 @@ Yiitap is an AI-powered, Notion-style WYSIWYG rich-text block-based editor, buil
 
 🚀 **Supports Vue & React** – Seamless integration with both frameworks.  
 🤖 **AI-powered** – Built-in AI capabilities to supercharge content creation and productivity.    
-📝 **Markdown-friendly** - Paste Markdown and copy Markdown natively.
+📝 **Markdown-friendly** - Paste Markdown and copy Markdown natively.  
+🤝 Collaboration: Real-time collaborative editing powered by Yjs and Hocuspocus.  
 📝 **Modern Notion-style Editor** – Clean, intuitive, and distraction-free writing experience.  
 🔧 **Highly Customizable & Extensible** – Based on **Tiptap** & **ProseMirror**.  
 🧩 **Block-based Editing** – Flexible content manipulation via **bubble, floating, main, and side menus**.   
@@ -71,12 +72,14 @@ Yiitap is an AI-powered, Notion-style WYSIWYG rich-text block-based editor, buil
 
 
 ## Use Cases
+📚 Knowledge & Notes: Personal notes, knowledge base, project docs.  
+✍️ Content Writing: Articles, blogs, weekly reports, technical docs.  
+🤖 AI Editing: AI continue, polish, rewrite, summarize, translate.  
+📝 Markdown Workflow: Edit, preview, import & export.  
+💬 AI Chat Rendering: Rich text renderer for Chat/Agent.  
+🧩 Low-code & CMS: Admin panels, page & content editors.  
+🔧 Custom Editor: Block-based, extensible, fully customizable.  
 
-🧠 AI Chat Editor (like ChatGPT UI)  
-📝 Writing tools (Notion-like)  
-📚 Knowledge base editors  
-✍️ Markdown editors  
-🧪 AI-powered content apps
 
 ## Quick start
 
@@ -94,6 +97,9 @@ pnpm install @yiitap/vue @yiitap/vue-preset
 
 For more detailed information, make sure to check out our [documentation](https://yiitap.pileax.ai/guide/getting-started). If you encounter any problems or have suggestions, please open an [issue](https://github.com/pileax-ai/yiitap/issues/new/choose).
 
+
+## Projects Used Yiitap
+🍀 [PileaX](https://github.com/pileax-ai/pileax): All-in-one AI KnowledgeBase, A local-first, all-in-one AI knowledge base that integrates AI chat, smart notes, and e-book reading & management.
 
 
 ## Contributing
