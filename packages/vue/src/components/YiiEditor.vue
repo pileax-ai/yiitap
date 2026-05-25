@@ -70,7 +70,7 @@ import { isExtensionInstalled } from '../utils'
 import {
   OPlaceholder,
   createExtensionList,
-  type AnyExtension,
+  type ExtensionsProp,
 } from '../extensions'
 import { type SideMenuAddType } from '../types/types'
 
@@ -173,7 +173,7 @@ const props = defineProps({
    * <a href="https://github.com/pileax-ai/yiitap/blob/main/packages/vue/src/extensions/index.ts" target="_blank">BuiltinExtensions</a>.
    */
   extensions: {
-    type: Array as () => AnyExtension[],
+    type: Array as () => ExtensionsProp[],
     default: () => [],
   },
   /**
@@ -258,7 +258,7 @@ const emit = defineEmits<{
   (e: 'update', payload: { editor: Editor }): void
 }>()
 
-const { tr } = useI18n()
+const { tr, setLocale } = useI18n()
 const darkModeAlt = ref(false)
 const isEditable = ref(true)
 const localeAlt = ref('en')
@@ -407,6 +407,8 @@ watch(
   () => props.locale,
   (newValue) => {
     localeAlt.value = newValue
+    setLocale(newValue)
+    editor.value?.view.dispatch(editor.value?.view.state.tr)
   }
 )
 
@@ -431,6 +433,8 @@ onBeforeMount(() => {
   aiOptionsAlt.value = props.aiOptions
   darkModeAlt.value = props.darkMode
   localeAlt.value = props.locale
+  setLocale(props.locale)
+  editor.value?.view.dispatch(editor.value?.view.state.tr)
 })
 
 defineExpose({

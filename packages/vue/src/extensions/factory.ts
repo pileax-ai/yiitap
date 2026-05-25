@@ -325,6 +325,11 @@ export const extensionRegistry: {
 /**
  * Derived Types for IntelliSense
  */
+export type ExtensionsProp = ExtensionName | ExtensionItem | AnyExtension[]
+
+/**
+ * Derived Types for IntelliSense
+ */
 export type ExtensionName = keyof typeof extensionRegistry
 
 /**
@@ -373,7 +378,7 @@ export const createExtension = <T extends ExtensionName>(
  * Allows passing either a simple string or a full { name, configure } object
  */
 export const createExtensionList = (
-  items: (ExtensionName | ExtensionItem)[]
+  items: ExtensionsProp[]
 ): AnyExtension[] => {
   return items.flatMap((item) => {
     // 1. If it's an array (e.g., OStarterKit.configure())

@@ -157,7 +157,7 @@ import {
   type AiOptions,
   type SideMenuAddType,
 } from '@yiitap/vue'
-import type { Editor } from '@yiitap/vue'
+import type { Editor, ExtensionsProp } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
 import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
@@ -177,7 +177,6 @@ const darkMode = ref(false)
 const editable = ref(true)
 const source = ref('default')
 const showDrawer = ref(false)
-provide('locale', locale)
 
 // Collaboration
 const ydoc = shallowRef<Y.Doc | null>(null)
@@ -200,7 +199,7 @@ const aiOptions = computed(() => {
 })
 
 const editorOptions = computed(() => {
-  const extensions = [
+  const extensions: ExtensionsProp[] = [
     OStarterKit.configure({
       UniqueID: true,
       OSlash: {
@@ -227,7 +226,7 @@ const editorOptions = computed(() => {
     'OMultiColumn',
     'OShortcut',
     'OVideo',
-  ] as any[]
+  ]
   if (collabReady.value) {
     extensions.push(
       {
