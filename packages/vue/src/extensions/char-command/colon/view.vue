@@ -1,6 +1,6 @@
 <template>
   <section class="o-colon-view">
-    <o-emoji-select :items="items" @select="onSelect" />
+    <o-emoji-select :items="items" :query="query" @select="onSelect" />
   </section>
 </template>
 
@@ -15,6 +15,10 @@ export default {
     items: {
       type: Array as () => Indexable[],
       required: true,
+    },
+    query: {
+      type: String,
+      default: '',
     },
     command: {
       type: Function,

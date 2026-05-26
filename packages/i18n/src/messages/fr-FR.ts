@@ -114,6 +114,18 @@ export default {
     video: 'Insérer une vidéo',
     viewSource: 'Afficher la source',
   },
+  emojiGroup: {
+    activities: 'Activités',
+    animals: 'Animaux et nature',
+    flags: 'drapeaux',
+    food: 'Nourriture et boissons',
+    objects: 'Objets',
+    people: 'Personnes et corps',
+    recent: 'Récent',
+    smileys: 'Émoticônes et émotions',
+    symbols: 'Symboles',
+    travel: 'Voyages et lieux',
+  },
   image: {
     height: 'Hauteur',
     large: 'Grand',

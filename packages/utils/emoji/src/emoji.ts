@@ -29,6 +29,7 @@ const filterEmojiGroups = (query: string) => {
 }
 
 const emojiGroupIcons = {
+  recent: 'schedule',
   smileys_emotion: 'emotion',
   people_body: 'face',
   animals_nature: 'psychiatry',

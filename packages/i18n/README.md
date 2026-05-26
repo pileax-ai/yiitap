@@ -6,6 +6,12 @@
 ## Introduction
 Yiitap is a WYSIWYG rich-text block-based editor built on top of [tiptap](https://tiptap.dev).
 
+## Generate
+```shell
+pnpm generate
+pnpm generate-zh
+```
+
 ## Official Documentation
 Documentation can be found on the [Yiitap website](https://yiitap.pileax.ai).
 

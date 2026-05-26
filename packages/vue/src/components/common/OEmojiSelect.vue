@@ -5,6 +5,7 @@
         ref="input"
         v-model="value"
         type="text"
+        :placeholder="tr('label.search')"
         autofocus
         clearable
         @update:modelValue="onSearch"
@@ -22,7 +23,7 @@
           class="group"
           v-show="group.emojis?.length"
         >
-          <header>{{ group.name }}</header>
+          <header>{{ tr(`emojiGroup.${group.slug?.split('_')[0]}`) }}</header>
           <section class="items">
             <div v-for="(item, j) in group.emojis" :key="`item-${j}`">
               <div class="item" @click="onSelected(item)">
@@ -33,10 +34,12 @@
         </div>
       </template>
 
-      <div class="groups-empty" v-if="!isNotEmpty">没有记录</div>
+      <div class="groups-empty" v-if="!isNotEmpty">
+        {{ tr('label.noResults') }}
+      </div>
     </section>
 
-    <section class="group-icons">
+    <section class="group-icons" v-if="isNotEmpty">
       <template v-for="(group, i) in visibleGroups" :key="`target-${i}`">
         <o-tooltip :delay="300" placement="bottom">
           <template #trigger>
@@ -49,7 +52,7 @@
               <o-icon :name="emojiGroupIcons[group.slug]" />
             </div>
           </template>
-          {{ group.name }}
+          {{ tr(`emojiGroup.${group.slug?.split('_')[0]}`) }}
         </o-tooltip>
       </template>
     </section>
@@ -60,11 +63,16 @@
 import { computed, ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { filterEmojiGroups, emojiGroupIcons } from '@yiitap/util-emoji'
 import { OIcon, OInput, OTooltip } from '../../components'
+import { useI18n } from '../../hooks'
 
 const props = defineProps({
   items: {
     type: Array as () => Indexable[],
     required: true,
+  },
+  query: {
+    type: String,
+    default: '',
   },
   enableSearch: {
     type: Boolean,
@@ -73,18 +81,36 @@ const props = defineProps({
 })
 const emit = defineEmits(['select'])
 
+const { tr } = useI18n()
 const input = ref(null)
 const value = ref('')
 const searchResults = ref([])
+const recentEmojis = ref<Indexable[]>([])
 const groupIndex = ref(0)
 
 const scrollContainer = ref<HTMLElement | null>(null)
 const groupRefs = ref<Record<number, HTMLElement>>({})
 let isClickScrolling = false
 let observer: IntersectionObserver | null = null
+const RECENT_MAX_LIMIT = 24
+const LOCAL_STORAGE_KEY = 'yiitap.emojis'
+
+const combinedGroups = computed(() => {
+  if (recentEmojis.value.length === 0 || props.query) {
+    return props.items
+  }
+
+  const recentGroup = {
+    name: 'Recent',
+    slug: 'recent',
+    emojis: recentEmojis.value,
+  }
+
+  return [recentGroup, ...props.items]
+})
 
 const visibleGroups = computed(() => {
-  return value.value ? searchResults.value : props.items
+  return value.value ? searchResults.value : combinedGroups.value
 })
 
 const isNotEmpty = computed(() => {
@@ -94,6 +120,28 @@ const isNotEmpty = computed(() => {
   })
   return notEmpty
 })
+
+function loadRecentEmojis() {
+  try {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY)
+    recentEmojis.value = data ? JSON.parse(data) : []
+  } catch (e) {
+    recentEmojis.value = []
+  }
+}
+
+function saveToRecent(item: Indexable) {
+  // Remove duplicate if it already exists
+  const filtered = recentEmojis.value.filter((e) => e.emoji !== item.emoji)
+  // Unshift to the front
+  filtered.unshift(item)
+  // Slice to limit size
+  if (filtered.length > RECENT_MAX_LIMIT) {
+    filtered.splice(RECENT_MAX_LIMIT)
+  }
+  recentEmojis.value = filtered
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filtered))
+}
 
 function setGroupRef(el: any, index: number) {
   if (el) {
@@ -112,6 +160,7 @@ function onSearch() {
 }
 
 function onSelected(item: Indexable) {
+  saveToRecent(item)
   emit('select', item)
 }
 
@@ -192,8 +241,9 @@ watch(
 )
 
 onMounted(() => {
-  // console.log('emojiGroup', emojiGroups)
+  // console.log('emojiGroup', props.items)
   // console.log('emojiList', emojiList.value)
+  loadRecentEmojis()
   initObserver()
 })
 
@@ -216,7 +266,7 @@ onBeforeUnmount(() => {
   .groups {
     max-height: 344px !important;
     scrollbar-width: none;
-    padding: 8px 8px 0 8px;
+    padding: 8px;
   }
 
   .groups-empty {
@@ -228,6 +278,7 @@ onBeforeUnmount(() => {
   .group {
     header {
       color: var(--yii-caption-color) !important;
+      margin: 8px 0;
     }
   }
 
@@ -246,7 +297,7 @@ onBeforeUnmount(() => {
     align-items: center;
     width: 32px;
     height: 32px;
-    font-size: 26px;
+    font-size: 24px;
     line-height: 1;
     border-radius: 4px;
     cursor: pointer;
