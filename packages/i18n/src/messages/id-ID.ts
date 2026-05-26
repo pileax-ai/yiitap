@@ -114,6 +114,18 @@ export default {
     video: 'Sisipkan Video',
     viewSource: 'Lihat Sumber',
   },
+  emojiGroup: {
+    activities: 'Aktivitas',
+    animals: 'Hewan & Alam',
+    flags: 'Bendera',
+    food: 'Makanan & Minuman',
+    objects: 'Benda-benda',
+    people: 'Manusia & Tubuh',
+    recent: 'Terkini',
+    smileys: 'Smiley & Emosi',
+    symbols: 'Simbol',
+    travel: 'Perjalanan & Tempat',
+  },
   image: {
     height: 'Tinggi',
     large: 'Besar',

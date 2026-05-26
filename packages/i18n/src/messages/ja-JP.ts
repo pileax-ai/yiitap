@@ -114,6 +114,18 @@ export default {
     video: 'ビデオの挿入',
     viewSource: 'ソースを表示',
   },
+  emojiGroup: {
+    activities: 'アクティビティ',
+    animals: '動物と自然',
+    flags: '旗',
+    food: '飲食',
+    objects: 'オブジェクト',
+    people: '人体',
+    recent: '最近の',
+    smileys: '絵文字と感情表現',
+    symbols: 'シンボル',
+    travel: '旅行と観光',
+  },
   image: {
     height: '身長',
     large: '大きい',

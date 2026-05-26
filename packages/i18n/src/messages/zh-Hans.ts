@@ -114,6 +114,18 @@ export default {
     video: '视频',
     viewSource: '查看资料',
   },
+  emojiGroup: {
+    activities: '活动',
+    animals: '动物与自然',
+    flags: '旗帜',
+    food: '食物与饮料',
+    objects: '物体',
+    people: '人物与身体',
+    recent: '最近使用',
+    smileys: '表情与情感',
+    symbols: '符号',
+    travel: '旅游与地点',
+  },
   image: {
     height: '高度',
     large: '大',

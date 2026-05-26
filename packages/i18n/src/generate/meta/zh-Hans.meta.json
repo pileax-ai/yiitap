@@ -106,6 +106,15 @@
   "editor.url": "e6b391a8",
   "editor.video": "7fcf42ed",
   "editor.viewSource": "0336dcfd",
+  "emojiGroup.activities": "36c6f572",
+  "emojiGroup.animals": "d9e34c08",
+  "emojiGroup.flags": "5c50d959",
+  "emojiGroup.food": "d6b29c0a",
+  "emojiGroup.objects": "775a3520",
+  "emojiGroup.people": "b4f66275",
+  "emojiGroup.recent": "7354e633",
+  "emojiGroup.symbols": "9eb729ff",
+  "emojiGroup.travel": "ead29bb1",
   "image.height": "c1df04ee",
   "image.large": "ab18e30c",
   "image.link": "bfe68d58",
@@ -139,6 +148,8 @@
   "label.cut": "43fc7788",
   "label.download": "f26ef914",
   "label.edit": "95b351c8",
+  "label.embed": "6ac6e338",
+  "label.embedAdd": "1555c22c",
   "label.empty": "a3f3d4bb",
   "label.emptyTips": "2ba93fab",
   "label.example": "1a63ac23",
@@ -219,6 +230,5 @@
   "table.selectColumn": "c9397e93",
   "table.selectRow": "b2997ed7",
   "table.split": "488d0742",
-  "label.embed": "6ac6e338",
-  "label.embedAdd": "1555c22c"
+  "emojiGroup.smileys": "587f4f1b"
 }

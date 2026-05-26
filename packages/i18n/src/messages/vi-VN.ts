@@ -114,6 +114,18 @@ export default {
     video: 'Chèn Video',
     viewSource: 'Xem nguồn',
   },
+  emojiGroup: {
+    activities: 'Các hoạt động',
+    animals: 'Động vật và thiên nhiên',
+    flags: 'Cờ',
+    food: 'Đồ ăn & thức uống',
+    objects: 'Đối tượng',
+    people: 'Con người và cơ thể',
+    recent: 'Gần đây',
+    smileys: 'Biểu tượng cảm xúc và sự biểu lộ cảm xúc',
+    symbols: 'Biểu tượng',
+    travel: 'Du lịch & Địa điểm',
+  },
   image: {
     height: 'Chiều cao',
     large: 'Lớn',

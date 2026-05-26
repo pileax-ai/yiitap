@@ -114,6 +114,18 @@ export default {
     video: 'Вставить видео',
     viewSource: 'Посмотреть исходный код',
   },
+  emojiGroup: {
+    activities: 'Деятельность',
+    animals: 'Животные и природа',
+    flags: 'Флаги',
+    food: 'Еда и напитки',
+    objects: 'Объекты',
+    people: 'Люди и тело',
+    recent: 'Недавний',
+    smileys: 'Смайлики и эмоции',
+    symbols: 'Символы',
+    travel: 'Путешествия и места',
+  },
   image: {
     height: 'Высота',
     large: 'Большой',

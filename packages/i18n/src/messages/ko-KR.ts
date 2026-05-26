@@ -114,6 +114,18 @@ export default {
     video: '비디오 삽입',
     viewSource: '소스 보기',
   },
+  emojiGroup: {
+    activities: '활동',
+    animals: '동물과 자연',
+    flags: '깃발',
+    food: '음식 및 음료',
+    objects: '사물',
+    people: '사람과 신체',
+    recent: '최근의',
+    smileys: '스마일리와 감정',
+    symbols: '기호',
+    travel: '여행 및 장소',
+  },
   image: {
     height: '키',
     large: '크기가 큰',
