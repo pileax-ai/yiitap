@@ -1,6 +1,6 @@
 <template>
   <section class="o-emoji-select">
-    <div v-if="enableSearch">
+    <div class="search" v-if="enableSearch">
       <o-input
         ref="input"
         v-model="value"
@@ -15,10 +15,14 @@
       </o-input>
     </div>
 
-    <section class="groups o-scroll">
+    <section ref="scrollContainer" class="groups o-scroll" @scroll="onScroll">
       <template v-for="(group, i) in visibleGroups" :key="`group-${i}`">
-        <div class="group" v-show="group.emojis?.length">
-          <header ref="groupRefs">{{ group.name }}</header>
+        <div
+          :ref="(el) => setGroupRef(el, i)"
+          class="group"
+          v-show="group.emojis?.length"
+        >
+          <header>{{ group.name }}</header>
           <section class="items">
             <div v-for="(item, j) in group.emojis" :key="`item-${j}`">
               <div class="item" @click="onSelected(item)">
@@ -34,7 +38,7 @@
 
     <section class="group-icons">
       <template v-for="(group, i) in visibleGroups" :key="`target-${i}`">
-        <o-tooltip :delay="300">
+        <o-tooltip :delay="300" placement="bottom">
           <template #trigger>
             <div
               class="item"
@@ -53,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { filterEmojiGroups, emojiGroupIcons } from '@yiitap/util-emoji'
 import { OIcon, OInput, OTooltip } from '../../components'
 
@@ -72,8 +76,12 @@ const emit = defineEmits(['select'])
 const input = ref(null)
 const value = ref('')
 const searchResults = ref([])
-const groupRefs = ref([])
 const groupIndex = ref(0)
+
+const scrollContainer = ref<HTMLElement | null>(null)
+const groupRefs = ref<Record<number, HTMLElement>>({})
+let isClickScrolling = false
+let observer: IntersectionObserver | null = null
 
 const visibleGroups = computed(() => {
   return value.value ? searchResults.value : props.items
@@ -87,13 +95,31 @@ const isNotEmpty = computed(() => {
   return notEmpty
 })
 
+function setGroupRef(el: any, index: number) {
+  if (el) {
+    groupRefs.value[index] = el
+  }
+}
+
 function onSearch() {
   groupIndex.value = 0
   searchResults.value = value.value ? filterEmojiGroups(value.value) : []
+
+  // Re-init observer after search results change and DOM updates
+  nextTick(() => {
+    initObserver()
+  })
 }
 
 function onSelected(item: Indexable) {
   emit('select', item)
+}
+
+function onScroll() {
+  if (isClickScrolling) {
+    // If it's a click-triggered scroll, we let scrollIntoView finish
+    // A simple timeout or intersection observer logic below will handle resetting
+  }
 }
 
 function onScrollTo(item: Indexable, index: number) {
@@ -102,20 +128,95 @@ function onScrollTo(item: Indexable, index: number) {
   target.scrollIntoView({ behavior: 'instant', block: 'start' })
 }
 
+function initObserver() {
+  if (observer) {
+    observer.disconnect()
+  }
+
+  if (!scrollContainer.value) return
+
+  // Set up the intersection observer
+  observer = new IntersectionObserver(
+    (entries) => {
+      // If we are currently executing a click-scroll, ignore observer updates
+      if (isClickScrolling) {
+        // Reset the lock once the target elements stabilize
+        const isTargetIntersecting = entries.some(
+          (entry) =>
+            entry.isIntersecting &&
+            groupRefs.value[groupIndex.value] === entry.target
+        )
+        if (isTargetIntersecting) {
+          isClickScrolling = false
+        }
+        return
+      }
+
+      // Find the group that is most visible at the top of the container
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          // Find the index of the intersecting element
+          const indexStr = Object.keys(groupRefs.value).find(
+            (key) => groupRefs.value[Number(key)] === entry.target
+          )
+          if (indexStr !== undefined) {
+            groupIndex.value = Number(indexStr)
+            break
+          }
+        }
+      }
+    },
+    {
+      root: scrollContainer.value,
+      // Trigger when the header is within the top portion of the view
+      rootMargin: '0px 0px -50% 0px',
+      threshold: 0,
+    }
+  )
+
+  // Observe all group
+  Object.values(groupRefs.value).forEach((groupEl) => {
+    observer?.observe(groupEl)
+  })
+}
+
+watch(
+  visibleGroups,
+  () => {
+    groupRefs.value = {}
+    nextTick(() => {
+      initObserver()
+    })
+  },
+  { deep: true }
+)
+
 onMounted(() => {
   // console.log('emojiGroup', emojiGroups)
   // console.log('emojiList', emojiList.value)
+  initObserver()
+})
+
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect()
+  }
 })
 </script>
 
 <style lang="scss">
 .o-emoji-select {
   position: relative;
-  width: 384px;
+  width: 400px;
+
+  .search {
+    padding: 8px 8px 0 8px;
+  }
 
   .groups {
     max-height: 344px !important;
     scrollbar-width: none;
+    padding: 8px 8px 0 8px;
   }
 
   .groups-empty {
@@ -137,7 +238,6 @@ onMounted(() => {
   .items {
     display: flex;
     flex-wrap: wrap;
-    //justify-content: center;
   }
 
   .item {
@@ -161,8 +261,8 @@ onMounted(() => {
   .group-icons {
     display: flex;
     align-items: center;
-    //justify-content: space-between;
-    padding-top: 8px;
+    padding: 8px;
+    border-top: solid 1px var(--yii-border-color);
 
     .item {
       margin-right: 4px;

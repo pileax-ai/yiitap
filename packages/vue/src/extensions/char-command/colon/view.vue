@@ -77,7 +77,7 @@ export default {
   }
 
   .tippy-content {
-    padding: 8px;
+    padding: 0;
   }
 }
 </style>

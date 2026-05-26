@@ -48,4 +48,10 @@ function onSelect(options: Indexable) {
 <style lang="scss">
 .o-emoji-btn {
 }
+
+.o-emoji-popover {
+  .popover-content {
+    padding: 0 !important;
+  }
+}
 </style>
