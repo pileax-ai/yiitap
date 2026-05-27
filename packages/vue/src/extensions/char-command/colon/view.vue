@@ -69,7 +69,7 @@ export default {
 }
 
 .emoji-tippy {
-  background: #fff;
+  background: var(--yii-tippy-popover-bg-color);
   border-radius: 8px;
   box-shadow:
     0 1px 8px rgba(0, 0, 0, 0.2),
