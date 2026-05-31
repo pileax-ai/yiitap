@@ -1,12 +1,12 @@
 <template>
-  <section class="page-demo" :class="{ dark: darkMode }">
+  <section class="page-code-editor" :class="{ dark: darkMode }">
     <n-drawer
       v-model:show="showDrawer"
       :default-width="400"
       placement="right"
       resizable
     >
-      <n-drawer-content title="Yii Editor" closable>
+      <n-drawer-content title="Yii Code Editor" closable>
         <n-form ref="form" label-placement="left" label-width="auto">
           <h3>General</h3>
           <n-divider />
@@ -25,50 +25,10 @@
               <template #unchecked> Readonly </template>
             </n-switch>
           </n-form-item>
-          <n-form-item label="Collaboration">
-            <n-switch v-model:value="collaboration">
-              <template #checked> Enable </template>
-              <template #unchecked> Disable </template>
-            </n-switch>
-          </n-form-item>
-          <n-form-item label="Content">
-            <n-select v-model:value="source" :options="sourceList" />
-          </n-form-item>
 
-          <h3>AI</h3>
+          <h3>Pages</h3>
           <n-divider />
-          <n-form-item label="AI Provider">
-            <n-select
-              v-model:value="aiOption.provider"
-              :options="aiProviders"
-            />
-          </n-form-item>
-          <n-form-item label="Base URL" v-if="aiOption.provider === 'custom'">
-            <n-input v-model:value="aiOption.baseURL" placeholder="baseURL" />
-          </n-form-item>
-          <n-form-item label="API Key">
-            <n-input v-model:value="aiOption.apiKey" placeholder="apiKey" />
-          </n-form-item>
-
-          <template v-if="collaboration">
-            <h3>Collaboration</h3>
-            <n-divider />
-            <n-form-item label="Document Name">
-              <n-input
-                v-model:value="documentName"
-                placeholder="Document Name"
-              />
-            </n-form-item>
-            <n-form-item label="Provider URL">
-              <n-input v-model:value="providerUrl" placeholder="Provider URL" />
-            </n-form-item>
-            <n-form-item label="Provider Token">
-              <n-input
-                v-model:value="providerToken"
-                placeholder="Provider Token"
-              />
-            </n-form-item>
-          </template>
+          <n-menu :options="menuOptions" />
         </n-form>
       </n-drawer-content>
     </n-drawer>
@@ -77,11 +37,11 @@
       <header>
         <section class="info">
           <div class="logo">
-            <a href="https://yiitap.pileax.ai" target="_blank">
+            <a href="/">
               <img src="/logo.png" alt="Logo" />
             </a>
           </div>
-          <div class="title">Yiitap</div>
+          <div class="title">Yiitap Code</div>
           <div class="version">
             <version-badge package="@yiitap/vue" />
           </div>
@@ -95,42 +55,22 @@
           </n-button>
         </section>
       </header>
-      <div class="toolbar">
-        <o-main-menu
-          :editor="yiiEditor?.editor"
-          :menu="editorOptions.mainMenu"
-          :data-theme="darkMode ? 'dark' : ''"
-        />
-      </div>
     </section>
-    <section class="content-container" @scroll="onScroll">
+    <section class="content-container">
       <section class="layout page">
-        <YiiEditor
+        <YiiCodeEditor
           ref="yiiEditor"
           class="layout-content"
           v-bind="editorOptions"
           @update="onUpdate"
-          :key="editorKey"
-          v-if="!collaboration || collabReady"
         />
-
-        <aside class="layout-right">
-          <div class="sticky-top">
-            <o-doc-toc
-              ref="tocRef"
-              :editor="yiiEditor?.editor"
-              :max-level="3"
-              @doc-scroll="onDocScroll"
-            />
-          </div>
-        </aside>
       </section>
     </section>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch, shallowRef, onBeforeMount } from 'vue'
+import { computed, ref, watch, onBeforeMount } from 'vue'
 import {
   NButton,
   NDivider,
@@ -138,210 +78,41 @@ import {
   NDrawerContent,
   NForm,
   NFormItem,
-  NInput,
+  NMenu,
   NSelect,
   NSwitch,
 } from 'naive-ui'
 import '@google/model-viewer'
 import {
-  YiiEditor,
-  ODocToc,
+  YiiCodeEditor,
   OIcon,
-  OMainMenu,
-  OAiBlock,
-  OUploadManager,
-  OStarterKit,
   removeHtmlAttributes,
-  DefaultBlockMenuOptions,
-  createSlashSuggestion,
-  type AiOptions,
-  type SideMenuAddType,
+  type JSONContent,
 } from '@yiitap/vue'
-import type { Editor, ExtensionsProp } from '@yiitap/vue'
+import type { Editor } from '@yiitap/vue'
 import { SupportLanguages } from '@yiitap/i18n'
-import { HocuspocusProvider } from '@hocuspocus/provider'
-import * as Y from 'yjs'
-import { getData } from '@/data'
-import useAi from '@/hooks/useAi'
 import VersionBadge from '../components/VersionBadge.vue'
 import 'katex/dist/katex.min.css'
+import { menuOptions } from '@/constants/menu'
 
 const emit = defineEmits(['mode'])
 
-const { aiOption, onStreamingChatCompletion } = useAi()
-
-const yiiEditor = ref<InstanceType<typeof YiiEditor>>()
-const tocRef = ref<InstanceType<typeof ODocToc>>()
+const yiiEditor = ref<InstanceType<typeof YiiCodeEditor>>()
 const locale = ref('en-US')
 const darkMode = ref(false)
 const editable = ref(true)
-const source = ref('default')
 const showDrawer = ref(false)
-
-// Collaboration
-const ydoc = shallowRef<Y.Doc | null>(null)
-const hpProvider = shallowRef<HocuspocusProvider | null>(null)
-
-const collaboration = ref(false)
-const documentName = ref('note@2b590c99-18ad-45bb-a4dd-d1ebdf2adcb3')
-const providerUrl = ref('ws://localhost:9621')
-const providerToken = ref('')
-const collabReady = ref(false)
 const DEBUG = true
 
-const aiOptions = computed(() => {
-  return {
-    provider: {
-      provider: aiOption.value.provider,
-    },
-    onStreamingChatCompletion: onStreamingChatCompletion,
-  } as AiOptions
-})
-
 const editorOptions = computed(() => {
-  const extensions: ExtensionsProp[] = [
-    OStarterKit.configure({
-      UniqueID: true,
-      OSlash: {
-        suggestion: createSlashSuggestion({
-          // exclude: ['modelViewer'],
-          // customFilter: (item) => item.value !== 'heading',
-        }),
-      },
-    }),
-    OAiBlock.configure(aiOptions.value),
-    OUploadManager.configure({
-      onUpload: onUpload,
-    }),
-    'InlineMath',
-    'Markdown',
-    'OAudio',
-    'OColon',
-    'OBlockMath',
-    'OColorHighlighter',
-    'ODetails',
-    'OEmbed',
-    'OImage',
-    'OModelViewer',
-    'OMultiColumn',
-    'OShortcut',
-    'OVideo',
-  ]
-  if (collabReady.value) {
-    extensions.push(
-      {
-        name: 'Collaboration',
-        configure: {
-          document: ydoc.value,
-        },
-      },
-      {
-        name: 'CollaborationCaret',
-        configure: {
-          provider: hpProvider.value,
-          user: {
-            name: 'User Name',
-            color: '#f783ac',
-          },
-        },
-      }
-    )
-  }
-
   return {
-    aiOptions: aiOptions.value,
     locale: locale.value,
     darkMode: darkMode.value,
     editable: editable.value,
-    content: collabReady.value ? '' : content.value,
-    showMainMenu: false,
-    showBubbleMenu: true,
-    showFloatingMenu: true,
-    sideMenu: {
-      show: true,
-      add: 'menu' as SideMenuAddType,
-      addMenuOptions: {
-        ...DefaultBlockMenuOptions,
-        modelViewer: false,
-      },
-    },
+    content:
+      '<pre><code class="language-javascript">console.log(\'Hello World\')</code></pre>',
     pageView: 'page',
-    mainMenu: [
-      'bold',
-      'italic',
-      'text-format-dropdown',
-      'separator',
-      'heading',
-      'font-family',
-      'text-color-dropdown',
-      'color',
-      'background-color',
-      'highlight',
-      'clearFormat',
-      'separator',
-      'align-dropdown',
-      'separator',
-      'horizontalRule',
-      'blockquote',
-      'details',
-      'list-dropdown',
-      'codeBlock',
-      'table',
-      'callout',
-      'emoji',
-      'aiBlock',
-      'separator',
-      'modelViewer',
-      'extension-dropdown',
-    ],
-    collab: {
-      enabled: collaboration.value,
-    },
-    extensions: extensions,
   }
-})
-
-const editorKey = computed(() => {
-  return collaboration.value ? 'collaboration' : 'normal'
-})
-
-const content = computed(() => {
-  return getData(source.value, locale.value as 'en')
-})
-
-const sourceList = computed(() => {
-  return [
-    { label: 'Default', value: 'default' },
-    { label: 'Empty', value: 'empty' },
-    { label: 'Code Block', value: 'codeBlock' },
-    { label: 'Diagram', value: 'diagram' },
-    { label: 'Audio', value: 'audio' },
-    { label: 'Image', value: 'image' },
-    { label: 'Media', value: 'media' },
-    { label: 'ModelViewer', value: 'modelViewer' },
-    { label: 'MultiColumn', value: 'multiColumn' },
-    { label: 'Table', value: 'table' },
-  ]
-})
-
-const aiProviders = computed(() => {
-  return [
-    {
-      label: 'OpenAI',
-      value: 'openai',
-      baseURL: '',
-    },
-    {
-      label: 'DeepSeek',
-      value: 'deepseek',
-      baseURL: 'https://api.deepseek.com/v1',
-    },
-    {
-      label: 'Custom',
-      value: 'custom',
-      baseURL: '',
-    },
-  ]
 })
 
 const editor = computed(() => {
@@ -351,59 +122,9 @@ const editor = computed(() => {
 function init() {
   try {
     locale.value = localStorage.getItem('yiitap.locale') || 'en-US'
-    providerToken.value = localStorage.getItem('yiitap.token') || ''
-    collaboration.value =
-      localStorage.getItem('yiitap.collaboration') === 'true'
-    const aiOptionString = localStorage.getItem('yiitap.ai.option')
-    if (aiOptionString) {
-      aiOption.value = JSON.parse(aiOptionString)
-    }
-
-    initSource()
-    initCollab()
   } catch (e) {
     // ignore
   }
-}
-
-function initSource() {
-  const urlParams = new URLSearchParams(window.location.search)
-  const s = urlParams.get('source')
-  if (s && sourceList.value.find((i) => i.value === s)) {
-    source.value = s
-  } else {
-    source.value = localStorage.getItem('yiitap.source') || 'default'
-  }
-}
-
-async function initCollab() {
-  if (!collaboration.value) return
-  resetCollab()
-
-  const doc = new Y.Doc()
-  const provider = new HocuspocusProvider({
-    url: providerUrl.value,
-    name: documentName.value,
-    document: doc,
-    token: providerToken.value,
-    onConnect() {
-      console.log('Hocuspocus connected')
-      collabReady.value = true
-    },
-  })
-  ydoc.value = doc
-  hpProvider.value = provider
-}
-
-function resetCollab() {
-  if (hpProvider.value) {
-    hpProvider.value.destroy()
-    ydoc.value?.destroy()
-  }
-
-  hpProvider.value = null
-  ydoc.value = null
-  collabReady.value = false
 }
 
 function onToggleDrawer() {
@@ -414,26 +135,19 @@ function onGithub() {
   window.open('https://github.com/pileax-ai/yiitap', '_blank')
 }
 
-function onUpload(file: File, type: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    // Upload mock
-    setTimeout(() => {
-      try {
-        // Create a temporary local URL for the file
-        const url = URL.createObjectURL(file)
-        resolve(url)
-      } catch (error) {
-        reject(new Error('Failed to generate mock URL'))
-      }
-    }, 1000)
-  })
-}
-
 function onMode() {
   emit('mode', darkMode.value)
 }
 
-function onUpdate({ editor }: { editor: Editor }) {
+function onUpdate({
+  editor,
+  language,
+  code,
+}: {
+  editor: Editor
+  language: string
+  code: string
+}) {
   // Get content of editor
   // console.log(editor.getJSON())
 
@@ -444,54 +158,16 @@ function onUpdate({ editor }: { editor: Editor }) {
   if (import.meta.env.DEV && DEBUG) {
     console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
     console.debug(editor.getJSON())
+
+    // code
+    console.debug('language', language)
+    console.debug('code', code)
   }
-}
-
-function onScroll(event: Event) {
-  tocRef.value?.onScroll(event)
-}
-
-function onDocScroll(event: Event) {
-  // If docScroll event not emitted, use tocRef.value?.onScroll(event) to update toc progress when scrolling.
-  // console.debug('docScroll', event)
 }
 
 watch(locale, (newValue) => {
-  if (!collaboration.value) {
-    yiiEditor.value?.editor.commands.setContent(content.value, {
-      emitUpdate: true,
-    })
-  }
   localStorage.setItem('yiitap.locale', newValue)
 })
-
-watch(source, (newValue) => {
-  localStorage.setItem('yiitap.source', newValue)
-  yiiEditor.value?.editor.commands.setContent(content.value, {
-    emitUpdate: true,
-  })
-})
-
-watch(providerToken, (newValue) => {
-  localStorage.setItem('yiitap.token', newValue)
-})
-
-watch(collaboration, (newValue) => {
-  if (newValue) {
-    initCollab()
-  } else {
-    resetCollab()
-  }
-  localStorage.setItem('yiitap.collaboration', `${newValue}`)
-})
-
-watch(
-  aiOption,
-  (newValue) => {
-    localStorage.setItem('yiitap.ai.option', JSON.stringify(aiOption.value))
-  },
-  { deep: true }
-)
 
 watch(editor, (newValue) => {
   if (import.meta.env.DEV) {
@@ -512,7 +188,7 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss">
-.page-demo {
+.page-code-editor {
   position: absolute;
   left: 0;
   right: 0;
@@ -523,7 +199,7 @@ onBeforeMount(() => {
   background: var(--yii-bg-color);
 
   .toolbar-container {
-    height: 108px;
+    height: 60px;
     header {
       height: 60px;
       display: flex;
@@ -567,24 +243,13 @@ onBeforeMount(() => {
         }
       }
     }
-
-    .toolbar {
-      width: 100%;
-      height: 48px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-top: solid 1px rgba(0, 0, 0, 0.05);
-      border-bottom: solid 1px rgba(0, 0, 0, 0.05);
-      box-sizing: border-box;
-    }
   }
 
   .content-container {
     position: absolute;
     left: 0;
     right: 0;
-    top: 108px;
+    top: 60px;
     bottom: 0;
     overflow: auto;
 
@@ -625,10 +290,6 @@ onBeforeMount(() => {
         .sticky-top {
           position: sticky;
           top: 0;
-        }
-        .o-doc-toc {
-          position: absolute;
-          right: 20px;
         }
       }
     }
