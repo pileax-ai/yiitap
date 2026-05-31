@@ -1,5 +1,15 @@
 # app-vue
 
+## 0.19.1
+
+### Patch Changes
+
+- fc4148c: fix: code editor
+- Updated dependencies [fc4148c]
+  - @yiitap/vue@0.19.1
+  - @yiitap/i18n@0.19.1
+  - @yiitap/vue-preset@0.19.1
+
 ## 0.19.0
 
 ### Minor Changes

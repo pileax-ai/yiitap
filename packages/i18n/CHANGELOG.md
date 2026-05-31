@@ -1,5 +1,7 @@
 # @yiitap/i18n
 
+## 0.19.1
+
 ## 0.19.0
 
 ### Patch Changes

@@ -1,5 +1,7 @@
 # @yiitap/util-emoji
 
+## 0.19.1
+
 ## 0.19.0
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yiitap/extension-ai-block
 
+## 0.19.1
+
+### Patch Changes
+
+- @yiitap/core@0.19.1
+
 ## 0.19.0
 
 ### Patch Changes

@@ -1,5 +1,34 @@
 # @yiitap/vue
 
+## 0.19.1
+
+### Patch Changes
+
+- fc4148c: fix: code editor
+- Updated dependencies [fc4148c]
+  - @yiitap/vue@0.19.1
+  - @yiitap/core@0.19.1
+  - @yiitap/extension-ai-block@0.19.1
+  - @yiitap/extension-blockquote@0.19.1
+  - @yiitap/extension-callout@0.19.1
+  - @yiitap/extension-char-command@0.19.1
+  - @yiitap/extension-color-highlighter@0.19.1
+  - @yiitap/extension-embed@0.19.1
+  - @yiitap/extension-image@0.19.1
+  - @yiitap/extension-inline-placeholder@0.19.1
+  - @yiitap/extension-model-viewer@0.19.1
+  - @yiitap/extension-multi-column@0.19.1
+  - @yiitap/extension-placeholder@0.19.1
+  - @yiitap/extension-selection-decoration@0.19.1
+  - @yiitap/extension-shortcut@0.19.1
+  - @yiitap/extension-table@0.19.1
+  - @yiitap/extension-table-wrapper@0.19.1
+  - @yiitap/extension-task-item@0.19.1
+  - @yiitap/extension-upload-manager@0.19.1
+  - @yiitap/extension-video@0.19.1
+  - @yiitap/i18n@0.19.1
+  - @yiitap/util-emoji@0.19.1
+
 ## 0.19.0
 
 ### Minor Changes
