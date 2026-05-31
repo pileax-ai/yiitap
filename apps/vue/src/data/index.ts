@@ -1,5 +1,6 @@
 import { BasicFeaturesArticle, BasicFeaturesArticleZh } from './article'
 import { Audio, AudioZh } from './audio'
+import { CodeBlock } from './code-block'
 import { Diagram } from './diagram'
 import { Image, ImageZh } from './image'
 import { Media, MediaZh } from './media'
@@ -10,6 +11,7 @@ import { Table, TableZh } from './table'
 const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
   empty: { en: '<p></p>', zh: '<p></p>' },
   audio: { en: Audio, zh: AudioZh },
+  codeBlock: { en: CodeBlock, zh: CodeBlock },
   diagram: { en: Diagram, zh: Diagram },
   image: { en: Image, zh: ImageZh },
   media: { en: Media, zh: MediaZh },

@@ -163,7 +163,7 @@ import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
 import { getData } from '@/data'
 import useAi from '@/hooks/useAi'
-import VersionBadge from './VersionBadge.vue'
+import VersionBadge from '../components/VersionBadge.vue'
 import 'katex/dist/katex.min.css'
 
 const emit = defineEmits(['mode'])
