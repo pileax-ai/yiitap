@@ -38,7 +38,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
 
 import useI18n from '../hooks/useI18n'
-import { OCodeBlock, Markdown } from '../extensions'
+import { OCodeBlock, OShortcut, Markdown } from '../extensions'
 
 const props = defineProps({
   /**
@@ -130,7 +130,7 @@ const editor = useEditor({
 
     const codeJson = editor.getJSON().content[0] as JSONContent
     const language = codeJson.attrs?.language || ''
-    const code = codeJson.content.length > 0 ? codeJson.content[0].text : ''
+    const code = codeJson.content?.length > 0 ? codeJson.content[0].text : ''
 
     // Only emit update when editor is ready
     emit('update', { editor, language, code })
@@ -168,6 +168,7 @@ function buildExtensions() {
 
   // Code
   extensions.push(OCodeBlock)
+  extensions.push(OShortcut)
   extensions.push(Markdown)
 
   return extensions

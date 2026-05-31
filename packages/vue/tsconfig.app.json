@@ -24,7 +24,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "declarationDir": "dist/types",
+    "declarationDir": "types",
     "allowJs": true,
     "baseUrl": ".",
     "rootDir": "src",

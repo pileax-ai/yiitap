@@ -111,6 +111,7 @@ const editorOptions = computed(() => {
     editable: editable.value,
     content:
       '<pre><code class="language-javascript">console.log(\'Hello World\')</code></pre>',
+    autofocus: true,
     pageView: 'page',
   }
 })
