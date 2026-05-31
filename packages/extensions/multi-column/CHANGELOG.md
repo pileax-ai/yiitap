@@ -1,5 +1,7 @@
 # @yiitap/extension-multi-column
 
+## 0.19.0
+
 ## 0.18.2
 
 ### Patch Changes

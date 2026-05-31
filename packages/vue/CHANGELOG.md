@@ -1,5 +1,43 @@
 # @yiitap/vue
 
+## 0.19.0
+
+### Minor Changes
+
+- 06f04af: simple code editor
+
+### Patch Changes
+
+- 664b19f: fix(vue): Fix prop extensions type hint for YiiEditor component
+- d1a7f2e: Recent emojis and emoji group scroll sync
+- 0668786: perf(vue): Refactor useI18n hook for better performance
+- Updated dependencies [664b19f]
+- Updated dependencies [d1a7f2e]
+- Updated dependencies [06f04af]
+- Updated dependencies [0668786]
+  - @yiitap/vue@0.19.0
+  - @yiitap/util-emoji@0.19.0
+  - @yiitap/i18n@0.19.0
+  - @yiitap/core@0.19.0
+  - @yiitap/extension-ai-block@0.19.0
+  - @yiitap/extension-blockquote@0.19.0
+  - @yiitap/extension-callout@0.19.0
+  - @yiitap/extension-char-command@0.19.0
+  - @yiitap/extension-color-highlighter@0.19.0
+  - @yiitap/extension-embed@0.19.0
+  - @yiitap/extension-image@0.19.0
+  - @yiitap/extension-inline-placeholder@0.19.0
+  - @yiitap/extension-model-viewer@0.19.0
+  - @yiitap/extension-multi-column@0.19.0
+  - @yiitap/extension-placeholder@0.19.0
+  - @yiitap/extension-selection-decoration@0.19.0
+  - @yiitap/extension-shortcut@0.19.0
+  - @yiitap/extension-table@0.19.0
+  - @yiitap/extension-table-wrapper@0.19.0
+  - @yiitap/extension-task-item@0.19.0
+  - @yiitap/extension-upload-manager@0.19.0
+  - @yiitap/extension-video@0.19.0
+
 ## 0.18.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yiitap/util-emoji
 
+## 0.19.0
+
+### Patch Changes
+
+- d1a7f2e: Recent emojis and emoji group scroll sync
+
 ## 0.18.2
 
 ## 0.18.1

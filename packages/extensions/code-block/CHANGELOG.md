@@ -1,5 +1,11 @@
 # @yiitap/extension-code-block
 
+## 0.19.0
+
+### Minor Changes
+
+- 06f04af: simple code editor
+
 ## 0.18.2
 
 ## 0.18.1

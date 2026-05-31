@@ -1,5 +1,21 @@
 # app-vue
 
+## 0.19.0
+
+### Minor Changes
+
+- 06f04af: simple code editor
+
+### Patch Changes
+
+- Updated dependencies [664b19f]
+- Updated dependencies [d1a7f2e]
+- Updated dependencies [06f04af]
+- Updated dependencies [0668786]
+  - @yiitap/vue@0.19.0
+  - @yiitap/i18n@0.19.0
+  - @yiitap/vue-preset@0.19.0
+
 ## 0.18.2
 
 ### Patch Changes
