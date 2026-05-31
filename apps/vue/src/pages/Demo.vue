@@ -69,6 +69,10 @@
               />
             </n-form-item>
           </template>
+
+          <h3>Pages</h3>
+          <n-divider />
+          <n-menu :options="menuOptions" />
         </n-form>
       </n-drawer-content>
     </n-drawer>
@@ -130,7 +134,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch, shallowRef, onBeforeMount } from 'vue'
+import { computed, ref, watch, shallowRef, onBeforeMount } from 'vue'
 import {
   NButton,
   NDivider,
@@ -139,6 +143,7 @@ import {
   NForm,
   NFormItem,
   NInput,
+  NMenu,
   NSelect,
   NSwitch,
 } from 'naive-ui'
@@ -163,8 +168,9 @@ import { HocuspocusProvider } from '@hocuspocus/provider'
 import * as Y from 'yjs'
 import { getData } from '@/data'
 import useAi from '@/hooks/useAi'
-import VersionBadge from './VersionBadge.vue'
+import VersionBadge from '../components/VersionBadge.vue'
 import 'katex/dist/katex.min.css'
+import { menuOptions } from '@/constants/menu'
 
 const emit = defineEmits(['mode'])
 
@@ -313,6 +319,7 @@ const sourceList = computed(() => {
   return [
     { label: 'Default', value: 'default' },
     { label: 'Empty', value: 'empty' },
+    { label: 'Code Block', value: 'codeBlock' },
     { label: 'Diagram', value: 'diagram' },
     { label: 'Audio', value: 'audio' },
     { label: 'Image', value: 'image' },

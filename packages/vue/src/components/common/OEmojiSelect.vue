@@ -272,12 +272,12 @@ onBeforeUnmount(() => {
   .groups-empty {
     padding: 16px 0;
     text-align: center;
-    color: var(--yii-caption-color) !important;
+    color: var(--yii-tips-color) !important;
   }
 
   .group {
     header {
-      color: var(--yii-caption-color) !important;
+      color: var(--yii-tips-color) !important;
       margin: 8px 0;
     }
   }
