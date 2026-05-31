@@ -17,8 +17,6 @@
  * YiiCodeEditor is a simple code editor for Vue.
  */
 
-import type { JSONContent } from '../../types'
-
 defineOptions({ name: 'YiiEditor' })
 
 import {
@@ -29,7 +27,12 @@ import {
   watch,
   type PropType,
 } from 'vue'
-import { Editor, type EditorEvents, type FocusPosition } from '@tiptap/core'
+import {
+  Editor,
+  type EditorEvents,
+  type FocusPosition,
+  type JSONContent,
+} from '@tiptap/core'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
