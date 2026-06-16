@@ -12,6 +12,7 @@
             ref="imageContainerRef"
             @wheel.prevent="onWheel"
             @dblclick="resetZoom"
+            @click="onBackgroundClick"
           >
             <img
               ref="imageRef"
@@ -117,6 +118,12 @@ const imageStyle = computed(() => ({
 const scalePercent = computed(() => {
   return parseInt(`${scale.value * 100}`)
 })
+
+function onBackgroundClick(event: MouseEvent) {
+  if (event.target === imageContainerRef.value) {
+    onClose()
+  }
+}
 
 const onWheel = (event: WheelEvent) => {
   event.preventDefault()

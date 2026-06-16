@@ -13,6 +13,7 @@
             @wheel.prevent="onWheel"
             @mousedown="onMouseDown"
             @dblclick="resetZoom"
+            @click="onBackgroundClick"
           >
             <div
               ref="svgWrapperRef"
@@ -86,6 +87,12 @@ const imageStyle = computed(() => ({
 const scalePercent = computed(() => {
   return parseInt(`${scale.value * 100}`)
 })
+
+function onBackgroundClick(event: MouseEvent) {
+  if (event.target === imageContainerRef.value) {
+    onClose()
+  }
+}
 
 const onWheel = (event: WheelEvent) => {
   event.preventDefault()
