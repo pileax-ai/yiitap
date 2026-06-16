@@ -102,7 +102,7 @@ export default function () {
   }
 
   function runCommand(command: string, options: Indexable = {}) {
-    console.log('runCommand', command, options)
+    // console.log('runCommand', command, options)
     switch (command) {
       case 'selectColumn':
         selectColumn()

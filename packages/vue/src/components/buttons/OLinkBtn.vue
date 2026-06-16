@@ -60,7 +60,6 @@ function onShow() {
   if (linkOptions?.href) {
     href.value = linkOptions.href
     openInNewTab.value = linkOptions.target === '_blank'
-    console.log('show', showPopover.value, linkOptions, openInNewTab.value)
   }
 }
 

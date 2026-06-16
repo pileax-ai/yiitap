@@ -153,7 +153,6 @@ function onSelect(command: string, value: any) {
 }
 
 watch(isFocused, (newValue) => {
-  // console.log('isFocused', props.node.attrs)
   onShowPopover(newValue)
 })
 </script>

@@ -80,16 +80,13 @@ function runCommand(item: Indexable) {
   ) {
     const isActive = props.editor?.isActive(nodeType.value)
     const res = props.editor?.commands.lift(nodeType.value)
-    console.log('lift', nodeType.value, isActive, res)
     return
   }
 
   const commands = props.editor?.commands
   const focus = props.editor?.chain().focus(pos + 1)
-  console.log('runCommand', item)
   onCommand(commands, focus, item.value, item.options)
   props.editor?.commands.focus()
-  // props.editor?.commands.setNodeSelection(pos)
 }
 </script>
 

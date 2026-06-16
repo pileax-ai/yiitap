@@ -179,7 +179,6 @@ export const Shortcut = Extension.create<ShortcutOptions>({
 
               const item = new ClipboardItem(writeData)
               navigator.clipboard.write([item])
-              // console.log('Selected data: ', writeData)
             } catch (err) {
               console.error('Clipboard write failed.', err)
             }
@@ -226,7 +225,6 @@ export const Shortcut = Extension.create<ShortcutOptions>({
 
             const item = new ClipboardItem(writeData)
             navigator.clipboard.write([item])
-            // console.log('Selected data: ', writeData)
           } catch (err) {
             console.error('Clipboard write failed.', err)
           }
@@ -289,7 +287,6 @@ export const Shortcut = Extension.create<ShortcutOptions>({
       const { selection, tr } = state
       const { $from } = selection
       const node = $from.node(-1)
-      // console.log('select node:', node?.type.name)
 
       // New selection
       let start = -1
@@ -313,7 +310,6 @@ export const Shortcut = Extension.create<ShortcutOptions>({
           }
           depth--
         }
-        // console.log('select newNode: doc', newNode?.type.name)
 
         if (this.options.selectableNodes.includes(newNode?.type.name)) {
           start = pos + 1

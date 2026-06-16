@@ -78,7 +78,6 @@ function onCancel() {
 }
 
 function onConfirm(value: string) {
-  console.log('confirm', value)
   if (pos.value) {
     if (value) {
       run(props.editor as Editor, 'inlineMathUpdate', {

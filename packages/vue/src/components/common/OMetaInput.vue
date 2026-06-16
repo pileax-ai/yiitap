@@ -69,7 +69,6 @@ const input = ref(null)
 const value = ref('')
 
 function onConfirm() {
-  console.log('confirm', value.value)
   emit('confirm', value.value)
 }
 

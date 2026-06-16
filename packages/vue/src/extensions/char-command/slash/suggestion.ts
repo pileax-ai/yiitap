@@ -74,7 +74,6 @@ export const createSlashSuggestion = (options: SlashSuggestionOptions = {}) => {
         },
 
         onKeyDown(props: SuggestionKeyDownProps) {
-          // console.log('down', props.event)
           if (props.event.key === 'Escape') {
             popup[0].hide()
             component.destroy()
