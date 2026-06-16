@@ -23,6 +23,11 @@
             v-if="codeView === 'splitHorizontal'"
           />
           <o-code-block-view-dropdown v-model="view" class="editable" v-else />
+          <o-menubar-btn
+            icon="zoom_in"
+            :tooltip="tr('image.zoom')"
+            @click="onPreview"
+          />
         </template>
         <o-menubar-btn
           :icon="wrapIcon"
@@ -43,7 +48,7 @@
         />
         <o-menubar-btn
           icon="play_circle"
-          tooltip="Run"
+          :tooltip="tr('label.preview')"
           @click="onRun"
           v-if="runnable"
         />
@@ -59,20 +64,13 @@
       v-bind="dialogOptions"
       @close="onDialogClose"
     >
-      <template #title>{{ preview }}</template>
+      <template #title>{{ tr('label.preview') }}</template>
 
       <template v-if="preview === 'run'">
         <iframe
           sandbox="allow-same-origin allow-scripts"
           :srcdoc="html"
         ></iframe>
-      </template>
-
-      <template v-else-if="preview === 'mermaid'">
-        <div
-          ref="mermaidMount"
-          class="tiptap ProseMirror mermaid-split-horizontal"
-        />
       </template>
     </o-dialog>
 
@@ -83,6 +81,8 @@
       </div>
       <div class="mermaid-svg" v-html="mermaidSvg" v-else />
     </section>
+    <o-diagram-viewer v-model:show="showDiagramViewer" :svg="mermaidSvg">
+    </o-diagram-viewer>
   </o-node-view>
 </template>
 
@@ -102,6 +102,7 @@ import {
   OMenubarBtn,
   ONodeView,
   ODialog,
+  ODiagramViewer,
 } from '../../components/index'
 import { Languages } from '../../constants/language'
 import { uuid } from '../../utils/uuid'
@@ -128,6 +129,7 @@ const error = ref('')
 const view = ref('splitVertical')
 const oldView = ref('')
 const diagramTheme = ref('default')
+const showDiagramViewer = ref(false)
 
 mermaid.registerLayoutLoaders(elkLayouts)
 const mermaidConfig = {
@@ -189,6 +191,10 @@ const codeView = computed(() => {
 
 function onSelectLanguage(value: string) {
   language.value = value
+}
+
+function onPreview() {
+  showDiagramViewer.value = true
 }
 
 function onCopy() {

@@ -1,6 +1,6 @@
 <template>
   <teleport to="body">
-    <div v-if="show" class="dialog-overlay o-image-viewer">
+    <div v-if="show" class="dialog-overlay o-diagram-viewer">
       <header>
         <o-btn icon="close" @click="onClose" />
       </header>
@@ -11,34 +11,21 @@
             class="image-container"
             ref="imageContainerRef"
             @wheel.prevent="onWheel"
+            @mousedown="onMouseDown"
             @dblclick="resetZoom"
             @click="onBackgroundClick"
           >
-            <img
-              ref="imageRef"
-              :src="currentImage.attrs.src"
-              alt="image"
+            <div
+              ref="svgWrapperRef"
+              class="mermaid-svg"
               :style="imageStyle"
-              @mousedown="onMouseDown"
+              v-html="svg"
             />
           </div>
         </div>
       </div>
 
       <footer>
-        <div class="action-group">
-          <o-btn
-            icon="arrow_back"
-            :class="{ disabled: currentIndex <= 0 }"
-            @click="onPrevious"
-          />
-          <o-btn
-            icon="arrow_back"
-            icon-class="rotate-180"
-            :class="{ disabled: currentIndex >= props.images.length - 1 }"
-            @click="onNext"
-          />
-        </div>
         <div class="action-group">
           <o-btn icon="horizontal_rule" @click="zoomOut" />
           <div class="o-btn scale">{{ scalePercent }}%</div>
@@ -52,12 +39,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { OBtn } from '../index'
 import { useCommon } from '../../hooks'
 
-defineOptions({ name: 'ODialog' })
-
-import { ref, onMounted, computed, watch, onBeforeUnmount } from 'vue'
-import { OBtn } from '../index'
+defineOptions({ name: 'ODiagramDialog' })
 
 const props = defineProps({
   show: {
@@ -68,25 +54,21 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  images: {
-    type: Array as () => EditorImage[],
-    default: () => [],
-  },
-  current: {
-    type: Number,
-    default: 0,
+  svg: {
+    type: String,
+    default: '',
   },
 })
 
 const emits = defineEmits(['update:show'])
 
-const { downloadImage } = useCommon()
-const currentIndex = ref(0)
+const { commonDownload } = useCommon()
 const scale = ref(1)
 const position = ref({ x: 0, y: 0 })
 const isDragging = ref(false)
 const dragStart = ref({ x: 0, y: 0 })
-const imageRef = ref<HTMLImageElement | null>(null)
+
+const svgWrapperRef = ref<HTMLDivElement | null>(null)
 const imageContainerRef = ref<HTMLDivElement | null>(null)
 
 const ZOOM_CONFIG = {
@@ -95,19 +77,6 @@ const ZOOM_CONFIG = {
   STEP: 0.1,
   WHEEL_SENSITIVITY: 0.001,
 }
-
-const currentImage = computed(() => {
-  const len = props.images.length
-  let value = {}
-  if (len > 0) {
-    value =
-      currentIndex.value >= 0 && currentIndex.value < len
-        ? props.images.at(currentIndex.value)
-        : props.images.at(0)
-  }
-
-  return value as EditorImage
-})
 
 const imageStyle = computed(() => ({
   transform: `translate(${position.value.x}px, ${position.value.y}px) scale(${scale.value})`,
@@ -129,14 +98,13 @@ const onWheel = (event: WheelEvent) => {
   event.preventDefault()
 
   const delta = -event.deltaY * ZOOM_CONFIG.WHEEL_SENSITIVITY
-
   let newScale = scale.value + delta
   newScale = Math.max(
     ZOOM_CONFIG.MIN_SCALE,
     Math.min(ZOOM_CONFIG.MAX_SCALE, newScale)
   )
 
-  if (imageContainerRef.value && imageRef.value) {
+  if (imageContainerRef.value && svgWrapperRef.value) {
     const rect = imageContainerRef.value.getBoundingClientRect()
     const mouseX = event.clientX - rect.left - rect.width / 2
     const mouseY = event.clientY - rect.top - rect.height / 2
@@ -189,76 +157,48 @@ const resetZoom = () => {
   position.value = { x: 0, y: 0 }
 }
 
-const onPrevious = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value -= 1
-    resetZoom()
-  }
-}
-
-const onNext = () => {
-  if (currentIndex.value < props.images.length - 1) {
-    currentIndex.value += 1
-    resetZoom()
-  }
-}
-
 const onClose = () => {
   resetZoom()
   emits('update:show', false)
 }
 
 const onDownload = () => {
-  downloadImage(currentImage.value.attrs?.src)
+  if (!props.svg) {
+    return
+  }
+  const fileName = `mermaid-${Date.now()}.svg`
+  commonDownload('svg', fileName, props.svg)
 }
 
 const onKeyDown = (event: KeyboardEvent) => {
   if (!props.show) return
-  event.preventDefault()
-  event.stopPropagation()
 
   switch (event.key) {
     case '+':
     case '=':
       event.preventDefault()
+      event.stopPropagation()
       zoomIn()
       break
     case '-':
       event.preventDefault()
+      event.stopPropagation()
       zoomOut()
       break
     case '0':
       event.preventDefault()
+      event.stopPropagation()
       resetZoom()
       break
-    case 'ArrowLeft':
-      if (event.ctrlKey || event.metaKey) {
-        event.preventDefault()
-        onPrevious()
-      }
-      break
-    case 'ArrowRight':
-      if (event.ctrlKey || event.metaKey) {
-        event.preventDefault()
-        onNext()
-      }
-      break
     case 'Escape':
+      event.preventDefault()
+      event.stopPropagation()
       onClose()
       break
   }
 }
 
-watch(
-  () => props.current,
-  (newValue) => {
-    currentIndex.value = newValue
-    resetZoom()
-  }
-)
-
 onMounted(() => {
-  currentIndex.value = props.current
   document.addEventListener('keydown', onKeyDown)
 })
 
@@ -270,10 +210,10 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
-.o-image-viewer {
+.o-diagram-viewer {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--yii-bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,12 +248,28 @@ onBeforeUnmount(() => {
         align-items: center;
         overflow: hidden;
 
-        img {
-          max-width: 100%;
-          max-height: 100%;
-          transition: transform 0.1s ease;
-          object-fit: contain;
+        .mermaid-svg {
+          width: 75%;
+          height: 75%;
+          min-width: 480px;
+          min-height: 480px;
+          max-width: 90vw;
+          max-height: 80vh;
+
+          transition: transform 0.05s ease-out;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           border-radius: 4px;
+
+          /* Crucial: Override Mermaid inline styles to scale correctly */
+          svg {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain;
+          }
         }
       }
     }
