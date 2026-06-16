@@ -1,5 +1,11 @@
 # @yiitap/extension-placeholder
 
+## 0.19.2
+
+### Patch Changes
+
+- ed90f08: fix bugs
+
 ## 0.19.1
 
 ## 0.19.0

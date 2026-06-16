@@ -1,5 +1,36 @@
 # @yiitap/vue
 
+## 0.19.2
+
+### Patch Changes
+
+- ed90f08: fix bugs
+- 8e5c744: diagram previewer
+- Updated dependencies [ed90f08]
+- Updated dependencies [8e5c744]
+  - @yiitap/extension-placeholder@0.19.2
+  - @yiitap/extension-shortcut@0.19.2
+  - @yiitap/extension-callout@0.19.2
+  - @yiitap/vue@0.19.2
+  - @yiitap/core@0.19.2
+  - @yiitap/extension-ai-block@0.19.2
+  - @yiitap/extension-blockquote@0.19.2
+  - @yiitap/extension-char-command@0.19.2
+  - @yiitap/extension-color-highlighter@0.19.2
+  - @yiitap/extension-embed@0.19.2
+  - @yiitap/extension-image@0.19.2
+  - @yiitap/extension-inline-placeholder@0.19.2
+  - @yiitap/extension-model-viewer@0.19.2
+  - @yiitap/extension-multi-column@0.19.2
+  - @yiitap/extension-selection-decoration@0.19.2
+  - @yiitap/extension-table@0.19.2
+  - @yiitap/extension-table-wrapper@0.19.2
+  - @yiitap/extension-task-item@0.19.2
+  - @yiitap/extension-upload-manager@0.19.2
+  - @yiitap/extension-video@0.19.2
+  - @yiitap/i18n@0.19.2
+  - @yiitap/util-emoji@0.19.2
+
 ## 0.19.1
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # app-vue
 
+## 0.19.2
+
+### Patch Changes
+
+- Updated dependencies [ed90f08]
+- Updated dependencies [8e5c744]
+  - @yiitap/vue@0.19.2
+  - @yiitap/vue-preset@0.19.2
+  - @yiitap/i18n@0.19.2
+
 ## 0.19.1
 
 ### Patch Changes
