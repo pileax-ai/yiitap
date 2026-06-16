@@ -192,7 +192,9 @@ function onSelectLanguage(value: string) {
 }
 
 function onCopy() {
-  const text = props.node.content.content[0].text
+  const text = props.node.content.content.length
+    ? props.node.content.content[0].text
+    : ''
   copyToClipboard(text).then(() => {
     copyIcon.value = 'done'
     setTimeout(() => {
