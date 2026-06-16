@@ -81,8 +81,6 @@ function onLoad() {
 }
 
 function onConfirm() {
-  console.log('latex', latex.value, pos.value)
-
   if (pos.value) {
     if (latex.value) {
       run(props.editor as Editor, 'inlineMathUpdate', {

@@ -102,7 +102,6 @@ function selectNode() {
     // pos += 1
   }
   props.editor?.commands.setNodeSelection(pos)
-  // console.log('currentPos', pos, props.node.nodeSize)
 }
 
 watch(

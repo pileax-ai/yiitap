@@ -45,10 +45,6 @@ const { locale, tr } = useI18n()
 const { isEditable, run } = useTiptap()
 const popover = ref<InstanceType<typeof OPopover>>()
 
-function onSettings() {
-  console.log('hoho')
-}
-
 function onAction(item: Indexable) {
   emit('action', item)
   popover.value?.setShow(false)

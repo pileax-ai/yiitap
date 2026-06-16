@@ -20,7 +20,7 @@ const isMarkdown = (text: string, threshold = 0.2): boolean => {
 
   // 1. Fast Track: If text contains wrapped code or math blocks, it's highly likely Markdown
   if (/```[\s\S]*?```/.test(text) || /\$\$[\s\S]+?\$\$/.test(text)) {
-    console.log('Markdown: With code or math block')
+    // console.log('Markdown: With code or math block')
     return true
   }
 
@@ -80,7 +80,7 @@ const isMarkdown = (text: string, threshold = 0.2): boolean => {
   const symbolCount = (text.match(/[*_`#>[\]]/g) || []).length
   const symbolDensity = symbolCount / text.length
 
-  console.log('isMarkdown: ', ratio, symbolDensity)
+  // console.log('isMarkdown: ', ratio, symbolDensity)
   return ratio >= threshold || symbolDensity > 0.05
 }
 

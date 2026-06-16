@@ -115,8 +115,6 @@ export const Callout = Node.create<CalloutOptions>({
   parseMarkdown: (token, helpers) => {
     const icon = token.info.replace('info', '').trim() || '🌾'
     const content = helpers.parseChildren(token.tokens ?? [])
-    console.log('callout parseMarkdown', token.info)
-    console.log('callout parseMarkdown', token, content, icon)
     return helpers.createNode('callout', { icon: icon }, content)
   },
 
@@ -147,9 +145,7 @@ export const Callout = Node.create<CalloutOptions>({
       if (!match) return undefined
 
       const [, info, body] = match
-      console.log('markdownTokenizer', src, match, info, body)
 
-      // 解析 body 内部为 block token
       const bodyTokens = lexer.blockTokens(body)
 
       return {

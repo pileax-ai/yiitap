@@ -229,5 +229,4 @@ defineExpose({
 @use '../style/tiptap';
 @use '../style/yiitap';
 @import '../../../icon/dist/yiitap-icon.css';
-//@import '../style/multi-column';
 </style>

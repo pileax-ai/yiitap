@@ -68,7 +68,6 @@ function onShow(value: boolean) {
 }
 
 function onClickOutside() {
-  console.log('click outside')
   if (props.hideClickOutside) {
     emit('update:modelValue', false)
   }

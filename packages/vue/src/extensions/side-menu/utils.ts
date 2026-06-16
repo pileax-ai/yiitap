@@ -54,7 +54,6 @@ export function getNodeViewElementFromPos(pos: number, view: EditorView) {
     }
   }
 
-  // console.log('node', node)
   return node as HTMLElement
 }
 
@@ -148,7 +147,7 @@ export function getNodeInfoFromPos(doc: Node, pos: number): BlockInfo {
   // If the position is outside the outer block group, we need to move it to the
   // nearest block. This happens when the collaboration plugin is active, where
   // the selection is placed at the very end of the doc.
-  console.log('docabc', doc)
+  // console.log('doc', doc)
   const outerBlockGroupStartPos = 1
   const outerBlockGroupEndPos = doc.nodeSize - 2
   if (pos <= outerBlockGroupStartPos) {

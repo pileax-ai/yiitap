@@ -116,7 +116,6 @@ export class SideMenuView {
   }
 
   createTooltip() {
-    // console.log('createTooltip')
     const { element: editorElement } = this.editor.options
     const el =
       editorElement instanceof Element
@@ -186,8 +185,6 @@ export class SideMenuView {
     const { coords } = SideMenuPluginKey.getState(state)
     const nodeElement = getNodeElementFromCoords(coords, view)
     const pos = getNodePosFromCoords(coords, view)
-    // console.log('update', coords, pos)
-    // console.log('update', nodeElement)
 
     // Set pos === 0 if want to hide the frist node
     if (!nodeElement) {
@@ -264,7 +261,6 @@ const onDragStart = (e: DragEvent, editor: Editor) => {
   const selectedSlice = view.state.selection.content()
   const { dom, text } = view.serializeForClipboard(selectedSlice)
 
-  // console.log('imageElement', pos, dragImageElement)
   e.dataTransfer.clearData()
   e.dataTransfer.setData('text/html', dom.innerHTML)
   e.dataTransfer.setData('text/plain', text) // TODO: markdown
@@ -325,7 +321,6 @@ function setDragImage(view: EditorView, from: number, to = from) {
     )
   }
 
-  // console.log('index', firstIndex, lastIndex)
   for (let i = parent.childElementCount - 1; i >= 0; i--) {
     if (i > firstIndex || i < lastIndex) {
       parentClone.removeChild(parentClone.children[i])
@@ -377,7 +372,6 @@ export class SideMenuPlugin {
               left: event.clientX,
               top: event.clientY,
             }
-            // console.log('over', coords)
 
             // This is used for avoiding table events conflict
             // TODO: Find a better way

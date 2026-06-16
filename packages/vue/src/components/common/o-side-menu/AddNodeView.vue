@@ -196,7 +196,6 @@ const isEmpty = computed(() => {
 })
 
 const newPos = computed(() => {
-  // console.log('node', props.getPos(), props.node)
   return isEmpty.value ? props.getPos() : props.getPos() + props.node.nodeSize
 })
 

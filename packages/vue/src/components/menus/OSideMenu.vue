@@ -124,7 +124,6 @@ function onEditorTransaction({ editor, transaction }) {
         node.value = n.node as ProseMirrorNode
         pos.value = n.pos
       }
-      // console.log('side-menu', n.node.type.name, pos.value)
     }
   }
 }

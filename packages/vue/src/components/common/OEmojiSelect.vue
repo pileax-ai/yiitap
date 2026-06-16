@@ -241,8 +241,6 @@ watch(
 )
 
 onMounted(() => {
-  // console.log('emojiGroup', props.items)
-  // console.log('emojiList', emojiList.value)
   loadRecentEmojis()
   initObserver()
 })

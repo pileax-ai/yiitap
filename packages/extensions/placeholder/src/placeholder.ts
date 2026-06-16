@@ -127,7 +127,6 @@ export const Placeholder = Extension.create<PlaceholderOptions>({
             }
             const active = pluginState?.active
             if (!active) return null
-            // console.log('decorations active', active)
 
             const deco = Decoration.widget(active.pos, () => {
               const span = document.createElement('span')

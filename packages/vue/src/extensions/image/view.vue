@@ -320,8 +320,6 @@ function onImageLoad() {
       imageView.value?.$el?.parentElement.getBoundingClientRect().width ?? 0
     containerMaxWidth.value =
       document.querySelector('.layout')?.getBoundingClientRect().width ?? 1200
-    // console.log('natural', naturalWidth.value, naturalHeight.value, maxWidth.value, containerMaxWidth.value)
-    // console.log('container', currentContainerHeight.value, containerHeight.value, containerMaxHeight.value)
 
     // Set max width and height
     const aspectRatio = naturalWidth.value / naturalHeight.value
@@ -343,7 +341,6 @@ function onImageLoad() {
     } else {
       isMax.value = currentWidth.value > maxWidth.value
     }
-    // console.log('current', currentWidth.value, currentHeight.value, containerHeight.value)
 
     // container
     if (containerHeight.value > 0) {
@@ -354,7 +351,6 @@ function onImageLoad() {
     }
 
     containerMaxHeight.value = currentHeight.value
-    // console.log('container', currentContainerHeight.value, containerHeight.value, containerMaxHeight.value)
     checkPositionControls()
   }
 }
