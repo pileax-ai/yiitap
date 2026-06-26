@@ -2,7 +2,7 @@
 	"name": "@yiitap/icon",
 	"description": "yiitab icon font",
 	"version": "0.19.2",
-	"private": false,
+	"private": true,
 	"author": {
 		"name": "Yiitap",
 		"email": "yiinote@gmail.com"

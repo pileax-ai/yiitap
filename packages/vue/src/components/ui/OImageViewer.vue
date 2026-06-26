@@ -43,6 +43,7 @@
           <o-btn icon="horizontal_rule" @click="zoomOut" />
           <div class="o-btn scale">{{ scalePercent }}%</div>
           <o-btn icon="add" @click="zoomIn" />
+          <o-btn icon="rotate" @click="rotateRight" flat />
           <o-btn icon="download" @click="onDownload" />
           <o-btn icon="close" @click="onClose" />
         </div>
@@ -83,6 +84,7 @@ const emits = defineEmits(['update:show'])
 const { downloadImage } = useCommon()
 const currentIndex = ref(0)
 const scale = ref(1)
+const rotation = ref(0)
 const position = ref({ x: 0, y: 0 })
 const isDragging = ref(false)
 const dragStart = ref({ x: 0, y: 0 })
@@ -110,7 +112,7 @@ const currentImage = computed(() => {
 })
 
 const imageStyle = computed(() => ({
-  transform: `translate(${position.value.x}px, ${position.value.y}px) scale(${scale.value})`,
+  transform: `translate(${position.value.x}px, ${position.value.y}px) scale(${scale.value}) rotate(${rotation.value}deg)`,
   transformOrigin: 'center center',
   cursor: isDragging.value ? 'grabbing' : scale.value > 1 ? 'grab' : 'default',
 }))
@@ -187,6 +189,10 @@ const zoomOut = () => {
 const resetZoom = () => {
   scale.value = 1
   position.value = { x: 0, y: 0 }
+}
+
+const rotateRight = () => {
+  rotation.value += 90
 }
 
 const onPrevious = () => {
