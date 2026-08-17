@@ -62,7 +62,7 @@ jobs:
 
       - name: Create Publish
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           createGithubReleases: false
           publish: pnpm run publish
