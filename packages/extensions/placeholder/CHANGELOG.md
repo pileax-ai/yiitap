@@ -1,5 +1,7 @@
 # @yiitap/extension-placeholder
 
+## 0.19.3
+
 ## 0.19.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yiitap/icon
 
+## 0.19.3
+
+### Patch Changes
+
+- 2c5e53c: image rotate
+
 ## 0.19.2
 
 ## 0.19.1

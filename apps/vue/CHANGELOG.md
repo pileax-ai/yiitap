@@ -1,5 +1,16 @@
 # app-vue
 
+## 0.19.3
+
+### Patch Changes
+
+- 0c59a6e: table link
+- Updated dependencies [0c59a6e]
+- Updated dependencies [2c5e53c]
+  - @yiitap/vue@0.19.3
+  - @yiitap/i18n@0.19.3
+  - @yiitap/vue-preset@0.19.3
+
 ## 0.19.2
 
 ### Patch Changes

@@ -1,5 +1,7 @@
 # @yiitap/extension-inline-placeholder
 
+## 0.19.3
+
 ## 0.19.2
 
 ## 0.19.1

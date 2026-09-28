@@ -1,5 +1,36 @@
 # @yiitap/vue
 
+## 0.19.3
+
+### Patch Changes
+
+- 0c59a6e: table link
+- 2c5e53c: image rotate
+- Updated dependencies [0c59a6e]
+- Updated dependencies [2c5e53c]
+  - @yiitap/vue@0.19.3
+  - @yiitap/core@0.19.3
+  - @yiitap/extension-ai-block@0.19.3
+  - @yiitap/extension-blockquote@0.19.3
+  - @yiitap/extension-callout@0.19.3
+  - @yiitap/extension-char-command@0.19.3
+  - @yiitap/extension-color-highlighter@0.19.3
+  - @yiitap/extension-embed@0.19.3
+  - @yiitap/extension-image@0.19.3
+  - @yiitap/extension-inline-placeholder@0.19.3
+  - @yiitap/extension-model-viewer@0.19.3
+  - @yiitap/extension-multi-column@0.19.3
+  - @yiitap/extension-placeholder@0.19.3
+  - @yiitap/extension-selection-decoration@0.19.3
+  - @yiitap/extension-shortcut@0.19.3
+  - @yiitap/extension-table@0.19.3
+  - @yiitap/extension-table-wrapper@0.19.3
+  - @yiitap/extension-task-item@0.19.3
+  - @yiitap/extension-upload-manager@0.19.3
+  - @yiitap/extension-video@0.19.3
+  - @yiitap/i18n@0.19.3
+  - @yiitap/util-emoji@0.19.3
+
 ## 0.19.2
 
 ### Patch Changes
