@@ -35,7 +35,8 @@
 	},
 	"packageManager": "pnpm@10.6.2",
 	"devDependencies": {
-		"@changesets/cli": "^2.28.1",
+		"@changesets/changelog-github": "^1",
+		"@changesets/cli": "^3.0.3",
 		"@eslint/js": "^9.21.0",
 		"@tsconfig/node20": "^20.1.2",
 		"@types/node": "20.8.10",
@@ -71,9 +72,6 @@
 			"prosemirror-model": "1.25.4",
 			"prosemirror-state": "1.4.4",
 			"prosemirror-view": "1.41.6"
-		},
-		"patchedDependencies": {
-			"@changesets/assemble-release-plan@6.0.10": "patches/@changesets__assemble-release-plan@6.0.10.patch"
 		}
 	}
 }
