@@ -64,9 +64,9 @@ jobs:
         id: changesets
         uses: changesets/action@v2
         with:
+          pr-title: "Publish a new release version"
           create-github-releases: false
           publish-script: pnpm run publish
-          pr-title: "Publish a new release version"
           commit-message: >-
             "chore(global): publish a new release version"
           github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
