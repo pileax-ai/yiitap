@@ -64,13 +64,13 @@ jobs:
         id: changesets
         uses: changesets/action@v2
         with:
-          createGithubReleases: false
-          publish: pnpm run publish
-          title: "Publish a new release version"
-          commit: >-
+          create-github-releases: false
+          publish-script: pnpm run publish
+          pr-title: "Publish a new release version"
+          commit-message: >-
             "chore(global): publish a new release version"
+          github-token: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.PUBLISH_NPM_TOKEN }}
 
       - name: Release Drafter
