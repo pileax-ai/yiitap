@@ -55,6 +55,7 @@ import {
   InlineMathBubble,
   LinkBubble,
   TableBubble,
+  TableLinkBubble,
 } from '../../constants/menu'
 import { ODivider, OMenubarBtn, OAiMenu, OInlineMathMenu } from '../index'
 import type { AiOptions } from '@yiitap/core'
@@ -193,6 +194,9 @@ const dynamicMenu = computed(() => {
       menu = isLinkSelected.value ? ImageLinkBubble : ImageBubble
     } else if (props.editor?.isActive('table')) {
       menu = TableBubble
+      if (isLinkSelected.value) {
+        menu = TableLinkBubble
+      }
     } else if (isLinkSelected.value) {
       menu = LinkBubble
     } else if (props.editor?.isActive('inlineMath')) {
