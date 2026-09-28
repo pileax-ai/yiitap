@@ -112,6 +112,21 @@ export const TableBubble = [
   'align-group',
 ]
 
+export const TableLinkBubble = [
+  'link-open',
+  'link-edit',
+  'linkUnset',
+  'separator',
+  'table-group',
+  'separator',
+  'bold',
+  'italic',
+  'font-family',
+  'text-color-dropdown',
+  'separator',
+  'align-group',
+]
+
 /**
  * Floating Menu
  */
