@@ -4,7 +4,7 @@
     placement="bottom-start"
     trigger="click"
     tippy-class="o-language-popover"
-    conten-class="dropdown"
+    content-class="dropdown"
     @update:show="onShow"
   >
     <template #trigger>
@@ -30,7 +30,7 @@
         </template>
       </o-input>
     </header>
-    <section class="o-scroll">
+    <o-scroll-area>
       <o-list hoverable clickable>
         <template v-for="(item, index) in filterOptions" :key="index">
           <o-list-item
@@ -47,13 +47,21 @@
           </o-list-item>
         </template>
       </o-list>
-    </section>
+    </o-scroll-area>
   </o-popover>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { OBtn, OIcon, OInput, OList, OListItem, OPopover } from '../index'
+import {
+  OBtn,
+  OIcon,
+  OInput,
+  OList,
+  OListItem,
+  OPopover,
+  OScrollArea,
+} from '../index'
 
 import useI18n from '../../hooks/useI18n'
 import { Languages } from '../../constants/language'

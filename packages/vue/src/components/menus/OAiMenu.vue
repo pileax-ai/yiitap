@@ -5,18 +5,16 @@
       :offset="[-4, 10]"
       placement="bottom-start"
       tippy-class="ai-menu-popover"
-      content-class=""
+      content-class="dropdown"
     >
       <template #popover-content>
-        <div class="o-scroll" v-if="view === 'main'">
-          <section class="view-main">
-            <o-block-list
-              :items="items"
-              @select="onClick"
-              :use-keyboard="showPopover"
-            />
-          </section>
-        </div>
+        <section class="view-main" v-if="view === 'main'">
+          <o-block-list
+            :items="items"
+            @select="onClick"
+            :use-keyboard="showPopover"
+          />
+        </section>
         <section class="view-output" v-if="view === 'output'">
           <div class="action-container">
             <div style="display: flex">
@@ -45,9 +43,9 @@
               />
             </div>
           </div>
-          <div class="o-scroll" v-if="output">
+          <o-scroll-area v-if="output">
             <div class="tiptap output" v-html="output"></div>
-          </div>
+          </o-scroll-area>
         </section>
       </template>
 
@@ -90,6 +88,7 @@ import {
   OCommonBtn,
   OIcon,
   OInput,
+  OScrollArea,
   OToast,
 } from '../../components/index'
 
@@ -308,9 +307,8 @@ onMounted(() => {
       padding: 2px !important;
     }
 
-    .o-scroll {
+    .o-scroll-area {
       padding: 6px;
-      max-height: 480px !important;
     }
 
     .view-output {

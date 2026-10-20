@@ -27,26 +27,28 @@
         </div>
       </template>
 
-      <div class="main-view o-scroll" style="max-width: 480px">
-        <div class="toc__title">{{ tr('label.toc') }}</div>
-        <slot name="title"></slot>
-        <ul class="toc__list">
-          <li
-            class="toc__item"
-            :class="`toc__item--${heading.level}`"
-            v-for="(heading, index) in headings"
-            :key="index"
-          >
-            <span
-              class="heading"
-              :class="{ selected: selectedHeading === heading.id }"
-              @click="onClick(heading)"
+      <o-scroll-area :max-height="maxHeight">
+        <div class="main-view">
+          <div class="toc__title">{{ tr('label.toc') }}</div>
+          <slot name="title"></slot>
+          <ul class="toc__list">
+            <li
+              class="toc__item"
+              :class="`toc__item--${heading.level}`"
+              v-for="(heading, index) in headings"
+              :key="index"
             >
-              {{ heading.text }}
-            </span>
-          </li>
-        </ul>
-      </div>
+              <span
+                class="heading"
+                :class="{ selected: selectedHeading === heading.id }"
+                @click="onClick(heading)"
+              >
+                {{ heading.text }}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </o-scroll-area>
     </o-popover>
   </section>
 </template>
@@ -59,7 +61,7 @@ defineOptions({ name: 'ODocToc' })
 
 import { ref, watch, type PropType } from 'vue'
 import { Editor } from '@tiptap/core'
-import { OPopover, OBtn } from '../../components'
+import { OPopover, OBtn, OScrollArea } from '../../components'
 import useI18n from '../../hooks/useI18n'
 
 interface Heading {
@@ -92,6 +94,10 @@ const props = defineProps({
   maxLevel: {
     type: Number as PropType<2 | 3>,
     default: 3,
+  },
+  maxHeight: {
+    type: String,
+    default: '80vh',
   },
 })
 
@@ -298,11 +304,12 @@ defineExpose({
 
 .o-toc-popover {
   .popover-content {
-    padding: 2px !important;
+    padding: 0 !important;
   }
+
   .main-view {
     min-width: 240px;
-    max-height: 600px;
+    max-width: 400px;
     padding: 10px;
   }
 }
