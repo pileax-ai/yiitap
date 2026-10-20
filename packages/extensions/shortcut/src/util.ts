@@ -102,7 +102,11 @@ const jsonToMarkdown = (json: any, editor: Editor) => {
   return markdownParts.join('\n\n')
 }
 
-const excludeExtensions = ['Mathematics', 'starterKit']
+const excludeExtensions = [
+  'Mathematics',
+  'starterKit',
+  'listItemBranchingDeleteKeymap',
+]
 
 const jsonToHTML = (json: any, editor: Editor) => {
   const doc = Array.isArray(json) ? { type: 'doc', content: json } : json
