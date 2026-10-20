@@ -319,6 +319,7 @@ const sourceList = computed(() => {
   return [
     { label: 'Default', value: 'default' },
     { label: 'Empty', value: 'empty' },
+    { label: 'Callout', value: 'callout' },
     { label: 'Code Block', value: 'codeBlock' },
     { label: 'Diagram', value: 'diagram' },
     { label: 'Audio', value: 'audio' },

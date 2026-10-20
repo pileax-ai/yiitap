@@ -33,14 +33,14 @@
       <div class="color-row">
         <o-menubar-btn
           icon="format_text"
-          tooltip="Default color"
+          :tooltip="tr('editor.defaultColor')"
           content-class="border"
           @click="onSelect('color', { value: '' })"
         />
         <o-menubar-btn
           icon="format_text"
           :color="foreColor"
-          tooltip="Last used"
+          :tooltip="tr('label.lastUsed')"
           content-class="border"
           @click="onSelect('color', { value: foreColor })"
           v-if="foreColor"
@@ -90,13 +90,13 @@
       <div class="color-row">
         <o-menubar-btn
           icon="slash_forward"
-          tooltip="No Color"
+          :tooltip="tr('editor.noColor')"
           content-class="border"
           @click="onSelect('backgroundColor', { value: '' })"
         />
         <o-menubar-btn
           icon="format_text"
-          tooltip="Last used"
+          :tooltip="tr('label.lastUsed')"
           content-class="border"
           :content-style="{ backgroundColor: backColor }"
           @click="onSelect('backgroundColor', { value: backColor })"

@@ -8,22 +8,31 @@
     <div class="callout-container">
       <o-popover
         ref="iconPopover"
+        content-class="o-callout-popover"
         placement="bottom-start"
         trigger="click"
         :offset="[0, 0]"
         :disable="!isEditable"
       >
         <template #trigger>
-          <div class="callout-icon">
-            {{ node.attrs.icon }}
+          <div class="callout-icon" v-if="icon">
+            {{ icon }}
           </div>
         </template>
 
-        <o-emoji-select
-          :items="emojiGroups"
-          @select="onSelect('icon', $event)"
-          enable-search
-        />
+        <section class="callout-emoji">
+          <div class="toolbar">
+            <div>{{ tr('editor.emoji') }}</div>
+            <div>
+              <o-btn @click="onRemoveIcon">{{ tr('label.remove') }}</o-btn>
+            </div>
+          </div>
+          <o-emoji-select
+            :items="emojiGroups"
+            @select="onSelect('icon', $event)"
+            enable-search
+          />
+        </section>
       </o-popover>
 
       <div class="callout-content">
@@ -46,16 +55,18 @@ import { computed, ref, watch } from 'vue'
 import { NodeViewContent, nodeViewProps } from '@tiptap/vue-3'
 import {
   OBlockMenu,
+  OBtn,
   OContextMenu,
   OEmojiSelect,
   ONodeView,
   OPopover,
 } from '../../components'
-import { useTheme, useTiptap } from '../../hooks'
+import { useI18n, useTheme, useTiptap } from '../../hooks'
 import { emojiGroups } from '@yiitap/util-emoji'
 
 const props = defineProps(nodeViewProps)
 
+const { tr } = useI18n()
 const { theme } = useTheme()
 const { isEditable } = useTiptap()
 const showContextMenu = ref(false)
@@ -107,6 +118,15 @@ const borderColorDark = computed({
   },
 })
 
+const icon = computed({
+  get() {
+    return props.node.attrs.icon
+  },
+  set(value) {
+    props.updateAttributes({ icon: value })
+  },
+})
+
 const backColorTheme = computed(() => {
   return theme.value === 'dark' ? backColorDark.value : backColor.value
 })
@@ -114,10 +134,6 @@ const backColorTheme = computed(() => {
 const borderColorTheme = computed(() => {
   return theme.value === 'dark' ? borderColorDark.value : borderColor.value
 })
-
-function setIcon(icon) {
-  props.updateAttributes({ icon: icon })
-}
 
 function onAction(action: BlockOption) {
   showContextMenu.value = false
@@ -137,6 +153,11 @@ function onShowPopover(value: boolean) {
   showPopover.value = value
 }
 
+function onRemoveIcon() {
+  icon.value = ''
+  iconPopover.value?.setShow(false)
+}
+
 function onSelect(command: string, value: any) {
   switch (command) {
     case 'backColor':
@@ -146,7 +167,8 @@ function onSelect(command: string, value: any) {
       borderColor.value = value
       break
     case 'icon':
-      setIcon(value.emoji)
+      // setIcon(value.emoji)
+      icon.value = value.emoji
       iconPopover.value?.setShow(false)
       break
   }
@@ -199,15 +221,19 @@ watch(isFocused, (newValue) => {
 
 .o-callout-popover {
   padding: 0 !important;
-  top: -14px;
-  right: -12px;
-  min-width: 200px;
-  box-shadow: none !important;
-  background: transparent !important;
+  .callout-emoji {
+    .toolbar {
+      padding: 8px 8px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //border-bottom: solid 1px var(--yii-border-color);
 
-  .n-popover__content {
-    display: flex;
-    justify-content: flex-end;
+      .o-btn {
+        padding: 4px 8px;
+        height: unset;
+      }
+    }
   }
 }
 

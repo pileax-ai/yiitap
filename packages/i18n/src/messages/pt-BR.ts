@@ -45,6 +45,7 @@ export default {
     blockMath: 'Bloco de matemática',
     blockquote: 'Citação em bloco',
     bold: 'Audacioso',
+    borderColor: 'Cor da borda',
     callout: 'Chamar',
     center: 'Alinhamento central',
     code: 'Código',
@@ -171,8 +172,10 @@ export default {
     generate: 'Gerar',
     generatedBy: 'Gerado por',
     help: 'Ajuda',
+    icon: 'Ícone',
     image: 'Imagem',
     imageAdd: 'Adicione uma imagem',
+    lastUsed: 'Último uso',
     link: 'Link',
     linkAddress: 'Endereço do link',
     linkPlaceholder: {

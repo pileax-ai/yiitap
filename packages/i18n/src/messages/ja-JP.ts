@@ -45,6 +45,7 @@ export default {
     blockMath: 'ブロック演算',
     blockquote: 'ブロック引用',
     bold: '大胆な',
+    borderColor: '枠線の色',
     callout: '叫ぶ',
     center: '中央揃え',
     code: 'コード',
@@ -170,8 +171,10 @@ export default {
     generate: '生成する',
     generatedBy: '生成者',
     help: 'ヘルプ',
+    icon: 'アイコン',
     image: '画像',
     imageAdd: '画像を追加する',
+    lastUsed: '最終使用日時',
     link: 'リンク',
     linkAddress: 'リンクアドレス',
     linkPlaceholder: {

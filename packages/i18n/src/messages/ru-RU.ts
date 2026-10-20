@@ -45,6 +45,7 @@ export default {
     blockMath: 'Блок математики',
     blockquote: 'Цитата',
     bold: 'Смелый',
+    borderColor: 'Цвет границы',
     callout: 'Вызывать',
     center: 'Выровнять по центру',
     code: 'Код',
@@ -171,8 +172,10 @@ export default {
     generate: 'Генерировать',
     generatedBy: 'Создано',
     help: 'Помощь',
+    icon: 'Икона',
     image: 'Изображение',
     imageAdd: 'Добавить изображение',
+    lastUsed: 'Последнее использование',
     link: 'Связь',
     linkAddress: 'Адрес ссылки',
     linkPlaceholder: {

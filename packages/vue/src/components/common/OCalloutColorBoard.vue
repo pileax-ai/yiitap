@@ -1,16 +1,16 @@
 <template>
   <section class="o-callout-color-board">
     <section class="fore-colors">
-      <div class="label o-tips">Border color</div>
+      <div class="label o-tips">{{ tr('editor.borderColor') }}</div>
       <div class="color-row">
         <o-menubar-btn
           icon="slash_forward"
-          tooltip="No color"
+          :tooltip="tr('editor.noColor')"
           content-class="border"
           @click="onSelect('foreColor', { value: '' })"
         />
         <o-menubar-btn
-          tooltip="Last used"
+          :tooltip="tr('label.lastUsed')"
           :content-style="{ borderColor: foreColor }"
           @click="onSelect('foreColor', { value: foreColor })"
           v-if="foreColor"
@@ -27,17 +27,17 @@
       </div>
     </section>
     <section class="back-colors">
-      <div class="label o-tips">Background</div>
+      <div class="label o-tips">{{ tr('editor.backgroundColor') }}</div>
       <div class="color-row">
         <o-menubar-btn
           icon="slash_forward"
-          tooltip="Default Color"
+          :tooltip="tr('editor.noColor')"
           content-class="border"
-          @click="onSelect('backColor', { value: '#F5F5F5' })"
+          @click="onSelect('backColor', { value: '' })"
         />
         <o-menubar-btn
           :content-style="{ backgroundColor: backColor }"
-          tooltip="Last used"
+          :tooltip="tr('label.lastUsed')"
           content-class="border"
           @click="onSelect('backColor', { value: backColor })"
           v-if="backColor"
@@ -59,6 +59,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { OMenubarBtn } from '../index'
+import { useI18n } from '../../hooks'
 
 const props = defineProps({
   foreColor: {
@@ -75,6 +76,8 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['select'])
+
+const { tr } = useI18n()
 
 function onSelect(name: string, color: Indexable) {
   emit('select', {
