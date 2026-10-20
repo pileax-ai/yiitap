@@ -368,6 +368,11 @@ export class SideMenuPlugin {
       props: {
         handleDOMEvents: {
           mouseover(view, event) {
+            // Only work when editor is focused
+            if (!view.hasFocus()) {
+              return
+            }
+
             const coords = {
               left: event.clientX,
               top: event.clientY,

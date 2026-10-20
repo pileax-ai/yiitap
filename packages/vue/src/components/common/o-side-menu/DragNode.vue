@@ -91,8 +91,9 @@ function onShow(value: boolean) {
 
   if (value) {
     selectNode()
+    props.editor?.commands.blur()
   } else {
-    // props.editor?.commands.focus()
+    props.editor?.commands.focus()
   }
 }
 

@@ -208,6 +208,7 @@ const getNewPos = () => {
 .o-add-node-view {
   border-radius: 4px;
   width: 232px;
+  //max-height: min(50vh, 600px) !important;
   font-size: 0.9rem;
 
   .panel {
