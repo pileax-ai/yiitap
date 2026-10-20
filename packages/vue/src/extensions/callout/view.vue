@@ -186,7 +186,7 @@ watch(isFocused, (newValue) => {
   padding: 12px;
   margin: 4px 0;
   background: var(--callout-back-color);
-  border: solid 1px var(--callout-border-color);
+  outline: solid 1px var(--callout-border-color);
 
   .callout-container {
     display: flex;

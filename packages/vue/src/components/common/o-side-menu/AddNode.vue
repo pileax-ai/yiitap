@@ -15,7 +15,9 @@
       </div>
     </template>
 
-    <add-node-view v-bind="props" @action="onAction" />
+    <o-scroll-area>
+      <add-node-view v-bind="props" @action="onAction" />
+    </o-scroll-area>
   </o-popover>
 </template>
 
@@ -23,7 +25,7 @@
 import { computed, type PropType, ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import AddNodeView from './AddNodeView.vue'
-import { OBtn, OIcon, OPopover } from '../../index'
+import { OBtn, OIcon, OPopover, OScrollArea } from '../../index'
 
 const props = defineProps({
   ...nodeViewProps,

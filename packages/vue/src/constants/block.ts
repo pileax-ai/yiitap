@@ -293,7 +293,7 @@ export const BlockMenus: BlockOption[] = [
     label: 'label.icon',
     value: 'callout_emoji',
     icon: 'emotion',
-    color: BrandColor.lightBlue,
+    color: BrandColor.orange,
     filter: 'callout',
     component: 'OEmojiSelect',
   },

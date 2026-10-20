@@ -1,45 +1,44 @@
 <template>
-  <section
-    class="o-slash-view o-shadow-3 o-menu o-scroll"
-    :class="`view-${view}`"
-  >
-    <section class="view-main" v-if="view === 'main'">
-      <o-list hoverable clickable>
-        <template v-if="filteredItem.length">
-          <template v-for="(item, index) in filteredItem" :key="index">
-            <template v-if="item.group">
-              <o-divider v-if="index > 0" />
-              <div class="group o-tips">{{ tr(item.group) }}</div>
-            </template>
-            <o-list-item
-              class="item"
-              :class="{ 'is-active': index === selectedIndex }"
-              clickable
-              @click="onClick(item)"
-            >
-              <template #prefix>
-                <o-icon :name="item.icon" :color="item.color" />
+  <o-scroll-area class="o-shadow-3 o-menu">
+    <section class="o-slash-view" :class="`view-${view}`">
+      <section class="view-main" v-if="view === 'main'">
+        <o-list hoverable clickable>
+          <template v-if="filteredItem.length">
+            <template v-for="(item, index) in filteredItem" :key="index">
+              <template v-if="item.group">
+                <o-divider v-if="index > 0" />
+                <div class="group o-tips">{{ tr(item.group) }}</div>
               </template>
-              <template #suffix>
-                <span class="o-tips">
-                  {{ item.tips }}
-                </span>
-              </template>
+              <o-list-item
+                class="item"
+                :class="{ 'is-active': index === selectedIndex }"
+                clickable
+                @click="onClick(item)"
+              >
+                <template #prefix>
+                  <o-icon :name="item.icon" :color="item.color" />
+                </template>
+                <template #suffix>
+                  <span class="o-tips">
+                    {{ item.tips }}
+                  </span>
+                </template>
 
-              {{ tr(item.label) }}
-            </o-list-item>
+                {{ tr(item.label) }}
+              </o-list-item>
+            </template>
           </template>
-        </template>
-        <div class="item" v-else>No result</div>
-      </o-list>
+          <div class="item" v-else>No result</div>
+        </o-list>
+      </section>
+      <section class="view-emoji" v-else-if="view === 'emoji'">
+        <!--      <o-emoji-select @set="setEmoji" />-->
+      </section>
+      <section class="view-emoji" v-else-if="view === 'ai'">
+        <!--      <o-ai-generator :editor="editor" :range="range" />-->
+      </section>
     </section>
-    <section class="view-emoji" v-else-if="view === 'emoji'">
-      <!--      <o-emoji-select @set="setEmoji" />-->
-    </section>
-    <section class="view-emoji" v-else-if="view === 'ai'">
-      <!--      <o-ai-generator :editor="editor" :range="range" />-->
-    </section>
-  </section>
+  </o-scroll-area>
 </template>
 
 <script lang="ts">
@@ -47,7 +46,13 @@ import type { PropType } from 'vue'
 import { Editor, type Range } from '@tiptap/core'
 import useI18n from '../../../hooks/useI18n'
 import useTiptap from '../../../hooks/useTiptap'
-import { ODivider, OIcon, OList, OListItem } from '../../../components/index'
+import {
+  ODivider,
+  OIcon,
+  OList,
+  OListItem,
+  OScrollArea,
+} from '../../../components/index'
 import { BasicBlocks } from '../../../constants/block'
 import { isExtensionInstalled } from '../../../utils'
 
@@ -86,6 +91,7 @@ export default {
     }
   },
   components: {
+    OScrollArea,
     ODivider,
     OIcon,
     OList,
