@@ -9,7 +9,8 @@
         <o-popover
           :ref="(el: InstanceType<typeof OPopover>) => setPopoverRef(el, index)"
           placement="right-start"
-          :offset="[-10, 16]"
+          content-class="dropdown"
+          :offset="[-10, 6]"
           v-if="item.children?.length"
         >
           <template #trigger>
@@ -20,10 +21,12 @@
               clickable
             />
           </template>
-          <o-block-list
-            :items="item.children"
-            @select="onClick(item, index, $event)"
-          />
+          <o-scroll-area>
+            <o-block-list
+              :items="item.children"
+              @select="onClick(item, index, $event)"
+            />
+          </o-scroll-area>
         </o-popover>
         <o-block-list-item
           :item="item"
@@ -42,7 +45,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import useI18n from '../../hooks/useI18n'
-import { OBlockList, OBlockListItem, ODivider, OList, OPopover } from '../index'
+import {
+  OBlockList,
+  OBlockListItem,
+  ODivider,
+  OList,
+  OPopover,
+  OScrollArea,
+} from '../index'
 
 const props = defineProps({
   items: {

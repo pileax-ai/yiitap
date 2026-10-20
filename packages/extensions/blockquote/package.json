@@ -33,10 +33,10 @@
 		"test-ci": "vitest --run"
 	},
 	"dependencies": {
-		"@tiptap/extension-blockquote": "^3.20.0"
+		"@tiptap/extension-blockquote": "^3.32.0"
 	},
 	"peerDependencies": {
-		"@tiptap/core": "^3.20.0"
+		"@tiptap/core": "^3.32.0"
 	},
 	"devDependencies": {}
 }

@@ -13,7 +13,7 @@
     "@google/model-viewer": "^4.1.0",
     "@hocuspocus/provider": "^3.4.3",
     "@mermaid-js/layout-elk": "^0.2.0",
-    "@tiptap/starter-kit": "^3.20.0",
+    "@tiptap/starter-kit": "^3.32.0",
     "@yiitap/i18n": "workspace:*",
     "@yiitap/vue": "workspace:*",
     "@yiitap/vue-preset": "workspace:*",

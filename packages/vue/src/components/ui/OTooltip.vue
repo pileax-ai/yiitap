@@ -1,5 +1,5 @@
 <template>
-  <div ref="triggerRef" data-tippy-role="tooltip">
+  <div ref="triggerRef" data-tippy-role="tooltip" class="o-tooltip">
     <slot name="trigger"></slot>
     <div ref="contentRef" class="tooltip-content">
       <slot></slot>
@@ -82,4 +82,9 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.o-tooltip {
+  display: flex;
+  align-items: center;
+}
+</style>
