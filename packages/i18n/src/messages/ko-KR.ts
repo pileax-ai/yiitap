@@ -45,6 +45,7 @@ export default {
     blockMath: '블록 수학',
     blockquote: '인용구',
     bold: '용감한',
+    borderColor: '테두리 색상',
     callout: '호출',
     center: '중앙 정렬',
     code: '암호',
@@ -170,8 +171,10 @@ export default {
     generate: '생성하다',
     generatedBy: '생성자',
     help: '돕다',
+    icon: '상',
     image: '영상',
     imageAdd: '이미지 추가',
+    lastUsed: '마지막 사용',
     link: '링크',
     linkAddress: '링크 주소',
     linkPlaceholder: {

@@ -57,6 +57,7 @@ import { convertShortcut } from '../../utils/convert'
 import {
   OCalloutColorBoard,
   ODivider,
+  OEmojiSelect,
   OIcon,
   OList,
   OListItem,
@@ -117,6 +118,8 @@ function getComponent(item: Indexable) {
   switch (item.component) {
     case 'OCalloutColorBoard':
       return OCalloutColorBoard
+    case 'OEmojiSelect':
+      return OEmojiSelect
     case 'OTextColorBoard':
       return OTextColorBoard
     default:
@@ -171,6 +174,7 @@ function onDuplicate() {
 }
 
 function onSelect(item: Indexable, options: Indexable) {
+  // console.log('select', item, options)
   switch (options.name) {
     case 'backColor':
       props.updateAttributes({ backColor: options.value })
@@ -183,6 +187,12 @@ function onSelect(item: Indexable, options: Indexable) {
       break
     case 'backgroundColor':
       run(props.editor, options.name, { color: options.value })
+      break
+  }
+
+  switch (item.value) {
+    case 'callout_emoji':
+      props.updateAttributes({ icon: options.emoji })
       break
   }
 }

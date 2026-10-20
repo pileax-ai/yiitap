@@ -60,15 +60,27 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
-import { filterEmojiGroups, emojiGroupIcons } from '@yiitap/util-emoji'
+import {
+  computed,
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  nextTick,
+  onBeforeMount,
+} from 'vue'
+import {
+  filterEmojiGroups,
+  emojiGroups,
+  emojiGroupIcons,
+} from '@yiitap/util-emoji'
 import { OIcon, OInput, OTooltip } from '../../components'
 import { useI18n } from '../../hooks'
 
 const props = defineProps({
   items: {
     type: Array as () => Indexable[],
-    required: true,
+    required: false,
   },
   query: {
     type: String,
@@ -84,6 +96,7 @@ const emit = defineEmits(['select'])
 const { tr } = useI18n()
 const input = ref(null)
 const value = ref('')
+const emojiItems = ref<Indexable[]>([])
 const searchResults = ref([])
 const recentEmojis = ref<Indexable[]>([])
 const groupIndex = ref(0)
@@ -97,7 +110,7 @@ const LOCAL_STORAGE_KEY = 'yiitap.emojis'
 
 const combinedGroups = computed(() => {
   if (recentEmojis.value.length === 0 || props.query) {
-    return props.items
+    return emojiItems.value
   }
 
   const recentGroup = {
@@ -106,7 +119,7 @@ const combinedGroups = computed(() => {
     emojis: recentEmojis.value,
   }
 
-  return [recentGroup, ...props.items]
+  return [recentGroup, ...emojiItems.value]
 })
 
 const visibleGroups = computed(() => {
@@ -115,7 +128,8 @@ const visibleGroups = computed(() => {
 
 const isNotEmpty = computed(() => {
   let notEmpty = false
-  visibleGroups.value.map((item) => {
+  const groups = visibleGroups.value || []
+  groups.map((item) => {
     notEmpty = notEmpty || item.emojis.length
   })
   return notEmpty
@@ -240,6 +254,12 @@ watch(
   { deep: true }
 )
 
+onBeforeMount(() => {
+  emojiItems.value = (
+    props.items?.length ? props.items : emojiGroups
+  ) as Indexable[]
+})
+
 onMounted(() => {
   loadRecentEmojis()
   initObserver()
@@ -259,6 +279,10 @@ onBeforeUnmount(() => {
 
   .search {
     padding: 8px 8px 0 8px;
+
+    .o-input {
+      padding: 0 4px;
+    }
   }
 
   .groups {

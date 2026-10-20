@@ -38,6 +38,7 @@
   "editor.blockMath": "afd1e2da",
   "editor.blockquote": "146aaf13",
   "editor.bold": "114c3050",
+  "editor.borderColor": "475c80ec",
   "editor.callout": "1eaf6bb9",
   "editor.center": "f52ac7a7",
   "editor.code": "ca0dbad9",
@@ -113,6 +114,7 @@
   "emojiGroup.objects": "c8308b1e",
   "emojiGroup.people": "d1310ead",
   "emojiGroup.recent": "dae52b80",
+  "emojiGroup.smileys": "4c2fe5ca",
   "emojiGroup.symbols": "5214a8a6",
   "emojiGroup.travel": "b6ad4457",
   "image.height": "eec6c4bd",
@@ -156,8 +158,10 @@
   "label.generate": "32b919d1",
   "label.generatedBy": "065bf91c",
   "label.help": "6a26f548",
+  "label.icon": "81743429",
   "label.image": "be53a054",
   "label.imageAdd": "06c0d8d1",
+  "label.lastUsed": "135daaf0",
   "label.link": "97e7c9a7",
   "label.linkAddress": "3982cb7c",
   "label.linkPlaceholder.image": "9ce38727",
@@ -230,6 +234,5 @@
   "table.removeRow": "d312b9cc",
   "table.selectColumn": "53baa16c",
   "table.selectRow": "1953384c",
-  "table.split": "3068f60f",
-  "emojiGroup.smileys": "4c2fe5ca"
+  "table.split": "3068f60f"
 }

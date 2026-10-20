@@ -45,6 +45,7 @@ export default {
     blockMath: 'Mathe blockieren',
     blockquote: 'Blockquote',
     bold: 'Deutlich',
+    borderColor: 'Rahmenfarbe',
     callout: 'Aufbieten, ausrufen, zurufen',
     center: 'Mittig ausrichten',
     code: 'Code',
@@ -171,8 +172,10 @@ export default {
     generate: 'Erzeugen',
     generatedBy: 'Erstellt von',
     help: 'Helfen',
+    icon: 'Symbol',
     image: 'Bild',
     imageAdd: 'Fügen Sie ein Bild hinzu',
+    lastUsed: 'Zuletzt verwendet',
     link: 'Link',
     linkAddress: 'Linkadresse',
     linkPlaceholder: {

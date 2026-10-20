@@ -45,6 +45,7 @@ export default {
     blockMath: '塊級公式',
     blockquote: '引用',
     bold: '粗體',
+    borderColor: '邊框顏色',
     callout: '高亮塊',
     center: '居中對齊',
     code: '代碼',
@@ -170,8 +171,10 @@ export default {
     generate: '生成',
     generatedBy: '生成自',
     help: '幫助',
+    icon: '圖示',
     image: '圖片',
     imageAdd: '新增圖片',
+    lastUsed: '最近使用',
     link: '鏈接',
     linkAddress: '鏈接地址',
     linkPlaceholder: {

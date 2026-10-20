@@ -289,6 +289,14 @@ export const BlockMenus: BlockOption[] = [
     filter: 'callout',
     component: 'OCalloutColorBoard',
   },
+  {
+    label: 'label.icon',
+    value: 'callout_emoji',
+    icon: 'emotion',
+    color: BrandColor.lightBlue,
+    filter: 'callout',
+    component: 'OEmojiSelect',
+  },
 ]
 
 export const AskAiBlocks: BlockOption[] = [

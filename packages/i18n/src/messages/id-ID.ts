@@ -45,6 +45,7 @@ export default {
     blockMath: 'Blokir Matematika',
     blockquote: 'kutipan blok',
     bold: 'Berani',
+    borderColor: 'Warna Garis Tepi',
     callout: 'Info',
     center: 'Rata tengah',
     code: 'Kode',
@@ -171,8 +172,10 @@ export default {
     generate: 'Menghasilkan',
     generatedBy: 'Dihasilkan oleh',
     help: 'Membantu',
+    icon: 'Ikon',
     image: 'Gambar',
     imageAdd: 'Tambahkan gambar',
+    lastUsed: 'Terakhir digunakan',
     link: 'Link',
     linkAddress: 'Alamat Tautan',
     linkPlaceholder: {

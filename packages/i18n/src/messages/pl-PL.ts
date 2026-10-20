@@ -45,6 +45,7 @@ export default {
     blockMath: 'Blokuj matematykę',
     blockquote: 'Cytat blokowy',
     bold: 'Pogrubiony',
+    borderColor: 'Kolor obramowania',
     callout: 'Objaśnienie',
     center: 'Wyśrodkuj',
     code: 'Kod',
@@ -171,8 +172,10 @@ export default {
     generate: 'Spowodować',
     generatedBy: 'Wygenerowane przez',
     help: 'Pomoc',
+    icon: 'Ikona',
     image: 'Obraz',
     imageAdd: 'Dodaj obraz',
+    lastUsed: 'Ostatnio używane',
     link: 'Połączyć',
     linkAddress: 'Adres łącza',
     linkPlaceholder: {

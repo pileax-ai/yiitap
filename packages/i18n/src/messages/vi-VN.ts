@@ -45,6 +45,7 @@ export default {
     blockMath: 'Khối Toán',
     blockquote: 'Trích dẫn',
     bold: 'In đậm',
+    borderColor: 'Màu viền',
     callout: 'Chú thích',
     center: 'Căn giữa',
     code: 'Mã số',
@@ -171,8 +172,10 @@ export default {
     generate: 'Phát ra',
     generatedBy: 'Được tạo bởi',
     help: 'Giúp đỡ',
+    icon: 'Biểu tượng',
     image: 'Hình ảnh',
     imageAdd: 'Thêm một hình ảnh',
+    lastUsed: 'Lần cuối sử dụng',
     link: 'liên kết',
     linkAddress: 'Địa chỉ liên kết',
     linkPlaceholder: {
