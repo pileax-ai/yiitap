@@ -440,6 +440,15 @@ importers:
         specifier: ^3.32.0
         version: 3.32.0
 
+  packages/extensions/toggle-heading:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.32.0
+        version: 3.32.0(@tiptap/pm@3.32.0)
+      '@tiptap/pm':
+        specifier: ^3.32.0
+        version: 3.32.0
+
   packages/extensions/upload-manager:
     dependencies:
       '@tiptap/core':
@@ -676,6 +685,9 @@ importers:
       '@yiitap/extension-task-item':
         specifier: workspace:*
         version: link:../extensions/task-item
+      '@yiitap/extension-toggle-heading':
+        specifier: workspace:*
+        version: link:../extensions/toggle-heading
       '@yiitap/extension-upload-manager':
         specifier: workspace:*
         version: link:../extensions/upload-manager
@@ -881,6 +893,9 @@ importers:
       '@yiitap/extension-task-item':
         specifier: workspace:*
         version: link:../extensions/task-item
+      '@yiitap/extension-toggle-heading':
+        specifier: workspace:*
+        version: link:../extensions/toggle-heading
       '@yiitap/extension-upload-manager':
         specifier: workspace:*
         version: link:../extensions/upload-manager

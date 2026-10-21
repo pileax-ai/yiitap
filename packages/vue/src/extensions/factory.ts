@@ -39,6 +39,7 @@ import type {
   ColumnDropCursorOptions,
   MultiColumnOptions,
   ShortcutOptions,
+  ToggleHeadingOptions,
   UploadManagerOptions,
 } from './extensions'
 
@@ -100,6 +101,7 @@ import {
   OTableHeader,
   OTableWrapper,
   OTaskItem,
+  OToggleHeading,
   OVideo,
   OUploadManager,
 
@@ -175,6 +177,7 @@ export interface ExtensionOptions {
   OColumnDropCursor: ColumnDropCursorOptions
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
+  OToggleHeading: ToggleHeadingOptions
   OVideo: { allowFullscreen?: boolean; HTMLAttributes?: Record<string, any> }
   OUploadManager: UploadManagerOptions
 
@@ -288,6 +291,7 @@ export const extensionRegistry: {
       ],
       ...opts,
     }),
+  OToggleHeading: (opts?) => OToggleHeading.configure(opts),
   OVideo: (opts?) => OVideo.configure(opts),
   OUploadManager: (opts?) => OUploadManager.configure(opts),
 

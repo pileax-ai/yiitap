@@ -231,6 +231,7 @@ const editorOptions = computed(() => {
     'OModelViewer',
     'OMultiColumn',
     'OShortcut',
+    'OToggleHeading',
     'OVideo',
   ]
   if (collabReady.value) {

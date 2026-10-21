@@ -461,5 +461,5 @@ defineExpose({
 @use '../style/yiitap';
 @import '../../../icon/dist/yiitap-icon.css';
 @import '@yiitap/extension-multi-column/dist/style.css';
-//@import '../style/multi-column';
+@import '@yiitap/extension-toggle-heading/dist/style.css';
 </style>

@@ -71,6 +71,7 @@
     "@yiitap/extension-table": "workspace:*",
     "@yiitap/extension-table-wrapper": "workspace:*",
     "@yiitap/extension-task-item": "workspace:*",
+    "@yiitap/extension-toggle-heading": "workspace:*",
     "@yiitap/extension-upload-manager": "workspace:*",
     "@yiitap/extension-video": "workspace:*",
     "@yiitap/i18n": "workspace:*",

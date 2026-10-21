@@ -1,0 +1,42 @@
+// ----------------------------------------------------
+//  Toggle Heading
+// ----------------------------------------------------
+.tiptap .cw-heading {
+  position: relative;
+}
+
+/* 箭头：行内元素，参与文本流，位于标题文字之前 */
+.tiptap .cw-heading .cw-fold-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;          /* 与标题文字保持一点间距 */
+  vertical-align: middle;     /* 和标题文字垂直居中对齐 */
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #999;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.35;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+/* hover 标题行时箭头变明显（Notion 风格） */
+.tiptap .cw-heading:hover .cw-fold-btn {
+  opacity: 1;
+}
+
+.tiptap .cw-fold-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* 折叠内容隐藏逻辑不变 */
+.tiptap .cw-hidden-by-fold {
+  display: none !important;
+}
