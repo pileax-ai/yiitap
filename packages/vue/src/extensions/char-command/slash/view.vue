@@ -142,6 +142,8 @@ export default {
         return true
       }
       if (event.key === 'Enter') {
+        event.preventDefault()
+        event.stopPropagation()
         this.enterHandler()
         return true
       }

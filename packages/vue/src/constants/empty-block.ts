@@ -148,3 +148,30 @@ export const EmptyVideo = {
     src: 'init',
   },
 }
+
+export const buildEmptyToggleBlock = (level = 0) => {
+  return {
+    type: 'toggleBlock',
+    attrs: {
+      open: true,
+    },
+    content: [
+      {
+        type: 'toggleHead',
+        attrs: {
+          level: level,
+        },
+        content: [],
+      },
+      {
+        type: 'toggleBody',
+        content: [
+          {
+            type: 'paragraph',
+            content: [],
+          },
+        ],
+      },
+    ],
+  }
+}

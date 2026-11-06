@@ -21,10 +21,10 @@ export default {
       friendly: '友好',
       humorous: '幽默',
       inspirational: '鼓舞人心',
-      mysterious: '神秘',
+      mysterious: '神秘'
     },
     translate: '翻译成',
-    write: 'Write anything',
+    write: 'Write anything'
   },
   diagram: {
     class: '类图',
@@ -33,7 +33,7 @@ export default {
     name: '文本绘图',
     sequence: '时序图',
     state: '状态图',
-    tips: '使用Markdown风格文本生成流程图、顺序图、类图、状态图和甘特图',
+    tips: '使用Markdown风格文本生成流程图、顺序图、类图、状态图和甘特图'
   },
   editor: {
     add: '添加',
@@ -106,14 +106,23 @@ export default {
     textFormat: '更多格式',
     thirdPartyService: '第三方服务',
     todoList: '任务列表',
+    toggle: '折叠列表',
     toggleFullscreen: '全屏切换',
+    toggleHead: '折叠标题',
+    toggleHeading: '折叠标题',
+    toggleHeading1: '折叠标题一',
+    toggleHeading2: '折叠标题二',
+    toggleHeading3: '折叠标题三',
+    toggleHeading4: '折叠标题四',
+    toggleHeading5: '折叠标题五',
     toggleList: '折叠列表',
     underline: '下划线',
     undo: '撤消',
     unorderedList: '无序列表',
+    untoggleHeading: '取消折叠',
     url: 'URL',
     video: '视频',
-    viewSource: '查看资料',
+    viewSource: '查看资料'
   },
   emojiGroup: {
     activities: '活动',
@@ -125,7 +134,7 @@ export default {
     recent: '最近使用',
     smileys: '表情与情感',
     symbols: '符号',
-    travel: '旅游与地点',
+    travel: '旅游与地点'
   },
   image: {
     height: '高度',
@@ -143,7 +152,7 @@ export default {
     src: '图片地址',
     unlockAspectRatio: '解锁长宽比',
     width: '宽度',
-    zoom: '缩放',
+    zoom: '缩放'
   },
   label: {
     advanced: '进阶',
@@ -167,6 +176,7 @@ export default {
     embedAdd: '嵌入 (PDF、视频、音乐...)',
     empty: '空白页面',
     emptyTips: '按回车开始编辑，或从下方选择',
+    emptyToggle: '空折叠区块',
     example: '示例',
     generate: '生成',
     generatedBy: '生成自',
@@ -180,7 +190,7 @@ export default {
     linkPlaceholder: {
       image: '图片链接',
       model: '模型链接',
-      video: '视频链接',
+      video: '视频链接'
     },
     media: '多媒体',
     model: '模型',
@@ -203,7 +213,7 @@ export default {
     think: '思考',
     toc: '目录',
     turnInto: '转成',
-    typeForCommands: "输入 '/' 显示命令",
+    typeForCommands: '输入 \'/\' 显示命令',
     untitled: '未命名',
     update: '更新',
     upload: '上传',
@@ -211,12 +221,12 @@ export default {
       failed: '上传失败',
       notConfigured: '未配置上传方法',
       tips: '将文件拖到此处，或点击上传',
-      uploading: '上传中',
+      uploading: '上传中'
     },
     video: '视频',
     videoAdd: '添加视频',
     view: '视图',
-    write: '写作',
+    write: '写作'
   },
   language: {
     chineseSimplified: '简体中文',
@@ -232,14 +242,14 @@ export default {
     portuguese: '葡萄牙语',
     russian: '俄语',
     spanish: '西班牙语',
-    vietnamese: '越南语',
+    vietnamese: '越南语'
   },
   link: {
     back: '返回主菜单',
     edit: '编辑链接',
     off: '取消链接',
     open: '打开链接',
-    openInNewTab: '在新标签页打开',
+    openInNewTab: '在新标签页打开'
   },
   table: {
     addColumn: '添加列',
@@ -256,6 +266,6 @@ export default {
     removeRow: '删除行',
     selectColumn: '选择列',
     selectRow: '选择行',
-    split: '拆分单元格',
-  },
+    split: '拆分单元格'
+  }
 }

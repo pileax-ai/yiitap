@@ -251,6 +251,19 @@ export default function () {
       case 'textAlign':
         focus.setTextAlign(options.textAlign).run()
         break
+      case 'toggleBlock':
+        console.log('toggleBlock', options)
+        focus.insertToggleBlock(options as { level: Level }).run()
+        break
+      case 'toggleBlockSet':
+        focus.setToggleBlock(options as { level: Level }).run()
+        break
+      case 'toggleBlockUnset':
+        focus.unsetToggleBlock().run()
+        break
+      case 'toggleBlockToggle':
+        focus.toggleToggleBlock(options as { level: Level }).run()
+        break
       case 'underline':
         focus.toggleUnderline().run()
         break
@@ -278,6 +291,17 @@ export default function () {
     view.dispatch(tr)
   }
 
+  function inferNodeType(node) {
+    const content = node?.content?.content
+    if (content?.length > 0) {
+      const first = content[0]
+      if (['embed', 'image', 'toggleHead'].includes(first.type.name)) {
+        return first.type.name
+      }
+    }
+    return node?.type.name
+  }
+
   function getEditorImages(editor: Editor) {
     const images: EditorImage[] = []
 
@@ -298,6 +322,7 @@ export default function () {
 
     onCommand,
     run,
+    inferNodeType,
     getEditorImages,
   }
 }

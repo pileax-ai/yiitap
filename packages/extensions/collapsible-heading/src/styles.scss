@@ -1,0 +1,57 @@
+// ----------------------------------------------------
+//  Toggle Heading
+// ----------------------------------------------------
+.tiptap .cw-heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Fold button: inline element, participates in the text flow, positioned before the heading text */
+.tiptap .cw-heading .cw-fold-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 2px;          /* Keep a small gap from the heading text */
+  margin-left: -20px;
+  vertical-align: middle;     /* Vertically center aligned with the heading text */
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--yii-tips-color);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Rotate only the inner arrow span smoothly when collapsed, keeping the button box fixed */
+.tiptap .cw-heading .cw-fold-btn > span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.tiptap .cw-heading.cw-collapsed .cw-fold-btn > span {
+  transform: rotate(-90deg);
+}
+
+/* Make the arrow more visible when hovering over the heading row (Notion style) */
+.tiptap .cw-heading:hover .cw-fold-btn {
+  opacity: 1;
+}
+
+.tiptap .cw-fold-btn:hover {
+  background: var(--yii-hover-bg-color);
+  color: var(--yii-color);
+}
+
+/* Collapsed content hiding logic */
+.tiptap .cw-hidden-by-fold {
+  display: none !important;
+}

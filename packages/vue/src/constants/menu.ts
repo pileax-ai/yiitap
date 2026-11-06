@@ -48,7 +48,7 @@ export const TableMenu = [
   'separator',
   'horizontalRule',
   'blockquote',
-  'details',
+  'toggle-list',
   'list-dropdown',
   'link',
   'image',
@@ -98,7 +98,7 @@ export const MoreBubble = [
   'separator',
   'code',
   'blockquote',
-  'details',
+  'toggle-list',
 ]
 
 export const TableBubble = [

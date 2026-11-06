@@ -21,10 +21,10 @@ export default {
       friendly: 'フレンドリー',
       humorous: 'ユーモラスな',
       inspirational: 'インスピレーションを与える',
-      mysterious: '不思議な',
+      mysterious: '不思議な'
     },
     translate: 'に翻訳する',
-    write: '何でも書いてください',
+    write: '何でも書いてください'
   },
   diagram: {
     class: 'クラス図',
@@ -33,7 +33,7 @@ export default {
     name: 'テキスト図',
     sequence: 'シーケンス図',
     state: '状態図',
-    tips: 'マークダウンと同様の方法でテキストから図やチャートを生成',
+    tips: 'マークダウンと同様の方法でテキストから図やチャートを生成'
   },
   editor: {
     add: '追加',
@@ -106,14 +106,23 @@ export default {
     textFormat: 'その他のテキスト形式',
     thirdPartyService: 'サードパーティのサービス',
     todoList: 'すべてのリスト',
+    toggle: 'トグル',
     toggleFullscreen: '全画面表示の切り替え',
+    toggleHead: '見出しの切り替え',
+    toggleHeading: '見出しの切り替え',
+    toggleHeading1: '見出し1を切り替える',
+    toggleHeading2: '見出し2を切り替える',
+    toggleHeading3: '見出し3を切り替える',
+    toggleHeading4: '見出し4を切り替える',
+    toggleHeading5: '見出し5を切り替える',
     toggleList: 'リストの切り替え',
     underline: '下線',
     undo: '元に戻す',
     unorderedList: '順序なしリスト',
+    untoggleHeading: '切り替えを解除する',
     url: 'URL',
     video: 'ビデオの挿入',
-    viewSource: 'ソースを表示',
+    viewSource: 'ソースを表示'
   },
   emojiGroup: {
     activities: 'アクティビティ',
@@ -125,7 +134,7 @@ export default {
     recent: '最近の',
     smileys: '絵文字と感情表現',
     symbols: 'シンボル',
-    travel: '旅行と観光',
+    travel: '旅行と観光'
   },
   image: {
     height: '身長',
@@ -143,7 +152,7 @@ export default {
     src: '画像ソース',
     unlockAspectRatio: 'アスペクト比のロックを解除する',
     width: '幅',
-    zoom: 'ズーム',
+    zoom: 'ズーム'
   },
   label: {
     advanced: '高度な',
@@ -167,6 +176,7 @@ export default {
     embedAdd: '埋め込み（PDF、YouTube、Googleドキュメント、Spotifyなど）',
     empty: '空の',
     emptyTips: 'Enter を押して空のメモを続行するか、次を選択してください',
+    emptyToggle: '空のトグル',
     example: '例',
     generate: '生成する',
     generatedBy: '生成者',
@@ -180,7 +190,7 @@ export default {
     linkPlaceholder: {
       image: '画像リンク',
       model: 'モデルリンク',
-      video: '動画リンク',
+      video: '動画リンク'
     },
     media: 'メディア',
     model: 'モデル',
@@ -212,12 +222,12 @@ export default {
       failed: 'アップロードに失敗しました',
       notConfigured: 'アップロードは設定されていません',
       tips: 'ファイルをここにドラッグするか、クリックしてアップロードしてください。',
-      uploading: 'アップロード中',
+      uploading: 'アップロード中'
     },
     video: 'ビデオ',
     videoAdd: 'ビデオを追加する',
     view: 'ビュー',
-    write: '書く',
+    write: '書く'
   },
   language: {
     chineseSimplified: '簡体字中国語',
@@ -233,14 +243,14 @@ export default {
     portuguese: 'ポルトガル語',
     russian: 'ロシア',
     spanish: 'スペイン語',
-    vietnamese: 'ベトナム語',
+    vietnamese: 'ベトナム語'
   },
   link: {
     back: 'メインメニューに戻る',
     edit: 'リンクの編集',
     off: 'リンクを無効にする',
     open: 'リンクを開く',
-    openInNewTab: '新しいタブで開く',
+    openInNewTab: '新しいタブで開く'
   },
   table: {
     addColumn: '列の追加',
@@ -257,6 +267,6 @@ export default {
     removeRow: '行の削除',
     selectColumn: '列の選択',
     selectRow: '行を選択',
-    split: 'セルの分割',
-  },
+    split: 'セルの分割'
+  }
 }

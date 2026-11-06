@@ -84,7 +84,8 @@ import OSelectionDecoration from '@yiitap/extension-selection-decoration'
 import OShortcut, { type ShortcutOptions } from '@yiitap/extension-shortcut'
 import OTable from '@yiitap/extension-table'
 import OTaskItem from '@yiitap/extension-task-item'
-import OToggleHeading, { type ToggleHeadingOptions } from '@yiitap/extension-toggle-heading'
+import { ToggleBlock, ToggleBody, ToggleHead, type ToggleBlockOptions } from '@yiitap/extension-toggle-block'
+import { CollapsibleHeading, type CollapsibleHeadingOptions } from '@yiitap/extension-collapsible-heading'
 import OUploadManager, {
   type UploadManagerOptions,
 } from '@yiitap/extension-upload-manager'
@@ -213,7 +214,6 @@ export {
   OTableHeader,
   OTableWrapper,
   OTaskItem,
-  OToggleHeading,
   OVideo,
   OUploadManager,
 
@@ -227,6 +227,12 @@ export {
   createSlashSuggestion,
   ColonSuggestion,
   EmojiSuggestion,
+
+  // Toggle
+  ToggleBlock,
+  ToggleBody,
+  ToggleHead,
+  CollapsibleHeading,
 }
 
 export type {
@@ -266,6 +272,7 @@ export type {
   ColumnDropCursorOptions,
   MultiColumnOptions,
   ShortcutOptions,
-  ToggleHeadingOptions,
+  ToggleBlockOptions,
+  CollapsibleHeadingOptions,
   UploadManagerOptions,
 }

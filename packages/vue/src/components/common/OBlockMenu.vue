@@ -1,5 +1,8 @@
 <template>
   <o-list class="o-block-menu" hoverable clickable>
+    <template v-if="isStyleType">
+      <o-turn-into-menu v-bind=props @action="onAction" />
+    </template>
     <template v-if="actions.length">
       <template v-for="(item, index) in actions" :key="index">
         <template v-if="item.group">
@@ -63,8 +66,9 @@ import {
   OListItem,
   OPopover,
   OTextColorBoard,
+  OTurnIntoMenu,
 } from '../../components/index'
-import { BlockMenus, StyleBlocks } from '../../constants/block'
+import { BlockMenus, AllStyleBlocks } from '../../constants/block'
 import { nodeViewProps } from '@tiptap/vue-3'
 
 const props = defineProps({
@@ -81,15 +85,15 @@ const props = defineProps({
 const emit = defineEmits(['action'])
 
 const { tr } = useI18n()
-const { run } = useTiptap()
+const { run, inferNodeType } = useTiptap()
 const popovers = ref([])
 
 const nodeType = computed(() => {
-  return props.node?.type.name
+  return inferNodeType(props.node)
 })
 
 const isStyleType = computed(() => {
-  return StyleBlocks.find((e) => e.value === nodeType.value)
+  return AllStyleBlocks.find((e) => e.value === nodeType.value) || ['toggleHead'].includes(nodeType.value)
 })
 
 const actions = computed(() => {
@@ -102,10 +106,10 @@ const actions = computed(() => {
   let nodeActions =
     BlockMenus.filter((e) => e.filter?.indexOf(nodeType.value) >= 0) ?? []
   nodeActions = nodeActions.concat(styleActions)
-  if (nodeActions.length > 0) {
-    const firstAction = nodeActions[0]
-    firstAction.group = `editor.${nodeType.value}`
-  }
+  // if (nodeActions.length > 0) {
+  //   const firstAction = nodeActions[0]
+  //   firstAction.group = `editor.${nodeType.value}`
+  // }
 
   // common actions
   const commonActions = BlockMenus.filter(
@@ -145,6 +149,9 @@ function onAction(item: Indexable) {
     case 'duplicate':
       onDuplicate()
       break
+    default:
+      emit('action', item)
+      break;
   }
 }
 

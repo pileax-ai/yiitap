@@ -25,6 +25,12 @@
               <template #unchecked> Readonly </template>
             </n-switch>
           </n-form-item>
+          <n-form-item label="Heading Collapsible">
+            <n-switch v-model:value="headingCollapsible">
+              <template #checked> Enable </template>
+              <template #unchecked> Disable </template>
+            </n-switch>
+          </n-form-item>
           <n-form-item label="Collaboration">
             <n-switch v-model:value="collaboration">
               <template #checked> Enable </template>
@@ -181,6 +187,7 @@ const tocRef = ref<InstanceType<typeof ODocToc>>()
 const locale = ref('en-US')
 const darkMode = ref(false)
 const editable = ref(true)
+const headingCollapsible = ref(true)
 const source = ref('default')
 const showDrawer = ref(false)
 
@@ -219,19 +226,24 @@ const editorOptions = computed(() => {
     OUploadManager.configure({
       onUpload: onUpload,
     }),
+    {
+      name: 'OCollapsibleHeading',
+      configure: {
+        enabled: () => headingCollapsible.value
+      }
+    },
     'InlineMath',
     'Markdown',
     'OAudio',
     'OColon',
     'OBlockMath',
     'OColorHighlighter',
-    'ODetails',
     'OEmbed',
     'OImage',
     'OModelViewer',
     'OMultiColumn',
     'OShortcut',
-    'OToggleHeading',
+    'OToggleBlock',
     'OVideo',
   ]
   if (collabReady.value) {
@@ -272,6 +284,7 @@ const editorOptions = computed(() => {
         modelViewer: false,
       },
     },
+    collapsible: headingCollapsible.value,
     pageView: 'page',
     mainMenu: [
       'bold',
@@ -290,7 +303,7 @@ const editorOptions = computed(() => {
       'separator',
       'horizontalRule',
       'blockquote',
-      'details',
+      'toggle-list',
       'list-dropdown',
       'codeBlock',
       'table',
@@ -329,6 +342,7 @@ const sourceList = computed(() => {
     { label: 'ModelViewer', value: 'modelViewer' },
     { label: 'MultiColumn', value: 'multiColumn' },
     { label: 'Table', value: 'table' },
+    { label: 'Toggle Block', value: 'toggleBlock' },
   ]
 })
 
@@ -479,6 +493,10 @@ watch(source, (newValue) => {
   yiiEditor.value?.editor.commands.setContent(content.value, {
     emitUpdate: true,
   })
+})
+
+watch(headingCollapsible, () => {
+  editor.value?.view.dispatch(editor.value?.state.tr)
 })
 
 watch(providerToken, (newValue) => {

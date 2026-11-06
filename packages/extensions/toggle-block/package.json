@@ -1,6 +1,6 @@
 {
-	"name": "@yiitap/extension-toggle-heading",
-	"description": "Toggle heading extension",
+	"name": "@yiitap/extension-toggle-block",
+	"description": "Toggle block extension",
 	"version": "0.19.3",
 	"private": false,
 	"author": {

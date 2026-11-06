@@ -29,7 +29,7 @@ function toggle() {
   .details {
     display: flex;
     align-items: flex-start;
-    gap: 0.25rem;
+    gap: 2px;
     border: 1px solid var(--gray-3);
     border-radius: 0.5rem;
 
@@ -42,7 +42,7 @@ function toggle() {
       background: transparent;
       border-radius: 4px;
       display: flex;
-      font-size: 0.5rem;
+      font-size: 1rem;
       justify-content: center;
       line-height: 1;
       margin: 3px 0;
@@ -55,7 +55,7 @@ function toggle() {
       }
 
       .o-icon {
-        font-size: 14px;
+        font-size: 0.8em;
         transform: rotate(-90deg);
         transition: transform 0.3s ease-in-out;
       }

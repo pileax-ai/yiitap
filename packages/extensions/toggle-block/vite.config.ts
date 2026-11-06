@@ -6,7 +6,7 @@ export default mergeConfig(
     build: {
       target: 'esnext',
       lib: {
-        name: 'ToggleHeading',
+        name: 'ToggleBlock',
         entry: 'src/index.ts',
         formats: ['es', 'cjs', 'iife'],
         fileName: (format) => {

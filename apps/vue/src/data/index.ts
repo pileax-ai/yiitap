@@ -8,6 +8,7 @@ import { Media, MediaZh } from './media'
 import { ModelViewer, ModelViewerZh } from './model-viewer'
 import { MultiColumn, MultiColumnZh } from './multi-column'
 import { Table, TableZh } from './table'
+import { ToggleBlock, ToggleBlockZh } from './toggle-block'
 
 const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
   empty: { en: '<p></p>', zh: '<p></p>' },
@@ -20,6 +21,7 @@ const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
   modelViewer: { en: ModelViewer, zh: ModelViewerZh },
   multiColumn: { en: MultiColumn, zh: MultiColumnZh },
   table: { en: Table, zh: TableZh },
+  toggleBlock: { en: ToggleBlock, zh: ToggleBlockZh },
 }
 
 const DEFAULT_CONTENT = {

@@ -228,7 +228,6 @@ const props = defineProps({
     type: Object as PropType<AiOptions>,
     default: () => {},
   },
-
   /**
    * Collab config.
    */
@@ -237,6 +236,13 @@ const props = defineProps({
     default: (): CollabConfig => ({
       enabled: false,
     }),
+  },
+  /**
+   * Heading collapsible.
+   */
+  collapsible: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -323,6 +329,7 @@ const sideMenuOptions = computed(() => {
     add: props.sideMenu.add,
     addMenuOptions: props.sideMenu.addMenuOptions,
     title: props.title,
+    collapsible: props.collapsible,
     menu: [],
   }
 })
@@ -354,9 +361,11 @@ function buildExtensions() {
           }
         }
 
-        if (node.type.name === 'heading') {
+        if (['heading', 'toggleHead'].includes(node.type.name)) {
           const level = node.attrs.level
-          return pos > 0 ? `H${level}` : tr('label.untitled')
+          return pos > 0
+            ? level > 0 ? `H${level}` : tr('editor.toggle')
+            : tr('label.untitled')
         } else if (node.type.name === 'paragraph') {
           const isSlashActive =
             isExtensionInstalled(editor, 'slash-command') ||
@@ -389,9 +398,23 @@ function buildExtensions() {
     })
   )
 
-  // User custom extension
-  const userExtensions = createExtensionList(props.extensions)
-  extensions.push(...userExtensions)
+  // User custom extensions
+  if (props.extensions.includes('OToggleBlock')) {
+    const filterExtensions = props.extensions.filter(item => item !== 'OToggleBlock')
+    const userExtensions = createExtensionList([
+      ...filterExtensions,
+      {
+        name: 'OToggleBlock',
+        configure: {
+          placeholder: () => tr('label.emptyToggle')
+        }
+      }
+    ])
+    extensions.push(...userExtensions)
+  } else {
+    const userExtensions = createExtensionList(props.extensions)
+    extensions.push(...userExtensions)
+  }
 
   return extensions
 }
@@ -461,5 +484,6 @@ defineExpose({
 @use '../style/yiitap';
 @import '../../../icon/dist/yiitap-icon.css';
 @import '@yiitap/extension-multi-column/dist/style.css';
-@import '@yiitap/extension-toggle-heading/dist/style.css';
+@import '@yiitap/extension-toggle-block/dist/style.css';
+@import '@yiitap/extension-collapsible-heading/dist/style.css';
 </style>

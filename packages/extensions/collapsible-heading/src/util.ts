@@ -30,53 +30,61 @@ const outlineOf = (doc: ProseMirrorNode) => {
   return out
 }
 
-export const buildDecorations = (doc: ProseMirrorNode, folded: Set<string>): DecorationSet  => {
+export const buildDecorations = (
+  doc: ProseMirrorNode,
+  collapsed: Set<string>,
+  enabled: boolean = true
+): DecorationSet => {
+  if (!enabled) {
+    return DecorationSet.empty
+  }
+
   const decos: Decoration[] = []
   const headings = outlineOf(doc)
 
-  // 1. 找出每个折叠标题的“作用范围” [contentStart, contentEnd)
+  // 1. Find the content range [contentStart, contentEnd) for each collapsed heading
   const hiddenRanges: { from: number; to: number }[] = []
   headings.forEach((h, i) => {
-    if (!folded.has(h.slug)) return
+    if (!collapsed.has(h.slug)) return
     const contentStart = h.pos + h.node.nodeSize
     const next = headings.slice(i + 1).find((n) => n.level <= h.level)
     const contentEnd = next ? next.pos : doc.content.size
     hiddenRanges.push({ from: contentStart, to: contentEnd })
   })
 
-  // 2. 为所有 heading 注入箭头 widget 和折叠 class
+  // 2. Inject arrow widgets and fold classes into all headings
   headings.forEach((h) => {
-    const isFolded = folded.has(h.slug)
+    const isCollapsed = collapsed.has(h.slug)
     const nodeEnd = h.pos + h.node.nodeSize
 
-    // 给 heading 节点加上 cw-heading / cw-folded class，用于 CSS 定位箭头
     decos.push(
       Decoration.node(h.pos, nodeEnd, {
-        class: `cw-heading${isFolded ? ' cw-folded' : ''}`,
+        class: `cw-heading${isCollapsed ? ' cw-collapsed' : ''}`,
         'data-anchor': h.slug,
       })
     )
 
-    // 在 heading 开始处注入可点击的箭头（widget 不进入文档内容）
     decos.push(
       Decoration.widget(h.pos + 1, () => {
         const btn = document.createElement('button')
         btn.className = 'cw-fold-btn'
         btn.type = 'button'
-        btn.dataset.slug = h.slug          // 直接挂 slug，click 处理更稳
-        btn.setAttribute('aria-label', isFolded ? 'Expand section' : 'Collapse section')
-        btn.textContent = isFolded ? '▸' : '▾'
+        btn.dataset.slug = h.slug
+        btn.setAttribute('aria-label', isCollapsed ? 'Expand section' : 'Collapse section')
+
+        const icon = document.createElement('span')
+        icon.textContent = isCollapsed ? '▸' : '▾'
+        btn.appendChild(icon)
+
         return btn
       }, { key: `fold-arrow-${h.slug}`, side: -1 })
     )
   })
 
-  // 3. 对折叠范围内的所有内容应用隐藏装饰
-  // 使用 Decoration.node 给范围内的顶层节点添加隐藏 class
+  // 3. Apply hide decorations to all block nodes within collapsed ranges
   hiddenRanges.forEach(({ from, to }) => {
     doc.nodesBetween(from, to, (node, pos) => {
       if (pos < from || pos >= to) return
-      // 只对块级节点加隐藏 class，避免影响行内结构
       if (node.isBlock) {
         decos.push(
           Decoration.node(pos, pos + node.nodeSize, {

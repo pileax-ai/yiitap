@@ -301,6 +301,15 @@ importers:
         specifier: ^3.32.0
         version: 3.32.0
 
+  packages/extensions/collapsible-heading:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.32.0
+        version: 3.32.0(@tiptap/pm@3.32.0)
+      '@tiptap/pm':
+        specifier: ^3.32.0
+        version: 3.32.0
+
   packages/extensions/color-highlighter:
     dependencies:
       '@tiptap/core':
@@ -440,7 +449,7 @@ importers:
         specifier: ^3.32.0
         version: 3.32.0
 
-  packages/extensions/toggle-heading:
+  packages/extensions/toggle-block:
     dependencies:
       '@tiptap/core':
         specifier: ^3.32.0
@@ -649,6 +658,9 @@ importers:
       '@yiitap/extension-char-command':
         specifier: workspace:*
         version: link:../extensions/char-command
+      '@yiitap/extension-collapsible-heading':
+        specifier: workspace:*
+        version: link:../extensions/collapsible-heading
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
@@ -685,9 +697,9 @@ importers:
       '@yiitap/extension-task-item':
         specifier: workspace:*
         version: link:../extensions/task-item
-      '@yiitap/extension-toggle-heading':
+      '@yiitap/extension-toggle-block':
         specifier: workspace:*
-        version: link:../extensions/toggle-heading
+        version: link:../extensions/toggle-block
       '@yiitap/extension-upload-manager':
         specifier: workspace:*
         version: link:../extensions/upload-manager
@@ -857,6 +869,9 @@ importers:
       '@yiitap/extension-char-command':
         specifier: workspace:*
         version: link:../extensions/char-command
+      '@yiitap/extension-collapsible-heading':
+        specifier: workspace:*
+        version: link:../extensions/collapsible-heading
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
@@ -893,9 +908,9 @@ importers:
       '@yiitap/extension-task-item':
         specifier: workspace:*
         version: link:../extensions/task-item
-      '@yiitap/extension-toggle-heading':
+      '@yiitap/extension-toggle-block':
         specifier: workspace:*
-        version: link:../extensions/toggle-heading
+        version: link:../extensions/toggle-block
       '@yiitap/extension-upload-manager':
         specifier: workspace:*
         version: link:../extensions/upload-manager

@@ -21,10 +21,10 @@ export default {
       friendly: 'Thân thiện',
       humorous: 'Hài hước',
       inspirational: 'truyền cảm hứng',
-      mysterious: 'Bí ẩn',
+      mysterious: 'Bí ẩn'
     },
     translate: 'Dịch sang',
-    write: 'Viết bất cứ điều gì',
+    write: 'Viết bất cứ điều gì'
   },
   diagram: {
     class: 'Sơ đồ lớp',
@@ -33,7 +33,7 @@ export default {
     name: 'Sơ đồ văn bản',
     sequence: 'Sơ đồ trình tự',
     state: 'Sơ đồ trạng thái',
-    tips: 'Tạo sơ đồ và biểu đồ từ văn bản theo cách tương tự như đánh dấu',
+    tips: 'Tạo sơ đồ và biểu đồ từ văn bản theo cách tương tự như đánh dấu'
   },
   editor: {
     add: 'Thêm vào',
@@ -106,14 +106,23 @@ export default {
     textFormat: 'Thêm định dạng văn bản',
     thirdPartyService: 'Dịch vụ của bên thứ ba',
     todoList: 'Tất cả danh sách',
+    toggle: 'Chuyển đổi',
     toggleFullscreen: 'Chuyển đổi toàn màn hình',
+    toggleHead: 'Chuyển đổi tiêu đề',
+    toggleHeading: 'Chuyển đổi tiêu đề',
+    toggleHeading1: 'Bật/tắt tiêu đề 1',
+    toggleHeading2: 'Chuyển đổi tiêu đề 2',
+    toggleHeading3: 'Bật/tắt tiêu đề 3',
+    toggleHeading4: 'Bật/tắt tiêu đề 4',
+    toggleHeading5: 'Bật/tắt tiêu đề 5',
     toggleList: 'Chuyển đổi danh sách',
     underline: 'gạch chân',
     undo: 'Hoàn tác',
     unorderedList: 'Danh sách không có thứ tự',
+    untoggleHeading: 'Bỏ bật',
     url: 'URL',
     video: 'Chèn Video',
-    viewSource: 'Xem nguồn',
+    viewSource: 'Xem nguồn'
   },
   emojiGroup: {
     activities: 'Các hoạt động',
@@ -125,7 +134,7 @@ export default {
     recent: 'Gần đây',
     smileys: 'Biểu tượng cảm xúc và sự biểu lộ cảm xúc',
     symbols: 'Biểu tượng',
-    travel: 'Du lịch & Địa điểm',
+    travel: 'Du lịch & Địa điểm'
   },
   image: {
     height: 'Chiều cao',
@@ -143,7 +152,7 @@ export default {
     src: 'Nguồn hình ảnh',
     unlockAspectRatio: 'Mở khóa tỷ lệ khung hình',
     width: 'Chiều rộng',
-    zoom: 'Phóng',
+    zoom: 'Phóng'
   },
   label: {
     advanced: 'Trình độ cao',
@@ -166,8 +175,8 @@ export default {
     embed: 'Nhúng',
     embedAdd: 'Nhúng (PDF, Youtube, Google Docs, Spotify...)',
     empty: 'Trống',
-    emptyTips:
-      'Press Enter to continue with an empty note, or select following',
+    emptyTips: 'Press Enter to continue with an empty note, or select following',
+    emptyToggle: 'Công tắc trống',
     example: 'Ví dụ',
     generate: 'Phát ra',
     generatedBy: 'Được tạo bởi',
@@ -181,7 +190,7 @@ export default {
     linkPlaceholder: {
       image: 'Liên kết hình ảnh',
       model: 'Liên kết mô hình',
-      video: 'Liên kết video',
+      video: 'Liên kết video'
     },
     media: 'Phương tiện truyền thông',
     model: 'Người mẫu',
@@ -205,7 +214,7 @@ export default {
     think: 'Nghĩ',
     toc: 'Mục lục',
     turnInto: 'Biến thành',
-    typeForCommands: "Nhập '/' cho các lệnh",
+    typeForCommands: 'Nhập \'/\' cho các lệnh',
     untitled: 'Không có tiêu đề',
     update: 'Cập nhật',
     upload: 'Tải lên',
@@ -213,12 +222,12 @@ export default {
       failed: 'Tải lên thất bại',
       notConfigured: 'Chức năng tải lên chưa được cấu hình.',
       tips: 'Kéo thả tệp vào đây hoặc nhấp chuột để tải lên.',
-      uploading: 'Đang tải lên',
+      uploading: 'Đang tải lên'
     },
     video: 'Băng hình',
     videoAdd: 'Thêm video',
     view: 'Xem',
-    write: 'Viết',
+    write: 'Viết'
   },
   language: {
     chineseSimplified: 'Tiếng Trung giản thể',
@@ -234,14 +243,14 @@ export default {
     portuguese: 'Portuguese',
     russian: 'Russian',
     spanish: 'Spanish',
-    vietnamese: 'Vietnamese',
+    vietnamese: 'Vietnamese'
   },
   link: {
     back: 'Quay lại menu chính',
     edit: 'Chỉnh sửa liên kết',
     off: 'Tắt liên kết',
     open: 'Mở liên kết',
-    openInNewTab: 'Mở trong tab mới',
+    openInNewTab: 'Mở trong tab mới'
   },
   table: {
     addColumn: 'Thêm cột',
@@ -258,6 +267,6 @@ export default {
     removeRow: 'Xóa hàng',
     selectColumn: 'Chọn cột',
     selectRow: 'Chọn hàng',
-    split: 'Tách ô',
-  },
+    split: 'Tách ô'
+  }
 }

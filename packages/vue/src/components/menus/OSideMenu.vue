@@ -7,7 +7,7 @@
       :editor="editor"
       :tippy-options="tippyOptions"
     >
-      <section class="container">
+      <section class="container" :class="{ 'collapsible': collapsible }">
         <add-node
           v-bind="nodeProps"
           :add-menu-options="addMenuOptions"
@@ -56,6 +56,10 @@ const props = defineProps({
     default: null,
   },
   title: {
+    type: Boolean,
+    default: false,
+  },
+  collapsible: {
     type: Boolean,
     default: false,
   },
@@ -149,6 +153,10 @@ onMounted(() => {
 
   .container {
     display: flex;
+
+    &.collapsible {
+      margin-right: 18px;
+    }
 
     .o-node-btn {
       height: 26px;

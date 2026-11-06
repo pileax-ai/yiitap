@@ -39,6 +39,7 @@ const props = defineProps({
 .o-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: 20px;
 
   &.small {
