@@ -1,5 +1,15 @@
 # @yiitap/i18n
 
+## 0.20.0
+
+### Minor Changes
+
+- c1c1821: extension: toggle-block
+
+### Patch Changes
+
+- 68f505b: make callout icon removable
+
 ## 0.19.3
 
 ## 0.19.2

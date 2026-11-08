@@ -1,5 +1,9 @@
 # @yiitap/util-emoji
 
+## 0.20.0
+
+No changes in this release.
+
 ## 0.19.3
 
 ## 0.19.2

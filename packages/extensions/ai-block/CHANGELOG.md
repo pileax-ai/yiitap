@@ -1,5 +1,17 @@
 # @yiitap/extension-ai-block
 
+## 0.20.0
+
+### Minor Changes
+
+- e7b6f1f: table cell bubble menu
+
+### Patch Changes
+
+- Updated dependencies [e7b6f1f]
+- Updated dependencies [c1c1821]
+  - @yiitap/core@0.20.0
+
 ## 0.19.3
 
 ### Patch Changes

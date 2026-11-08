@@ -1,5 +1,12 @@
 # @yiitap/core
 
+## 0.20.0
+
+### Minor Changes
+
+- e7b6f1f: table cell bubble menu
+- c1c1821: extension: toggle-block
+
 ## 0.19.3
 
 ## 0.19.2

@@ -1,5 +1,41 @@
 # @yiitap/vue-preset
 
+## 0.20.0
+
+### Minor Changes
+
+- e7b6f1f: table cell bubble menu
+- c1c1821: extension: toggle-block
+
+### Patch Changes
+
+- Updated dependencies [68f505b]
+- Updated dependencies [e7b6f1f]
+- Updated dependencies [c1c1821]
+  - @yiitap/i18n@0.20.0
+  - @yiitap/core@0.20.0
+  - @yiitap/extension-ai-block@0.20.0
+  - @yiitap/extension-blockquote@0.20.0
+  - @yiitap/extension-callout@0.20.0
+  - @yiitap/extension-char-command@0.20.0
+  - @yiitap/extension-color-highlighter@0.20.0
+  - @yiitap/extension-embed@0.20.0
+  - @yiitap/extension-image@0.20.0
+  - @yiitap/extension-inline-placeholder@0.20.0
+  - @yiitap/extension-model-viewer@0.20.0
+  - @yiitap/extension-multi-column@0.20.0
+  - @yiitap/extension-placeholder@0.20.0
+  - @yiitap/extension-selection-decoration@0.20.0
+  - @yiitap/extension-shortcut@0.20.0
+  - @yiitap/extension-table@0.20.0
+  - @yiitap/extension-table-wrapper@0.20.0
+  - @yiitap/extension-task-item@0.20.0
+  - @yiitap/extension-upload-manager@0.20.0
+  - @yiitap/extension-video@0.20.0
+  - @yiitap/extension-collapsible-heading@0.20.0
+  - @yiitap/extension-toggle-block@0.20.0
+  - @yiitap/util-emoji@0.20.0
+
 ## 0.19.3
 
 ### Patch Changes
