@@ -81,11 +81,13 @@ export const BasicBlocks: BlockOption[] = [
   {
     label: 'editor.toggleList',
     value: 'toggleBlock',
+    turnIntoValue: 'toggleBlockSet',
     keywords: 'toggle, list',
     tips: '>',
     icon: 'toggle_list',
     color: BrandColor.indigo,
     style: true,
+    options: { level: 0 },
   },
   {
     label: 'editor.codeBlock',
@@ -268,11 +270,13 @@ export const AdvancedBlocks: BlockOption[] = [
   },
 ]
 
-export const AdvancedStyleBlocks: BlockOption[] = AdvancedBlocks.filter((e) => e.style)
+export const AdvancedStyleBlocks: BlockOption[] = AdvancedBlocks.filter(
+  (e) => e.style
+)
 
 export const AllStyleBlocks: BlockOption[] = [
   ...StyleBlocks,
-  ...AdvancedStyleBlocks
+  ...AdvancedStyleBlocks,
 ]
 
 export const Blocks: BlockOption[] = [
@@ -586,5 +590,8 @@ export const AiBlocks: BlockOption[] = [
 
 export const DefaultBlockMenuOptions: Record<string, boolean> =
   Object.fromEntries(
-    [...BasicBlocks, ...AdvancedStyleBlocks, ...CommonBlocks].map((block) => [block.value, true])
+    [...BasicBlocks, ...AdvancedStyleBlocks, ...CommonBlocks].map((block) => [
+      block.value,
+      true,
+    ])
   )

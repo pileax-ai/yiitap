@@ -3,11 +3,7 @@
     <div class="group o-tips" v-if="showGroup">
       {{ nodeLabel }}
     </div>
-    <o-popover
-      ref="popover"
-      :offset="[0, 4]"
-      placement="right"
-    >
+    <o-popover ref="popover" :offset="[0, 4]" placement="right">
       <template #trigger>
         <o-list-item class="item" clickable>
           <template #prefix>
@@ -21,7 +17,7 @@
         </o-list-item>
       </template>
 
-      <o-list hoverable clickable style="min-width: 200px;">
+      <o-list hoverable clickable style="min-width: 200px">
         <template v-for="(item, index) in AllStyleBlocks" :key="index">
           <template v-if="item.group || item.subGroup">
             <div class="group o-tips">
@@ -29,9 +25,12 @@
               <template v-if="item.subGroup">{{ tr(item.subGroup) }}</template>
             </div>
           </template>
-          <o-list-item class="item" :class="{ 'is-active': isActive(item) }"
-                       clickable
-                       @click="onAction(item)">
+          <o-list-item
+            class="item"
+            :class="{ 'is-active': isActive(item) }"
+            clickable
+            @click="onAction(item)"
+          >
             <template #prefix>
               <o-icon :name="item.icon" :color="item.color" />
             </template>
@@ -48,12 +47,7 @@
 import { computed, ref } from 'vue'
 import useI18n from '../../hooks/useI18n'
 import useTiptap from '../../hooks/useTiptap'
-import {
-  OIcon,
-  OList,
-  OListItem,
-  OPopover,
-} from '../../components/index'
+import { OIcon, OList, OListItem, OPopover } from '../../components/index'
 import { AllStyleBlocks } from '../../constants/block'
 import { nodeViewProps } from '@tiptap/vue-3'
 
@@ -98,7 +92,7 @@ function isActive(item: Indexable) {
 }
 
 function onAction(item: Indexable) {
-  emit('action', {...item, value: item.turnIntoValue || item.value})
+  emit('action', { ...item, value: item.turnIntoValue || item.value })
   popover.value?.setShow(false)
 }
 </script>

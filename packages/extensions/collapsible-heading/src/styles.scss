@@ -3,19 +3,22 @@
 // ----------------------------------------------------
 .tiptap .cw-heading {
   position: relative;
-  display: flex;
-  align-items: center;
+
+  &.is-empty {
+    .cw-fold-btn {
+      display: none;
+    }
+  }
 }
 
 /* Fold button: inline element, participates in the text flow, positioned before the heading text */
 .tiptap .cw-heading .cw-fold-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  margin-right: 2px;          /* Keep a small gap from the heading text */
-  margin-left: -20px;
+  margin: 0 2px 0 -20px;
   vertical-align: middle;     /* Vertically center aligned with the heading text */
   padding: 0;
   border: none;

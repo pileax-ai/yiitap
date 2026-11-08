@@ -24,9 +24,10 @@ export const ToggleBody = Node.create<ToggleBodyOptions>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    const placeholder = typeof this.options.placeholder === 'function'
-      ? this.options.placeholder()
-      : this.options.placeholder
+    const placeholder =
+      typeof this.options.placeholder === 'function'
+        ? this.options.placeholder()
+        : this.options.placeholder
 
     return [
       'div',

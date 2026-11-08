@@ -1,7 +1,7 @@
 <template>
   <o-list class="o-block-menu" hoverable clickable>
     <template v-if="isStyleType">
-      <o-turn-into-menu v-bind=props @action="onAction" />
+      <o-turn-into-menu v-bind="props" @action="onAction" />
     </template>
     <template v-if="actions.length">
       <template v-for="(item, index) in actions" :key="index">
@@ -93,7 +93,10 @@ const nodeType = computed(() => {
 })
 
 const isStyleType = computed(() => {
-  return AllStyleBlocks.find((e) => e.value === nodeType.value) || ['toggleHead'].includes(nodeType.value)
+  return (
+    AllStyleBlocks.find((e) => e.value === nodeType.value) ||
+    ['toggleHead'].includes(nodeType.value)
+  )
 })
 
 const actions = computed(() => {
@@ -151,7 +154,7 @@ function onAction(item: Indexable) {
       break
     default:
       emit('action', item)
-      break;
+      break
   }
 }
 

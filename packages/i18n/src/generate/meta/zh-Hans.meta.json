@@ -99,6 +99,7 @@
   "editor.textFormat": "19989e7a",
   "editor.thirdPartyService": "c93690b0",
   "editor.todoList": "ca27b7bc",
+  "editor.toggle": "072151eb",
   "editor.toggleFullscreen": "35c171f2",
   "editor.toggleHead": "f8daa8bc",
   "editor.toggleHeading": "f8daa8bc",
@@ -242,6 +243,5 @@
   "table.removeRow": "947fa341",
   "table.selectColumn": "c9397e93",
   "table.selectRow": "b2997ed7",
-  "table.split": "488d0742",
-  "editor.toggle": "072151eb"
+  "table.split": "488d0742"
 }

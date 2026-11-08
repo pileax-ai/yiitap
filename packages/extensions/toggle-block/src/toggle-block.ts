@@ -1,6 +1,13 @@
 // toggleBlock.ts
-import { Node, mergeAttributes, InputRule, type NodeViewRendererProps } from '@tiptap/core'
+import {
+  Node,
+  mergeAttributes,
+  InputRule,
+  type NodeViewRendererProps,
+} from '@tiptap/core'
 import { TextSelection } from '@tiptap/pm/state'
+
+import { shouldSiblingStop } from './util'
 
 export interface ToggleBlockOptions {
   HTMLAttributes: Record<string, any>
@@ -31,7 +38,7 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
     return {
       HTMLAttributes: {},
       triggerCharacters: ['>'],
-      placeholder: ''
+      placeholder: '',
     }
   },
 
@@ -71,11 +78,14 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
 
     let bodyText = ''
     if (bodyNode && bodyNode.content) {
-      const renderedChildren = bodyNode.content.map(child => helpers.renderChildren([child]))
+      const renderedChildren = bodyNode.content.map((child) =>
+        helpers.renderChildren([child])
+      )
       bodyText = renderedChildren.join('\n\n').trim()
     }
 
-    const headingLine = level === 0 ? headText : `${'#'.repeat(level)} ${headText}`
+    const headingLine =
+      level === 0 ? headText : `${'#'.repeat(level)} ${headText}`
 
     if (!bodyText) {
       return `${headingLine}\n\n`
@@ -127,7 +137,10 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
         contentDOM,
         update: (updatedNode) => {
           if (updatedNode.type.name !== this.name) return false
-          container.setAttribute('data-open', updatedNode.attrs.open ? 'true' : 'false')
+          container.setAttribute(
+            'data-open',
+            updatedNode.attrs.open ? 'true' : 'false'
+          )
 
           const newLevel = updatedNode.child(0)?.attrs?.level || 0
           button.className = `toggle-block-btn toggle-block-btn-h${newLevel}`
@@ -142,355 +155,378 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
     return {
       insertToggleBlock:
         (attrs) =>
-          ({ state, dispatch, tr }) => {
-            const level = attrs?.level || 0
-            const { $from, $to } = state.selection
-            const range = $from.blockRange($to)
+        ({ state, dispatch, tr }) => {
+          const level = attrs?.level || 0
+          const { $from, $to } = state.selection
+          const range = $from.blockRange($to)
 
-            if (!range) {
-              return false
-            }
+          if (!range) {
+            return false
+          }
 
-            const toggleBlockNode = state.schema.node(this.name, { open: true }, [
-              state.schema.node('toggleHead', { level }, []),
-              state.schema.node('toggleBody', {}, [
-                state.schema.node('paragraph', {}, []),
-              ]),
-            ])
+          const toggleBlockNode = state.schema.node(this.name, { open: true }, [
+            state.schema.node('toggleHead', { level }, []),
+            state.schema.node('toggleBody', {}, [
+              state.schema.node('paragraph', {}, []),
+            ]),
+          ])
 
-            const currentNode = $from.parent
-            const isEmptyParagraph = currentNode.type.name === 'paragraph' && currentNode.content.size === 0
+          const currentNode = $from.parent
+          const isEmptyParagraph =
+            currentNode.type.name === 'paragraph' &&
+            currentNode.content.size === 0
 
-            let toggleBlockDepth = -1
-            let isInsideToggleHead = false
+          let toggleBlockDepth = -1
+          let isInsideToggleHead = false
 
-            for (let d = $from.depth; d > 0; d--) {
-              const node = $from.node(d)
-              if (node.type.name === this.name) {
-                toggleBlockDepth = d
-                const childNode = $from.node(d + 1)
-                if (childNode && childNode.type.name === 'toggleHead') {
-                  isInsideToggleHead = true
-                }
-                break
+          for (let d = $from.depth; d > 0; d--) {
+            const node = $from.node(d)
+            if (node.type.name === this.name) {
+              toggleBlockDepth = d
+              const childNode = $from.node(d + 1)
+              if (childNode && childNode.type.name === 'toggleHead') {
+                isInsideToggleHead = true
               }
+              break
             }
+          }
 
-            if (dispatch) {
-              let targetStart = range.start
+          if (dispatch) {
+            let targetStart = range.start
 
-              if (toggleBlockDepth !== -1) {
-                if (isInsideToggleHead) {
-                  targetStart = $from.after(toggleBlockDepth)
-                } else {
-                  targetStart = range.end
-                }
-                tr.insert(targetStart, toggleBlockNode)
-              } else if (isEmptyParagraph) {
-                tr.replaceRangeWith(range.start, range.end, toggleBlockNode)
-                targetStart = range.start
+            if (toggleBlockDepth !== -1) {
+              if (isInsideToggleHead) {
+                targetStart = $from.after(toggleBlockDepth)
               } else {
                 targetStart = range.end
-                tr.insert(targetStart, toggleBlockNode)
               }
-
-              const resolvedPos = tr.doc.resolve(targetStart + 2)
-              tr.setSelection(TextSelection.near(resolvedPos))
-
-              dispatch(tr)
-              return true
+              tr.insert(targetStart, toggleBlockNode)
+            } else if (isEmptyParagraph) {
+              tr.replaceRangeWith(range.start, range.end, toggleBlockNode)
+              targetStart = range.start
+            } else {
+              targetStart = range.end
+              tr.insert(targetStart, toggleBlockNode)
             }
 
+            const resolvedPos = tr.doc.resolve(targetStart + 2)
+            tr.setSelection(TextSelection.near(resolvedPos))
+
+            dispatch(tr)
+            return true
+          }
+
+          return false
+        },
+
+      setToggleBlock:
+        (attributes?: { level?: number }) =>
+        ({ state, dispatch, tr }) => {
+          const { selection, schema } = state
+          const { $from, $to } = selection
+          const targetLevel = attributes?.level ?? 0
+
+          // Returns true when a sibling should NOT be absorbed into a toggle at `level`.
+          // Headings are always level >= 1, so a level-0 toggle absorbs all of them.
+          // A toggleBlock's level lives on its toggleHead (first child).
+          // Walk siblings from `startIndex` and collect those that belong to a toggle at `level`.
+          const collectAbsorbed = (
+            parentContainer: any,
+            startIndex: number,
+            level: number
+          ) => {
+            const nodes: any[] = []
+            let endOffset = 0
+            for (let i = startIndex; i < parentContainer.childCount; i++) {
+              const sibling = parentContainer.child(i)
+              if (shouldSiblingStop(sibling, level)) break
+              nodes.push(sibling)
+              endOffset += sibling.nodeSize
+            }
+            return { nodes, endOffset }
+          }
+
+          // Rebuild a toggleBlock with the new level.
+          // NOTE: a SMALLER level number means a HIGHER hierarchy, so it absorbs MORE siblings.
+          // When the level number grows (hierarchy lowers), the body is left untouched to
+          // avoid splitting existing content apart.
+          const rebuildToggleBlock = (
+            node: any,
+            oldLevel: number,
+            blockStart: number,
+            blockEnd: number,
+            parentContainer: any,
+            nodeIndex: number
+          ): boolean => {
+            if (oldLevel === targetLevel) return false
+
+            const headNode = node.child(0)
+            const bodyNode = node.child(1)
+
+            let absorbed: any[] = []
+            let extraEnd = 0
+            if (targetLevel < oldLevel) {
+              // Level number decreased → hierarchy raised → absorb extra siblings.
+              const res = collectAbsorbed(
+                parentContainer,
+                nodeIndex + 1,
+                targetLevel
+              )
+              absorbed = res.nodes
+              extraEnd = res.endOffset
+            }
+
+            const newHeadNode = schema.node(
+              'toggleHead',
+              { ...headNode.attrs, level: targetLevel },
+              headNode.content
+            )
+
+            let newBodyNode = bodyNode
+            if (absorbed.length > 0) {
+              const newBodyContent: any[] = []
+              bodyNode.forEach((child: any) => newBodyContent.push(child))
+              // Drop the placeholder empty paragraph added when nothing was absorbed before.
+              if (
+                newBodyContent.length === 1 &&
+                newBodyContent[0].type.name === 'paragraph' &&
+                newBodyContent[0].content.size === 0
+              ) {
+                newBodyContent.length = 0
+              }
+              newBodyContent.push(...absorbed)
+              newBodyNode = schema.node('toggleBody', {}, newBodyContent)
+            }
+
+            const newBlockNode = schema.node(
+              this.name,
+              { ...node.attrs, open: true },
+              [newHeadNode, newBodyNode]
+            )
+
+            tr.replaceWith(blockStart, blockEnd + extraEnd, newBlockNode)
+            return true
+          }
+
+          // 1. Locate the nearest enclosing toggleBlock.
+          let toggleBlockDepth = -1
+          let toggleBlockNode: any = null
+          let isInsideToggleHead = false
+
+          for (let d = $from.depth; d > 0; d--) {
+            const node = $from.node(d)
+            if (node.type.name === this.name) {
+              toggleBlockDepth = d
+              toggleBlockNode = node
+              const childNode = $from.node(d + 1)
+              if (childNode && childNode.type.name === 'toggleHead') {
+                isInsideToggleHead = true
+              }
+              break
+            }
+          }
+
+          // Case A: cursor is inside a toggleHead → adjust level and absorb extra siblings.
+          if (
+            toggleBlockDepth !== -1 &&
+            toggleBlockNode &&
+            isInsideToggleHead
+          ) {
+            if (!dispatch) return true
+            const currentLevel = toggleBlockNode.child(0).attrs.level || 0
+            rebuildToggleBlock(
+              toggleBlockNode,
+              currentLevel,
+              $from.before(toggleBlockDepth),
+              $from.after(toggleBlockDepth),
+              $from.node(toggleBlockDepth - 1),
+              $from.index(toggleBlockDepth - 1)
+            )
+            dispatch(tr)
+            return true
+          }
+
+          const range = $from.blockRange($to)
+          if (!range) return false
+
+          const currentNode = $from.parent
+          const nodeTypeName = currentNode.type.name
+
+          // Case B: the selected node itself is a toggleBlock → adjust level and absorb extra siblings.
+          if (nodeTypeName === this.name) {
+            if (!dispatch) return true
+            const currentLevel = currentNode.child(0).attrs.level || 0
+            rebuildToggleBlock(
+              currentNode,
+              currentLevel,
+              range.start,
+              range.end,
+              $from.node($from.depth - 1),
+              $from.index($from.depth - 1)
+            )
+            dispatch(tr)
+            return true
+          }
+
+          if (nodeTypeName !== 'heading' && nodeTypeName !== 'paragraph')
             return false
-          },
 
-      setToggleBlock: (attributes?: { level?: number }) => ({ state, dispatch, tr }) => {
-        const { selection, schema } = state
-        const { $from, $to } = selection
-        const targetLevel = attributes?.level ?? 0
+          // Case C: convert a heading / paragraph into a toggleBlock.
+          const effectiveLevel =
+            attributes?.level ??
+            (nodeTypeName === 'heading' ? currentNode.attrs.level || 1 : 0)
+          const nodePos = range.start
+          const nodeEnd = range.end
 
-        // Returns true when a sibling should NOT be absorbed into a toggle at `level`.
-        // Headings are always level >= 1, so a level-0 toggle absorbs all of them.
-        // A toggleBlock's level lives on its toggleHead (first child).
-        const shouldStop = (sibling: any, level: number): boolean => {
-          if (sibling.type.name === 'heading') {
-            const siblingLevel = sibling.attrs.level || 1
-            return level > 0 && siblingLevel <= level
-          }
-          if (sibling.type.name === this.name) {
-            const siblingLevel = sibling.firstChild?.attrs?.level ?? 0
-            return siblingLevel <= level
-          }
-          return false
-        }
+          const depth = $from.depth
+          const parentContainer = $from.node(depth - 1)
+          const nodeIndex = $from.index(depth - 1)
 
-        // Walk siblings from `startIndex` and collect those that belong to a toggle at `level`.
-        const collectAbsorbed = (parentContainer: any, startIndex: number, level: number) => {
-          const nodes: any[] = []
-          let endOffset = 0
-          for (let i = startIndex; i < parentContainer.childCount; i++) {
-            const sibling = parentContainer.child(i)
-            if (shouldStop(sibling, level)) break
-            nodes.push(sibling)
-            endOffset += sibling.nodeSize
-          }
-          return { nodes, endOffset }
-        }
-
-        // Rebuild a toggleBlock with the new level.
-        // NOTE: a SMALLER level number means a HIGHER hierarchy, so it absorbs MORE siblings.
-        // When the level number grows (hierarchy lowers), the body is left untouched to
-        // avoid splitting existing content apart.
-        const rebuildToggleBlock = (
-          node: any,
-          oldLevel: number,
-          blockStart: number,
-          blockEnd: number,
-          parentContainer: any,
-          nodeIndex: number,
-        ): boolean => {
-          if (oldLevel === targetLevel) return false
-
-          const headNode = node.child(0)
-          const bodyNode = node.child(1)
-
-          let absorbed: any[] = []
-          let extraEnd = 0
-          if (targetLevel < oldLevel) {
-            // Level number decreased → hierarchy raised → absorb extra siblings.
-            const res = collectAbsorbed(parentContainer, nodeIndex + 1, targetLevel)
-            absorbed = res.nodes
-            extraEnd = res.endOffset
-          }
-
-          const newHeadNode = schema.node(
-            'toggleHead',
-            { ...headNode.attrs, level: targetLevel },
-            headNode.content,
+          const { nodes: childNodes, endOffset } = collectAbsorbed(
+            parentContainer,
+            nodeIndex + 1,
+            effectiveLevel
           )
+          const lastNodeEnd = nodeEnd + endOffset
 
-          let newBodyNode = bodyNode
-          if (absorbed.length > 0) {
-            const newBodyContent: any[] = []
-            bodyNode.forEach((child: any) => newBodyContent.push(child))
-            // Drop the placeholder empty paragraph added when nothing was absorbed before.
-            if (
-              newBodyContent.length === 1 &&
-              newBodyContent[0].type.name === 'paragraph' &&
-              newBodyContent[0].content.size === 0
-            ) {
-              newBodyContent.length = 0
-            }
-            newBodyContent.push(...absorbed)
-            newBodyNode = schema.node('toggleBody', {}, newBodyContent)
+          // Ensure toggleBody is never empty (schema requires block+).
+          if (childNodes.length === 0) {
+            childNodes.push(schema.node('paragraph', {}, []))
           }
 
-          const newBlockNode = schema.node(this.name, { ...node.attrs, open: true }, [
-            newHeadNode,
-            newBodyNode,
-          ])
-
-          tr.replaceWith(blockStart, blockEnd + extraEnd, newBlockNode)
-          return true
-        }
-
-        // 1. Locate the nearest enclosing toggleBlock.
-        let toggleBlockDepth = -1
-        let toggleBlockNode: any = null
-        let isInsideToggleHead = false
-
-        for (let d = $from.depth; d > 0; d--) {
-          const node = $from.node(d)
-          if (node.type.name === this.name) {
-            toggleBlockDepth = d
-            toggleBlockNode = node
-            const childNode = $from.node(d + 1)
-            if (childNode && childNode.type.name === 'toggleHead') {
-              isInsideToggleHead = true
-            }
-            break
-          }
-        }
-
-        // Case A: cursor is inside a toggleHead → adjust level and absorb extra siblings.
-        if (toggleBlockDepth !== -1 && toggleBlockNode && isInsideToggleHead) {
-          if (!dispatch) return true
-          const currentLevel = toggleBlockNode.child(0).attrs.level || 0
-          rebuildToggleBlock(
-            toggleBlockNode,
-            currentLevel,
-            $from.before(toggleBlockDepth),
-            $from.after(toggleBlockDepth),
-            $from.node(toggleBlockDepth - 1),
-            $from.index(toggleBlockDepth - 1),
-          )
-          dispatch(tr)
-          return true
-        }
-
-        const range = $from.blockRange($to)
-        if (!range) return false
-
-        const currentNode = $from.parent
-        const nodeTypeName = currentNode.type.name
-
-        // Case B: the selected node itself is a toggleBlock → adjust level and absorb extra siblings.
-        if (nodeTypeName === this.name) {
-          if (!dispatch) return true
-          const currentLevel = currentNode.child(0).attrs.level || 0
-          rebuildToggleBlock(
-            currentNode,
-            currentLevel,
-            range.start,
-            range.end,
-            $from.node($from.depth - 1),
-            $from.index($from.depth - 1),
-          )
-          dispatch(tr)
-          return true
-        }
-
-        if (nodeTypeName !== 'heading' && nodeTypeName !== 'paragraph') return false
-
-        // Case C: convert a heading / paragraph into a toggleBlock.
-        const effectiveLevel =
-          attributes?.level ?? (nodeTypeName === 'heading' ? currentNode.attrs.level || 1 : 0)
-        const nodePos = range.start
-        const nodeEnd = range.end
-
-        const depth = $from.depth
-        const parentContainer = $from.node(depth - 1)
-        const nodeIndex = $from.index(depth - 1)
-
-        const { nodes: childNodes, endOffset } = collectAbsorbed(
-          parentContainer,
-          nodeIndex + 1,
-          effectiveLevel,
-        )
-        const lastNodeEnd = nodeEnd + endOffset
-
-        // Ensure toggleBody is never empty (schema requires block+).
-        if (childNodes.length === 0) {
-          childNodes.push(schema.node('paragraph', {}, []))
-        }
-
-        if (dispatch) {
-          const content = currentNode.content
-          const headNode = schema.node('toggleHead', { level: effectiveLevel }, content)
-          const toggleBodyNode = schema.node('toggleBody', {}, childNodes)
-          const toggleBlockNode = schema.node(this.name, { open: true }, [
-            headNode,
-            toggleBodyNode,
-          ])
-
-          tr.replaceWith(nodePos, lastNodeEnd, toggleBlockNode)
-
-          const targetPos = nodePos + 2 + content.size
-          tr.setSelection(TextSelection.near(tr.doc.resolve(targetPos)))
-          dispatch(tr)
-        }
-        return true
-      },
-
-      unsetToggleBlock: () => ({ state, dispatch, tr }) => {
-        const { selection } = state
-        const { $from } = selection
-
-        const currentNode = $from.parent
-        const nodeTypeName = currentNode.type.name
-
-        if (!['toggleHead', 'toggleBlock'].includes(nodeTypeName)) {
-          return false
-        }
-
-        let toggleBlockDepth = -1
-        let toggleBlockNode: any = null
-
-        for (let d = $from.depth; d > 0; d--) {
-          const node = $from.node(d)
-          if (node.type.name === this.name) {
-            toggleBlockDepth = d
-            toggleBlockNode = node
-            break
-          }
-        }
-
-        if (toggleBlockDepth === -1 || !toggleBlockNode) return false
-
-        const toggleBlockPos = $from.before(toggleBlockDepth)
-        const toggleBlockEnd = toggleBlockPos + toggleBlockNode.nodeSize
-
-        const headNode = toggleBlockNode.child(0)
-        const bodyNode = toggleBlockNode.child(1)
-
-        const level = headNode.attrs.level || 0
-        const headContent = headNode.content
-
-        const bodyNodes: any[] = []
-        bodyNode.forEach((node: any) => {
-          bodyNodes.push(node)
-        })
-
-        if (dispatch) {
-          const restoredMainNode = level > 0
-            ? state.schema.node('heading', { level }, headContent)
-            : state.schema.node('paragraph', {}, headContent)
-
-          const nodesToInsert = [restoredMainNode, ...bodyNodes]
-
-          tr.replaceWith(toggleBlockPos, toggleBlockEnd, nodesToInsert)
-
-          const resolvedPos = tr.doc.resolve(toggleBlockPos + 1)
-          tr.setSelection(TextSelection.near(resolvedPos))
-
-          dispatch(tr)
-        }
-
-        return true
-      },
-
-      toggleToggleBlock: (attributes?: { level?: number }) => ({ state, commands, dispatch, tr }) => {
-        const { selection } = state
-        const { $from } = selection
-
-        let toggleBlockDepth = -1
-        let toggleBlockNode: any = null
-        let isInsideToggleHead = false
-
-        for (let d = $from.depth; d > 0; d--) {
-          const node = $from.node(d)
-          if (node.type.name === this.name) {
-            toggleBlockDepth = d
-            toggleBlockNode = node
-
-            const childNode = $from.node(d + 1)
-            if (childNode && childNode.type.name === 'toggleHead') {
-              isInsideToggleHead = true
-            }
-            break
-          }
-        }
-
-        const targetLevel = attributes?.level ?? 0
-
-        if (toggleBlockDepth !== -1 && toggleBlockNode && isInsideToggleHead) {
-          const headNode = toggleBlockNode.child(0)
-          const currentLevel = headNode.attrs.level || 0
-
-          if (currentLevel === targetLevel) {
-            return commands.unsetToggleBlock()
-          }
-
-          const headPos = $from.before(toggleBlockDepth) + 1
           if (dispatch) {
-            tr.setNodeMarkup(headPos, undefined, { ...headNode.attrs, level: targetLevel })
+            const content = currentNode.content
+            const headNode = schema.node(
+              'toggleHead',
+              { level: effectiveLevel },
+              content
+            )
+            const toggleBodyNode = schema.node('toggleBody', {}, childNodes)
+            const toggleBlockNode = schema.node(this.name, { open: true }, [
+              headNode,
+              toggleBodyNode,
+            ])
+
+            tr.replaceWith(nodePos, lastNodeEnd, toggleBlockNode)
+
+            const targetPos = nodePos + 2 + content.size
+            tr.setSelection(TextSelection.near(tr.doc.resolve(targetPos)))
             dispatch(tr)
           }
           return true
-        }
+        },
 
-        return commands.setToggleBlock(attributes)
-      }
+      unsetToggleBlock:
+        () =>
+        ({ state, dispatch, tr }) => {
+          const { selection } = state
+          const { $from } = selection
+
+          const currentNode = $from.parent
+          const nodeTypeName = currentNode.type.name
+
+          if (!['toggleHead', 'toggleBlock'].includes(nodeTypeName)) {
+            return false
+          }
+
+          let toggleBlockDepth = -1
+          let toggleBlockNode: any = null
+
+          for (let d = $from.depth; d > 0; d--) {
+            const node = $from.node(d)
+            if (node.type.name === this.name) {
+              toggleBlockDepth = d
+              toggleBlockNode = node
+              break
+            }
+          }
+
+          if (toggleBlockDepth === -1 || !toggleBlockNode) return false
+
+          const toggleBlockPos = $from.before(toggleBlockDepth)
+          const toggleBlockEnd = toggleBlockPos + toggleBlockNode.nodeSize
+
+          const headNode = toggleBlockNode.child(0)
+          const bodyNode = toggleBlockNode.child(1)
+
+          const level = headNode.attrs.level || 0
+          const headContent = headNode.content
+
+          const bodyNodes: any[] = []
+          bodyNode.forEach((node: any) => {
+            bodyNodes.push(node)
+          })
+
+          if (dispatch) {
+            const restoredMainNode =
+              level > 0
+                ? state.schema.node('heading', { level }, headContent)
+                : state.schema.node('paragraph', {}, headContent)
+
+            const nodesToInsert = [restoredMainNode, ...bodyNodes]
+
+            tr.replaceWith(toggleBlockPos, toggleBlockEnd, nodesToInsert)
+
+            const resolvedPos = tr.doc.resolve(toggleBlockPos + 1)
+            tr.setSelection(TextSelection.near(resolvedPos))
+
+            dispatch(tr)
+          }
+
+          return true
+        },
+
+      toggleToggleBlock:
+        (attributes?: { level?: number }) =>
+        ({ state, commands, dispatch, tr }) => {
+          const { selection } = state
+          const { $from } = selection
+
+          let toggleBlockDepth = -1
+          let toggleBlockNode: any = null
+          let isInsideToggleHead = false
+
+          for (let d = $from.depth; d > 0; d--) {
+            const node = $from.node(d)
+            if (node.type.name === this.name) {
+              toggleBlockDepth = d
+              toggleBlockNode = node
+
+              const childNode = $from.node(d + 1)
+              if (childNode && childNode.type.name === 'toggleHead') {
+                isInsideToggleHead = true
+              }
+              break
+            }
+          }
+
+          const targetLevel = attributes?.level ?? 0
+
+          if (
+            toggleBlockDepth !== -1 &&
+            toggleBlockNode &&
+            isInsideToggleHead
+          ) {
+            const headNode = toggleBlockNode.child(0)
+            const currentLevel = headNode.attrs.level || 0
+
+            if (currentLevel === targetLevel) {
+              return commands.unsetToggleBlock()
+            }
+
+            const headPos = $from.before(toggleBlockDepth) + 1
+            if (dispatch) {
+              tr.setNodeMarkup(headPos, undefined, {
+                ...headNode.attrs,
+                level: targetLevel,
+              })
+              dispatch(tr)
+            }
+            return true
+          }
+
+          return commands.setToggleBlock(attributes)
+        },
     }
   },
 
@@ -559,18 +595,7 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
             let lastNodeEnd = blockEnd
             for (let i = nodeIndex + 1; i < parentContainer.childCount; i++) {
               const sibling = parentContainer.child(i)
-
-              // Stop at a heading of equal or higher level (headings are always level >= 1,
-              // so a level-0 toggle block absorbs all of them).
-              if (sibling.type.name === 'heading') {
-                const siblingLevel = sibling.attrs.level || 1
-                if (level > 0 && siblingLevel <= level) break
-              } else if (sibling.type.name === this.name) {
-                // toggleBlock: its level lives on the first child (toggleHead) attrs.
-                // Stop at an equal-or-higher-level toggle block.
-                const siblingLevel = sibling.firstChild?.attrs?.level ?? 0
-                if (siblingLevel <= level) break
-              }
+              if (shouldSiblingStop(sibling, level)) break
 
               bodyNodes.push(sibling)
               lastNodeEnd += sibling.nodeSize
@@ -624,7 +649,11 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
             bodyNodes.push(schema.node('paragraph', {}, []))
           }
 
-          const toggleHeadNode = schema.node('toggleHead', { level }, headingContent)
+          const toggleHeadNode = schema.node(
+            'toggleHead',
+            { level },
+            headingContent
+          )
           const toggleBodyNode = schema.node('toggleBody', {}, bodyNodes)
           const toggleBlockNode = schema.node(this.name, { open: true }, [
             toggleHeadNode,
@@ -644,21 +673,76 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
       new InputRule({
         find: /^\^\s(#{1,3})\s$/,
         handler: ({ state, range, match }) => {
-          const level = match[1].length
+          const targetLevel = match[1].length
           const { tr, schema } = state
+          const $from = state.doc.resolve(range.from)
+          const depth = $from.depth
+          const parentNode = $from.parent
 
+          // handleTextInput runs BEFORE the text is inserted, so `range` may
+          // exceed the current node's real content boundaries. Clamp it.
+          const contentStart = $from.start(depth)
+          const contentEnd = $from.end(depth)
+          const from = Math.max(range.from, contentStart)
+          const to = Math.min(range.to, contentEnd)
+
+          // Build the toggleHead content, stripping the "^### " prefix.
+          const headContent: any[] = []
+          if (from < to) {
+            let pos = contentStart
+            parentNode.forEach((node) => {
+              const s = pos
+              const e = pos + node.nodeSize
+              pos = e
+
+              if (e <= from || s >= to) {
+                // Entirely outside the trigger range → keep as-is.
+                headContent.push(node)
+              } else if (node.isText) {
+                // Partially overlapping text → keep only the non-overlapping slices.
+                const text = node.text || ''
+                const localFrom = Math.max(0, from - s)
+                const localTo = Math.min(text.length, to - s)
+                const before = text.slice(0, localFrom)
+                const after = text.slice(localTo)
+                if (before) headContent.push(schema.text(before, node.marks))
+                if (after) headContent.push(schema.text(after, node.marks))
+              }
+              // Fully inside the trigger range → drop.
+            })
+          } else {
+            // The doc doesn't contain the typed prefix yet → keep existing content.
+            parentNode.forEach((node) => headContent.push(node))
+          }
+
+          // Absorb subsequent siblings into toggleBody.
+          const parentContainer = $from.node(depth - 1)
+          const nodeIndex = $from.index(depth - 1)
+          const bodyNodes: any[] = []
+          let endOffset = 0
+          for (let i = nodeIndex + 1; i < parentContainer.childCount; i++) {
+            const sibling = parentContainer.child(i)
+            if (shouldSiblingStop(sibling, targetLevel)) break
+            bodyNodes.push(sibling)
+            endOffset += sibling.nodeSize
+          }
+
+          // toggleBody must never be empty (schema requires block+).
+          if (bodyNodes.length === 0) {
+            bodyNodes.push(schema.node('paragraph', {}, []))
+          }
+
+          // Replace the whole block plus the absorbed siblings.
+          const nodeStart = $from.before(depth)
+          const nodeEnd = $from.after(depth)
           const toggleBlockNode = schema.node(this.name, { open: true }, [
-            schema.node('toggleHead', { level }, []),
-            schema.node('toggleBody', {}, [
-              schema.node('paragraph', {}, []),
-            ]),
+            schema.node('toggleHead', { level: targetLevel }, headContent),
+            schema.node('toggleBody', {}, bodyNodes),
           ])
+          tr.replaceWith(nodeStart, nodeEnd + endOffset, toggleBlockNode)
 
-          tr.replaceRangeWith(range.from, range.to, toggleBlockNode)
-
-          const targetPos = range.from + 1
-          const resolvedPos = tr.doc.resolve(targetPos)
-          tr.setSelection(TextSelection.near(resolvedPos))
+          // Place the cursor at the start of toggleHead.
+          tr.setSelection(TextSelection.near(tr.doc.resolve(nodeStart + 1)))
         },
       }),
     ]
@@ -676,11 +760,15 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
         // ==========================================
         // Case A: Inside toggleHead -> Dissolve toggleBlock when backspacing at start
         // ==========================================
-        if ($from.parent.type.name === 'toggleHead' && $from.parentOffset === 0) {
+        if (
+          $from.parent.type.name === 'toggleHead' &&
+          $from.parentOffset === 0
+        ) {
           const toggleBlockDepth = $from.depth - 1
           const toggleBlockNode = $from.node(toggleBlockDepth)
 
-          if (!toggleBlockNode || toggleBlockNode.type.name !== this.name) return false
+          if (!toggleBlockNode || toggleBlockNode.type.name !== this.name)
+            return false
 
           const headNode = $from.parent
           const level = headNode.attrs.level || 0
@@ -702,9 +790,10 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
             const pos = $from.before(toggleBlockDepth)
             const end = pos + toggleBlockNode.nodeSize
 
-            const restoredNode = level > 0
-              ? state.schema.node('heading', { level }, headContent)
-              : state.schema.node('paragraph', {}, headContent)
+            const restoredNode =
+              level > 0
+                ? state.schema.node('heading', { level }, headContent)
+                : state.schema.node('paragraph', {}, headContent)
 
             const nodesToInsert = [restoredNode, ...bodyNodes]
 
@@ -731,7 +820,10 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
         // ==========================================
         // Case B: At start of first block inside toggleBody -> Merge back into toggleHead
         // ==========================================
-        if ($from.parent.type.name === 'paragraph' && $from.parentOffset === 0) {
+        if (
+          $from.parent.type.name === 'paragraph' &&
+          $from.parentOffset === 0
+        ) {
           const bodyDepth = $from.depth - 1
           const bodyNode = $from.node(bodyDepth)
 
@@ -740,55 +832,77 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
             const toggleBlockNode = $from.node(toggleBlockDepth)
 
             if (toggleBlockNode && toggleBlockNode.type.name === this.name) {
-              if (toggleBlockNode.child(1) === bodyNode && bodyNode.firstChild === $from.parent) {
+              if (
+                toggleBlockNode.child(1) === bodyNode &&
+                bodyNode.firstChild === $from.parent
+              ) {
                 const headNode = toggleBlockNode.child(0)
                 const headContent = headNode.content
                 const paragraphNode = $from.parent
                 const paragraphContent = paragraphNode.content
 
-                return this.editor.commands.command(({ tr, state, dispatch }) => {
-                  const headingPos = $from.before(toggleBlockDepth)
-                  const headStartPos = headingPos + 1
-                  const headEndPos = headStartPos + headNode.nodeSize - 2
-                  const originalHeadTextEnd = headEndPos
+                return this.editor.commands.command(
+                  ({ tr, state, dispatch }) => {
+                    const headingPos = $from.before(toggleBlockDepth)
+                    const headStartPos = headingPos + 1
+                    const headEndPos = headStartPos + headNode.nodeSize - 2
+                    const originalHeadTextEnd = headEndPos
 
-                  const mergedHeadContent = headContent.append(paragraphContent)
-                  const level = headNode.attrs.level || 0
-                  const newHeadNode = state.schema.node('toggleHead', { level }, mergedHeadContent)
+                    const mergedHeadContent =
+                      headContent.append(paragraphContent)
+                    const level = headNode.attrs.level || 0
+                    const newHeadNode = state.schema.node(
+                      'toggleHead',
+                      { level },
+                      mergedHeadContent
+                    )
 
-                  const remainingBodyNodes: any[] = []
-                  let firstSkipped = false
-                  bodyNode.forEach((node) => {
-                    if (firstSkipped) {
-                      remainingBodyNodes.push(node)
-                    } else {
-                      firstSkipped = true
+                    const remainingBodyNodes: any[] = []
+                    let firstSkipped = false
+                    bodyNode.forEach((node) => {
+                      if (firstSkipped) {
+                        remainingBodyNodes.push(node)
+                      } else {
+                        firstSkipped = true
+                      }
+                    })
+
+                    // Fallback if body becomes empty after merge
+                    if (remainingBodyNodes.length === 0) {
+                      remainingBodyNodes.push(
+                        state.schema.node('paragraph', {}, [])
+                      )
                     }
-                  })
 
-                  // Fallback if body becomes empty after merge
-                  if (remainingBodyNodes.length === 0) {
-                    remainingBodyNodes.push(state.schema.node('paragraph', {}, []))
+                    const newToggleBodyNode = state.schema.node(
+                      'toggleBody',
+                      {},
+                      remainingBodyNodes
+                    )
+                    const newToggleBlockNode = state.schema.node(
+                      this.name,
+                      { open: toggleBlockNode.attrs.open },
+                      [newHeadNode, newToggleBodyNode]
+                    )
+
+                    const toggleBlockEnd = headingPos + toggleBlockNode.nodeSize
+                    tr.replaceWith(
+                      headingPos,
+                      toggleBlockEnd,
+                      newToggleBlockNode
+                    )
+
+                    const targetCursorPos = headingPos + headNode.nodeSize
+                    tr.setSelection(
+                      TextSelection.near(tr.doc.resolve(targetCursorPos))
+                    )
+
+                    if (dispatch) {
+                      dispatch(tr)
+                    }
+                    return true
                   }
-
-                  const newToggleBodyNode = state.schema.node('toggleBody', {}, remainingBodyNodes)
-                  const newToggleBlockNode = state.schema.node(
-                    this.name,
-                    { open: toggleBlockNode.attrs.open },
-                    [newHeadNode, newToggleBodyNode]
-                  )
-
-                  const toggleBlockEnd = headingPos + toggleBlockNode.nodeSize
-                  tr.replaceWith(headingPos, toggleBlockEnd, newToggleBlockNode)
-
-                  const targetCursorPos = headingPos + headNode.nodeSize
-                  tr.setSelection(TextSelection.near(tr.doc.resolve(targetCursorPos)))
-
-                  if (dispatch) {
-                    dispatch(tr)
-                  }
-                  return true
-                })
+                )
               }
             }
           }
@@ -809,7 +923,8 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
               const currentBlock = $from.parent
 
               return this.editor.commands.command(({ tr, state, dispatch }) => {
-                const prevBlockPos = $from.before($from.depth) - prevSibling.nodeSize
+                const prevBlockPos =
+                  $from.before($from.depth) - prevSibling.nodeSize
                 const toggleBlockNode = prevSibling
                 const headNode = toggleBlockNode.child(0)
                 const bodyNode = toggleBlockNode.child(1)
@@ -821,18 +936,34 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
 
                 let cursorInsertPos = prevBlockPos + prevSibling.nodeSize - 1
                 const lastIndex = bodyChildren.length - 1
-                const lastChild = lastIndex >= 0 ? bodyChildren[lastIndex] : null
+                const lastChild =
+                  lastIndex >= 0 ? bodyChildren[lastIndex] : null
 
-                if (lastChild && lastChild.type.name === 'paragraph' && currentBlock.type.name === 'paragraph') {
-                  const originalLastChildTextEnd = prevBlockPos + toggleBlockNode.nodeSize - 2
-                  const mergedParaContent = lastChild.content.append(currentBlock.content)
-                  bodyChildren[lastIndex] = state.schema.node('paragraph', {}, mergedParaContent)
+                if (
+                  lastChild &&
+                  lastChild.type.name === 'paragraph' &&
+                  currentBlock.type.name === 'paragraph'
+                ) {
+                  const originalLastChildTextEnd =
+                    prevBlockPos + toggleBlockNode.nodeSize - 2
+                  const mergedParaContent = lastChild.content.append(
+                    currentBlock.content
+                  )
+                  bodyChildren[lastIndex] = state.schema.node(
+                    'paragraph',
+                    {},
+                    mergedParaContent
+                  )
                   cursorInsertPos = prevBlockPos + toggleBlockNode.nodeSize - 3
                 } else {
                   bodyChildren.push(currentBlock)
                 }
 
-                const newToggleBody = state.schema.node('toggleBody', {}, bodyChildren)
+                const newToggleBody = state.schema.node(
+                  'toggleBody',
+                  {},
+                  bodyChildren
+                )
                 const newToggleBlock = state.schema.node(
                   this.name,
                   { open: true },
@@ -846,7 +977,9 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
                   const resolvedPos = tr.doc.resolve(cursorInsertPos)
                   tr.setSelection(TextSelection.near(resolvedPos))
                 } catch (e) {
-                  tr.setSelection(TextSelection.near(tr.doc.resolve(prevBlockPos + 2)))
+                  tr.setSelection(
+                    TextSelection.near(tr.doc.resolve(prevBlockPos + 2))
+                  )
                 }
 
                 if (dispatch) {
@@ -888,7 +1021,8 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
             const isOnlyChild = $from.node(depth + 1).childCount === 1
             const blockEnd = $from.after(depth)
             // Keep at least one paragraph in the body to satisfy `block+`.
-            if (!isOnlyChild) tr.delete($from.before($from.depth), $from.after($from.depth))
+            if (!isOnlyChild)
+              tr.delete($from.before($from.depth), $from.after($from.depth))
 
             const pos = tr.mapping.map(blockEnd)
             tr.insert(pos, state.schema.node('paragraph', {}, []))
@@ -918,7 +1052,7 @@ export const ToggleBlock = Node.create<ToggleBlockOptions>({
           if (dispatch) dispatch(tr)
           return true
         })
-      }
+      },
     }
   },
 })

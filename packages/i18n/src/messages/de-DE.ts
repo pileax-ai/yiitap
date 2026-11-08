@@ -21,10 +21,10 @@ export default {
       friendly: 'Freundlich',
       humorous: 'Humorvoll',
       inspirational: 'Inspirierend',
-      mysterious: 'Geheimnisvoll'
+      mysterious: 'Geheimnisvoll',
     },
     translate: 'Übersetzen nach',
-    write: 'Schreiben Sie etwas'
+    write: 'Schreiben Sie etwas',
   },
   diagram: {
     class: 'Klassendiagramm',
@@ -33,7 +33,7 @@ export default {
     name: 'Textdiagramm',
     sequence: 'Sequenzdiagramm',
     state: 'Zustandsdiagramm',
-    tips: 'Generierung von Diagrammen und Diagrammen aus Text auf ähnliche Weise wie beim Markdown'
+    tips: 'Generierung von Diagrammen und Diagrammen aus Text auf ähnliche Weise wie beim Markdown',
   },
   editor: {
     add: 'Hinzufügen',
@@ -122,7 +122,7 @@ export default {
     untoggleHeading: 'Entsperren',
     url: 'URL',
     video: 'Video einfügen',
-    viewSource: 'Quelle anzeigen'
+    viewSource: 'Quelle anzeigen',
   },
   emojiGroup: {
     activities: 'Aktivitäten',
@@ -134,7 +134,7 @@ export default {
     recent: 'Jüngste',
     smileys: 'Smileys & Emotionen',
     symbols: 'Symbole',
-    travel: 'Reisen & Orte'
+    travel: 'Reisen & Orte',
   },
   image: {
     height: 'Höhe',
@@ -152,7 +152,7 @@ export default {
     src: 'Bildquelle',
     unlockAspectRatio: 'Seitenverhältnis freischalten',
     width: 'Breite',
-    zoom: 'Zoom'
+    zoom: 'Zoom',
   },
   label: {
     advanced: 'Fortschrittlich',
@@ -175,7 +175,8 @@ export default {
     embed: 'Einbetten',
     embedAdd: 'Einbetten (PDFs, YouTube, Google Docs, Spotify...)',
     empty: 'Leer',
-    emptyTips: 'Drücken Sie die Eingabetaste, um mit einer leeren Notiz fortzufahren, oder wählen Sie Folgendes aus',
+    emptyTips:
+      'Drücken Sie die Eingabetaste, um mit einer leeren Notiz fortzufahren, oder wählen Sie Folgendes aus',
     emptyToggle: 'Leerer Schalter',
     example: 'Beispiel',
     generate: 'Erzeugen',
@@ -190,7 +191,7 @@ export default {
     linkPlaceholder: {
       image: 'Bildlink',
       model: 'Modellverknüpfung',
-      video: 'Videolink'
+      video: 'Videolink',
     },
     media: 'Medien',
     model: 'Modell',
@@ -222,12 +223,12 @@ export default {
       failed: 'Hochladen fehlgeschlagen',
       notConfigured: 'Upload ist nicht konfiguriert',
       tips: 'Ziehen Sie Dateien hierher oder klicken Sie zum Hochladen.',
-      uploading: 'Hochladen'
+      uploading: 'Hochladen',
     },
     video: 'Video',
     videoAdd: 'Fügen Sie ein Video hinzu',
     view: 'Sicht',
-    write: 'Schreiben'
+    write: 'Schreiben',
   },
   language: {
     chineseSimplified: 'Vereinfachtes Chinesisch',
@@ -243,14 +244,14 @@ export default {
     portuguese: 'Portugiesisch',
     russian: 'Russisch',
     spanish: 'Spanisch',
-    vietnamese: 'Vietnamesisch'
+    vietnamese: 'Vietnamesisch',
   },
   link: {
     back: 'Zurück zum Hauptmenü',
     edit: 'Link bearbeiten',
     off: 'Link deaktivieren',
     open: 'Link öffnen',
-    openInNewTab: 'In neuem Tab öffnen'
+    openInNewTab: 'In neuem Tab öffnen',
   },
   table: {
     addColumn: 'Spalte hinzufügen',
@@ -267,6 +268,6 @@ export default {
     removeRow: 'Zeile entfernen',
     selectColumn: 'Wählen Sie Spalte aus',
     selectRow: 'Wählen Sie Zeile aus',
-    split: 'Geteilte Zellen'
-  }
+    split: 'Geteilte Zellen',
+  },
 }

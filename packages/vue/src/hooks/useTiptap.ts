@@ -252,7 +252,6 @@ export default function () {
         focus.setTextAlign(options.textAlign).run()
         break
       case 'toggleBlock':
-        console.log('toggleBlock', options)
         focus.insertToggleBlock(options as { level: Level }).run()
         break
       case 'toggleBlockSet':

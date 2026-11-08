@@ -21,10 +21,10 @@ export default {
       friendly: '友好',
       humorous: '幽默',
       inspirational: '鼓舞人心',
-      mysterious: '神秘'
+      mysterious: '神秘',
     },
     translate: '翻譯成',
-    write: '寫任何東西'
+    write: '寫任何東西',
   },
   diagram: {
     class: '類圖',
@@ -33,7 +33,7 @@ export default {
     name: '文本繪圖',
     sequence: '時序圖',
     state: '狀態圖',
-    tips: '使用Markdown風格文本生成流程圖、順序圖、類圖、狀態圖和甘特圖'
+    tips: '使用Markdown風格文本生成流程圖、順序圖、類圖、狀態圖和甘特圖',
   },
   editor: {
     add: '添加',
@@ -122,7 +122,7 @@ export default {
     untoggleHeading: '取消折疊',
     url: '網址',
     video: '影片',
-    viewSource: '查看資料'
+    viewSource: '查看資料',
   },
   emojiGroup: {
     activities: '活動',
@@ -134,7 +134,7 @@ export default {
     recent: '最近使用',
     smileys: '表情與情感',
     symbols: '符號',
-    travel: '觀光與地點'
+    travel: '觀光與地點',
   },
   image: {
     height: '高度',
@@ -152,7 +152,7 @@ export default {
     src: '圖片地址',
     unlockAspectRatio: '解鎖長寬比',
     width: '寬度',
-    zoom: '縮放'
+    zoom: '縮放',
   },
   label: {
     advanced: '進階',
@@ -190,7 +190,7 @@ export default {
     linkPlaceholder: {
       image: '圖片連結',
       model: '模型連結',
-      video: '影片連結'
+      video: '影片連結',
     },
     media: '多媒體',
     model: '模型',
@@ -213,7 +213,7 @@ export default {
     think: '思考',
     toc: '目錄',
     turnInto: '轉成',
-    typeForCommands: '輸入 \'/\' 顯示命令',
+    typeForCommands: "輸入 '/' 顯示命令",
     untitled: '未命名',
     update: '更新',
     upload: '上傳',
@@ -221,12 +221,12 @@ export default {
       failed: '上傳失敗',
       notConfigured: '未配置上傳方法',
       tips: '將文件拖曳到此處，或點擊上傳',
-      uploading: '上傳中'
+      uploading: '上傳中',
     },
     video: '影片',
     videoAdd: '新增影片',
     view: '視圖',
-    write: '寫作'
+    write: '寫作',
   },
   language: {
     chineseSimplified: '簡體中文',
@@ -242,14 +242,14 @@ export default {
     portuguese: '葡萄牙語',
     russian: '俄文',
     spanish: '西班牙語',
-    vietnamese: '越南語'
+    vietnamese: '越南語',
   },
   link: {
     back: '返回主菜單',
     edit: '編輯鏈接',
     off: '取消鏈接',
     open: '打開鏈接',
-    openInNewTab: '在新標籤頁打開'
+    openInNewTab: '在新標籤頁打開',
   },
   table: {
     addColumn: '添加列',
@@ -266,6 +266,6 @@ export default {
     removeRow: '刪除行',
     selectColumn: '選擇列',
     selectRow: '選擇行',
-    split: '拆分單元格'
-  }
+    split: '拆分單元格',
+  },
 }

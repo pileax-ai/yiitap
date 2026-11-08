@@ -364,7 +364,9 @@ function buildExtensions() {
         if (['heading', 'toggleHead'].includes(node.type.name)) {
           const level = node.attrs.level
           return pos > 0
-            ? level > 0 ? `H${level}` : tr('editor.toggle')
+            ? level > 0
+              ? `H${level}`
+              : tr('editor.toggle')
             : tr('label.untitled')
         } else if (node.type.name === 'paragraph') {
           const isSlashActive =
@@ -400,15 +402,17 @@ function buildExtensions() {
 
   // User custom extensions
   if (props.extensions.includes('OToggleBlock')) {
-    const filterExtensions = props.extensions.filter(item => item !== 'OToggleBlock')
+    const filterExtensions = props.extensions.filter(
+      (item) => item !== 'OToggleBlock'
+    )
     const userExtensions = createExtensionList([
       ...filterExtensions,
       {
         name: 'OToggleBlock',
         configure: {
-          placeholder: () => tr('label.emptyToggle')
-        }
-      }
+          placeholder: () => tr('label.emptyToggle'),
+        },
+      },
     ])
     extensions.push(...userExtensions)
   } else {

@@ -21,10 +21,10 @@ export default {
       friendly: '친숙한',
       humorous: '유머러스함',
       inspirational: '영감을 주는',
-      mysterious: '신비한'
+      mysterious: '신비한',
     },
     translate: '다음으로 번역하다',
-    write: '무엇이든 쓰세요'
+    write: '무엇이든 쓰세요',
   },
   diagram: {
     class: '클래스 다이어그램',
@@ -33,7 +33,7 @@ export default {
     name: '텍스트 다이어그램',
     sequence: '시퀀스 다이어그램',
     state: '상태 다이어그램',
-    tips: '마크다운과 유사한 방식으로 텍스트에서 다이어그램 및 차트 생성'
+    tips: '마크다운과 유사한 방식으로 텍스트에서 다이어그램 및 차트 생성',
   },
   editor: {
     add: '추가하다',
@@ -122,7 +122,7 @@ export default {
     untoggleHeading: '토글 해제',
     url: 'URL',
     video: '비디오 삽입',
-    viewSource: '소스 보기'
+    viewSource: '소스 보기',
   },
   emojiGroup: {
     activities: '활동',
@@ -134,7 +134,7 @@ export default {
     recent: '최근의',
     smileys: '스마일리와 감정',
     symbols: '기호',
-    travel: '여행 및 장소'
+    travel: '여행 및 장소',
   },
   image: {
     height: '키',
@@ -152,7 +152,7 @@ export default {
     src: '이미지 소스',
     unlockAspectRatio: '종횡비 잠금 해제',
     width: '너비',
-    zoom: '줌'
+    zoom: '줌',
   },
   label: {
     advanced: '고급의',
@@ -190,7 +190,7 @@ export default {
     linkPlaceholder: {
       image: '이미지 링크',
       model: '모델 링크',
-      video: '동영상 링크'
+      video: '동영상 링크',
     },
     media: '메디아',
     model: '모델',
@@ -214,7 +214,7 @@ export default {
     think: '생각하다',
     toc: '목차',
     turnInto: '변신하다',
-    typeForCommands: '명령에 \'/\'를 입력하세요.',
+    typeForCommands: "명령에 '/'를 입력하세요.",
     untitled: '제목 없음',
     update: '업데이트',
     upload: '업로드',
@@ -222,12 +222,12 @@ export default {
       failed: '업로드 실패',
       notConfigured: '업로드가 구성되지 않았습니다.',
       tips: '파일을 여기에 드래그하거나 클릭하여 업로드하세요.',
-      uploading: '업로드 중'
+      uploading: '업로드 중',
     },
     video: '동영상',
     videoAdd: '비디오 추가',
     view: '보다',
-    write: '쓰다'
+    write: '쓰다',
   },
   language: {
     chineseSimplified: '중국어 간체',
@@ -243,14 +243,14 @@ export default {
     portuguese: '포르투갈 인',
     russian: '러시아인',
     spanish: '스페인 사람',
-    vietnamese: '베트남 사람'
+    vietnamese: '베트남 사람',
   },
   link: {
     back: '메인 메뉴로 돌아가기',
     edit: '링크 편집',
     off: '링크 비활성화',
     open: '링크 열기',
-    openInNewTab: '새 탭에서 열기'
+    openInNewTab: '새 탭에서 열기',
   },
   table: {
     addColumn: '열 추가',
@@ -267,6 +267,6 @@ export default {
     removeRow: '행 제거',
     selectColumn: '열 선택',
     selectRow: '행 선택',
-    split: '셀 분할'
-  }
+    split: '셀 분할',
+  },
 }

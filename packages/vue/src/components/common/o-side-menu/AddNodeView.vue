@@ -73,7 +73,7 @@ import {
   EmptyTable,
   EmptyTaskItem,
   EmptyVideo,
-  buildEmptyToggleBlock
+  buildEmptyToggleBlock,
 } from '../../../constants/empty-block'
 
 const props = defineProps({

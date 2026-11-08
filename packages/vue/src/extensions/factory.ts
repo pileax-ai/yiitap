@@ -194,7 +194,7 @@ export interface ExtensionOptions {
     handleWidth?: number
     cellMinWidth?: number
     HTMLAttributes?: Record<string, any>
-  },
+  }
   OToggleBlock: ToggleBlockOptions
 
   // This index signature allows using ExtensionName to index this interface
@@ -336,7 +336,7 @@ export const extensionRegistry: {
     ToggleBlock,
     ToggleBody.configure(opts),
     ToggleHead,
-  ]
+  ],
 } as const
 
 /**

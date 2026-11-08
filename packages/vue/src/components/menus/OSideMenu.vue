@@ -7,7 +7,7 @@
       :editor="editor"
       :tippy-options="tippyOptions"
     >
-      <section class="container" :class="{ 'collapsible': collapsible }">
+      <section class="container" :class="{ collapsible: collapsible }">
         <add-node
           v-bind="nodeProps"
           :add-menu-options="addMenuOptions"

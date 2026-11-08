@@ -2,11 +2,7 @@ import { Extension } from '@tiptap/core'
 import { Markdown } from '@tiptap/markdown'
 import { Fragment, Slice } from '@tiptap/pm/model'
 import { CellSelection } from '@tiptap/pm/tables'
-import {
-  Plugin,
-  NodeSelection,
-  TextSelection,
-} from '@tiptap/pm/state'
+import { Plugin, NodeSelection, TextSelection } from '@tiptap/pm/state'
 
 import {
   isMultiLine,
@@ -208,8 +204,12 @@ export const Shortcut = Extension.create<ShortcutOptions>({
 
             if (node.type.name === 'paragraph' && parentNode) {
               // Delete the parentNode when remains only one child.
-              if (['callout', 'blockquote', 'listItem', 'taskItem'].includes(parentNode.type.name)
-                && parentNode.content.content.length === 1) {
+              if (
+                ['callout', 'blockquote', 'listItem', 'taskItem'].includes(
+                  parentNode.type.name
+                ) &&
+                parentNode.content.content.length === 1
+              ) {
                 continue
               }
             }
@@ -281,7 +281,7 @@ export const Shortcut = Extension.create<ShortcutOptions>({
           }
 
           // 2. Determine target state: if any node is collapsed, expand all; otherwise, collapse all.
-          const hasClosed = nodesToUpdate.some(item => !item.open)
+          const hasClosed = nodesToUpdate.some((item) => !item.open)
           const targetOpenState = hasClosed ? true : false
 
           // 3. Apply updates in reverse order to prevent position shifting
@@ -297,7 +297,7 @@ export const Shortcut = Extension.create<ShortcutOptions>({
           }
 
           return true
-        }
+        },
     }
   },
 

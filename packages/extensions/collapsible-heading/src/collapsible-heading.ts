@@ -9,7 +9,8 @@ export interface CollapsibleHeadingPluginState {
   enabled: boolean
 }
 
-export const collapsibleHeadingKey = new PluginKey<CollapsibleHeadingPluginState>('collapsibleHeading')
+export const collapsibleHeadingKey =
+  new PluginKey<CollapsibleHeadingPluginState>('collapsibleHeading')
 
 export interface CollapsibleHeadingOptions {
   enabled: boolean | (() => boolean)
@@ -46,15 +47,20 @@ export const CollapsibleHeading = Extension.create<CollapsibleHeadingOptions>({
         state: {
           init: (_, state) => ({
             collapsed: new Set<string>(),
-            decorations: buildDecorations(state.doc, new Set<string>(), isEnabled()),
+            decorations: buildDecorations(
+              state.doc,
+              new Set<string>(),
+              isEnabled()
+            ),
             enabled: isEnabled(),
           }),
           apply(tr, pluginState, _oldState, newState) {
             const currentEnabled = isEnabled()
-            const meta = tr.getMeta(collapsibleHeadingKey) as { toggle?: string } | undefined
+            const meta = tr.getMeta(collapsibleHeadingKey) as
+              { toggle?: string } | undefined
             const docChanged = tr.docChanged
             const foldToggled = Boolean(meta?.toggle)
-            const enabledChanged = currentEnabled !== pluginState.enabled  // ← 新增
+            const enabledChanged = currentEnabled !== pluginState.enabled // ← 新增
 
             if (!docChanged && !foldToggled && !enabledChanged) {
               return pluginState
@@ -72,7 +78,11 @@ export const CollapsibleHeading = Extension.create<CollapsibleHeadingOptions>({
 
             return {
               collapsed: nextCollapsed,
-              decorations: buildDecorations(newState.doc, nextCollapsed, currentEnabled),
+              decorations: buildDecorations(
+                newState.doc,
+                nextCollapsed,
+                currentEnabled
+              ),
               enabled: currentEnabled,
             }
           },

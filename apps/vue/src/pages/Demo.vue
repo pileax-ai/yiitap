@@ -229,8 +229,8 @@ const editorOptions = computed(() => {
     {
       name: 'OCollapsibleHeading',
       configure: {
-        enabled: () => headingCollapsible.value
-      }
+        enabled: () => headingCollapsible.value,
+      },
     },
     'InlineMath',
     'Markdown',

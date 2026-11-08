@@ -96,7 +96,7 @@ const jsonToMarkdown = (json: any, editor: Editor) => {
           continue
         }
       }
-      
+
       const md = editor.markdown?.serialize(node)
       if (md) {
         markdownParts.push(md.trim())

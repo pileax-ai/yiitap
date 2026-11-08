@@ -29,7 +29,11 @@ import { computed, ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import useI18n from '../../../hooks/useI18n'
 import useTiptap from '../../../hooks/useTiptap'
-import { OBlockMenu, OMenubarBtn, OTurnIntoMenu } from '../../../components/index'
+import {
+  OBlockMenu,
+  OMenubarBtn,
+  OTurnIntoMenu,
+} from '../../../components/index'
 import { StyleBlocks } from '../../../constants/block'
 
 const props = defineProps(nodeViewProps)

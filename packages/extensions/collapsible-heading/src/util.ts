@@ -4,11 +4,12 @@ import type { Node as ProseMirrorNode } from '@tiptap/pm/model'
 const makeSlugger = () => {
   const seen = new Map<string, number>()
   return (text: string) => {
-    const base = text
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\u4e00-\u9fa5]+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'section'
+    const base =
+      text
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\u4e00-\u9fa5]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'section'
     const n = (seen.get(base) || 0) + 1
     seen.set(base, n)
     return n === 1 ? base : `${base}-${n}`
@@ -17,7 +18,12 @@ const makeSlugger = () => {
 
 const outlineOf = (doc: ProseMirrorNode) => {
   const slugOf = makeSlugger()
-  const out: { slug: string; level: number; pos: number; node: ProseMirrorNode }[] = []
+  const out: {
+    slug: string
+    level: number
+    pos: number
+    node: ProseMirrorNode
+  }[] = []
   doc.forEach((node, offset) => {
     if (node.type.name !== 'heading') return
     out.push({
@@ -65,19 +71,26 @@ export const buildDecorations = (
     )
 
     decos.push(
-      Decoration.widget(h.pos + 1, () => {
-        const btn = document.createElement('button')
-        btn.className = 'cw-fold-btn'
-        btn.type = 'button'
-        btn.dataset.slug = h.slug
-        btn.setAttribute('aria-label', isCollapsed ? 'Expand section' : 'Collapse section')
+      Decoration.widget(
+        h.pos + 1,
+        () => {
+          const btn = document.createElement('button')
+          btn.className = 'cw-fold-btn'
+          btn.type = 'button'
+          btn.dataset.slug = h.slug
+          btn.setAttribute(
+            'aria-label',
+            isCollapsed ? 'Expand section' : 'Collapse section'
+          )
 
-        const icon = document.createElement('span')
-        icon.textContent = isCollapsed ? '▸' : '▾'
-        btn.appendChild(icon)
+          const icon = document.createElement('span')
+          icon.textContent = isCollapsed ? '▸' : '▾'
+          btn.appendChild(icon)
 
-        return btn
-      }, { key: `fold-arrow-${h.slug}`, side: -1 })
+          return btn
+        },
+        { key: `fold-arrow-${h.slug}`, side: -1 }
+      )
     )
   })
 
