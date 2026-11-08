@@ -1,22 +1,15 @@
 import { Extension } from '@tiptap/core'
 import { Markdown } from '@tiptap/markdown'
-import { Node as ProseMirrorNode, Fragment, Slice } from '@tiptap/pm/model'
+import { Fragment, Slice } from '@tiptap/pm/model'
 import { CellSelection } from '@tiptap/pm/tables'
-import {
-  Plugin,
-  PluginKey,
-  NodeSelection,
-  TextSelection,
-} from '@tiptap/pm/state'
+import { Plugin, NodeSelection, TextSelection } from '@tiptap/pm/state'
 
 import {
   isMultiLine,
-  isCodeBlock,
   isMarkdown,
   jsonToMarkdown,
   jsonToHTML,
   htmlToJSON,
-  recoverText,
 } from './util'
 
 type Indexable<T = any> = {
@@ -36,6 +29,10 @@ export interface ShortcutOptions {
     enabled?: boolean
     keys?: string[] // e.g. ['Mod-x']
   }
+  toggleAllToggleBlocks?: {
+    enabled?: boolean
+    keys?: string[] // e.g. ['Mod-x']
+  }
   markdown?: {
     enabled?: boolean
   }
@@ -51,6 +48,8 @@ declare module '@tiptap/core' {
       duplicateSelected: () => ReturnType
       /** Delete selected node */
       deleteSelected: (option?: { delete?: boolean }) => ReturnType
+      /** Toggle all toggle blocks */
+      toggleAllToggleBlocks: () => ReturnType
     }
   }
 }
@@ -63,6 +62,7 @@ export const Shortcut = Extension.create<ShortcutOptions>({
       copy: { enabled: true, keys: ['Mod-c'] },
       duplicate: { enabled: true, keys: ['Mod-d'] },
       delete: { enabled: true, keys: ['Mod-x'] },
+      toggleAllToggleBlocks: { enabled: true, keys: ['Mod-Alt-t'] },
       markdown: { enabled: true },
       selectableNodes: [
         'aiBlock',
@@ -196,6 +196,24 @@ export const Shortcut = Extension.create<ShortcutOptions>({
           let targetDepth = depth
           for (; depth > 0; depth--) {
             const node = $from.node(depth)
+            const parentNode = $from.node(depth - 1)
+
+            if (['detailsSummary', 'toggleHead'].includes(node.type.name)) {
+              continue
+            }
+
+            if (node.type.name === 'paragraph' && parentNode) {
+              // Delete the parentNode when remains only one child.
+              if (
+                ['callout', 'blockquote', 'listItem', 'taskItem'].includes(
+                  parentNode.type.name
+                ) &&
+                parentNode.content.content.length === 1
+              ) {
+                continue
+              }
+            }
+
             if (node.isBlock) {
               targetDepth = depth
               break
@@ -234,6 +252,50 @@ export const Shortcut = Extension.create<ShortcutOptions>({
             tr.delete(pos, end)
             dispatch(tr.scrollIntoView())
           }
+          return true
+        },
+      toggleAllToggleBlocks:
+        () =>
+        ({ tr, state, dispatch }) => {
+          const { doc } = state
+          const toggleBlockType = state.schema.nodes['toggleBlock']
+
+          if (!toggleBlockType) {
+            return false
+          }
+
+          // 1. Collect all toggleBlock nodes and their positions
+          const nodesToUpdate: { pos: number; open: boolean }[] = []
+
+          doc.descendants((node, pos) => {
+            if (node.type.name === 'toggleBlock') {
+              nodesToUpdate.push({
+                pos,
+                open: node.attrs.open,
+              })
+            }
+          })
+
+          if (nodesToUpdate.length === 0) {
+            return false
+          }
+
+          // 2. Determine target state: if any node is collapsed, expand all; otherwise, collapse all.
+          const hasClosed = nodesToUpdate.some((item) => !item.open)
+          const targetOpenState = hasClosed ? true : false
+
+          // 3. Apply updates in reverse order to prevent position shifting
+          if (dispatch) {
+            for (let i = nodesToUpdate.length - 1; i >= 0; i--) {
+              const { pos } = nodesToUpdate[i]
+              tr.setNodeMarkup(pos, undefined, {
+                ...doc.nodeAt(pos)?.attrs,
+                open: targetOpenState,
+              })
+            }
+            dispatch(tr)
+          }
+
           return true
         },
     }
@@ -276,6 +338,14 @@ export const Shortcut = Extension.create<ShortcutOptions>({
       const keys = this.options.delete.keys ?? ['Mod-x']
       for (const key of keys) {
         shortcuts[key] = ({ editor }) => editor.commands.deleteSelected()
+      }
+    }
+
+    // Toggle all toggle blocks
+    if (this.options.toggleAllToggleBlocks?.enabled) {
+      const keys = this.options.toggleAllToggleBlocks.keys ?? ['Mod-Alt-t']
+      for (const key of keys) {
+        shortcuts[key] = ({ editor }) => editor.commands.toggleAllToggleBlocks()
       }
     }
 

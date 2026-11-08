@@ -22,6 +22,7 @@ import OTableBtn from './buttons/OTableBtn.vue'
 import OTableGroup from './buttons/OTableGroup.vue'
 import OTextColorDropdown from './buttons/OTextColorDropdown.vue'
 import OTextFormatDropdown from './buttons/OTextFormatDropdown.vue'
+import OToggleListBtn from './buttons/OToggleListBtn.vue'
 
 /**
  * Command component except for simple commands
@@ -55,6 +56,7 @@ const CommandComponents: Indexable = {
   'table-group': OTableGroup,
   'text-color-dropdown': OTextColorDropdown,
   'text-format-dropdown': OTextFormatDropdown,
+  'toggle-list': OToggleListBtn,
 }
 
 export const getComponent = (name: string) => {

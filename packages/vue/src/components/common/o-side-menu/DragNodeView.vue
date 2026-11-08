@@ -1,7 +1,7 @@
 <template>
   <section class="o-drag-node-view">
     <section class="view-main" v-if="view === 'main'">
-      <section v-if="isStyleType">
+      <section v-if="isStyleType && false">
         <div class="group o-tips">{{ tr('label.turnInto') }}</div>
         <section class="panel">
           <o-menubar-btn
@@ -13,6 +13,9 @@
             quaternary
             @click="onAction(item)"
           />
+        </section>
+        <section>
+          <o-turn-into-menu v-bind="props" />
         </section>
       </section>
 
@@ -26,26 +29,23 @@ import { computed, ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import useI18n from '../../../hooks/useI18n'
 import useTiptap from '../../../hooks/useTiptap'
-import { OBlockMenu, OMenubarBtn } from '../../../components/index'
+import {
+  OBlockMenu,
+  OMenubarBtn,
+  OTurnIntoMenu,
+} from '../../../components/index'
 import { StyleBlocks } from '../../../constants/block'
 
 const props = defineProps(nodeViewProps)
 const emit = defineEmits(['action'])
 
-const { locale, tr } = useI18n()
-const { run, onCommand } = useTiptap()
+const { tr } = useI18n()
+const { onCommand, inferNodeType } = useTiptap()
 const view = ref('main')
 const unliftBlocks = ref(['heading', 'codeBlock', 'paragraph'])
 
 const nodeType = computed(() => {
-  const content = props.node?.content.content
-  if (content.length > 0) {
-    const first = content[0]
-    if (first.type.name === 'image') {
-      return first.type.name
-    }
-  }
-  return props.node?.type.name
+  return inferNodeType(props.node)
 })
 
 const isStyleType = computed(() => {

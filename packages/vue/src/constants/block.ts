@@ -80,12 +80,14 @@ export const BasicBlocks: BlockOption[] = [
   },
   {
     label: 'editor.toggleList',
-    value: 'details',
-    keywords: 'details, toggle',
+    value: 'toggleBlock',
+    turnIntoValue: 'toggleBlockSet',
+    keywords: 'toggle, list',
     tips: '>',
     icon: 'toggle_list',
     color: BrandColor.indigo,
     style: true,
+    options: { level: 0 },
   },
   {
     label: 'editor.codeBlock',
@@ -232,6 +234,49 @@ export const AdvancedBlocks: BlockOption[] = [
     tips: 'column',
     keywords: 'column,columns',
   },
+  {
+    label: 'editor.toggleHeading1',
+    value: 'toggleBlock',
+    turnIntoValue: 'toggleBlockSet',
+    keywords: 'h1',
+    tips: '# >',
+    icon: 'format_toggle_h1',
+    color: BrandColor.blue,
+    style: true,
+    options: { level: 1 },
+    subGroup: 'label.advanced',
+  },
+  {
+    label: 'editor.toggleHeading2',
+    value: 'toggleBlock',
+    turnIntoValue: 'toggleBlockSet',
+    keywords: 'h2',
+    tips: '## >',
+    icon: 'format_toggle_h2',
+    color: BrandColor.blue,
+    style: true,
+    options: { level: 2 },
+  },
+  {
+    label: 'editor.toggleHeading3',
+    value: 'toggleBlock',
+    turnIntoValue: 'toggleBlockSet',
+    keywords: 'h3',
+    tips: '### >',
+    icon: 'format_toggle_h3',
+    color: BrandColor.blue,
+    style: true,
+    options: { level: 3 },
+  },
+]
+
+export const AdvancedStyleBlocks: BlockOption[] = AdvancedBlocks.filter(
+  (e) => e.style
+)
+
+export const AllStyleBlocks: BlockOption[] = [
+  ...StyleBlocks,
+  ...AdvancedStyleBlocks,
 ]
 
 export const Blocks: BlockOption[] = [
@@ -254,15 +299,16 @@ export const BlockMenus: BlockOption[] = [
     label: 'label.copy',
     value: 'copy',
     icon: 'copy_all',
+    tips: 'Mod+C',
     color: BrandColor.indigo,
     filter: 'common',
   },
   {
-    label: 'editor.delete',
+    label: 'label.cut',
     value: 'delete',
-    icon: 'delete',
+    icon: 'cut',
     tips: 'Mod+X',
-    color: BrandColor.deepOrange,
+    color: BrandColor.orange,
     filter: 'common',
   },
   {
@@ -296,6 +342,13 @@ export const BlockMenus: BlockOption[] = [
     color: BrandColor.orange,
     filter: 'callout',
     component: 'OEmojiSelect',
+  },
+  {
+    label: 'editor.untoggleHeading',
+    value: 'toggleBlockUnset',
+    icon: 'list',
+    color: BrandColor.blueGrey,
+    filter: 'toggleHead',
   },
 ]
 
@@ -537,5 +590,8 @@ export const AiBlocks: BlockOption[] = [
 
 export const DefaultBlockMenuOptions: Record<string, boolean> =
   Object.fromEntries(
-    [...BasicBlocks, ...CommonBlocks].map((block) => [block.value, true])
+    [...BasicBlocks, ...AdvancedStyleBlocks, ...CommonBlocks].map((block) => [
+      block.value,
+      true,
+    ])
   )

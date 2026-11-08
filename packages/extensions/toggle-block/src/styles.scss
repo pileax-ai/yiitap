@@ -1,0 +1,95 @@
+/* Toggle Heading Outer Wrapper */
+.toggle-block-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  gap: 2px;
+
+  &:has(.toggle-head.is-empty):has(.toggle-body.is-empty) .toggle-icon {
+    opacity: 0.5;
+  }
+}
+
+/* Arrow Button */
+.toggle-block-btn {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  padding-inline: 4px !important;
+  font-size: 1rem !important;
+
+  &-h1 {
+    margin-top: 8px;
+  }
+  &-h2 {
+    margin-top: 5px;
+  }
+  &-h3 {
+    margin-top: 3px;
+  }
+  &-h3 {
+    margin-top: 1px;
+  }
+}
+
+.toggle-block-btn:hover {
+  background-color: var(--yii-hover-bg-color);
+}
+
+.toggle-icon {
+  width: 0.8em;
+  height: 0.8em;
+  fill: currentColor;
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(-90deg);
+}
+
+/* Expanded and Collapsed State Control */
+.toggle-block-wrapper[data-open="false"] > .toggle-block-btn .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.toggle-block-wrapper[data-open="true"] > .toggle-block-btn .toggle-icon {
+  transform: rotate(0deg);
+}
+
+/* Hide Body Node When Collapsed */
+.toggle-block-wrapper[data-open="false"] > .toggle-block-content > [data-type="toggle-body"] {
+  display: none !important;
+}
+
+/* Inner Editing Area Layout */
+.toggle-block-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Toggle Head Style Corrections */
+.toggle-head {
+  margin: 0 !important;
+
+  &-h0 {
+    font-weight: 600;
+  }
+}
+
+/* Toggle Body Indentation Control */
+.toggle-body {
+  padding-left: 0;
+  /* border-left: 1px solid #f0f0f0; */ /* Optional: add a vertical line to help indicate hierarchy */
+  margin-top: 0.25rem;
+
+  &.has-focus::before {
+    display: none !important;
+  }
+}

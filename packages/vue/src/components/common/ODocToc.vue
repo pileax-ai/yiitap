@@ -142,13 +142,17 @@ function initEditorContainerScroll() {
 function onUpdate() {
   const list = []
   props.editor?.state.doc.descendants((node, pos) => {
-    if (node.type.name === 'heading') {
+    if (['heading', 'toggleHead'].includes(node.type.name)) {
       const id = node.attrs['id']
-      list.push({
-        level: node.attrs.level,
-        text: node.textContent,
-        id,
-      })
+      const level = node.attrs.level
+
+      if (level > 0) {
+        list.push({
+          level: level,
+          text: node.textContent,
+          id,
+        })
+      }
     }
   })
   headings.value = list

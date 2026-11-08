@@ -39,28 +39,31 @@ import { OBtn, OIcon, OPopover } from '../../index'
 
 const props = defineProps(nodeViewProps)
 const emit = defineEmits(['dragstart', 'dragend'])
-const { run } = useTiptap()
+const { inferNodeType } = useTiptap()
 const popover = ref(null)
 const selected = ref(false)
 const unliftBlocks = ref(['heading', 'codeBlock', 'paragraph'])
 
 const nodeType = computed(() => {
-  const content = props.node?.content?.content
-  if (content?.length > 0) {
-    const first = content[0]
-    if (first.type.name === 'image' || first.type.name === 'embed') {
-      return first.type.name
-    }
-  }
-  return props.node?.type.name
+  return inferNodeType(props.node)
 })
 
 const block = computed(() => {
-  // console.log('block', nodeType.value)
+  // console.log('block', nodeType.value, props.node)
   let type = nodeType.value
   if (type === 'heading') {
     return {
       icon: `format_h${props.node.attrs?.level || 1}`,
+      color: BrandColor.blue,
+    }
+  } else if (type === 'toggleHead') {
+    let level = 0
+    const content = props.node?.content?.content
+    if (content?.length > 0) {
+      level = content[0].attrs.level
+    }
+    return {
+      icon: `format_toggle_h${level}`,
       color: BrandColor.blue,
     }
   } else if (type === 'table-wrapper') {

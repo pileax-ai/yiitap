@@ -65,53 +65,88 @@ const options = computed(() => {
     {
       label: tr('editor.paragraph'),
       value: 'paragraph',
-      valueAlt: '',
+      level: '',
       icon: 'title',
     },
     {
       label: tr('editor.heading1'),
       value: 'heading',
-      valueAlt: 1,
+      level: 1,
       icon: 'format_h1',
       separator: true,
     },
     {
       label: tr('editor.heading2'),
       value: 'heading',
-      valueAlt: 2,
+      level: 2,
       icon: 'format_h2',
     },
     {
       label: tr('editor.heading3'),
       value: 'heading',
-      valueAlt: 3,
+      level: 3,
       icon: 'format_h3',
     },
     {
       label: tr('editor.heading4'),
       value: 'heading',
-      valueAlt: 4,
+      level: 4,
       icon: 'format_h4',
     },
     {
       label: tr('editor.heading5'),
       value: 'heading',
-      valueAlt: 5,
+      level: 5,
       icon: 'format_h5',
+    },
+    {
+      label: tr('editor.toggleHeading1'),
+      value: 'toggleBlock',
+      valueAlt: 'toggleBlockToggle',
+      level: 0,
+      icon: 'format_toggle_h1',
+      separator: true,
+    },
+    {
+      label: tr('editor.toggleHeading1'),
+      value: 'toggleBlock',
+      valueAlt: 'toggleBlockToggle',
+      level: 1,
+      icon: 'format_toggle_h1',
+      separator: true,
+    },
+    {
+      label: tr('editor.toggleHeading2'),
+      value: 'toggleBlock',
+      valueAlt: 'toggleBlockToggle',
+      level: 2,
+      icon: 'format_toggle_h2',
+    },
+    {
+      label: tr('editor.toggleHeading3'),
+      value: 'toggleBlock',
+      valueAlt: 'toggleBlockToggle',
+      level: 3,
+      icon: 'format_toggle_h3',
     },
   ]
 })
 
 function isActive(item: Indexable) {
-  return item.value === 'heading'
-    ? props.editor?.isActive(item.value, { level: item.valueAlt })
-    : props.editor?.isActive(item.value)
+  switch (item.value) {
+    case 'heading':
+      return props.editor?.isActive('heading', { level: item.level })
+    case 'toggleBlock':
+      return props.editor?.isActive('toggleHead', { level: item.level })
+    default:
+      props.editor?.isActive(item.value)
+  }
 }
 
 function onSelect(item: Indexable) {
   popover.value?.setShow(false)
-  run(props.editor as Editor, item.value, {
-    level: item.valueAlt,
+  run(props.editor as Editor, item.valueAlt || item.value, {
+    level: item.level,
   })
 }
 </script>

@@ -54,6 +54,7 @@ import {
   DefaultBlockMenuOptions,
   BasicBlocks,
   CommonBlocks,
+  AdvancedStyleBlocks,
 } from '../../../constants/block'
 import {
   EmptyAiBlock,
@@ -72,6 +73,7 @@ import {
   EmptyTable,
   EmptyTaskItem,
   EmptyVideo,
+  buildEmptyToggleBlock,
 } from '../../../constants/empty-block'
 
 const props = defineProps({
@@ -88,7 +90,7 @@ const view = ref('main')
 
 const basicBlocks = computed(() => {
   const options = props.addMenuOptions || DefaultBlockMenuOptions
-  return BasicBlocks.filter(
+  return [...BasicBlocks, ...AdvancedStyleBlocks].filter(
     (item) =>
       isExtensionInstalled(props.editor, item.value) && options[item.value]
   )
@@ -102,7 +104,8 @@ const commonBlocks = computed(() => {
   )
 })
 
-function onClick(item) {
+function onClick(item: Indexable) {
+  console.log('click', item)
   let content = null
   switch (item.value) {
     case 'aiBlock':
@@ -165,6 +168,9 @@ function onClick(item) {
       break
     case 'modelViewer':
       content = EmptyModelViewer
+      break
+    case 'toggleBlock':
+      content = buildEmptyToggleBlock(item.options?.level)
       break
     case 'video':
       content = EmptyVideo

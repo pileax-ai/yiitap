@@ -18,11 +18,13 @@ declare global {
   interface BlockOption {
     label: string
     value: string
+    turnIntoValue?: string
     keywords?: string
     icon?: string
     color?: string
     tips?: string
     group?: string
+    subGroup?: string
     filter?: string
     style?: boolean
     options?: Indexable

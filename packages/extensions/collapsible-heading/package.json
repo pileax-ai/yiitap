@@ -1,0 +1,43 @@
+{
+	"name": "@yiitap/extension-collapsible-heading",
+	"description": "Collapsible heading extension",
+	"version": "0.19.3",
+	"private": false,
+	"author": {
+		"name": "Yiitap",
+		"email": "pileaxai@gmail.com"
+	},
+	"homepage": "",
+	"license": "MIT",
+	"type": "module",
+	"main": "dist/index.cjs",
+	"module": "dist/index.mjs",
+	"types": "dist/types/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		},
+    "./dist/style.css": "./dist/style.css",
+    "./style.css": "./dist/style.css"
+	},
+	"files": [
+		"dist",
+		"src"
+	],
+	"scripts": {
+		"build": "pnpm build-lib && pnpm build-types",
+		"build-lib": "vite build",
+		"build-types": "tsc --emitDeclarationOnly",
+		"lint": "eslint 'src/**/*.{ts,vue}'",
+		"test": "vitest",
+		"test-ci": "vitest --run"
+	},
+	"dependencies": {},
+	"peerDependencies": {
+		"@tiptap/core": "^3.32.0",
+		"@tiptap/pm": "^3.32.0"
+	},
+	"devDependencies": {}
+}

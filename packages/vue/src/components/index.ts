@@ -31,6 +31,7 @@ export { default as OTableCellHandler } from './common/OTableCellHandler.vue'
 export { default as OTableGrid } from './common/OTableGrid.vue'
 export { default as OTableCellBackground } from './common/OTableCellBackground.vue'
 export { default as OTextColorBoard } from './common/OTextColorBoard.vue'
+export { default as OTurnIntoMenu } from './common/OTurnIntoMenu.vue'
 export { OToast } from './common/OToast'
 
 // Node

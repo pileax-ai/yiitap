@@ -89,6 +89,14 @@ const jsonToMarkdown = (json: any, editor: Editor) => {
   const nodes = Array.isArray(json) ? json : [json]
   for (const node of nodes) {
     try {
+      // 1. Skip empty paragraph nodes (like trailingNode) to avoid serialization errors and trailing blank lines
+      if (node.type === 'paragraph') {
+        const hasContent = node.content && node.content.length > 0
+        if (!hasContent) {
+          continue
+        }
+      }
+
       const md = editor.markdown?.serialize(node)
       if (md) {
         markdownParts.push(md.trim())

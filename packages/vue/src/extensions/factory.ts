@@ -39,6 +39,8 @@ import type {
   ColumnDropCursorOptions,
   MultiColumnOptions,
   ShortcutOptions,
+  ToggleBlockOptions,
+  CollapsibleHeadingOptions,
   UploadManagerOptions,
 } from './extensions'
 
@@ -113,6 +115,12 @@ import {
   createSlashSuggestion,
   ColonSuggestion,
   EmojiSuggestion,
+
+  // Toggle
+  ToggleBlock,
+  ToggleBody,
+  ToggleHead,
+  CollapsibleHeading,
 } from './extensions'
 
 // ---------------------------------------------------------
@@ -175,6 +183,7 @@ export interface ExtensionOptions {
   OColumnDropCursor: ColumnDropCursorOptions
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
+  OCollapsibleHeading: CollapsibleHeadingOptions
   OVideo: { allowFullscreen?: boolean; HTMLAttributes?: Record<string, any> }
   OUploadManager: UploadManagerOptions
 
@@ -186,6 +195,7 @@ export interface ExtensionOptions {
     cellMinWidth?: number
     HTMLAttributes?: Record<string, any>
   }
+  OToggleBlock: ToggleBlockOptions
 
   // This index signature allows using ExtensionName to index this interface
   [key: string]: any
@@ -242,6 +252,7 @@ export const extensionRegistry: {
         'image',
         'paragraph',
         'table-wrapper',
+        'toggleHead',
         'video',
       ],
       ...opts,
@@ -288,6 +299,7 @@ export const extensionRegistry: {
       ],
       ...opts,
     }),
+  OCollapsibleHeading: (opts?) => CollapsibleHeading.configure(opts),
   OVideo: (opts?) => OVideo.configure(opts),
   OUploadManager: (opts?) => OUploadManager.configure(opts),
 
@@ -319,6 +331,11 @@ export const extensionRegistry: {
     TableRow,
     OTableHeader,
     OTableCell,
+  ],
+  OToggleBlock: (opts?) => [
+    ToggleBlock,
+    ToggleBody.configure(opts),
+    ToggleHead,
   ],
 } as const
 
