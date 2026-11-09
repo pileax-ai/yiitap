@@ -216,6 +216,7 @@ const editorOptions = computed(() => {
   const extensions: ExtensionsProp[] = [
     OStarterKit.configure({
       UniqueID: true,
+      OContentGuard: true,
       OSlash: {
         suggestion: createSlashSuggestion({
           // exclude: ['modelViewer'],
@@ -496,16 +497,25 @@ watch(source, (newValue) => {
   localStorage.setItem('yiitap.source', newValue)
   if (editor.value) {
     let sanitizedContent = content.value
-    if (null !== sanitizedContent && typeof sanitizedContent === 'object') {
-      sanitizedContent = sanitizeNodes(
-        sanitizedContent,
-        editor.value.extensionManager.extensions
-      )
-    }
 
-    editor.value.commands.setContent(sanitizedContent, {
-      emitUpdate: true,
-    })
+    // 1. User manually sanitize the content
+    // if (null !== sanitizedContent && typeof sanitizedContent === 'object') {
+    //   sanitizedContent = sanitizeNodes(
+    //     sanitizedContent,
+    //     editor.value.extensionManager.extensions
+    //   )
+    // }
+
+    // 2. Use setContentSafely provided by ContentGuard
+    if (typeof editor.value.commands.setContentSafely === 'function') {
+      editor.value.commands.setContentSafely(sanitizedContent, {
+        emitUpdate: true,
+      })
+    } else {
+      editor.value.commands.setContent(sanitizedContent, {
+        emitUpdate: true,
+      })
+    }
   }
 })
 

@@ -1,0 +1,1 @@
+# @yiitap/extension-content-guard

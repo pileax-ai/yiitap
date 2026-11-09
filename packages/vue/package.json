@@ -84,6 +84,7 @@
 		"@yiitap/extension-char-command": "workspace:*",
     "@yiitap/extension-collapsible-heading": "workspace:*",
 		"@yiitap/extension-color-highlighter": "workspace:*",
+    "@yiitap/extension-content-guard": "workspace:*",
 		"@yiitap/extension-embed": "workspace:*",
 		"@yiitap/extension-image": "workspace:*",
 		"@yiitap/extension-inline-placeholder": "workspace:*",
