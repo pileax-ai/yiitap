@@ -80,9 +80,9 @@ const options = computed(() => {
       icon: 'format_h3',
       options: { level: 3 },
     },
-    { label: tr('editor.todoList'), value: 'taskList', icon: 'check_box' },
+    { label: tr('editor.taskList'), value: 'taskList', icon: 'check_box' },
     {
-      label: tr('editor.unorderedList'),
+      label: tr('editor.bulletList'),
       value: 'bulletList',
       icon: 'format_list_bulleted',
     },

@@ -1,8 +1,8 @@
 <template>
   <o-menubar-btn
     class="o-details-btn"
-    icon="toggle_list"
-    :tooltip="tr('editor.toggleList')"
+    icon="details_arrow"
+    :tooltip="tr('editor.details')"
     :content-class="{
       'is-active': editor?.isActive('details'),
     }"
