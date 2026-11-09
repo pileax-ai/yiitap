@@ -159,6 +159,61 @@ export const Shortcut = Extension.create<ShortcutOptions>({
           const { selection } = state
           const { $from, from, to } = selection
 
+          // CodeBlock
+          // Handle line-based cut/delete when cursor is inside a codeBlock with collapsed selection
+          if ($from.parent.type.name === 'codeBlock' && from === to) {
+            const codeBlock = $from.parent
+            const text = codeBlock.textContent
+            const offset = $from.parentOffset
+
+            let lineStart = 0
+            for (let i = offset - 1; i >= 0; i--) {
+              if (text[i] === '\n') {
+                lineStart = i + 1
+                break
+              }
+            }
+
+            let lineEnd = text.length
+            for (let i = offset; i < text.length; i++) {
+              if (text[i] === '\n') {
+                lineEnd = i + 1
+                break
+              }
+            }
+
+            let actualStart = lineStart
+            let actualEnd = lineEnd
+
+            // If it is the last line (no trailing newline) and not the only line, include the preceding newline
+            if (lineEnd === text.length && lineStart > 0) {
+              actualStart = lineStart - 1
+            }
+
+            const lineText = text.slice(actualStart, actualEnd)
+
+            // Copy current line to clipboard
+            try {
+              const writeData: Indexable = {
+                'text/plain': new Blob([lineText], { type: 'text/plain' }),
+              }
+              const item = new ClipboardItem(writeData)
+              navigator.clipboard.write([item])
+            } catch (err) {
+              console.error('Clipboard write failed.', err)
+            }
+
+            // Delete current line range in document
+            if (option.delete && dispatch) {
+              const codeBlockStart = $from.start()
+              const docFrom = codeBlockStart + actualStart
+              const docTo = codeBlockStart + actualEnd
+              tr.delete(docFrom, docTo)
+              dispatch(tr.scrollIntoView())
+            }
+            return true
+          }
+
           // 1. Delete selected
           if (from !== to) {
             // Copy to clipboard

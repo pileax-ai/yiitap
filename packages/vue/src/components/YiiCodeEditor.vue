@@ -167,9 +167,7 @@ function buildExtensions() {
   )
 
   // Code
-  extensions.push(OCodeBlock)
-  extensions.push(OShortcut)
-  extensions.push(Markdown)
+  extensions.push(...[Markdown, OCodeBlock, OShortcut])
 
   return extensions
 }
