@@ -9,8 +9,9 @@ import { ModelViewer, ModelViewerZh } from './model-viewer'
 import { MultiColumn, MultiColumnZh } from './multi-column'
 import { Table, TableZh } from './table'
 import { ToggleBlock, ToggleBlockZh } from './toggle-block'
+import { docJson } from './json'
 
-const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
+const CONTENT_MAP: Record<string, { en: any; zh: any }> = {
   empty: { en: '<p></p>', zh: '<p></p>' },
   audio: { en: Audio, zh: AudioZh },
   callout: { en: Callout, zh: CalloutZh },
@@ -22,6 +23,7 @@ const CONTENT_MAP: Record<string, { en: string; zh: string }> = {
   multiColumn: { en: MultiColumn, zh: MultiColumnZh },
   table: { en: Table, zh: TableZh },
   toggleBlock: { en: ToggleBlock, zh: ToggleBlockZh },
+  json: { en: docJson, zh: docJson },
 }
 
 const DEFAULT_CONTENT = {

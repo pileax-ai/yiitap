@@ -68,6 +68,7 @@ import UniqueID, { type UniqueIDOptions } from '@tiptap/extension-unique-id'
 import type { AiBlockOptions } from '@yiitap/extension-ai-block'
 import type { CalloutOptions } from '@yiitap/extension-callout'
 import OColorHighlighter from '@yiitap/extension-color-highlighter'
+import OContentGuard from '@yiitap/extension-content-guard'
 import OInlinePlaceholder from '@yiitap/extension-inline-placeholder'
 import {
   Column,
@@ -152,6 +153,7 @@ export const DefaultExtensionNames = [
   'OBlockquote',
   'OCallout',
   'OCodeBlock',
+  'OContentGuard',
   'OHorizontalRule',
   'OLink',
   'OSelectionDecoration',
@@ -205,6 +207,7 @@ export {
   OCodeBlock,
   OColonCommand,
   OColorHighlighter,
+  OContentGuard,
   ODetails,
   OEmbed,
   OHorizontalRule,

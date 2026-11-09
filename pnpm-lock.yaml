@@ -132,6 +132,9 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^3.32.0
         version: 3.32.0
+      '@yiitap/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@yiitap/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n
@@ -318,6 +321,15 @@ importers:
       '@tiptap/pm':
         specifier: ^3.32.0
         version: 3.32.0
+
+  packages/extensions/content-guard:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.32.0
+        version: 3.32.0(@tiptap/pm@3.32.0)
+      '@yiitap/core':
+        specifier: workspace:*
+        version: link:../../core
 
   packages/extensions/embed:
     dependencies:
@@ -664,6 +676,9 @@ importers:
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
+      '@yiitap/extension-content-guard':
+        specifier: workspace:*
+        version: link:../extensions/content-guard
       '@yiitap/extension-embed':
         specifier: workspace:*
         version: link:../extensions/embed
@@ -875,6 +890,9 @@ importers:
       '@yiitap/extension-color-highlighter':
         specifier: workspace:*
         version: link:../extensions/color-highlighter
+      '@yiitap/extension-content-guard':
+        specifier: workspace:*
+        version: link:../extensions/content-guard
       '@yiitap/extension-embed':
         specifier: workspace:*
         version: link:../extensions/embed

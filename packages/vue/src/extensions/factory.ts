@@ -86,6 +86,7 @@ import {
   OCodeBlock,
   OColorHighlighter,
   OColonCommand,
+  OContentGuard,
   ODetails,
   OEmbed,
   OHorizontalRule,
@@ -173,6 +174,7 @@ export interface ExtensionOptions {
   OCallout: CalloutOptions
   OCodeBlock: OCodeBlockOptions
   OColorHighlighter: any
+  OContentGuard: any
   OEmbed: { HTMLAttributes?: Record<string, any> }
   OHorizontalRule: HorizontalRuleOptions
   OImage: ImageOptions
@@ -274,6 +276,7 @@ export const extensionRegistry: {
   OSlashZh: (opts?) =>
     OSlashZhCommand.configure({ suggestion: createSlashSuggestion(), ...opts }),
   OColorHighlighter: (opts?) => OColorHighlighter.configure(opts),
+  OContentGuard: (opts?) => OContentGuard.configure(opts),
   OColumnDropCursor: (opts?) => ColumnDropCursor.configure(opts),
   OHorizontalRule: (opts?) => OHorizontalRule.configure(opts),
   OImage: (opts?) => OImage.configure(opts),
