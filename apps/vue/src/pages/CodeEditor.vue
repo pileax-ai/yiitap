@@ -110,7 +110,9 @@ const editorOptions = computed(() => {
     darkMode: darkMode.value,
     editable: editable.value,
     content:
-      '<pre><code class="language-javascript">console.log(\'Hello World\')</code></pre>',
+      '<pre><code class="language-javascript">console.log(\'Hello World\')\n' +
+      '\n' +
+      'const menuOptions = []</code></pre>',
     autofocus: true,
     pageView: 'page',
   }
@@ -159,10 +161,6 @@ function onUpdate({
   if (import.meta.env.DEV && DEBUG) {
     console.debug(removeHtmlAttributes(editor.getHTML(), '[data-id]'))
     console.debug(editor.getJSON())
-
-    // code
-    console.debug('language', language)
-    console.debug('code', code)
   }
 }
 
