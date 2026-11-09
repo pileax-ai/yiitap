@@ -154,6 +154,7 @@ import {
   NSwitch,
 } from 'naive-ui'
 import '@google/model-viewer'
+import { sanitizeNodes } from '@yiitap/core'
 import {
   YiiEditor,
   ODocToc,
@@ -238,7 +239,7 @@ const editorOptions = computed(() => {
     'OColon',
     'OBlockMath',
     'OColorHighlighter',
-    'ODetails',
+    // 'ODetails',
     'OEmbed',
     'OImage',
     'OModelViewer',
@@ -345,6 +346,7 @@ const sourceList = computed(() => {
     { label: 'MultiColumn', value: 'multiColumn' },
     { label: 'Table', value: 'table' },
     { label: 'Toggle Block', value: 'toggleBlock' },
+    { label: 'JSON', value: 'json' },
   ]
 })
 
@@ -492,9 +494,19 @@ watch(locale, (newValue) => {
 
 watch(source, (newValue) => {
   localStorage.setItem('yiitap.source', newValue)
-  yiiEditor.value?.editor.commands.setContent(content.value, {
-    emitUpdate: true,
-  })
+  if (editor.value) {
+    let sanitizedContent = content.value
+    if (null !== sanitizedContent && typeof sanitizedContent === 'object') {
+      sanitizedContent = sanitizeNodes(
+        sanitizedContent,
+        editor.value.extensionManager.extensions
+      )
+    }
+
+    editor.value.commands.setContent(sanitizedContent, {
+      emitUpdate: true,
+    })
+  }
 })
 
 watch(headingCollapsible, () => {
@@ -526,10 +538,15 @@ watch(editor, (newValue) => {
   if (import.meta.env.DEV) {
     // Access properties exposed by YiiEditor
     // console.debug('editor', yiiEditor.value?.editor)
-    console.debug(
-      'extensions',
-      yiiEditor.value?.editor.extensionManager.extensions
-    )
+    const extensions = yiiEditor.value?.editor.extensionManager.extensions
+    console.debug('extensions', extensions)
+
+    if (extensions) {
+      const nodes = extensions
+        .filter((ext) => ext.type === 'node')
+        .map((ext) => ext.name)
+      console.log('nodes', nodes)
+    }
     // console.debug('darkMode', yiiEditor.value?.darkMode)
     // console.debug('local', yiiEditor.value?.local)
   }

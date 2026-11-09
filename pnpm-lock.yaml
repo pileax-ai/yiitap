@@ -132,6 +132,9 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^3.32.0
         version: 3.32.0
+      '@yiitap/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@yiitap/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n

@@ -58,7 +58,7 @@ import { Editor, type FocusPosition } from '@tiptap/core'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
-import type { AiOptions } from '@yiitap/core'
+import { sanitizeNodes, type AiOptions } from '@yiitap/core'
 
 import OMainMenu from './menus/OMainMenu.vue'
 import OBubbleMenu from './menus/OBubbleMenu.vue'
@@ -279,9 +279,18 @@ const customExtensions = computed(() => {
   return buildExtensions()
 })
 
+const sanitizedContent = computed(() => {
+  let content = props.content
+  if (null !== content && typeof content === 'object') {
+    content = sanitizeNodes(content, customExtensions.value)
+  }
+
+  return content
+})
+
 const editor = useEditor({
   editable: props.editable,
-  content: props.content,
+  content: sanitizedContent.value,
   autofocus: props.autofocus,
   extensions: customExtensions.value,
   onCreate: () => {
