@@ -43,7 +43,7 @@ export const BasicBlocks: BlockOption[] = [
     options: { level: 3 },
   },
   {
-    label: 'editor.todoList',
+    label: 'editor.taskList',
     value: 'taskList',
     keywords: 'task',
     tips: '[]',
@@ -52,7 +52,7 @@ export const BasicBlocks: BlockOption[] = [
     style: true,
   },
   {
-    label: 'editor.unorderedList',
+    label: 'editor.bulletList',
     value: 'bulletList',
     keywords: 'bullet',
     tips: '-',
@@ -76,6 +76,15 @@ export const BasicBlocks: BlockOption[] = [
     tips: '"',
     icon: 'format_quote_open',
     color: BrandColor.brown,
+    style: true,
+  },
+  {
+    label: 'editor.details',
+    value: 'details',
+    keywords: 'details',
+    tips: 'details',
+    icon: 'details_arrow',
+    color: BrandColor.blueGrey,
     style: true,
   },
   {
@@ -156,7 +165,7 @@ export const CommonBlocks: BlockOption[] = [
     color: BrandColor.blue,
   },
   {
-    label: 'editor.todoList',
+    label: 'editor.taskList',
     value: 'taskList',
     icon: 'check_box',
     tips: 'task',

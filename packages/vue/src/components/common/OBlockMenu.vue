@@ -8,7 +8,7 @@
         <template v-if="item.group">
           <o-divider v-if="index > 0 || isStyleType" />
           <div class="group o-tips" v-if="showGroup">
-            {{ tr(item.group) }}
+            {{ tr(item.group) || item.group }}
           </div>
         </template>
 
@@ -92,6 +92,22 @@ const nodeType = computed(() => {
   return inferNodeType(props.node)
 })
 
+const nodeLabel = computed(() => {
+  if (nodeType.value === 'toggleHead') {
+    const head = props.node?.content?.content[0]
+    const level = head.attrs.level
+    if (level === 0) {
+      return tr('editor.toggleList')
+    }
+  }
+
+  return (
+    tr(`label.${nodeType.value}`) ||
+    tr(`editor.${nodeType.value}`) ||
+    nodeType.value
+  )
+})
+
 const isStyleType = computed(() => {
   return (
     AllStyleBlocks.find((e) => e.value === nodeType.value) ||
@@ -109,10 +125,10 @@ const actions = computed(() => {
   let nodeActions =
     BlockMenus.filter((e) => e.filter?.indexOf(nodeType.value) >= 0) ?? []
   nodeActions = nodeActions.concat(styleActions)
-  // if (nodeActions.length > 0) {
-  //   const firstAction = nodeActions[0]
-  //   firstAction.group = `editor.${nodeType.value}`
-  // }
+  if (!isStyleType.value && nodeActions.length > 0) {
+    const firstAction = nodeActions[0]
+    firstAction.group = nodeLabel.value
+  }
 
   // common actions
   const commonActions = BlockMenus.filter(

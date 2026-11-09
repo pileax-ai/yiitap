@@ -73,7 +73,7 @@ function onSelect(item: Indexable) {
 const options = computed(() => {
   return [
     {
-      label: tr('editor.unorderedList'),
+      label: tr('editor.bulletList'),
       value: 'bulletList',
       icon: 'format_list_bulleted',
     },
@@ -82,7 +82,7 @@ const options = computed(() => {
       value: 'orderedList',
       icon: 'format_list_numbered',
     },
-    { label: tr('editor.todoList'), value: 'taskList', icon: 'check_box' },
+    { label: tr('editor.taskList'), value: 'taskList', icon: 'check_box' },
   ]
 })
 

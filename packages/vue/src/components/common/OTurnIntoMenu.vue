@@ -81,7 +81,11 @@ const nodeLabel = computed(() => {
     }
   }
 
-  return tr(`editor.${nodeType.value}`)
+  return (
+    tr(`label.${nodeType.value}`) ||
+    tr(`editor.${nodeType.value}`) ||
+    nodeType.value
+  )
 })
 
 function isActive(item: Indexable) {
