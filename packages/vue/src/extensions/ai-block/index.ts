@@ -10,3 +10,4 @@ const OAiBlock = AiBlock.extend<AiBlockOptions>({
 })
 
 export default OAiBlock
+export type { AiBlockOptions }

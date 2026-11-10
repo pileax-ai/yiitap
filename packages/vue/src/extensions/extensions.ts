@@ -65,8 +65,10 @@ import UniqueID, { type UniqueIDOptions } from '@tiptap/extension-unique-id'
 // YiiEditor extension imports
 // ---------------------------------------------------------
 // Extension lib
-import type { AiBlockOptions } from '@yiitap/extension-ai-block'
-import type { CalloutOptions } from '@yiitap/extension-callout'
+import {
+  CollapsibleHeading,
+  type CollapsibleHeadingOptions,
+} from '@yiitap/extension-collapsible-heading'
 import OColorHighlighter from '@yiitap/extension-color-highlighter'
 import OContentGuard from '@yiitap/extension-content-guard'
 import OInlinePlaceholder from '@yiitap/extension-inline-placeholder'
@@ -91,10 +93,6 @@ import {
   ToggleHead,
   type ToggleBlockOptions,
 } from '@yiitap/extension-toggle-block'
-import {
-  CollapsibleHeading,
-  type CollapsibleHeadingOptions,
-} from '@yiitap/extension-collapsible-heading'
 import OUploadManager, {
   type UploadManagerOptions,
 } from '@yiitap/extension-upload-manager'
@@ -105,21 +103,22 @@ import {
   SlashCommand as OSlashCommand,
   SlashZhCommand as OSlashZhCommand,
 } from '@yiitap/extension-char-command'
+
+// Extension local
 import {
   createSlashSuggestion,
   ColonSuggestion,
   EmojiSuggestion,
 } from './char-command'
-
-// Extension local
-import OAiBlock from './ai-block'
+import OAiBlock, { type AiBlockOptions } from './ai-block'
 import OAudio, { type AudioOptions } from './audio'
 import OBlockMath from './block-math'
 import OBlockquote, { type OBlockquoteOptions } from './blockquote'
-import OCallout from './callout'
+import OCallout, { type CalloutOptions } from './callout'
 import OCodeBlock, { type OCodeBlockOptions } from './code-block'
 import ODetails, { type ODetailsOptions } from './details'
 import OEmbed from './embed'
+import { OEncryptedBlock, OEncryptionMetadata, type EncryptedBlockOptions } from './encrypted/encrypted-block'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
@@ -160,6 +159,12 @@ export const DefaultExtensionNames = [
   'OSlash',
   'OSlashZh',
   'OTable',
+]
+
+export const EncryptionExtensionNames = [
+  'OEncryptionMetadata',
+  'OEncryptedBlock',
+  'OEncryptedText',
 ]
 
 // --------------------------------------------------------------------------------
@@ -210,6 +215,8 @@ export {
   OContentGuard,
   ODetails,
   OEmbed,
+  OEncryptedBlock,
+  OEncryptionMetadata,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -277,6 +284,7 @@ export type {
   AiBlockOptions,
   AudioOptions,
   CalloutOptions,
+  EncryptedBlockOptions,
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,

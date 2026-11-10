@@ -10,7 +10,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => ['model-viewer'].includes(tag),
+          isCustomElement: (tag) => ['model-viewer', 'encrypted-block'].includes(tag),
         },
       },
     }),

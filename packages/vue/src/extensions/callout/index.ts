@@ -10,3 +10,4 @@ const OCallout = Callout.extend<CalloutOptions>({
 })
 
 export default OCallout
+export type { CalloutOptions }

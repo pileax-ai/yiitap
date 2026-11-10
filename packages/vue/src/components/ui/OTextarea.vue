@@ -1,5 +1,5 @@
 <template>
-  <div class="o-textarea" :class="`type-${type}`">
+  <div class="o-textarea o-field">
     <div class="o-textarea__prefix">
       <slot name="prefix"></slot>
     </div>
@@ -8,7 +8,9 @@
         ref="input"
         v-model="value"
         :placeholder="placeholder"
+        :autocomplete="autocomplete"
         :rows="rows"
+        :readonly="readonly"
         @focus="emit('focus')"
         @blur="emit('blur')"
       />
@@ -38,13 +40,17 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  autocomplete: {
+    type: String,
+    default: '',
+  },
   clearable: {
     type: Boolean,
     default: false,
   },
-  type: {
-    type: String,
-    default: '',
+  readonly: {
+    type: Boolean,
+    default: false,
   },
   rows: {
     type: Number,
@@ -82,7 +88,7 @@ defineExpose({
 .o-textarea {
   display: inline-flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   padding: 4px 8px;
   width: 100%;
   border-radius: 3px;
@@ -94,6 +100,10 @@ defineExpose({
     outline: solid 1px #2080f0;
   }
 
+  &.error {
+    outline: solid 1px #f44336;
+  }
+
   &__prefix {
     flex: 0;
     margin-right: 10px;
@@ -101,10 +111,14 @@ defineExpose({
 
   &__main {
     flex: 1;
+    display: flex;
+    align-items: center;
 
     textarea {
+      field-sizing: content;
       width: 100%;
-      height: 30px;
+      min-height: 30px;
+      max-height: 300px;
       border: none;
       color: var(--yii-color);
       background: transparent;

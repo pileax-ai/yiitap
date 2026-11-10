@@ -154,18 +154,18 @@ import {
   NSwitch,
 } from 'naive-ui'
 import '@google/model-viewer'
-import { sanitizeNodes } from '@yiitap/core'
 import {
+  DefaultBlockMenuOptions,
   YiiEditor,
+  OAiBlock,
   ODocToc,
+  OEncryptionKit,
   OIcon,
   OMainMenu,
-  OAiBlock,
-  OUploadManager,
   OStarterKit,
-  removeHtmlAttributes,
-  DefaultBlockMenuOptions,
+  OUploadManager,
   createSlashSuggestion,
+  removeHtmlAttributes,
   type AiOptions,
   type SideMenuAddType,
 } from '@yiitap/vue'
@@ -225,6 +225,11 @@ const editorOptions = computed(() => {
       },
     }),
     OAiBlock.configure(aiOptions.value),
+    OEncryptionKit.configure({
+      OEncryptionMetadata: true,
+      OEncryptedBlock: true,
+      OEncryptedText: false,
+    }),
     OUploadManager.configure({
       onUpload: onUpload,
     }),
@@ -339,6 +344,7 @@ const sourceList = computed(() => {
     { label: 'Empty', value: 'empty' },
     { label: 'Callout', value: 'callout' },
     { label: 'Code Block', value: 'codeBlock' },
+    { label: 'Encrypted Block', value: 'encryptedBlock' },
     { label: 'Diagram', value: 'diagram' },
     { label: 'Audio', value: 'audio' },
     { label: 'Image', value: 'image' },

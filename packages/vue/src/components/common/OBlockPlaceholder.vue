@@ -1,5 +1,5 @@
 <template>
-  <section class="o-block-placeholder">
+  <section class="o-block-placeholder" :class="{ autogrow }">
     <div class="left">
       <div class="icon">
         <o-icon :name="icon" />
@@ -14,6 +14,8 @@
         <template v-else>
           {{ placeholder }}
         </template>
+
+        <slot></slot>
       </div>
     </div>
     <div class="right">
@@ -38,6 +40,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  autogrow: {
+    type: Boolean,
+    default: false,
+  },
 })
 </script>
 
@@ -46,7 +52,7 @@ const props = defineProps({
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   border-radius: 4px;
   color: var(--yii-tips-color);
   background: var(--yii-active-bg-color);
@@ -59,16 +65,24 @@ const props = defineProps({
   }
 
   .left {
+    flex: 1;
     display: flex;
-    align-items: center;
+    align-items: stretch;
   }
 
   .icon {
+    display: flex;
+    align-items: start;
     margin-right: 8px;
+    padding: 5px 0;
   }
 
   .placeholder {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
     height: 30px;
+    min-height: 30px;
     line-height: 30px;
     font-size: 0.9rem;
     max-width: 500px;
@@ -80,6 +94,16 @@ const props = defineProps({
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  &.autogrow {
+    .placeholder {
+      display: inline-flex;
+      align-items: center;
+      height: unset !important;
+      line-height: unset !important;
+      max-width: unset !important;
     }
   }
 }

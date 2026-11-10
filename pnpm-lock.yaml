@@ -340,6 +340,15 @@ importers:
         specifier: ^3.32.0
         version: 3.32.0
 
+  packages/extensions/encrypted:
+    dependencies:
+      '@tiptap/core':
+        specifier: ^3.32.0
+        version: 3.32.0(@tiptap/pm@3.32.0)
+      '@tiptap/pm':
+        specifier: ^3.32.0
+        version: 3.32.0
+
   packages/extensions/image:
     dependencies:
       '@tiptap/core':
@@ -682,6 +691,9 @@ importers:
       '@yiitap/extension-embed':
         specifier: workspace:*
         version: link:../extensions/embed
+      '@yiitap/extension-encrypted':
+        specifier: workspace:*
+        version: link:../extensions/encrypted
       '@yiitap/extension-image':
         specifier: workspace:*
         version: link:../extensions/image
@@ -896,6 +908,9 @@ importers:
       '@yiitap/extension-embed':
         specifier: workspace:*
         version: link:../extensions/embed
+      '@yiitap/extension-encrypted':
+        specifier: workspace:*
+        version: link:../extensions/encrypted
       '@yiitap/extension-image':
         specifier: workspace:*
         version: link:../extensions/image

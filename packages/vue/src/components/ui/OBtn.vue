@@ -1,8 +1,9 @@
 <template>
   <button
     class="o-btn"
-    :class="type ? `type-${type}` : ''"
-    @click="emit('click', $event)"
+    :class="{ [`type-${type}`]: type }"
+    :disabled="disabled"
+    @click.stop="emit('click', $event)"
   >
     <template v-if="loading">
       <div class="spinner"></div>
@@ -35,6 +36,10 @@ defineProps({
     type: String,
     default: '',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   loading: {
     type: Boolean,
     default: false,
@@ -57,6 +62,11 @@ const emit = defineEmits(['click'])
 
   &:hover {
     background: var(--yii-hover-bg-color) !important;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   &.type-tertiary {

@@ -164,6 +164,17 @@ body {
   }
 }
 
+.o-fields {
+  .o-field {
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
 
 .o-loading {
   width: 20px;

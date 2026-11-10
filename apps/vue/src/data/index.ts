@@ -3,6 +3,7 @@ import { Audio, AudioZh } from './audio'
 import { Callout, CalloutZh } from './callout'
 import { CodeBlock } from './code-block'
 import { Diagram } from './diagram'
+import { EncryptedBlock, EncryptedBlockZh } from './encrypted-block'
 import { Image, ImageZh } from './image'
 import { Media, MediaZh } from './media'
 import { ModelViewer, ModelViewerZh } from './model-viewer'
@@ -18,6 +19,7 @@ const CONTENT_MAP: Record<string, { en: any; zh: any }> = {
   codeBlock: { en: CodeBlock, zh: CodeBlock },
   diagram: { en: Diagram, zh: Diagram },
   image: { en: Image, zh: ImageZh },
+  encryptedBlock: { en: EncryptedBlock, zh: EncryptedBlockZh },
   media: { en: Media, zh: MediaZh },
   modelViewer: { en: ModelViewer, zh: ModelViewerZh },
   multiColumn: { en: MultiColumn, zh: MultiColumnZh },
