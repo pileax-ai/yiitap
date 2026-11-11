@@ -277,6 +277,14 @@ export const AdvancedBlocks: BlockOption[] = [
     style: true,
     options: { level: 3 },
   },
+  {
+    label: 'editor.encryptedBlock',
+    value: 'encryptedBlock',
+    keywords: 'encryption, password, key',
+    tips: 'encrypt',
+    icon: 'lock',
+    color: BrandColor.deepOrange,
+  },
 ]
 
 export const AdvancedStyleBlocks: BlockOption[] = AdvancedBlocks.filter(

@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
 import { useI18n, useTiptap } from '../../../hooks'
 import {
@@ -176,6 +176,10 @@ async function onSaving() {
 function onShowPopover(value: boolean) {
   showPopover.value = value
 }
+
+onMounted(() => {
+  onShowPopover(ciphertext.value === '')
+})
 </script>
 
 <style lang="scss">

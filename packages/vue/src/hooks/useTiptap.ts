@@ -108,6 +108,9 @@ export default function () {
           })
           .run()
         break
+      case 'encryptedBlock':
+        focus.setEncryptedBlock({ ciphertext: '', iv: [] }).run()
+        break
       case 'emoji':
         commands.insertContent(':')
         break

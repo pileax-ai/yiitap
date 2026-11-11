@@ -245,7 +245,7 @@ const editorOptions = computed(() => {
     'OColon',
     'OBlockMath',
     'OColorHighlighter',
-    // 'ODetails',
+    'ODetails',
     'OEmbed',
     'OImage',
     'OModelViewer',

@@ -66,7 +66,7 @@ const verified = computed(() => {
 const tabs = computed(() => {
   return [
     { label: 'Master Password', value: 'password', component: Password, show: !passwordReady.value },
-    { label: 'Verify', value: 'verifier', component: Verifier, show: !verified.value },
+    { label: 'Verify', value: 'verifier', component: Verifier, show: passwordReady.value && !verified.value },
     { label: 'Content', value: 'content', component: Content, show: true },
   ]
 })

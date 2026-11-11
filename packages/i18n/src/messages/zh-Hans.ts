@@ -58,6 +58,7 @@ export default {
     details: '详情块',
     duplicate: '创建副本',
     emoji: '表情',
+    encryptedBlock: '加密块',
     fontFamily: '字体',
     fontSize: '字体大小',
     formatting: '格式化',

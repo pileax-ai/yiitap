@@ -58,6 +58,7 @@ export default {
     details: 'Details',
     duplicate: 'Duplicate',
     emoji: 'Emoji',
+    encryptedBlock: 'Encrypted Block',
     fontFamily: 'Font Family',
     fontSize: 'Font Size',
     formatting: 'Formatting',

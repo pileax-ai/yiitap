@@ -17,7 +17,6 @@
         </template>
       </o-input>
       <o-input
-        ref="input"
         v-model="rePassword"
         placeholder="Input password again"
         type="password"
@@ -39,10 +38,9 @@
         class="o-field hidden"
       />
     </form>
-    {{docAttrs}}
     <footer class="actions">
-      <o-btn type="info" @click="onConfirm">
-        {{ tr('label.ok') }}
+      <o-btn type="info" @click.stop="onConfirm">
+        Next
       </o-btn>
     </footer>
   </section>
@@ -56,7 +54,6 @@ import { OBtn, OIcon, OInput } from '../../index'
 import useI18n from '../../../hooks/useI18n'
 import {
   setupMasterPassword,
-  verifyMasterPassword,
 } from '../../../utils/crypto'
 
 const props = defineProps({
@@ -68,7 +65,7 @@ const props = defineProps({
     default: '',
   },
 })
-const emit = defineEmits(['input'])
+const emit = defineEmits(['next'])
 
 const { tr } = useI18n()
 const input = ref<InstanceType<typeof OInput>>()
@@ -79,21 +76,19 @@ const error = ref({
   rePassword: { error: false, message: '' },
 })
 
-const docAttrs = computed(() => {
-  return props.editor?.state.doc.attrs
-})
-
 async function onConfirm() {
-  if (!validate()) return
+  if (!validate() || !props.editor) return
 
   const { salt, masterVerifyCipher, masterVerifyIv, key } = await setupMasterPassword(password.value)
 
-  props.editor?.commands.setMasterPasswordMeta({
+  props.editor.chain().focus().setMasterPasswordMeta({
     masterSalt: salt,
     masterVerifyCipher,
     masterVerifyIv,
-  })
-  console.log('masterPassword', {salt, masterVerifyCipher, masterVerifyIv, key})
+  }).run()
+  props.editor.storage.encryptionMetadata.masterKey = key
+
+  emit('next', 'content')
 }
 
 function validate() {
@@ -121,6 +116,14 @@ function validate() {
     error.value.rePassword = { error: false, message: '' }
   }
 
+  if (password.value !== rePassword.value) {
+    error.value.rePassword = {
+      error: true,
+      message: 'Password not match',
+    }
+    return false
+  }
+
   return true
 }
 
@@ -129,7 +132,7 @@ onMounted(() => {
 
   setTimeout(() => {
     input.value?.focus()
-  }, 0)
+  }, 100)
 })
 </script>
 
