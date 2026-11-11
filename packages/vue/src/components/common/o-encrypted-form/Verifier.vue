@@ -16,9 +16,15 @@
           <o-icon name="lock" class="o-tips" />
         </template>
         <template #bottom>
-          <span class="o-text-error">
+          <span class="o-text-error" v-if="error.message">
             {{ error.message }}
           </span>
+          <div v-else-if="docAttrs.masterTips">
+            <o-icon-label icon="info"
+                          :label="docAttrs.masterTips"
+                          class="o-tips"
+                          icon-class="small" />
+          </div>
         </template>
       </o-input>
 
@@ -41,7 +47,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
-import { OBtn, OIcon, OInput } from '../../index'
+import { OBtn, OIcon, OIconLabel, OInput } from '../../index'
 
 import useI18n from '../../../hooks/useI18n'
 import {

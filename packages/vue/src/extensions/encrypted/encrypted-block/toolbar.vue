@@ -48,9 +48,15 @@
         />
       </template>
       <template #bottom>
-        <span class="o-text-error">
-          {{ error.message }}
-        </span>
+        <span class="o-text-error" v-if="error.message">
+            {{ error.message }}
+          </span>
+        <div v-else-if="docAttrs.masterTips">
+          <o-icon-label icon="info"
+                        :label="docAttrs.masterTips"
+                        class="o-tips"
+                        icon-class="small" />
+        </div>
       </template>
     </o-input>
   </o-popover>
@@ -63,7 +69,10 @@ import { useI18n, useTiptap } from '../../../hooks'
 import {
   OPopover,
   OBlockToolbar,
-  OMenubarBtn, OIcon, OInput
+  OMenubarBtn,
+  OIcon,
+  OIconLabel,
+  OInput,
 } from '../../../components/index'
 import {
   verifyMasterPassword,

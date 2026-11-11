@@ -18,16 +18,25 @@
       </o-input>
       <o-input
         v-model="rePassword"
-        placeholder="Input password again"
+        placeholder="Password again"
         type="password"
         autocomplete="re-password"
         :class="{ 'error': error.rePassword?.error }"
-        autofocus
         clearable
         @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="lock" class="o-tips" />
+        </template>
+      </o-input>
+      <o-input
+        v-model="tips"
+        placeholder="Password tips"
+        clearable
+        @enter="onConfirm"
+      >
+        <template #prefix>
+          <o-icon name="info" class="o-tips" />
         </template>
       </o-input>
       <input
@@ -71,6 +80,7 @@ const { tr } = useI18n()
 const input = ref<InstanceType<typeof OInput>>()
 const password = ref('')
 const rePassword = ref('')
+const tips = ref('')
 const error = ref({
   password: { error: false, message: '' },
   rePassword: { error: false, message: '' },
@@ -83,6 +93,7 @@ async function onConfirm() {
 
   props.editor.chain().focus().setMasterPasswordMeta({
     masterSalt: salt,
+    masterTips: tips.value,
     masterVerifyCipher,
     masterVerifyIv,
   }).run()

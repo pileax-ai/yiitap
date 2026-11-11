@@ -23,6 +23,7 @@ export const EncryptedBlock = {
       123,
       89
     ],
+    "masterTips": "simple",
     "masterVerifyCipher": "SDfVbwF0X2TfvZQv0tidTvyN/wIP0XG4PyZfxiLJv9PGSi3TvLj3D/lxO4+ucvIv",
     "masterVerifyIv": [
       46,

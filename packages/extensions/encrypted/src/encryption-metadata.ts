@@ -16,6 +16,7 @@ declare module '@tiptap/core' {
       /** Set or update document master password metadata */
       setMasterPasswordMeta: (meta: {
         masterSalt: number[]
+        masterTips: string
         masterVerifyCipher: string
         masterVerifyIv: number[]
       }) => ReturnType
@@ -49,6 +50,16 @@ export const EncryptionMetadata = Extension.create<EncryptionMetadataOptions>({
               if (!attributes.masterSalt) return {}
               return {
                 'data-master-salt': JSON.stringify(attributes.masterSalt),
+              }
+            },
+          },
+          masterTips: {
+            default: null,
+            parseHTML: (element) => element.getAttribute('data-master-tips') || null,
+            renderHTML: (attributes) => {
+              if (!attributes.masterTips) return {}
+              return {
+                'data-master-tips': attributes.masterTips,
               }
             },
           },
@@ -90,6 +101,7 @@ export const EncryptionMetadata = Extension.create<EncryptionMetadataOptions>({
 
             const tr = state.tr
               .setDocAttribute('masterSalt', meta.masterSalt)
+              .setDocAttribute('masterTips', meta.masterTips)
               .setDocAttribute('masterVerifyCipher', meta.masterVerifyCipher)
               .setDocAttribute('masterVerifyIv', meta.masterVerifyIv)
 

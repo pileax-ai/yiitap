@@ -3,7 +3,7 @@
     class="o-btn"
     :class="{ [`type-${type}`]: type }"
     :disabled="disabled"
-    @click.stop="emit('click', $event)"
+    @click="emit('click', $event)"
   >
     <template v-if="loading">
       <div class="spinner"></div>
