@@ -1,8 +1,9 @@
 <template>
   <o-node-view
     v-bind="props"
-    class="o-model-viewer-view"
+    class="o-model-viewer-view has-toolbar"
     :class="{
+      'show-toolbar': toolbarShown,
       readonly: !editor?.isEditable,
       init: src === 'init',
     }"
@@ -126,6 +127,7 @@ const mouseEvent = ref({})
 const captionInput = ref(null)
 const showCaptionInput = ref(false)
 const showPopover = ref(false)
+const toolbarShown = ref(false)
 
 const dialogOptions = ref<DialogOption>({
   show: false,
@@ -150,11 +152,14 @@ const src = computed({
   },
 })
 
-function onAction(action: BlockOption) {
+function onAction(action: Indexable) {
   showContextMenu.value = false
   switch (action.value) {
     case 'replace':
       onShowPopover(true)
+      break
+    case 'show':
+      toolbarShown.value = action.show
       break
   }
 }

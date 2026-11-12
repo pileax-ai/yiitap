@@ -1,11 +1,11 @@
-import { computed, ref, inject } from 'vue'
+import { computed, ref, inject, type Ref } from 'vue'
 import type { ChainedCommands, Editor, SingleCommands } from '@tiptap/core'
 import type { Level } from '@tiptap/extension-heading'
 import { InlinePlaceholderKey } from '@yiitap/extension-placeholder'
 import { EmptyDiagram } from '../constants/empty-block'
 
 export default function () {
-  const isEditable = inject('isEditable', { value: true })
+  const isEditable = inject<Ref<boolean>>('isEditable', ref(true))
 
   function run(editor: Editor, command: string, options: Indexable = {}) {
     if (!editor.isEditable) return
@@ -107,6 +107,9 @@ export default function () {
             src: 'init',
           })
           .run()
+        break
+      case 'encryptedBlock':
+        focus.setEncryptedBlock({ ciphertext: '', iv: [] }).run()
         break
       case 'emoji':
         commands.insertContent(':')

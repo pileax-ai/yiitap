@@ -2,8 +2,9 @@
   <o-node-view
     ref="imageView"
     v-bind="props"
-    class="o-image-view"
+    class="o-image-view has-toolbar"
     :class="{
+      'show-toolbar': toolbarShown,
       max: isMax,
       'with-caption': attrs.alt,
       readonly: !editor?.isEditable,
@@ -173,6 +174,7 @@ const { downloadImage } = useCommon()
 const { isEditable, getEditorImages } = useTiptap()
 const showContextMenu = ref(false)
 const showPopover = ref(false)
+const toolbarShown = ref(false)
 const mouseEvent = ref({})
 const captionInput = ref(null)
 const showCaptionInput = ref(false)
@@ -266,11 +268,14 @@ function onContextMenu(e: MouseEvent) {
   mouseEvent.value = e
 }
 
-function onAction(action: BlockOption) {
+function onAction(action: Indexable) {
   showContextMenu.value = false
   switch (action.value) {
     case 'replace':
       onShowPopover(true)
+      break
+    case 'show':
+      toolbarShown.value = action.show
       break
   }
 }

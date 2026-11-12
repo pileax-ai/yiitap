@@ -114,6 +114,12 @@ const options = computed(() => {
       value: 'blockMath',
       icon: 'functions',
     },
+    {
+      label: tr('editor.encryptedBlock'),
+      value: 'encryptedBlock',
+      icon: 'lock',
+      separator: true,
+    },
   ]
 })
 

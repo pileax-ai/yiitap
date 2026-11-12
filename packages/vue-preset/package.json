@@ -63,6 +63,7 @@
     "@yiitap/extension-color-highlighter": "workspace:*",
     "@yiitap/extension-content-guard": "workspace:*",
     "@yiitap/extension-embed": "workspace:*",
+    "@yiitap/extension-encrypted": "workspace:*",
     "@yiitap/extension-image": "workspace:*",
     "@yiitap/extension-inline-placeholder": "workspace:*",
     "@yiitap/extension-model-viewer": "workspace:*",

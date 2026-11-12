@@ -277,6 +277,14 @@ export const AdvancedBlocks: BlockOption[] = [
     style: true,
     options: { level: 3 },
   },
+  {
+    label: 'editor.encryptedBlock',
+    value: 'encryptedBlock',
+    keywords: 'encryption, password, key',
+    tips: 'encrypt',
+    icon: 'lock',
+    color: BrandColor.deepOrange,
+  },
 ]
 
 export const AdvancedStyleBlocks: BlockOption[] = AdvancedBlocks.filter(
@@ -358,6 +366,13 @@ export const BlockMenus: BlockOption[] = [
     icon: 'list',
     color: BrandColor.blueGrey,
     filter: 'toggleHead',
+  },
+  {
+    label: 'label.encrypted.changePassword',
+    value: 'encrypted_password',
+    icon: 'password',
+    color: BrandColor.orange,
+    filter: 'encryptedBlock',
   },
 ]
 

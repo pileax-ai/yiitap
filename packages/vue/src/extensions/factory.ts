@@ -33,6 +33,8 @@ import type {
   AiBlockOptions,
   AudioOptions,
   CalloutOptions,
+  EncryptedBlockOptions,
+  EncryptionMetaOptions,
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,
@@ -89,6 +91,8 @@ import {
   OContentGuard,
   ODetails,
   OEmbed,
+  OEncryptedBlock,
+  OEncryptionMeta,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -174,15 +178,17 @@ export interface ExtensionOptions {
   OCallout: CalloutOptions
   OCodeBlock: OCodeBlockOptions
   OColorHighlighter: any
+  OColumnDropCursor: ColumnDropCursorOptions
   OContentGuard: any
   OEmbed: { HTMLAttributes?: Record<string, any> }
+  OEncryptedBlock: EncryptedBlockOptions
+  OEncryptionMeta: EncryptionMetaOptions
   OHorizontalRule: HorizontalRuleOptions
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
   OLink: LinkOptions
   OModelViewer: { HTMLAttributes?: Record<string, any> }
   OMultiColumn: MultiColumnOptions
-  OColumnDropCursor: ColumnDropCursorOptions
   OShortcut: ShortcutOptions
   OSelectionDecoration: any
   OCollapsibleHeading: CollapsibleHeadingOptions
@@ -268,9 +274,12 @@ export const extensionRegistry: {
     OBlockquote.configure({ triggerCharacters: ['"', '“', '”'], ...opts }),
   OCallout: (opts?) => OCallout.configure(opts),
   OCodeBlock: (opts?) => OCodeBlock.configure(opts),
+  OCollapsibleHeading: (opts?) => CollapsibleHeading.configure(opts),
   OColon: (opts?) =>
     OColonCommand.configure({ suggestion: ColonSuggestion, ...opts }),
   OEmbed: (opts?) => OEmbed.configure(opts),
+  OEncryptedBlock: (opts?) => OEncryptedBlock.configure(opts),
+  OEncryptionMeta: (opts?) => OEncryptionMeta.configure(opts),
   OSlash: (opts?) =>
     OSlashCommand.configure({ suggestion: createSlashSuggestion(), ...opts }),
   OSlashZh: (opts?) =>
@@ -302,7 +311,6 @@ export const extensionRegistry: {
       ],
       ...opts,
     }),
-  OCollapsibleHeading: (opts?) => CollapsibleHeading.configure(opts),
   OVideo: (opts?) => OVideo.configure(opts),
   OUploadManager: (opts?) => OUploadManager.configure(opts),
 
