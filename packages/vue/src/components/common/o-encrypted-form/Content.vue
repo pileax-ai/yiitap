@@ -4,11 +4,10 @@
       <o-textarea
         ref="input"
         v-model="value"
-        placeholder="Content"
+        :placeholder="tr('label.content')"
         :class="inputStatus"
         autofocus
         clearable
-        @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="shield" class="o-tips" />
@@ -28,13 +27,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
+import { arrayToBase64, encryptText} from '@yiitap/core'
+import { getEncryptionMeta } from '@yiitap/extension-encrypted'
 import { OBtn, OIcon, OTextarea } from '../../index'
 
-import useI18n from '../../../hooks/useI18n'
-import {
-  encryptText,
-  decryptText,
-} from '../../../utils/crypto'
+import { useI18n, MasterKeys } from '../../../hooks'
 
 const props = defineProps({
   editor: {
@@ -48,23 +45,29 @@ const input = ref<InstanceType<typeof OTextarea>>()
 const inputStatus = ref('')
 const value = ref('')
 
+const meta = computed(() => {
+  return getEncryptionMeta(props.editor.state)
+})
+
 const masterKey = computed({
   get() {
-    return props.editor?.storage.encryptionMetadata.masterKey
+    if (meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      return MasterKeys.get(id) ?? null
+    } else {
+      return null
+    }
   },
   set(value) {
-    if (props.editor) {
-      props.editor.storage.encryptionMetadata.masterKey = value
+    if (props.editor && meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      MasterKeys.set(id, value)
     }
   },
 })
 
-const docAttrs = computed(() => {
-  return props.editor?.state.doc.attrs
-})
-
 const passwordReady = computed(() => {
-  return docAttrs.value.masterVerifyCipher
+  return !!meta.value?.ciphertext
 })
 
 function validate() {
@@ -81,9 +84,6 @@ async function onConfirm() {
   if (!validate()) return
 
   const obj = await encryptText(value.value, masterKey.value)
-  const text = await decryptText(obj.ciphertext, obj.iv, masterKey.value)
-  console.log('text', text)
-
   emit('confirm', obj)
 }
 

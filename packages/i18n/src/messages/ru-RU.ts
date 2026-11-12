@@ -21,10 +21,10 @@ export default {
       friendly: 'Дружелюбно',
       humorous: 'Юмористический',
       inspirational: 'Вдохновляющий',
-      mysterious: 'Таинственный',
+      mysterious: 'Таинственный'
     },
     translate: 'Перевести на',
-    write: 'Напишите что-нибудь',
+    write: 'Напишите что-нибудь'
   },
   diagram: {
     class: 'Диаграмма классов',
@@ -33,7 +33,7 @@ export default {
     name: 'Текстовая диаграмма',
     sequence: 'Диаграмма последовательности',
     state: 'Государственная диаграмма',
-    tips: 'Генерация диаграммы и диаграммы из текста аналогично уценке.',
+    tips: 'Генерация диаграммы и диаграммы из текста аналогично уценке.'
   },
   editor: {
     add: 'Добавлять',
@@ -58,6 +58,7 @@ export default {
     details: 'Подробности',
     duplicate: 'Дублировать',
     emoji: 'Эмодзи',
+    encryptedBlock: 'Зашифрованный блок',
     fontFamily: 'Семейство шрифтов',
     fontSize: 'Размер шрифта',
     formatting: 'Форматирование',
@@ -123,7 +124,7 @@ export default {
     untoggleHeading: 'Отключить',
     url: 'URL-адрес',
     video: 'Вставить видео',
-    viewSource: 'Посмотреть исходный код',
+    viewSource: 'Посмотреть исходный код'
   },
   emojiGroup: {
     activities: 'Деятельность',
@@ -135,7 +136,7 @@ export default {
     recent: 'Недавний',
     smileys: 'Смайлики и эмоции',
     symbols: 'Символы',
-    travel: 'Путешествия и места',
+    travel: 'Путешествия и места'
   },
   image: {
     height: 'Высота',
@@ -153,7 +154,7 @@ export default {
     src: 'Источник изображения',
     unlockAspectRatio: 'Разблокировать соотношение сторон',
     width: 'Ширина',
-    zoom: 'Увеличить',
+    zoom: 'Увеличить'
   },
   label: {
     advanced: 'Передовой',
@@ -169,6 +170,7 @@ export default {
     color: 'Цвет',
     common: 'Общий',
     confirm: 'Подтверждать',
+    content: 'Содержание',
     copy: 'Копировать',
     cut: 'Резать',
     download: 'Скачать',
@@ -176,9 +178,26 @@ export default {
     embed: 'Встроить',
     embedAdd: 'Встраивание (PDF-файлов, YouTube, Google Docs, Spotify...)',
     empty: 'Пустой',
-    emptyTips:
-      'Нажмите Enter, чтобы продолжить с пустой заметки, или выберите следующее',
+    emptyTips: 'Нажмите Enter, чтобы продолжить с пустой заметки, или выберите следующее',
     emptyToggle: 'Пустой переключатель',
+    encrypted: {
+      block: 'Зашифрованный блок',
+      blockAdd: 'Добавить зашифрованный блок',
+      blockEmpty: 'Пустой зашифрованный блок',
+      changePassword: 'Изменить пароль',
+      content: 'Зашифрованное содержимое',
+      encryption: 'Шифрование',
+      errorDecrypt: 'Не удалось расшифровать',
+      errorToken: 'Неверный токен',
+      masterPassword: 'Главный пароль',
+      newPassword: 'Новый пароль',
+      oldPassword: 'Старый пароль',
+      password: 'Пароль',
+      passwordTips: 'Советы по паролям',
+      rePassword: 'Повторите ввод пароля.',
+      reveal: 'Раскрывать',
+      verify: 'Проверять'
+    },
     example: 'Пример',
     generate: 'Генерировать',
     generatedBy: 'Создано',
@@ -192,7 +211,7 @@ export default {
     linkPlaceholder: {
       image: 'Ссылка на изображение',
       model: 'Модель ссылки',
-      video: 'Ссылка на видео',
+      video: 'Ссылка на видео'
     },
     media: 'СМИ',
     model: 'Модель',
@@ -200,6 +219,7 @@ export default {
     model3dAdd: 'Добавить 3D-модель',
     modelViewer: 'Просмотр модели',
     more: 'Более',
+    next: 'Следующий',
     noResults: 'Нет результатов',
     ok: 'Хорошо',
     preview: 'Предварительный просмотр',
@@ -216,7 +236,7 @@ export default {
     think: 'Думать',
     toc: 'Оглавление',
     turnInto: 'Превратиться в',
-    typeForCommands: "Введите '/' для команд",
+    typeForCommands: 'Введите \'/\' для команд',
     untitled: 'Без названия',
     update: 'Обновлять',
     upload: 'Загрузить',
@@ -224,12 +244,12 @@ export default {
       failed: 'Загрузка не удалась.',
       notConfigured: 'Функция загрузки не настроена.',
       tips: 'Перетащите файлы сюда или нажмите для загрузки.',
-      uploading: 'Загрузка',
+      uploading: 'Загрузка'
     },
     video: 'Видео',
     videoAdd: 'Добавить видео',
     view: 'Вид',
-    write: 'Писать',
+    write: 'Писать'
   },
   language: {
     chineseSimplified: 'Упрощенный китайский',
@@ -245,14 +265,14 @@ export default {
     portuguese: 'португальский',
     russian: 'Русский',
     spanish: 'испанский',
-    vietnamese: 'вьетнамский',
+    vietnamese: 'вьетнамский'
   },
   link: {
     back: 'Вернуться в главное меню',
     edit: 'Изменить ссылку',
     off: 'Отключить ссылку',
     open: 'Открыть ссылку',
-    openInNewTab: 'Открыть в новой вкладке',
+    openInNewTab: 'Открыть в новой вкладке'
   },
   table: {
     addColumn: 'Добавить столбец',
@@ -269,6 +289,6 @@ export default {
     removeRow: 'Удалить строку',
     selectColumn: 'Выберите столбец',
     selectRow: 'Выберите строку',
-    split: 'Разделить ячейки',
-  },
+    split: 'Разделить ячейки'
+  }
 }

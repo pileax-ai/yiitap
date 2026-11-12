@@ -1,8 +1,9 @@
 <template>
   <o-node-view
     v-bind="props"
-    class="o-encrypted-block-view"
+    class="o-encrypted-block-view has-toolbar"
     :class="{
+      'show-toolbar': toolbarShown,
       readonly: !editor?.isEditable,
       init: !ciphertext,
     }"
@@ -12,24 +13,28 @@
   >
     <o-block-popover
       v-model="showPopover"
-      :placement="!ciphertext ? 'bottom' : 'top'"
+      placement="bottom"
     >
       <template #popover-content>
-        <o-encrypted-form
-          :editor="editor"
-          type="model"
-          :on-upload="onUpload"
-          @confirm="onSave"
-        />
+        <o-encrypted-password :editor="editor"
+                              @confirm="onShowPopover(false)"
+                              v-if="popoverView === 'password'" />
+        <o-encrypted-form :editor="editor"
+                          @confirm="onSave"
+                          v-else />
       </template>
 
       <o-block-placeholder
         icon="lock"
-        :placeholder="tr('label.model3dAdd')"
+        :placeholder="tr('label.encrypted.blockEmpty')"
         v-if="!ciphertext"
       />
       <div class="encrypted-block-container" v-else>
-        <toolbar v-bind="props" :revealed="revealed" @action="onAction" />
+        <toolbar v-bind="props"
+                 :decrypted="decrypted"
+                 :revealed="revealed"
+                 :text="decryptedText"
+                 @action="onAction" />
 
         <o-block-placeholder
           :icon="revealIcon"
@@ -38,9 +43,9 @@
           <template v-if="revealed">
             <o-textarea v-model="text" :readonly="!isEditable" @blur="onSaving" />
           </template>
-          <div v-else>
-            Encrypted content
-          </div>
+          <template v-else>
+            {{ tr('label.encrypted.content') }}
+          </template>
         </o-block-placeholder>
       </div>
     </o-block-popover>
@@ -52,20 +57,25 @@
     <o-dialog
       v-model:show="dialogOptions.show"
       v-bind="dialogOptions"
-      :title="tr('label.model3d')"
-      dialog-class="encrypted-block-dialog"
+      :title="tr('editor.encryptedBlock')"
+      dialog-class="encrypted-block-dialog small"
     >
       <div class="encrypted-block-container">
-        <div v-html="text" />
+        <header>
+          <o-icon-label icon="shield" :label="tr('label.content')" class="o-tips" />
+        </header>
+        <o-textarea v-model="text" @blur="onSaving" />
       </div>
     </o-dialog>
   </o-node-view>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
-import { useI18n, useTiptap } from '../../../hooks'
+import { arrayToBase64, encryptText } from '@yiitap/core'
+import { getEncryptionMeta } from '@yiitap/extension-encrypted'
+import { useI18n, useTiptap, MasterKeys } from '../../../hooks'
 import {
   OBlockMenu,
   OBlockPlaceholder,
@@ -73,24 +83,27 @@ import {
   OContextMenu,
   ODialog,
   OEncryptedForm,
+  OEncryptedPassword,
+  OIconLabel,
   ONodeView,
   OTextarea,
 } from '../../../components/index'
 import Toolbar from './toolbar.vue'
 import type { DialogOption } from '../../../types/types'
-import { encryptText } from '../../../utils/crypto'
 
 const props = defineProps(nodeViewProps)
 
-const onUpload = (props.editor.storage as any).uploadManager?.onUpload
 const { tr } = useI18n()
 const { isEditable } = useTiptap()
 const showContextMenu = ref(false)
 const mouseEvent = ref({})
+const popoverView = ref('form')
 const showPopover = ref(false)
-const revealed = ref(false)
-const revealedText = ref('')
+const toolbarShown = ref(false)
+const decrypted = ref(false)
+const decryptedText = ref('')
 const text = ref('')
+const revealed = ref(false)
 const savingIcon = ref('')
 
 const dialogOptions = ref<DialogOption>({
@@ -107,8 +120,25 @@ const ciphertext = computed({
   },
 })
 
-const masterKey = computed(() => {
-  return props.editor?.storage.encryptionMetadata.masterKey
+const meta = computed(() => {
+  return getEncryptionMeta(props.editor.state)
+})
+
+const masterKey = computed({
+  get() {
+    if (meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      return MasterKeys.get(id) ?? null
+    } else {
+      return null
+    }
+  },
+  set(value) {
+    if (props.editor && meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      MasterKeys.set(id, value)
+    }
+  },
 })
 
 const revealIcon = computed(() => {
@@ -119,20 +149,28 @@ const revealIcon = computed(() => {
 function onAction(action: Indexable) {
   showContextMenu.value = false
   switch (action.value) {
+    case 'encrypted_password':
+      popoverView.value = 'password'
+      showPopover.value = true
+      break
+    case 'preview':
+      dialogOptions.value.show = true
+      break
     case 'replace':
       onShowPopover(true)
       break
-    case 'revealed':
-      revealed.value = action.revealed
-      revealedText.value = action.text
-      text.value = action.text
+    case 'reveal':
+      revealed.value = !revealed.value
       break
-    case 'preview':
-      revealed.value = action.revealed
-      revealedText.value = action.text
-      text.value = action.text
-      dialogOptions.value.show = true
+    case 'show':
+      toolbarShown.value = action.show
       break
+  }
+
+  if (action.decrypted) {
+    decrypted.value = true
+    decryptedText.value = action.text
+    text.value = action.text
   }
 }
 
@@ -148,7 +186,6 @@ function onContextMenu(e: MouseEvent) {
 }
 
 function onSave(name: string, value: Indexable) {
-  console.log(name, value)
   savingIcon.value = 'done'
   props.updateAttributes({
     ciphertext: value.ciphertext,
@@ -162,20 +199,29 @@ function onSave(name: string, value: Indexable) {
 }
 
 async function onSaving() {
-  if (text.value !== revealedText.value) {
+  if (text.value !== decryptedText.value) {
     if (text.value) {
       const obj = await encryptText(text.value, masterKey.value)
       onSave('saving', obj)
     } else {
       onSave('saving', { ciphertext: '', iv: [] })
     }
-    revealedText.value = text.value
+    decryptedText.value = text.value
   }
 }
 
 function onShowPopover(value: boolean) {
   showPopover.value = value
 }
+
+watch(meta, (newValue) => {
+  // Reset
+  decrypted.value = false
+  decryptedText.value = ''
+  text.value = ''
+  revealed.value = false
+  savingIcon.value = ''
+})
 
 onMounted(() => {
   onShowPopover(ciphertext.value === '')
@@ -229,20 +275,26 @@ onMounted(() => {
 }
 
 .encrypted-block-dialog {
-  .encrypted-block-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    encrypted-block {
+  .dialog-box {
+    height: unset;
+    width: 50vw;
+    min-width: unset !important;
+    min-height: unset !important;
+    max-width: 700px !important;
+    max-height: 600px !important;;
+
+    .dialog-body {
       display: block;
-      width: 100%;
-      height: 100%;
-      border-radius: 3px;
-      object-fit: cover;
-      vertical-align: middle;
+    }
+  }
+
+  .encrypted-block-container {
+    padding: 1rem;
+
+    .o-textarea {
+      display: block;
+      margin-top: 4px;
     }
   }
 }

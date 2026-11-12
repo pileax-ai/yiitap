@@ -367,6 +367,13 @@ export const BlockMenus: BlockOption[] = [
     color: BrandColor.blueGrey,
     filter: 'toggleHead',
   },
+  {
+    label: 'label.encrypted.changePassword',
+    value: 'encrypted_password',
+    icon: 'password',
+    color: BrandColor.orange,
+    filter: 'encryptedBlock',
+  },
 ]
 
 export const AskAiBlocks: BlockOption[] = [

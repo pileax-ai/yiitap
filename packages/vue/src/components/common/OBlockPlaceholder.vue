@@ -68,6 +68,7 @@ const props = defineProps({
     flex: 1;
     display: flex;
     align-items: stretch;
+    min-width: 0;
   }
 
   .icon {
@@ -79,13 +80,15 @@ const props = defineProps({
 
   .placeholder {
     flex: 1;
-    display: inline-flex;
+    display: block;
     align-items: center;
+    width: 100%;
+    max-width: 500px;
+    min-width: 0;
     height: 30px;
     min-height: 30px;
     line-height: 30px;
     font-size: 0.9rem;
-    max-width: 500px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

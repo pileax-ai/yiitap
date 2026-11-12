@@ -4,43 +4,47 @@
 
 export const EncryptedBlock = {
   "type": "doc",
-  "attrs": {
-    "masterSalt": [
-      158,
-      232,
-      31,
-      21,
-      72,
-      69,
-      135,
-      151,
-      178,
-      161,
-      164,
-      97,
-      197,
-      147,
-      123,
-      89
-    ],
-    "masterTips": "simple",
-    "masterVerifyCipher": "SDfVbwF0X2TfvZQv0tidTvyN/wIP0XG4PyZfxiLJv9PGSi3TvLj3D/lxO4+ucvIv",
-    "masterVerifyIv": [
-      46,
-      213,
-      65,
-      63,
-      60,
-      89,
-      81,
-      138,
-      95,
-      147,
-      88,
-      132
-    ]
-  },
   "content": [
+    {
+      "type": "encryptionMeta",
+      "attrs": {
+        "version": "v1",
+        "tips": "123456",
+        "salt": [
+          17,
+          126,
+          209,
+          76,
+          99,
+          81,
+          34,
+          247,
+          213,
+          120,
+          57,
+          200,
+          102,
+          114,
+          224,
+          168
+        ],
+        "ciphertext": "zgi8m1iq/IqkBJJoLlwzaT4RSDpUGkndf1YnnRVek1/UmuEa2VjrjKee98kUYp5E",
+        "iv": [
+          199,
+          146,
+          53,
+          188,
+          83,
+          30,
+          223,
+          36,
+          240,
+          227,
+          96,
+          142
+        ]
+      }
+    },
     {
       "type": "heading",
       "attrs": {
@@ -107,27 +111,27 @@ export const EncryptedBlock = {
     {
       "type": "encryptedBlock",
       "attrs": {
-        "ciphertext": "OsjmccFCKKQmk8QAitBA84/TFqfJvz00gb7gYxzqmmr71Cl9Wz+e3nr0XRa4GGp+qkXwM10tVFOW6xqARX8SrSjrq+lA9vtwQiPHbtJJJyKBaeasE9JLqsLkqthRTBUdu/Z38sxgsLBSe8WV42uvc4b7umvbkXvI1YkgBIrnzo89ynMijY8hWqQBgneI8V73YRzrJjR8+BYFgG3u0prviHw93lVPz4qEqo5c82mT/m1hGu0OV6qk3nYoXPO7sih7XLkqERebLa8RW5U7vHKnJUEE50mQwQ==",
+        "ciphertext": "RxIEBYqqhpZ0Wimmu6X7RLY6LapxqaiBgMQ7VvvzIqopopwC5FEIvdprdfB7EHDCVhsPS8mQTilYY1WdjtYUb6ldh7LyZe81rOoYmAHZRGgOnU8jQ8N5V1nLwlU7VsOjlqQmUZyHoMqPr5zCm8tZSuhRUxFLPor7iKWOyOHlmsiHR7Iciwjh+bkjToruX1NGGFQn76qlP7ZezwLTILlLuiIH8MrrrQVvXyYix5AnvNY2uJ2v+y4jspe4poDLOsLEQnRvUmzSCtm3NMqqWZYcAJmfunimINXm",
         "iv": [
-          187,
-          46,
-          51,
-          174,
-          47,
-          69,
-          150,
-          93,
-          10,
-          168,
-          194,
-          181
+          105,
+          105,
+          159,
+          160,
+          152,
+          67,
+          207,
+          149,
+          41,
+          132,
+          226,
+          178
         ]
       }
     },
     {
       "type": "paragraph",
       "attrs": {
-        "id": "671b8be6-a6cb-4a54-be1b-e17deefc8534",
+        "id": "97598221-dba9-470d-b89d-dd02b90c5345",
         "textAlign": null
       }
     }
@@ -135,5 +139,5 @@ export const EncryptedBlock = {
 }
 
 export const EncryptedBlockZh = `
-<h1>Model Viewer</h1><h2>3D 模型</h2><model-viewer src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb" caption="文字说明"></model-viewer><p></p>
+<div data-type="encryption-meta" data-encryption-meta="eyJ2ZXJzaW9uIjoidjEiLCJ0aXBzIjoiNjY2NjY2Iiwic2FsdCI6WzEyMSwxNjgsOTYsMTEyLDEyNiw2MCwxMDYsMTEwLDI1LDEzMyw3LDk3LDQsMzgsOCw5OF0sImNpcGhlcnRleHQiOiJBRkJNd0crRHJ6L09tNHlveC9qKzlHTFBYcmtpdWl0K2k0SWpTcjlpcW91SXdzREttU3UwOUhOQzdyOEZVVm96IiwiaXYiOlsxNjMsMjksMTc4LDY2LDYwLDEwMiwxMjksMTkxLDE5LDIwMiwzMCw0OF19" style="display: none;"></div><h1>加密</h1><h2>加密块</h2><h3>空内容</h3><encrypted-block data-encryption-meta="eyJjaXBoZXJ0ZXh0IjoiIiwiaXYiOltdfQ"></encrypted-block><h3>加密内容</h3><encrypted-block data-encryption-meta="eyJjaXBoZXJ0ZXh0IjoiV0MybXIvQWNVSDVWbm9ZREh2TlBqdlNEYjNtTk5laWRlMkZteVQySXE5R0dMQUl6YVNsK1JHSnRJU3VOa2tJYWJrY3k5WEhXZkVUTWcxTkVCYnRVYXNLY1BHY1JSMHZ3RVZaYTA4MzZmNEMxYWZwbVBVU0cxVzQ9IiwiaXYiOlsxNDIsNzAsMjI1LDI0LDE0OCwxODgsNjgsMzksNjksNDcsNjIsMTRdfQ"></encrypted-block><p></p>
 `

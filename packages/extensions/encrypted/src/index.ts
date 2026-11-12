@@ -1,2 +1,3 @@
 export * from './encrypted-block'
-export * from './encryption-metadata'
+export * from './encryption-meta'
+export * from './util'

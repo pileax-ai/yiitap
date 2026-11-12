@@ -226,7 +226,7 @@ const editorOptions = computed(() => {
     }),
     OAiBlock.configure(aiOptions.value),
     OEncryptionKit.configure({
-      OEncryptionMetadata: true,
+      OEncryptionMeta: true,
       OEncryptedBlock: true,
       OEncryptedText: false,
     }),

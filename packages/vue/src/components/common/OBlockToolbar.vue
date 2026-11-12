@@ -8,6 +8,7 @@
         size="medium"
         :trigger="trigger"
         :show-arrow="false"
+        @update:show="emit('action', { value: 'show', show: $event })"
       >
         <template #trigger>
           <o-command-btn

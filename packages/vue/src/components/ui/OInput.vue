@@ -27,6 +27,9 @@
       </div>
     </div>
     <div class="o-input-bottom">
+      <div class="o-text-error" v-if="errorMessage">
+        {{ errorMessage }}
+      </div>
       <slot name="bottom"></slot>
     </div>
   </div>
@@ -56,6 +59,10 @@ const props = defineProps({
   clearable: {
     type: Boolean,
     default: false,
+  },
+  errorMessage: {
+    type: String,
+    default: '',
   },
 })
 const emit = defineEmits(['blur', 'enter', 'focus', 'clear', 'update:modelValue'])

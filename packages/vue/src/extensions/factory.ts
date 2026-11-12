@@ -34,6 +34,7 @@ import type {
   AudioOptions,
   CalloutOptions,
   EncryptedBlockOptions,
+  EncryptionMetaOptions,
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,
@@ -91,7 +92,7 @@ import {
   ODetails,
   OEmbed,
   OEncryptedBlock,
-  OEncryptionMetadata,
+  OEncryptionMeta,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -181,7 +182,7 @@ export interface ExtensionOptions {
   OContentGuard: any
   OEmbed: { HTMLAttributes?: Record<string, any> }
   OEncryptedBlock: EncryptedBlockOptions
-  OEncryptionMetadata: any
+  OEncryptionMeta: EncryptionMetaOptions
   OHorizontalRule: HorizontalRuleOptions
   OImage: ImageOptions
   OInlinePlaceholder: { char?: string; HTMLAttributes?: Record<string, any> }
@@ -278,7 +279,7 @@ export const extensionRegistry: {
     OColonCommand.configure({ suggestion: ColonSuggestion, ...opts }),
   OEmbed: (opts?) => OEmbed.configure(opts),
   OEncryptedBlock: (opts?) => OEncryptedBlock.configure(opts),
-  OEncryptionMetadata: (opts?) => OEncryptionMetadata.configure(opts),
+  OEncryptionMeta: (opts?) => OEncryptionMeta.configure(opts),
   OSlash: (opts?) =>
     OSlashCommand.configure({ suggestion: createSlashSuggestion(), ...opts }),
   OSlashZh: (opts?) =>

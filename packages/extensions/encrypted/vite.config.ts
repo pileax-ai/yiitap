@@ -35,6 +35,9 @@ export default mergeConfig(
           exports: 'named',
           globals: {
             '@tiptap/core': 'TiptapCore',
+            '@tiptap/pm/model': 'TiptapPmModel',
+            '@tiptap/pm/state': 'TiptapPmState',
+            '@yiitap/core': 'YiitapCore',
           },
         },
       },

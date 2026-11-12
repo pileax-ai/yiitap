@@ -1,8 +1,9 @@
 <template>
   <o-node-view
     v-bind="props"
-    class="o-audio-view"
+    class="o-audio-view has-toolbar"
     :class="{
+      'show-toolbar': toolbarShown,
       readonly: !editor?.isEditable,
       init: src === INIT_SRC,
     }"
@@ -73,6 +74,7 @@ const mouseEvent = ref({})
 const captionInput = ref(null)
 const showCaptionInput = ref(false)
 const showPopover = ref(false)
+const toolbarShown = ref(false)
 const INIT_SRC = '//init.mp3'
 
 const caption = computed({
@@ -93,11 +95,14 @@ const src = computed({
   },
 })
 
-function onAction(action: BlockOption) {
+function onAction(action: Indexable) {
   showContextMenu.value = false
   switch (action.value) {
     case 'replace':
       onShowPopover(true)
+      break
+    case 'show':
+      toolbarShown.value = action.show
       break
   }
 }

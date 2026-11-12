@@ -14,7 +14,7 @@
       </div>
       <div>
         <div class="type">
-          Encrypted
+          {{ tr('label.encrypted.encryption') }}
         </div>
       </div>
     </header>
@@ -35,19 +35,17 @@
 <script setup lang="ts">
 import {ref, computed, type PropType, onMounted, watch} from 'vue'
 import { Editor } from '@tiptap/core'
+import { arrayToBase64 } from '@yiitap/core'
+import { getEncryptionMeta } from '@yiitap/extension-encrypted'
 import Content from './Content.vue'
 import Password from './Password.vue'
 import Verifier from './Verifier.vue'
 
-import useI18n from '../../../hooks/useI18n'
+import { useI18n, MasterKeys } from '../../../hooks'
 
 const props = defineProps({
   editor: {
     type: Editor,
-  },
-  onUpload: {
-    type: Function as PropType<(file: File, type: string) => Promise<string>>,
-    default: undefined,
   },
 })
 const emit = defineEmits(['confirm'])
@@ -55,19 +53,28 @@ const emit = defineEmits(['confirm'])
 const currentTab = ref('content')
 const { tr } = useI18n()
 
+const meta = computed(() => {
+  return getEncryptionMeta(props.editor.state)
+})
+
 const passwordReady = computed(() => {
-  return !!props.editor?.state.doc.attrs.masterVerifyCipher
+  return !!meta.value?.ciphertext
 })
 
 const verified = computed(() => {
-  return !!props.editor?.storage.encryptionMetadata.masterKey
+  if (meta.value?.salt) {
+    const id = arrayToBase64(meta.value.salt)
+    return !!(MasterKeys.get(id) ?? null)
+  } else {
+    return false
+  }
 })
 
 const tabs = computed(() => {
   return [
-    { label: 'Master Password', value: 'password', component: Password, show: !passwordReady.value },
-    { label: 'Verify', value: 'verifier', component: Verifier, show: passwordReady.value && !verified.value },
-    { label: 'Content', value: 'content', component: Content, show: true },
+    { label: tr('label.encrypted.masterPassword'), value: 'password', component: Password, show: !passwordReady.value },
+    { label: tr('label.encrypted.verify'), value: 'verifier', component: Verifier, show: passwordReady.value && !verified.value },
+    { label: tr('label.content'), value: 'content', component: Content, show: true },
   ]
 })
 

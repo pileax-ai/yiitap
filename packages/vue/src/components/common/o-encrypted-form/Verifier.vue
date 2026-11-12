@@ -1,16 +1,15 @@
 <template>
   <section class="o-encrypted-verifier">
-    <form class="o-fields o-form">
+    <form class="o-fields o-form" @submit.prevent="onConfirm">
       <o-input
         ref="input"
         v-model="password"
-        placeholder="Password"
+        :placeholder="tr('label.encrypted.password')"
         type="password"
         autocomplete="new-password"
         :class="{ 'error': error.error }"
         autofocus
         clearable
-        @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="lock" class="o-tips" />
@@ -19,26 +18,18 @@
           <span class="o-text-error" v-if="error.message">
             {{ error.message }}
           </span>
-          <div v-else-if="docAttrs.masterTips">
+          <div v-else-if="meta?.tips">
             <o-icon-label icon="info"
-                          :label="docAttrs.masterTips"
+                          :label="meta.tips"
                           class="o-tips"
                           icon-class="small" />
           </div>
         </template>
       </o-input>
-
-      <input
-        type="text"
-        name="username"
-        autocomplete="username"
-        value="the-actual-username"
-        class="o-field hidden"
-      />
     </form>
     <footer class="actions">
       <o-btn type="info" @click="onConfirm">
-        Next
+        {{ tr('label.next') }}
       </o-btn>
     </footer>
   </section>
@@ -47,12 +38,10 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
+import { arrayToBase64, verifyMasterPassword, type MasterPasswordMeta } from '@yiitap/core'
+import { getEncryptionMeta } from '@yiitap/extension-encrypted'
 import { OBtn, OIcon, OIconLabel, OInput } from '../../index'
-
-import useI18n from '../../../hooks/useI18n'
-import {
-  verifyMasterPassword,
-} from '../../../utils/crypto'
+import { useI18n, MasterKeys } from '../../../hooks'
 
 const props = defineProps({
   editor: {
@@ -66,17 +55,23 @@ const input = ref<InstanceType<typeof OInput>>()
 const password = ref('')
 const error = ref<Indexable>({})
 
-const docAttrs = computed(() => {
-  return props.editor?.state.doc.attrs
+const meta = computed(() => {
+  return getEncryptionMeta(props.editor.state)
 })
 
 const masterKey = computed({
   get() {
-    return props.editor?.storage.encryptionMetadata.masterKey
+    if (meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      return MasterKeys.get(id) ?? null
+    } else {
+      return null
+    }
   },
   set(value) {
-    if (props.editor) {
-      props.editor.storage.encryptionMetadata.masterKey = value
+    if (props.editor && meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      MasterKeys.set(id, value)
     }
   },
 })
@@ -85,16 +80,18 @@ async function onConfirm() {
   if (!validate()) return
 
   try {
-    const attrs = docAttrs.value
-    const key = await verifyMasterPassword(password.value, attrs.masterSalt, attrs.masterVerifyCipher, attrs.masterVerifyIv)
-    if (key) {
-      masterKey.value = key
+    if (!meta.value) {
+      error.value = { error: true, message: '无加密元数据' }
+      return
+    }
+
+    const attrs = meta.value as MasterPasswordMeta
+    const result = await verifyMasterPassword(password.value, attrs)
+    if (result.ok) {
+      masterKey.value = result.key
       emit('next', 'content')
     } else {
-      error.value = {
-        error: true,
-        message: 'Token不正确'
-      }
+      error.value = { error: true, message: 'Incorrect password or tampered ciphertext/IV' }
     }
   } catch (err) {
     error.value = {

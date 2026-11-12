@@ -5,22 +5,25 @@
     size="medium"
     trigger="manual"
     class="o-encrypted-block-toolbar"
+    tippy-class="o-encrypted-block-toolbar-popover"
     :offset="[0, 46]"
     :show-arrow="false"
+    @update:show="emit('action', { value: 'show', show: $event })"
   >
     <template #trigger>
       <o-block-toolbar v-bind="props" @action="onAction">
         <o-menubar-btn
           :icon="revealed ? 'visibility_off' : 'visibility'"
-          tooltip="Reveal"
-          @click="onReveal('revealed')"
+          :tooltip="tr('label.encrypted.reveal')"
+          @click="onDecrypt('reveal')"
         />
-        <template v-if="isEditable">
-          <o-menubar-btn
-            icon="crop_free"
-            :tooltip="tr('image.zoom')"
-            @click="onReveal('preview')"
-          />
+        <o-menubar-btn
+          icon="crop_free"
+          :tooltip="tr('label.preview')"
+          @click="onDecrypt('preview')"
+        />
+        <template v-if="decrypted">
+          <o-copy-btn :text="text" />
         </template>
       </o-block-toolbar>
     </template>
@@ -28,8 +31,8 @@
     <o-input
       ref="input"
       v-model="password"
-      type="text"
-      placeholder="Input password"
+      type="password"
+      :placeholder="tr('label.encrypted.password')"
       :class="{ 'error': error.error }"
       autofocus
       clearable
@@ -37,7 +40,7 @@
       @clear="error = {}"
     >
       <template #prefix>
-        <o-icon name="function" class="o-tips" />
+        <o-icon name="password" class="o-tips" />
       </template>
       <template #suffix>
         <o-icon
@@ -51,9 +54,9 @@
         <span class="o-text-error" v-if="error.message">
             {{ error.message }}
           </span>
-        <div v-else-if="docAttrs.masterTips">
+        <div v-else-if="meta?.tips">
           <o-icon-label icon="info"
-                        :label="docAttrs.masterTips"
+                        :label="meta.tips"
                         class="o-tips"
                         icon-class="small" />
         </div>
@@ -65,39 +68,41 @@
 <script setup lang="ts">
 import {computed, ref} from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
-import { useI18n, useTiptap } from '../../../hooks'
+import { arrayToBase64, verifyMasterPassword, decryptText, type MasterPasswordMeta } from '@yiitap/core'
+import { getEncryptionMeta } from '@yiitap/extension-encrypted'
+import { useI18n, useTiptap, MasterKeys } from '../../../hooks'
 import {
   OPopover,
   OBlockToolbar,
+  OCopyBtn,
   OMenubarBtn,
   OIcon,
   OIconLabel,
   OInput,
 } from '../../../components/index'
-import {
-  verifyMasterPassword,
-  encryptText,
-  decryptText,
-} from '../../../utils/crypto'
 
 const props = defineProps({
   ...nodeViewProps,
+  decrypted: {
+    type: Boolean,
+    default: false,
+  },
   revealed: {
     type: Boolean,
     default: false,
   },
-  type: {
+  text: {
     type: String,
-    default: 'link',
+    default: '',
   },
   trigger: {
     type: String,
     default: 'click',
   },
 })
-const emit = defineEmits(['action'])
+const emit = defineEmits(['action', 'update:show'])
 
-const { locale, tr } = useI18n()
+const { tr } = useI18n()
 const { isEditable, run } = useTiptap()
 const popover = ref<InstanceType<typeof OPopover>>()
 const input = ref<InstanceType<typeof OInput>>()
@@ -108,35 +113,31 @@ const error = ref<Indexable>({
   message: ''
 })
 
-const docAttrs = computed(() => {
-  return props.editor?.state.doc.attrs
+const meta = computed(() => {
+  return getEncryptionMeta(props.editor.state)
 })
 
-const iv = computed({
-  get() {
-    return props.node.attrs.iv
-  },
-  set(value) {
-    props.updateAttributes({ iv: value })
-  },
+const iv = computed(() => {
+  return props.node.attrs.iv
 })
 
-const ciphertext = computed({
-  get() {
-    return props.node.attrs.ciphertext
-  },
-  set(value) {
-    props.updateAttributes({ ciphertext: value })
-  },
+const ciphertext = computed(() => {
+  return props.node.attrs.ciphertext
 })
 
 const masterKey = computed({
   get() {
-    return props.editor?.storage.encryptionMetadata.masterKey
+    if (meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      return MasterKeys.get(id) ?? null
+    } else {
+      return null
+    }
   },
   set(value) {
-    if (props.editor) {
-      props.editor.storage.encryptionMetadata.masterKey = value
+    if (props.editor && meta.value?.salt) {
+      const id = arrayToBase64(meta.value.salt)
+      MasterKeys.set(id, value)
     }
   },
 })
@@ -151,17 +152,19 @@ function onShowPopover(source = '') {
 
 async function onVerify() {
   try {
-    const attrs = docAttrs.value
-    const key = await verifyMasterPassword(password.value, attrs.masterSalt, attrs.masterVerifyCipher, attrs.masterVerifyIv)
-    if (key) {
-      console.log('key', key, verifySource.value)
-      masterKey.value = key
-      onReveal(verifySource.value)
-      error.value = {}
+    if (!meta.value) {
+      return
+    }
+    const attrs = meta.value as MasterPasswordMeta
+    const result = await verifyMasterPassword(password.value, attrs)
+    if (result.ok) {
+      masterKey.value = result.key
+      onDecrypt(verifySource.value)
+      onReset()
     } else {
       error.value = {
         error: true,
-        message: 'Token不正确'
+        message: 'Incorrect password or tampered ciphertext/IV'
       }
     }
   } catch (err) {
@@ -172,23 +175,29 @@ async function onVerify() {
   }
 }
 
-async function onReveal(source: string) {
+async function onDecrypt(source: string) {
   if (!masterKey.value) {
     onShowPopover(source)
     return
   }
 
-  try {
-    const text = await decryptText(ciphertext.value, iv.value, masterKey.value)
-    console.log('onReveal', source, masterKey.value, text)
+  if (props.decrypted) {
     emit('action', {
       value: source,
-      revealed: !props.revealed,
+    })
+    return
+  }
+
+  try {
+    const text = await decryptText(ciphertext.value, iv.value, masterKey.value)
+    emit('action', {
+      value: source,
+      decrypted: true,
       text
     })
     popover.value?.setShow(false)
   } catch (err) {
-    error.value = { error: false, message: '解密失败' }
+    error.value = { error: false, message: tr('label.encryted.errorDecrypt') }
     onShowPopover(source)
   }
 }
@@ -197,10 +206,19 @@ function onAction(item: Indexable) {
   emit('action', item)
   popover.value?.setShow(false)
 }
+
+function onReset() {
+  error.value = {}
+  password.value = ''
+}
 </script>
 
 <style lang="scss">
 .o-encrypted-block-toolbar {
-
+  &-popover {
+    .o-input {
+      min-width: 280px;
+    }
+  }
 }
 </style>

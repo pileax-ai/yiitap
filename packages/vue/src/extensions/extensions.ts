@@ -118,7 +118,12 @@ import OCallout, { type CalloutOptions } from './callout'
 import OCodeBlock, { type OCodeBlockOptions } from './code-block'
 import ODetails, { type ODetailsOptions } from './details'
 import OEmbed from './embed'
-import { OEncryptedBlock, OEncryptionMetadata, type EncryptedBlockOptions } from './encrypted/encrypted-block'
+import {
+  OEncryptedBlock,
+  OEncryptionMeta,
+  type EncryptedBlockOptions,
+  type EncryptionMetaOptions
+} from './encrypted/encrypted-block'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'
 import OLink from './link'
@@ -162,7 +167,7 @@ export const DefaultExtensionNames = [
 ]
 
 export const EncryptionExtensionNames = [
-  'OEncryptionMetadata',
+  'OEncryptionMeta',
   'OEncryptedBlock',
   'OEncryptedText',
 ]
@@ -216,7 +221,7 @@ export {
   ODetails,
   OEmbed,
   OEncryptedBlock,
-  OEncryptionMetadata,
+  OEncryptionMeta,
   OHorizontalRule,
   OImage,
   OInlinePlaceholder,
@@ -285,6 +290,7 @@ export type {
   AudioOptions,
   CalloutOptions,
   EncryptedBlockOptions,
+  EncryptionMetaOptions,
   OBlockquoteOptions,
   OCodeBlockOptions,
   ODetailsOptions,

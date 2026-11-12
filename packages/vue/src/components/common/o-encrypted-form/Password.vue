@@ -1,16 +1,15 @@
 <template>
   <section class="o-media-link">
-    <form class="o-fields o-form">
+    <form class="o-fields o-form" @submit.prevent="onConfirm">
       <o-input
         ref="input"
         v-model="password"
-        placeholder="Password"
+        :placeholder="tr('label.encrypted.password')"
         type="password"
         autocomplete="new-password"
         :class="{ 'error': error.password?.error }"
         autofocus
         clearable
-        @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="lock" class="o-tips" />
@@ -18,12 +17,11 @@
       </o-input>
       <o-input
         v-model="rePassword"
-        placeholder="Password again"
+        :placeholder="tr('label.encrypted.rePassword')"
         type="password"
         autocomplete="re-password"
         :class="{ 'error': error.rePassword?.error }"
         clearable
-        @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="lock" class="o-tips" />
@@ -31,25 +29,17 @@
       </o-input>
       <o-input
         v-model="tips"
-        placeholder="Password tips"
+        :placeholder="tr('label.encrypted.passwordTips')"
         clearable
-        @enter="onConfirm"
       >
         <template #prefix>
           <o-icon name="info" class="o-tips" />
         </template>
       </o-input>
-      <input
-        type="text"
-        name="username"
-        autocomplete="username"
-        value="the-actual-username"
-        class="o-field hidden"
-      />
     </form>
     <footer class="actions">
       <o-btn type="info" @click.stop="onConfirm">
-        Next
+        {{ tr('label.next') }}
       </o-btn>
     </footer>
   </section>
@@ -58,12 +48,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
+import { arrayToBase64, setupMasterPassword, CurrentEncryptionVersion } from '@yiitap/core'
 import { OBtn, OIcon, OInput } from '../../index'
-
-import useI18n from '../../../hooks/useI18n'
-import {
-  setupMasterPassword,
-} from '../../../utils/crypto'
+import { useI18n, MasterKeys } from '../../../hooks'
 
 const props = defineProps({
   editor: {
@@ -89,52 +76,46 @@ const error = ref({
 async function onConfirm() {
   if (!validate() || !props.editor) return
 
-  const { salt, masterVerifyCipher, masterVerifyIv, key } = await setupMasterPassword(password.value)
+  const { version, salt, ciphertext, iv, key } = await setupMasterPassword(CurrentEncryptionVersion, password.value)
 
-  props.editor.chain().focus().setMasterPasswordMeta({
-    masterSalt: salt,
-    masterTips: tips.value,
-    masterVerifyCipher,
-    masterVerifyIv,
+  props.editor.chain().focus().setEncryptionMeta({
+    version,
+    tips: tips.value,
+    salt,
+    ciphertext,
+    iv,
   }).run()
-  props.editor.storage.encryptionMetadata.masterKey = key
+  const id = arrayToBase64(salt)
+  MasterKeys.set(id, key)
 
   emit('next', 'content')
 }
 
-function validate() {
-  error.value = {
+function validate(): boolean {
+  const newError = {
     password: { error: false, message: '' },
     rePassword: { error: false, message: '' },
   }
+
   if (!password.value) {
-    error.value.password = {
-      error: true,
-      message: 'Required',
-    }
+    newError.password = { error: true, message: 'Required' }
+    error.value = newError
     return false
-  } else {
-    error.value.password = { error: false, message: '' }
   }
 
   if (!rePassword.value) {
-    error.value.rePassword = {
-      error: true,
-      message: 'Required',
-    }
+    newError.rePassword = { error: true, message: 'Required' }
+    error.value = newError
     return false
-  } else {
-    error.value.rePassword = { error: false, message: '' }
   }
 
   if (password.value !== rePassword.value) {
-    error.value.rePassword = {
-      error: true,
-      message: 'Password not match',
-    }
+    newError.rePassword = { error: true, message: 'Password not match' }
+    error.value = newError
     return false
   }
 
+  error.value = newError
   return true
 }
 

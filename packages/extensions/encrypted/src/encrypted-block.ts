@@ -3,6 +3,9 @@ import {
   nodeInputRule,
   mergeAttributes,
 } from '@tiptap/core'
+import { encodeBase64 } from '@yiitap/core'
+
+import { parseEncryptedBlock } from './util'
 
 export const inputRegex = /(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/
 
@@ -48,30 +51,24 @@ export const EncryptedBlock = Node.create<EncryptedBlockOptions>({
         tag: 'encrypted-block',
         getAttrs: (dom) => {
           const el = dom as HTMLElement
-          const ivAttr = el.getAttribute('data-iv') || '[]'
-          let parsedIv = []
-          try {
-            parsedIv = JSON.parse(ivAttr)
-          } catch (e) {
-            parsedIv = []
-          }
-
-          return {
-            ciphertext: el.getAttribute('data-ciphertext') || '',
-            iv: parsedIv,
-          }
+          const raw = el.getAttribute('data-encryption-meta')
+          return parseEncryptedBlock(raw)
         },
       },
     ]
   },
 
-  renderHTML({ node, HTMLAttributes }) {
+  renderHTML({ node }) {
     return [
       'encrypted-block',
-      mergeAttributes(HTMLAttributes, {
-        'data-ciphertext': node.attrs.ciphertext,
-        'data-iv': JSON.stringify(node.attrs.iv),
-      }),
+      {
+        'data-encryption-meta': encodeBase64(
+          JSON.stringify({
+            ciphertext: node.attrs.ciphertext,
+            iv: node.attrs.iv,
+          })
+        ),
+      },
     ]
   },
 

@@ -6,7 +6,7 @@
       @click.self="close"
       v-if="show"
     >
-      <div class="dialog-box" :class="{ fullscreen: fullscreen }">
+      <div class="dialog-box" :class="{ fullscreen }">
         <div class="dialog-header">
           <slot name="title">{{ title }}</slot>
           <o-btn icon="close" class="close" @click="close" />
@@ -71,6 +71,7 @@ const close = () => {
       max-height: unset;
       border-radius: 0;
     }
+
 
     .dialog-body {
       position: relative;

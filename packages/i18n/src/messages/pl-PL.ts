@@ -21,10 +21,10 @@ export default {
       friendly: 'Przyjazny',
       humorous: 'Humorystyczny',
       inspirational: 'Inspirujące',
-      mysterious: 'Tajemniczy',
+      mysterious: 'Tajemniczy'
     },
     translate: 'Przetłumacz na',
-    write: 'Napisz cokolwiek',
+    write: 'Napisz cokolwiek'
   },
   diagram: {
     class: 'Schemat klas',
@@ -33,7 +33,7 @@ export default {
     name: 'Schemat tekstowy',
     sequence: 'Schemat sekwencji',
     state: 'Diagram stanu',
-    tips: 'Generowanie diagramu i wykresu z tekstu w podobny sposób jak przecena',
+    tips: 'Generowanie diagramu i wykresu z tekstu w podobny sposób jak przecena'
   },
   editor: {
     add: 'Dodać',
@@ -58,6 +58,7 @@ export default {
     details: 'Bliższe dane',
     duplicate: 'Duplikat',
     emoji: 'Emoji',
+    encryptedBlock: 'Zaszyfrowany blok',
     fontFamily: 'Rodzina czcionek',
     fontSize: 'Rozmiar czcionki',
     formatting: 'Formatowanie',
@@ -123,7 +124,7 @@ export default {
     untoggleHeading: 'Odłącz',
     url: 'Adres URL',
     video: 'Wstaw wideo',
-    viewSource: 'Zobacz źródło',
+    viewSource: 'Zobacz źródło'
   },
   emojiGroup: {
     activities: 'Działania',
@@ -135,7 +136,7 @@ export default {
     recent: 'Ostatni',
     smileys: 'Uśmiechy i emocje',
     symbols: 'Symbolika',
-    travel: 'Podróże i miejsca',
+    travel: 'Podróże i miejsca'
   },
   image: {
     height: 'Wysokość',
@@ -153,7 +154,7 @@ export default {
     src: 'Źródło obrazu',
     unlockAspectRatio: 'Odblokuj proporcje',
     width: 'Szerokość',
-    zoom: 'Brzęczenie',
+    zoom: 'Brzęczenie'
   },
   label: {
     advanced: 'Zaawansowany',
@@ -169,6 +170,7 @@ export default {
     color: 'Kolor',
     common: 'Wspólny',
     confirm: 'Confirm',
+    content: 'Treść',
     copy: 'Kopia',
     cut: 'Cięcie',
     download: 'Pobierać',
@@ -176,9 +178,26 @@ export default {
     embed: 'Osadzać',
     embedAdd: 'Osadź (pliki PDF, Youtube, Google Docs, Spotify...)',
     empty: 'Pusty',
-    emptyTips:
-      'Naciśnij Enter, aby kontynuować z pustą notatką, lub wybierz opcję Dalej',
+    emptyTips: 'Naciśnij Enter, aby kontynuować z pustą notatką, lub wybierz opcję Dalej',
     emptyToggle: 'Pusty przełącznik',
+    encrypted: {
+      block: 'Zaszyfrowany blok',
+      blockAdd: 'Dodaj zaszyfrowany blok',
+      blockEmpty: 'Pusty zaszyfrowany blok',
+      changePassword: 'Zmień hasło',
+      content: 'Zaszyfrowana treść',
+      encryption: 'Szyfrowanie',
+      errorDecrypt: 'Nie udało się odszyfrować',
+      errorToken: 'Nieprawidłowy token',
+      masterPassword: 'Hasło główne',
+      newPassword: 'Nowe hasło',
+      oldPassword: 'Stare hasło',
+      password: 'Hasło',
+      passwordTips: 'Wskazówki dotyczące haseł',
+      rePassword: 'Ponowne hasło',
+      reveal: 'Ujawnić',
+      verify: 'Zweryfikować'
+    },
     example: 'Przykład',
     generate: 'Spowodować',
     generatedBy: 'Wygenerowane przez',
@@ -192,7 +211,7 @@ export default {
     linkPlaceholder: {
       image: 'Link do obrazu',
       model: 'Model łącza',
-      video: 'Link do filmu',
+      video: 'Link do filmu'
     },
     media: 'Głoska bezdźwięczna',
     model: 'Model',
@@ -200,6 +219,7 @@ export default {
     model3dAdd: 'Dodaj model 3D',
     modelViewer: 'Przeglądarka modeli',
     more: 'Więcej',
+    next: 'Następny',
     noResults: 'Brak wyników',
     ok: 'OK',
     preview: 'Zapowiedź',
@@ -224,12 +244,12 @@ export default {
       failed: 'Przesyłanie nie powiodło się',
       notConfigured: 'Przesyłanie nie jest skonfigurowane',
       tips: 'Przeciągnij pliki tutaj lub kliknij, aby je przesłać.',
-      uploading: 'Przesyłanie',
+      uploading: 'Przesyłanie'
     },
     video: 'Wideo',
     videoAdd: 'Dodaj film',
     view: 'Pogląd',
-    write: 'Pisać',
+    write: 'Pisać'
   },
   language: {
     chineseSimplified: 'Simplified Chinese',
@@ -245,14 +265,14 @@ export default {
     portuguese: 'Portuguese',
     russian: 'Russian',
     spanish: 'Spanish',
-    vietnamese: 'Vietnamese',
+    vietnamese: 'Vietnamese'
   },
   link: {
     back: 'Powrót do menu głównego',
     edit: 'Edytuj łącze',
     off: 'Wyłącz łącze',
     open: 'Otwórz łącze',
-    openInNewTab: 'Otwórz w nowej karcie',
+    openInNewTab: 'Otwórz w nowej karcie'
   },
   table: {
     addColumn: 'Dodaj kolumnę',
@@ -269,6 +289,6 @@ export default {
     removeRow: 'Usuń wiersz',
     selectColumn: 'Wybierz Kolumna',
     selectRow: 'Wybierz opcję Wiersz',
-    split: 'Podziel komórki',
-  },
+    split: 'Podziel komórki'
+  }
 }

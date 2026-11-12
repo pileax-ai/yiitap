@@ -1,5 +1,5 @@
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import { EncryptedBlock, EncryptionMetadata, type EncryptedBlockOptions } from '@yiitap/extension-encrypted'
+import { EncryptedBlock, EncryptionMeta, type EncryptedBlockOptions, type EncryptionMetaOptions } from '@yiitap/extension-encrypted'
 import View from './view.vue'
 
 const OEncryptedBlock = EncryptedBlock.extend<EncryptedBlockOptions>({
@@ -8,5 +8,5 @@ const OEncryptedBlock = EncryptedBlock.extend<EncryptedBlockOptions>({
   },
 })
 
-export { OEncryptedBlock, EncryptionMetadata as OEncryptionMetadata }
-export type { EncryptedBlockOptions }
+export { OEncryptedBlock, EncryptionMeta as OEncryptionMeta }
+export type { EncryptedBlockOptions, EncryptionMetaOptions }
