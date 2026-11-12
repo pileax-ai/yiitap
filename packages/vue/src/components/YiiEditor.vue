@@ -16,6 +16,9 @@
       </template>
     </o-main-menu>
 
+    <!-- Find and Replace -->
+    <o-find-menu :editor="editor" v-if="editor" />
+
     <!-- Bubble/Floating Menu -->
     <o-bubble-menu
       v-bind="bubbleMenuOptions"
@@ -62,6 +65,7 @@ import { sanitizeNodes, type AiOptions } from '@yiitap/core'
 
 import OMainMenu from './menus/OMainMenu.vue'
 import OBubbleMenu from './menus/OBubbleMenu.vue'
+import OFindMenu from './menus/OFindMenu.vue'
 import OFloatingMenu from './menus/OFloatingMenu.vue'
 import OSideMenu from './menus/OSideMenu.vue'
 

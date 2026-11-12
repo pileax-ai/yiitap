@@ -51,6 +51,7 @@
 		"@tiptap/extension-collaboration-caret": "^3.32.0",
 		"@tiptap/extension-details": "^3.32.0",
 		"@tiptap/extension-document": "^3.32.0",
+    "@tiptap/extension-find-and-replace": "3.32.0",
 		"@tiptap/extension-font-family": "^3.32.0",
 		"@tiptap/extension-heading": "^3.32.0",
 		"@tiptap/extension-highlight": "^3.32.0",

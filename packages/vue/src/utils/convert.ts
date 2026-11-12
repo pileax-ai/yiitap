@@ -45,7 +45,7 @@ export const systemKeymap = () => {
   }
 }
 
-export const convertShortcut = (shortcut: string) => {
+export const convertShortcut = (shortcut: string, keepCase = false) => {
   const keys = shortcut
     ?.split('+')
     .map((k) => k.trim().toLowerCase())
@@ -53,8 +53,16 @@ export const convertShortcut = (shortcut: string) => {
   if (!keys || !keys.length) return shortcut
 
   const map = systemKeymap()
-  const converted = keys.map((k) => {
-    return map[k as keyof typeof map] ?? k.toUpperCase()
+  const converted = keys.map((k, index) => {
+    if (map[k as keyof typeof map]) {
+      return map[k as keyof typeof map]
+    }
+    // If keepCase is true, retrieve the original token by index from the raw split
+    if (keepCase) {
+      const originalTokens = shortcut.split('+').map((item) => item.trim())
+      return originalTokens[index] ?? k
+    }
+    return k.toUpperCase()
   })
 
   return converted.join('+')

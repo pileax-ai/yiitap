@@ -239,6 +239,7 @@ const editorOptions = computed(() => {
         enabled: () => headingCollapsible.value,
       },
     },
+    'FindAndReplace',
     'InlineMath',
     'Markdown',
     'OAudio',

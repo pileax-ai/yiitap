@@ -11,6 +11,7 @@
           :type="type"
           :placeholder="placeholder"
           :autocomplete="autocomplete"
+          :tabindex="tabindex"
           @focus="emit('focus')"
           @blur="emit('blur')"
           @keyup.enter="emit('enter')"
@@ -36,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import OIcon from './OIcon.vue'
 
 const props = defineProps({
@@ -49,6 +50,10 @@ const props = defineProps({
     default: 'text',
   },
   placeholder: {
+    type: String,
+    default: '',
+  },
+  tabindex: {
     type: String,
     default: '',
   },
@@ -72,6 +77,7 @@ const emit = defineEmits([
   'clear',
   'update:modelValue',
 ])
+const attrs = useAttrs()
 const input = ref<HTMLInputElement | null>(null)
 
 const value = computed({
