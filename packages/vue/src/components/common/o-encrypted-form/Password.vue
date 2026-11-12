@@ -7,7 +7,7 @@
         :placeholder="tr('label.encrypted.password')"
         type="password"
         autocomplete="new-password"
-        :class="{ 'error': error.password?.error }"
+        :class="{ error: error.password?.error }"
         autofocus
         clearable
       >
@@ -20,7 +20,7 @@
         :placeholder="tr('label.encrypted.rePassword')"
         type="password"
         autocomplete="re-password"
-        :class="{ 'error': error.rePassword?.error }"
+        :class="{ error: error.rePassword?.error }"
         clearable
       >
         <template #prefix>
@@ -48,7 +48,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
-import { arrayToBase64, setupMasterPassword, CurrentEncryptionVersion } from '@yiitap/core'
+import {
+  arrayToBase64,
+  setupMasterPassword,
+  CurrentEncryptionVersion,
+} from '@yiitap/core'
 import { OBtn, OIcon, OInput } from '../../index'
 import { useI18n, MasterKeys } from '../../../hooks'
 
@@ -76,15 +80,22 @@ const error = ref({
 async function onConfirm() {
   if (!validate() || !props.editor) return
 
-  const { version, salt, ciphertext, iv, key } = await setupMasterPassword(CurrentEncryptionVersion, password.value)
+  const { version, salt, ciphertext, iv, key } = await setupMasterPassword(
+    CurrentEncryptionVersion,
+    password.value
+  )
 
-  props.editor.chain().focus().setEncryptionMeta({
-    version,
-    tips: tips.value,
-    salt,
-    ciphertext,
-    iv,
-  }).run()
+  props.editor
+    .chain()
+    .focus()
+    .setEncryptionMeta({
+      version,
+      tips: tips.value,
+      salt,
+      ciphertext,
+      iv,
+    })
+    .run()
   const id = arrayToBase64(salt)
   MasterKeys.set(id, key)
 

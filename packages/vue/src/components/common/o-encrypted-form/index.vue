@@ -22,10 +22,12 @@
     <section class="tab-panels">
       <template v-for="(item, index) in tabs" :key="index">
         <div class="tab-panel" v-if="item.value === currentTab">
-          <component :is="item.component"
-                     v-bind="props"
-                     @confirm="onConfirm"
-                     @next="onNext" />
+          <component
+            :is="item.component"
+            v-bind="props"
+            @confirm="onConfirm"
+            @next="onNext"
+          />
         </div>
       </template>
     </section>
@@ -33,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, type PropType, onMounted, watch} from 'vue'
+import { ref, computed, type PropType, onMounted, watch } from 'vue'
 import { Editor } from '@tiptap/core'
 import { arrayToBase64 } from '@yiitap/core'
 import { getEncryptionMeta } from '@yiitap/extension-encrypted'
@@ -72,9 +74,24 @@ const verified = computed(() => {
 
 const tabs = computed(() => {
   return [
-    { label: tr('label.encrypted.masterPassword'), value: 'password', component: Password, show: !passwordReady.value },
-    { label: tr('label.encrypted.verify'), value: 'verifier', component: Verifier, show: passwordReady.value && !verified.value },
-    { label: tr('label.content'), value: 'content', component: Content, show: true },
+    {
+      label: tr('label.encrypted.masterPassword'),
+      value: 'password',
+      component: Password,
+      show: !passwordReady.value,
+    },
+    {
+      label: tr('label.encrypted.verify'),
+      value: 'verifier',
+      component: Verifier,
+      show: passwordReady.value && !verified.value,
+    },
+    {
+      label: tr('label.content'),
+      value: 'content',
+      component: Content,
+      show: true,
+    },
   ]
 })
 
@@ -88,13 +105,17 @@ function onNext(name: string) {
 
 watch(verified, (newValue) => {
   currentTab.value = passwordReady.value
-    ? verified.value ? 'content' : 'verifier'
+    ? verified.value
+      ? 'content'
+      : 'verifier'
     : 'password'
 })
 
 onMounted(() => {
   currentTab.value = passwordReady.value
-    ? verified.value ? 'content' : 'verifier'
+    ? verified.value
+      ? 'content'
+      : 'verifier'
     : 'password'
 })
 </script>

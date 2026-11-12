@@ -122,7 +122,7 @@ import {
   OEncryptedBlock,
   OEncryptionMeta,
   type EncryptedBlockOptions,
-  type EncryptionMetaOptions
+  type EncryptionMetaOptions,
 } from './encrypted/encrypted-block'
 import OHorizontalRule from './horizontal-rule'
 import OImage from './image'

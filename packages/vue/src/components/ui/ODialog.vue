@@ -72,7 +72,6 @@ const close = () => {
       border-radius: 0;
     }
 
-
     .dialog-body {
       position: relative;
       display: flex;

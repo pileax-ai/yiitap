@@ -1,17 +1,17 @@
 export default {
   ai: {
-    askAi: 'Demandez à l\'IA',
+    askAi: "Demandez à l'IA",
     changeTone: 'Changer de ton',
     continuation: 'Continuation',
     enrichWithEmoji: 'Enrichissez avec Emoji',
     error: 'Veuillez fournir une configuration IA correcte',
     explain: 'Expliquer',
-    fixSpellingGrammar: 'Corriger l\'orthographe et la grammaire',
-    improveWriting: 'Améliorer l\'écriture',
+    fixSpellingGrammar: "Corriger l'orthographe et la grammaire",
+    improveWriting: "Améliorer l'écriture",
     makeLonger: 'Rallonger',
     makeShorter: 'Rendre plus court',
     summarize: 'Résumer',
-    tellAi: 'Dites à l\'IA quoi écrire',
+    tellAi: "Dites à l'IA quoi écrire",
     tone: {
       authoritative: 'Faisant autorité',
       casual: 'Occasionnel',
@@ -21,10 +21,10 @@ export default {
       friendly: 'Amical',
       humorous: 'Humoristique',
       inspirational: 'Inspirant',
-      mysterious: 'Mystérieux'
+      mysterious: 'Mystérieux',
     },
     translate: 'Traduire en',
-    write: 'Écrivez n\'importe quoi'
+    write: "Écrivez n'importe quoi",
   },
   diagram: {
     class: 'Diagramme de classes',
@@ -32,15 +32,15 @@ export default {
     gantt: 'Diagramme de Gantt',
     name: 'Diagramme de texte',
     sequence: 'Diagramme de séquence',
-    state: 'Diagramme d\'état',
-    tips: 'Génération de diagramme et de graphique à partir de texte de la même manière que le markdown'
+    state: "Diagramme d'état",
+    tips: 'Génération de diagramme et de graphique à partir de texte de la même manière que le markdown',
   },
   editor: {
     add: 'Ajouter',
     addMore: 'Ajouter plus',
     aiBlock: 'Bloc IA',
     align: 'Aligner',
-    backgroundColor: 'Couleur d\'arrière-plan',
+    backgroundColor: "Couleur d'arrière-plan",
     blockFormula: 'Bloc',
     blockMath: 'Bloquer les mathématiques',
     blockquote: 'Citation de bloc',
@@ -74,7 +74,7 @@ export default {
     horizontal: 'Règle horizontale',
     hr: 'Insérer une règle horizontale',
     hyperlink: 'Lien hypertexte',
-    indent: 'Augmenter l\'indentation',
+    indent: "Augmenter l'indentation",
     indentDropdown: 'Retrait',
     inlineFormula: 'En ligne',
     inlineMath: 'Mathématiques en ligne',
@@ -86,7 +86,7 @@ export default {
     multiColumn: 'Multi-colonnes',
     noColor: 'Aucune couleur',
     orderedList: 'Liste ordonnée',
-    outdent: 'Diminuer l\'indentation',
+    outdent: "Diminuer l'indentation",
     paragraph: 'Paragraphe',
     photo: 'Insérer une photo',
     print: 'Imprimer',
@@ -111,8 +111,8 @@ export default {
     thirdPartyService: 'Services tiers',
     toggle: 'Basculer',
     toggleFullscreen: 'Basculer en plein écran',
-    toggleHead: 'Basculer l\'en-tête',
-    toggleHeading: 'Basculer l\'en-tête',
+    toggleHead: "Basculer l'en-tête",
+    toggleHeading: "Basculer l'en-tête",
     toggleHeading1: 'Basculer le titre 1',
     toggleHeading2: 'Basculer le titre 2',
     toggleHeading3: 'Basculer le titre 3',
@@ -124,7 +124,7 @@ export default {
     untoggleHeading: 'Désactiver',
     url: 'URL',
     video: 'Insérer une vidéo',
-    viewSource: 'Afficher la source'
+    viewSource: 'Afficher la source',
   },
   emojiGroup: {
     activities: 'Activités',
@@ -136,7 +136,7 @@ export default {
     recent: 'Récent',
     smileys: 'Émoticônes et émotions',
     symbols: 'Symboles',
-    travel: 'Voyages et lieux'
+    travel: 'Voyages et lieux',
   },
   image: {
     height: 'Hauteur',
@@ -145,16 +145,16 @@ export default {
     lockAspectRatio: 'Verrouiller le rapport hauteur/largeur',
     medium: 'Moyen',
     original: 'Original',
-    preferences: 'Préférences d\'image',
+    preferences: "Préférences d'image",
     ratio: 'Rapport',
     reposition: 'Repositionner',
-    repositionTips: 'Faites glisser l\'image pour la repositionner',
+    repositionTips: "Faites glisser l'image pour la repositionner",
     size: 'Taille',
     small: 'Petit',
-    src: 'Source de l\'image',
+    src: "Source de l'image",
     unlockAspectRatio: 'Déverrouiller le rapport hauteur/largeur',
     width: 'Largeur',
-    zoom: 'Zoom'
+    zoom: 'Zoom',
   },
   label: {
     advanced: 'Avancé',
@@ -178,7 +178,8 @@ export default {
     embed: 'Intégrer',
     embedAdd: 'Intégrer (PDF, YouTube, Google Docs, Spotify...)',
     empty: 'Vide',
-    emptyTips: 'Appuyez sur Entrée pour continuer avec une note vide, ou sélectionnez ce qui suit',
+    emptyTips:
+      'Appuyez sur Entrée pour continuer avec une note vide, ou sélectionnez ce qui suit',
     emptyToggle: 'Bascule vide',
     encrypted: {
       block: 'Bloc chiffré',
@@ -194,9 +195,9 @@ export default {
       oldPassword: 'Ancien mot de passe',
       password: 'Mot de passe',
       passwordTips: 'Conseils pour les mots de passe',
-      rePassword: 'Veuillez à nouveau m\'indiquer votre mot de passe.',
+      rePassword: "Veuillez à nouveau m'indiquer votre mot de passe.",
       reveal: 'Révéler',
-      verify: 'Vérifier'
+      verify: 'Vérifier',
     },
     example: 'Exemple',
     generate: 'Générer',
@@ -209,9 +210,9 @@ export default {
     link: 'Lien',
     linkAddress: 'Adresse du lien',
     linkPlaceholder: {
-      image: 'Lien vers l\'image',
+      image: "Lien vers l'image",
       model: 'Lien vers le modèle',
-      video: 'Lien vidéo'
+      video: 'Lien vidéo',
     },
     media: 'Médias',
     model: 'Modèle',
@@ -221,7 +222,7 @@ export default {
     more: 'Plus',
     next: 'Suivant',
     noResults: 'Aucun résultat',
-    ok: 'D\'accord',
+    ok: "D'accord",
     preview: 'Aperçu',
     remove: 'Retirer',
     replace: 'Remplacer',
@@ -236,20 +237,20 @@ export default {
     think: 'Pense',
     toc: 'Table des matières',
     turnInto: 'Devenir',
-    typeForCommands: 'Tapez \'/\' pour les commandes',
+    typeForCommands: "Tapez '/' pour les commandes",
     untitled: 'Sans titre',
     update: 'Mise à jour',
     upload: 'Télécharger',
     uploader: {
       failed: 'Échec du chargement',
-      notConfigured: 'Le chargement n\'est pas configuré.',
+      notConfigured: "Le chargement n'est pas configuré.",
       tips: 'Glissez-déposez les fichiers ici, ou cliquez pour les télécharger.',
-      uploading: 'Téléchargement'
+      uploading: 'Téléchargement',
     },
     video: 'Vidéo',
     videoAdd: 'Ajouter une vidéo',
     view: 'Voir',
-    write: 'Écrire'
+    write: 'Écrire',
   },
   language: {
     chineseSimplified: 'Chinois simplifié',
@@ -265,14 +266,14 @@ export default {
     portuguese: 'portugais',
     russian: 'russe',
     spanish: 'Espagnol',
-    vietnamese: 'vietnamien'
+    vietnamese: 'vietnamien',
   },
   link: {
     back: 'Retour au menu principal',
     edit: 'Modifier le lien',
     off: 'Désactiver le lien',
     open: 'Ouvrir le lien',
-    openInNewTab: 'Ouvrir dans un nouvel onglet'
+    openInNewTab: 'Ouvrir dans un nouvel onglet',
   },
   table: {
     addColumn: 'Ajouter une colonne',
@@ -289,6 +290,6 @@ export default {
     removeRow: 'Supprimer la ligne',
     selectColumn: 'Sélectionner une colonne',
     selectRow: 'Sélectionner une ligne',
-    split: 'Diviser les cellules'
-  }
+    split: 'Diviser les cellules',
+  },
 }

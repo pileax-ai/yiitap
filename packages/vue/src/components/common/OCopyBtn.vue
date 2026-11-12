@@ -1,6 +1,5 @@
 <template>
-  <o-common-btn :icon="copyIcon"
-                :tooltip="tr('label.copy')" @click="onClick">
+  <o-common-btn :icon="copyIcon" :tooltip="tr('label.copy')" @click="onClick">
   </o-common-btn>
 </template>
 

@@ -20,7 +20,7 @@
           :error-message="error?.oldPassword.message"
           type="password"
           autocomplete="old-password"
-          :class="{ 'error': error.oldPassword?.error }"
+          :class="{ error: error.oldPassword?.error }"
           autofocus
           clearable
         >
@@ -42,7 +42,7 @@
             :error-message="error?.password.message"
             type="password"
             autocomplete="new-password"
-            :class="{ 'error': error.password?.error }"
+            :class="{ error: error.password?.error }"
             autofocus
             clearable
           >
@@ -56,7 +56,7 @@
             :error-message="error?.rePassword.message"
             type="password"
             autocomplete="re-password"
-            :class="{ 'error': error.rePassword?.error }"
+            :class="{ error: error.rePassword?.error }"
             clearable
           >
             <template #prefix>
@@ -76,8 +76,7 @@
       </form>
     </section>
     <footer class="actions">
-      <o-btn type="info" :loading="loading"
-             @click.stop="onConfirm">
+      <o-btn type="info" :loading="loading" @click.stop="onConfirm">
         {{ tr('label.ok') }}
       </o-btn>
     </footer>
@@ -85,16 +84,19 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, onMounted} from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Editor } from '@tiptap/core'
 import {
   arrayToBase64,
   setupMasterPassword,
   CurrentEncryptionVersion,
   type MasterPasswordMeta,
-  verifyMasterPassword
+  verifyMasterPassword,
 } from '@yiitap/core'
-import { getEncryptionMeta, changeMasterPassword } from '@yiitap/extension-encrypted'
+import {
+  getEncryptionMeta,
+  changeMasterPassword,
+} from '@yiitap/extension-encrypted'
 import { useI18n, MasterKeys } from '../../hooks'
 import { OBtn, OIcon, OInput } from '../../index'
 
@@ -124,7 +126,7 @@ const meta = computed(() => {
 
 async function verify() {
   if (!oldPassword.value) {
-    error.value.oldPassword = { error: true, message: 'Required'}
+    error.value.oldPassword = { error: true, message: 'Required' }
     return false
   }
 
@@ -139,7 +141,10 @@ async function verify() {
     if (result.ok) {
       return true
     } else {
-      error.value.oldPassword = { error: true, message: 'Incorrect password or tampered ciphertext/IV' }
+      error.value.oldPassword = {
+        error: true,
+        message: 'Incorrect password or tampered ciphertext/IV',
+      }
       return false
     }
   } catch (err) {
@@ -178,15 +183,24 @@ function validate(): boolean {
 }
 
 async function onConfirm() {
-  if (!await verify()) return
+  if (!(await verify())) return
   if (!validate()) return
 
   loading.value = true
-  const { salt, key } = await setupMasterPassword(CurrentEncryptionVersion, password.value)
+  const { salt, key } = await setupMasterPassword(
+    CurrentEncryptionVersion,
+    password.value
+  )
 
   // Change master password
   try {
-    await changeMasterPassword(props.editor, CurrentEncryptionVersion, oldPassword.value, password.value, tips.value)
+    await changeMasterPassword(
+      props.editor,
+      CurrentEncryptionVersion,
+      oldPassword.value,
+      password.value,
+      tips.value
+    )
   } catch (err) {
     console.error(err)
   }

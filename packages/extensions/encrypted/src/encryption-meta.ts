@@ -2,7 +2,12 @@ import { Node } from '@tiptap/core'
 import { Plugin, PluginKey } from '@tiptap/pm/state'
 import { encodeBase64 } from '@yiitap/core'
 
-import { ENCRYPTION_META_NODE, EncryptionMetaOptions, findMetaNode, parseEncryptionMeta } from './util'
+import {
+  ENCRYPTION_META_NODE,
+  EncryptionMetaOptions,
+  findMetaNode,
+  parseEncryptionMeta,
+} from './util'
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
@@ -36,7 +41,9 @@ export const EncryptionMeta = Node.create<EncryptionMetaOptions>({
       {
         tag: 'div[data-type="encryption-meta"]',
         getAttrs: (element) => {
-          const raw = (element as HTMLElement).getAttribute('data-encryption-meta')
+          const raw = (element as HTMLElement).getAttribute(
+            'data-encryption-meta'
+          )
 
           return parseEncryptionMeta(raw)
         },
@@ -71,7 +78,7 @@ export const EncryptionMeta = Node.create<EncryptionMetaOptions>({
 
           // Structural check without instanceof to avoid duplicate-package issues.
           // Any step spanning from 0 to the end of the old doc means a full replacement.
-          const isFullDocReplace = tr.steps.some(step => {
+          const isFullDocReplace = tr.steps.some((step) => {
             const s = step as any
             return s.from === 0 && s.to === tr.before.content.size
           })
@@ -84,7 +91,7 @@ export const EncryptionMeta = Node.create<EncryptionMetaOptions>({
         },
 
         appendTransaction(trs, oldState, newState) {
-          if (!trs.some(tr => tr.docChanged)) return null
+          if (!trs.some((tr) => tr.docChanged)) return null
 
           const oldMeta = findMetaNode(oldState.doc)
           if (!oldMeta) return null
@@ -128,26 +135,27 @@ export const EncryptionMeta = Node.create<EncryptionMetaOptions>({
     return {
       setEncryptionMeta:
         (meta: EncryptionMetaOptions) =>
-          ({ state, dispatch }) => {
-            const first = state.doc.firstChild
-            const nodeType = state.schema.nodes[ENCRYPTION_META_NODE]
-            if (!nodeType) return false
+        ({ state, dispatch }) => {
+          const first = state.doc.firstChild
+          const nodeType = state.schema.nodes[ENCRYPTION_META_NODE]
+          if (!nodeType) return false
 
-            if (!first || first.type.name !== ENCRYPTION_META_NODE) {
-              // Create and insert the meta node at position 0
-              if (dispatch) {
-                dispatch(state.tr.insert(0, nodeType.create(meta)))
-              }
-              return true
-            }
-
-            // Merge into existing attributes
+          if (!first || first.type.name !== ENCRYPTION_META_NODE) {
+            // Create and insert the meta node at position 0
             if (dispatch) {
-              dispatch(state.tr.setNodeMarkup(0, undefined, { ...first.attrs, ...meta }))
+              dispatch(state.tr.insert(0, nodeType.create(meta)))
             }
             return true
-          },
+          }
+
+          // Merge into existing attributes
+          if (dispatch) {
+            dispatch(
+              state.tr.setNodeMarkup(0, undefined, { ...first.attrs, ...meta })
+            )
+          }
+          return true
+        },
     }
   },
 })
-

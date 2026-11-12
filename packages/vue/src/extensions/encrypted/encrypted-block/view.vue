@@ -11,17 +11,14 @@
     @contextmenu.prevent="onContextMenu"
     @click="onClick"
   >
-    <o-block-popover
-      v-model="showPopover"
-      placement="bottom"
-    >
+    <o-block-popover v-model="showPopover" placement="bottom">
       <template #popover-content>
-        <o-encrypted-password :editor="editor"
-                              @confirm="onShowPopover(false)"
-                              v-if="popoverView === 'password'" />
-        <o-encrypted-form :editor="editor"
-                          @confirm="onSave"
-                          v-else />
+        <o-encrypted-password
+          :editor="editor"
+          @confirm="onShowPopover(false)"
+          v-if="popoverView === 'password'"
+        />
+        <o-encrypted-form :editor="editor" @confirm="onSave" v-else />
       </template>
 
       <o-block-placeholder
@@ -30,18 +27,21 @@
         v-if="!ciphertext"
       />
       <div class="encrypted-block-container" v-else>
-        <toolbar v-bind="props"
-                 :decrypted="decrypted"
-                 :revealed="revealed"
-                 :text="decryptedText"
-                 @action="onAction" />
+        <toolbar
+          v-bind="props"
+          :decrypted="decrypted"
+          :revealed="revealed"
+          :text="decryptedText"
+          @action="onAction"
+        />
 
-        <o-block-placeholder
-          :icon="revealIcon"
-          :autogrow="revealed"
-        >
+        <o-block-placeholder :icon="revealIcon" :autogrow="revealed">
           <template v-if="revealed">
-            <o-textarea v-model="text" :readonly="!isEditable" @blur="onSaving" />
+            <o-textarea
+              v-model="text"
+              :readonly="!isEditable"
+              @blur="onSaving"
+            />
           </template>
           <template v-else>
             {{ tr('label.encrypted.content') }}
@@ -62,7 +62,11 @@
     >
       <div class="encrypted-block-container">
         <header>
-          <o-icon-label icon="shield" :label="tr('label.content')" class="o-tips" />
+          <o-icon-label
+            icon="shield"
+            :label="tr('label.content')"
+            class="o-tips"
+          />
         </header>
         <o-textarea v-model="text" @blur="onSaving" />
       </div>
@@ -189,7 +193,7 @@ function onSave(name: string, value: Indexable) {
   savingIcon.value = 'done'
   props.updateAttributes({
     ciphertext: value.ciphertext,
-    iv: value.iv
+    iv: value.iv,
   })
   onShowPopover(false)
 
@@ -275,14 +279,13 @@ onMounted(() => {
 }
 
 .encrypted-block-dialog {
-
   .dialog-box {
     height: unset;
     width: 50vw;
     min-width: unset !important;
     min-height: unset !important;
     max-width: 700px !important;
-    max-height: 600px !important;;
+    max-height: 600px !important;
 
     .dialog-body {
       display: block;

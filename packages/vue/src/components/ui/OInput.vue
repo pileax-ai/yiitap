@@ -65,7 +65,13 @@ const props = defineProps({
     default: '',
   },
 })
-const emit = defineEmits(['blur', 'enter', 'focus', 'clear', 'update:modelValue'])
+const emit = defineEmits([
+  'blur',
+  'enter',
+  'focus',
+  'clear',
+  'update:modelValue',
+])
 const input = ref<HTMLInputElement | null>(null)
 
 const value = computed({
@@ -110,7 +116,6 @@ defineExpose({
     border-radius: 3px;
     box-sizing: border-box;
     outline: solid 1px rgba(0, 0, 0, 0.05);
-
 
     &:has(input:focus) {
       background: var(--yii-active-bg-color);

@@ -21,10 +21,10 @@ export default {
       friendly: 'Ramah',
       humorous: 'Lucu',
       inspirational: 'Inspiratif',
-      mysterious: 'Misterius'
+      mysterious: 'Misterius',
     },
     translate: 'Terjemahkan ke',
-    write: 'Tulis apa saja'
+    write: 'Tulis apa saja',
   },
   diagram: {
     class: 'Diagram Kelas',
@@ -33,7 +33,7 @@ export default {
     name: 'Diagram Teks',
     sequence: 'Diagram Urutan',
     state: 'Diagram Keadaan',
-    tips: 'Pembuatan diagram dan bagan dari teks dengan cara yang mirip dengan penurunan harga'
+    tips: 'Pembuatan diagram dan bagan dari teks dengan cara yang mirip dengan penurunan harga',
   },
   editor: {
     add: 'Menambahkan',
@@ -124,7 +124,7 @@ export default {
     untoggleHeading: 'Nonaktifkan',
     url: 'URL',
     video: 'Sisipkan Video',
-    viewSource: 'Lihat Sumber'
+    viewSource: 'Lihat Sumber',
   },
   emojiGroup: {
     activities: 'Aktivitas',
@@ -136,7 +136,7 @@ export default {
     recent: 'Terkini',
     smileys: 'Smiley & Emosi',
     symbols: 'Simbol',
-    travel: 'Perjalanan & Tempat'
+    travel: 'Perjalanan & Tempat',
   },
   image: {
     height: 'Tinggi',
@@ -154,7 +154,7 @@ export default {
     src: 'Sumber Gambar',
     unlockAspectRatio: 'Buka kunci rasio aspek',
     width: 'Lebar',
-    zoom: 'Perbesar'
+    zoom: 'Perbesar',
   },
   label: {
     advanced: 'Canggih',
@@ -178,7 +178,8 @@ export default {
     embed: 'Menanamkan',
     embedAdd: 'Sematkan (PDF, YouTube, Google Docs, Spotify...)',
     empty: 'Kosong',
-    emptyTips: 'Tekan Enter untuk melanjutkan dengan catatan kosong, atau pilih berikut',
+    emptyTips:
+      'Tekan Enter untuk melanjutkan dengan catatan kosong, atau pilih berikut',
     emptyToggle: 'Tombol kosong',
     encrypted: {
       block: 'Blok Terenkripsi',
@@ -196,7 +197,7 @@ export default {
       passwordTips: 'Tips kata sandi',
       rePassword: 'Kata sandi lagi',
       reveal: 'Mengungkap',
-      verify: 'Memeriksa'
+      verify: 'Memeriksa',
     },
     example: 'Contoh',
     generate: 'Menghasilkan',
@@ -211,7 +212,7 @@ export default {
     linkPlaceholder: {
       image: 'Tautan gambar',
       model: 'Tautan model',
-      video: 'Tautan video'
+      video: 'Tautan video',
     },
     media: 'Media',
     model: 'Model',
@@ -236,7 +237,7 @@ export default {
     think: 'Memikirkan',
     toc: 'Daftar isi',
     turnInto: 'Berubah menjadi',
-    typeForCommands: 'Ketik \'/\' untuk perintah',
+    typeForCommands: "Ketik '/' untuk perintah",
     untitled: 'Tanpa judul',
     update: 'Memperbarui',
     upload: 'Mengunggah',
@@ -244,12 +245,12 @@ export default {
       failed: 'Unggahan gagal',
       notConfigured: 'Unggahan belum dikonfigurasi.',
       tips: 'Seret file ke sini, atau klik untuk mengunggah.',
-      uploading: 'Mengunggah'
+      uploading: 'Mengunggah',
     },
     video: 'Video',
     videoAdd: 'Tambahkan video',
     view: 'Melihat',
-    write: 'Menulis'
+    write: 'Menulis',
   },
   language: {
     chineseSimplified: 'Simplified Chinese',
@@ -265,14 +266,14 @@ export default {
     portuguese: 'Portuguese',
     russian: 'Russian',
     spanish: 'Spanish',
-    vietnamese: 'Vietnamese'
+    vietnamese: 'Vietnamese',
   },
   link: {
     back: 'Kembali ke menu utama',
     edit: 'Sunting Tautan',
     off: 'Nonaktifkan Tautan',
     open: 'Buka Tautan',
-    openInNewTab: 'Open in new tab'
+    openInNewTab: 'Open in new tab',
   },
   table: {
     addColumn: 'Tambahkan Kolom',
@@ -289,6 +290,6 @@ export default {
     removeRow: 'Hapus Baris',
     selectColumn: 'Pilih Kolom',
     selectRow: 'Pilih Baris',
-    split: 'Pisahkan Sel'
-  }
+    split: 'Pisahkan Sel',
+  },
 }

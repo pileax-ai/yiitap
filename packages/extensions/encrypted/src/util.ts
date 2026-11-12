@@ -3,11 +3,13 @@ import { Node as PMNode } from '@tiptap/pm/model'
 import type { EditorState } from '@tiptap/pm/state'
 import {
   DataCorruptError,
-  decodeBase64, decryptText,
-  EncryptionVersion, encryptText,
+  decodeBase64,
+  decryptText,
+  EncryptionVersion,
+  encryptText,
   MasterPasswordMeta,
   setupMasterPassword,
-  verifyMasterPassword
+  verifyMasterPassword,
 } from '@yiitap/core'
 
 export const ENCRYPTED_BLOCK_NODE = 'encryptedBlock'
@@ -25,7 +27,9 @@ export interface EncryptionMetaOptions {
  * Internal helper: locate the meta node in the document
  * @param doc Document
  */
-export function findMetaNode(doc: PMNode): { node: PMNode; pos: number } | null {
+export function findMetaNode(
+  doc: PMNode
+): { node: PMNode; pos: number } | null {
   // Fast path: meta is normally the first child
   const first = doc.firstChild
   if (first && first.type.name === ENCRYPTION_META_NODE) {
@@ -46,7 +50,9 @@ export function findMetaNode(doc: PMNode): { node: PMNode; pos: number } | null 
  * Public helper: read the current encryption metadata
  * @param state Editor State
  */
-export function getEncryptionMeta(state: EditorState): EncryptionMetaOptions | null {
+export function getEncryptionMeta(
+  state: EditorState
+): EncryptionMetaOptions | null {
   const first = state.doc.firstChild
   if (!first || first.type.name !== ENCRYPTION_META_NODE) return null
   return first.attrs as EncryptionMetaOptions
@@ -57,7 +63,7 @@ export async function changeMasterPassword(
   newVersion: EncryptionVersion,
   oldPassword: string,
   newPassword: string,
-  newPasswordTips: string,
+  newPasswordTips: string
 ): Promise<CryptoKey> {
   const { state, view } = editor
 
@@ -89,10 +95,17 @@ export async function changeMasterPassword(
   // 5. Reencryption
   const reEncrypted = await Promise.all(
     blocks.map(async ({ pos, attrs }) => {
-      const plain = await decryptText(attrs.ciphertext as string, attrs.iv as number[], oldResult.key)
-      const enc = await encryptText(plain, newSetup.key)  // 内部生成新 IV
-      return { pos, attrs: { ...attrs, ciphertext: enc.ciphertext, iv: enc.iv } }
-    }),
+      const plain = await decryptText(
+        attrs.ciphertext as string,
+        attrs.iv as number[],
+        oldResult.key
+      )
+      const enc = await encryptText(plain, newSetup.key) // 内部生成新 IV
+      return {
+        pos,
+        attrs: { ...attrs, ciphertext: enc.ciphertext, iv: enc.iv },
+      }
+    })
   )
 
   // 6. Commit transaction
@@ -151,7 +164,8 @@ export function parseEncryptedBlock(raw: string | null) {
       const attrs = JSON.parse(text)
       if (!attrs || typeof attrs !== 'object') return null
       return {
-        ciphertext: typeof attrs.ciphertext === 'string' ? attrs.ciphertext : '',
+        ciphertext:
+          typeof attrs.ciphertext === 'string' ? attrs.ciphertext : '',
         iv: Array.isArray(attrs.iv) ? attrs.iv : [],
       }
     } catch {

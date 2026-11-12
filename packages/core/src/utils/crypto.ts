@@ -22,11 +22,19 @@ export interface EncryptionProfile {
 export const PROFILES: Record<EncryptionVersion, EncryptionProfile> = {
   v1: Object.freeze({
     version: 'v1',
-    kdf: Object.freeze({ name: 'PBKDF2', hash: 'SHA-256', iterations: 600_000 }),
+    kdf: Object.freeze({
+      name: 'PBKDF2',
+      hash: 'SHA-256',
+      iterations: 600_000,
+    }),
   }),
   v2: Object.freeze({
     version: 'v2',
-    kdf: Object.freeze({ name: 'PBKDF2', hash: 'SHA-256', iterations: 1_000_000 }),
+    kdf: Object.freeze({
+      name: 'PBKDF2',
+      hash: 'SHA-256',
+      iterations: 1_000_000,
+    }),
   }),
 }
 
@@ -53,10 +61,11 @@ export class DataCorruptError extends Error {
 }
 
 export type VerifyMasterPasswordResult =
-  | { ok: true; key: CryptoKey }
-  | { ok: false; reason: 'PASSWORD_INVALID' }
+  { ok: true; key: CryptoKey } | { ok: false; reason: 'PASSWORD_INVALID' }
 
-export function getEncryptionProfile(version: EncryptionVersion): EncryptionProfile {
+export function getEncryptionProfile(
+  version: EncryptionVersion
+): EncryptionProfile {
   if (!Object.prototype.hasOwnProperty.call(PROFILES, version)) {
     throw new Error(`Unsupported encryption version: ${version}`)
   }
@@ -67,7 +76,10 @@ export function getEncryptionProfile(version: EncryptionVersion): EncryptionProf
  * Initialize a new document master password.
  * Generates a fresh salt, derives the CryptoKey, and encrypts a verification token.
  */
-export async function setupMasterPassword(version: EncryptionVersion, password: string): Promise<MasterPasswordSetupResult> {
+export async function setupMasterPassword(
+  version: EncryptionVersion,
+  password: string
+): Promise<MasterPasswordSetupResult> {
   const salt = generateSalt()
   const key = await deriveKeyFromPassword(version, password, salt)
 
@@ -90,11 +102,16 @@ function assertValidVerifyMeta(meta: MasterPasswordMeta): void {
   if (!Array.isArray(meta.iv) || meta.iv.length !== IV_BYTES) {
     throw new DataCorruptError('masterVerifyIv must be 12 bytes')
   }
-  if (typeof meta.ciphertext !== 'string' || !isValidStandardBase64(meta.ciphertext)) {
+  if (
+    typeof meta.ciphertext !== 'string' ||
+    !isValidStandardBase64(meta.ciphertext)
+  ) {
     throw new DataCorruptError('masterVerifyCipher is not valid base64')
   }
   if (!Object.prototype.hasOwnProperty.call(PROFILES, meta.version)) {
-    throw new DataCorruptError(`Unsupported encryption version: ${meta.version}`)
+    throw new DataCorruptError(
+      `Unsupported encryption version: ${meta.version}`
+    )
   }
 }
 
@@ -104,7 +121,7 @@ function assertValidVerifyMeta(meta: MasterPasswordMeta): void {
  */
 export async function verifyMasterPassword(
   password: string,
-  meta: MasterPasswordMeta,
+  meta: MasterPasswordMeta
 ): Promise<VerifyMasterPasswordResult> {
   assertValidVerifyMeta(meta)
 
@@ -145,7 +162,7 @@ export async function changeMasterPassword(
 export async function deriveKeyFromPassword(
   version: EncryptionVersion,
   password: string,
-  salt: Uint8Array,
+  salt: Uint8Array
 ): Promise<CryptoKey> {
   const profile = getEncryptionProfile(version)
   const encoder = new TextEncoder()
@@ -184,7 +201,10 @@ export function generateIv(): Uint8Array {
   return window.crypto.getRandomValues(new Uint8Array(12))
 }
 
-export async function encryptText(text: string, key: CryptoKey): Promise<{ ciphertext: string; iv: number[] }> {
+export async function encryptText(
+  text: string,
+  key: CryptoKey
+): Promise<{ ciphertext: string; iv: number[] }> {
   const iv = generateIv()
   const encoded = new TextEncoder().encode(text)
   const cipherBuffer = await window.crypto.subtle.encrypt(
@@ -198,7 +218,11 @@ export async function encryptText(text: string, key: CryptoKey): Promise<{ ciphe
   }
 }
 
-export async function decryptText(base64Cipher: string, ivArray: number[], key: CryptoKey): Promise<string> {
+export async function decryptText(
+  base64Cipher: string,
+  ivArray: number[],
+  key: CryptoKey
+): Promise<string> {
   const iv = new Uint8Array(ivArray)
   const cipherBuffer = base64ToBuffer(base64Cipher)
   const decryptedBuffer = await window.crypto.subtle.decrypt(
@@ -218,9 +242,14 @@ function isValidStandardBase64(s: string): boolean {
 // ------------------------------------------------------------
 export function encodeBase64(str: string): string {
   const bytes = new TextEncoder().encode(str)
-  const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join('')
+  const binString = Array.from(bytes, (byte) =>
+    String.fromCodePoint(byte)
+  ).join('')
   // Convert standard base64 to base64url: no +, /, or = padding.
-  return btoa(binString).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+  return btoa(binString)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
 }
 
 export function decodeBase64(base64Str: string): string {

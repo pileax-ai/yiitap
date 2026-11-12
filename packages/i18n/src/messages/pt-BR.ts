@@ -21,10 +21,10 @@ export default {
       friendly: 'Amigável',
       humorous: 'Bem-humorado',
       inspirational: 'Inspirador',
-      mysterious: 'Misterioso'
+      mysterious: 'Misterioso',
     },
     translate: 'Traduzir para',
-    write: 'Escreva qualquer coisa'
+    write: 'Escreva qualquer coisa',
   },
   diagram: {
     class: 'Diagrama de classes',
@@ -33,7 +33,7 @@ export default {
     name: 'Diagrama de Texto',
     sequence: 'Diagrama de Sequência',
     state: 'Diagrama de Estado',
-    tips: 'Geração de diagrama e gráfico a partir de texto de maneira semelhante ao markdown'
+    tips: 'Geração de diagrama e gráfico a partir de texto de maneira semelhante ao markdown',
   },
   editor: {
     add: 'Adicionar',
@@ -124,7 +124,7 @@ export default {
     untoggleHeading: 'Desativar',
     url: 'URL',
     video: 'Inserir vídeo',
-    viewSource: 'Ver fonte'
+    viewSource: 'Ver fonte',
   },
   emojiGroup: {
     activities: 'Atividades',
@@ -136,7 +136,7 @@ export default {
     recent: 'Recente',
     smileys: 'Carinhas sorridentes e emoções',
     symbols: 'Símbolos',
-    travel: 'Viagens e Lugares'
+    travel: 'Viagens e Lugares',
   },
   image: {
     height: 'Altura',
@@ -154,7 +154,7 @@ export default {
     src: 'Fonte da imagem',
     unlockAspectRatio: 'Desbloquear proporção',
     width: 'Largura',
-    zoom: 'Zoom'
+    zoom: 'Zoom',
   },
   label: {
     advanced: 'Avançado',
@@ -178,7 +178,8 @@ export default {
     embed: 'Incorporar',
     embedAdd: 'Incorporar (PDFs, YouTube, Google Docs, Spotify...)',
     empty: 'Vazio',
-    emptyTips: 'Pressione Enter para continuar com uma nota vazia ou selecione o seguinte',
+    emptyTips:
+      'Pressione Enter para continuar com uma nota vazia ou selecione o seguinte',
     emptyToggle: 'Alternar vazio',
     encrypted: {
       block: 'Bloco criptografado',
@@ -196,7 +197,7 @@ export default {
       passwordTips: 'Dicas de senha',
       rePassword: 'Senha novamente',
       reveal: 'Revelar',
-      verify: 'Verificar'
+      verify: 'Verificar',
     },
     example: 'Exemplo',
     generate: 'Gerar',
@@ -211,7 +212,7 @@ export default {
     linkPlaceholder: {
       image: 'Link da imagem',
       model: 'Link do modelo',
-      video: 'Link do vídeo'
+      video: 'Link do vídeo',
     },
     media: 'Mídia',
     model: 'Modelo',
@@ -236,7 +237,7 @@ export default {
     think: 'Pensar',
     toc: 'Índice',
     turnInto: 'Transforme-se em',
-    typeForCommands: 'Digite \'/\' para comandos',
+    typeForCommands: "Digite '/' para comandos",
     untitled: 'Sem título',
     update: 'Atualizar',
     upload: 'Carregar',
@@ -244,12 +245,12 @@ export default {
       failed: 'Falha no upload',
       notConfigured: 'O carregamento não está configurado.',
       tips: 'Arraste os arquivos para cá ou clique para fazer o upload.',
-      uploading: 'Carregando'
+      uploading: 'Carregando',
     },
     video: 'Vídeo',
     videoAdd: 'Adicionar um vídeo',
     view: 'Visualizar',
-    write: 'Escrever'
+    write: 'Escrever',
   },
   language: {
     chineseSimplified: 'Chinês simplificado',
@@ -265,14 +266,14 @@ export default {
     portuguese: 'Português',
     russian: 'russo',
     spanish: 'Espanhol',
-    vietnamese: 'vietnamita'
+    vietnamese: 'vietnamita',
   },
   link: {
     back: 'Voltar ao menu principal',
     edit: 'Editar link',
     off: 'Desativar link',
     open: 'Abrir link',
-    openInNewTab: 'Abrir em nova aba'
+    openInNewTab: 'Abrir em nova aba',
   },
   table: {
     addColumn: 'Adicionar coluna',
@@ -289,6 +290,6 @@ export default {
     removeRow: 'Remover linha',
     selectColumn: 'Selecione Coluna',
     selectRow: 'Selecione linha',
-    split: 'Dividir células'
-  }
+    split: 'Dividir células',
+  },
 }

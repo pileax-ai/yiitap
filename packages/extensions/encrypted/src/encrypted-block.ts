@@ -1,8 +1,4 @@
-import {
-  Node,
-  nodeInputRule,
-  mergeAttributes,
-} from '@tiptap/core'
+import { Node, nodeInputRule, mergeAttributes } from '@tiptap/core'
 import { encodeBase64 } from '@yiitap/core'
 
 import { parseEncryptedBlock } from './util'
@@ -98,9 +94,8 @@ export const EncryptedBlock = Node.create<EncryptedBlockOptions>({
     start: (src: string) => src.match(/<encrypted-block/)?.index ?? -1,
     tokenize(src: string) {
       // Regex to capture the entire tag and its attributes
-      const match = /^<encrypted-block\b([^>]*)><\/encrypted-block>\s*(?:\n|$)/i.exec(
-        src
-      )
+      const match =
+        /^<encrypted-block\b([^>]*)><\/encrypted-block>\s*(?:\n|$)/i.exec(src)
       if (!match) return undefined
 
       const attrsStr = match[1]

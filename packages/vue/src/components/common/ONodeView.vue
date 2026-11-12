@@ -16,7 +16,8 @@ defineProps(nodeViewProps)
 
   //  hover
   // --------------------------------------------------
-  &.has-toolbar:hover, &.show-toolbar {
+  &.has-toolbar:hover,
+  &.show-toolbar {
     .o-block-toolbar {
       visibility: visible;
     }

@@ -33,7 +33,7 @@
       v-model="password"
       type="password"
       :placeholder="tr('label.encrypted.password')"
-      :class="{ 'error': error.error }"
+      :class="{ error: error.error }"
       autofocus
       clearable
       @keydown.enter.prevent="onVerify"
@@ -52,13 +52,15 @@
       </template>
       <template #bottom>
         <span class="o-text-error" v-if="error.message">
-            {{ error.message }}
-          </span>
+          {{ error.message }}
+        </span>
         <div v-else-if="meta?.tips">
-          <o-icon-label icon="info"
-                        :label="meta.tips"
-                        class="o-tips"
-                        icon-class="small" />
+          <o-icon-label
+            icon="info"
+            :label="meta.tips"
+            class="o-tips"
+            icon-class="small"
+          />
         </div>
       </template>
     </o-input>
@@ -66,9 +68,14 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import { nodeViewProps } from '@tiptap/vue-3'
-import { arrayToBase64, verifyMasterPassword, decryptText, type MasterPasswordMeta } from '@yiitap/core'
+import {
+  arrayToBase64,
+  verifyMasterPassword,
+  decryptText,
+  type MasterPasswordMeta,
+} from '@yiitap/core'
 import { getEncryptionMeta } from '@yiitap/extension-encrypted'
 import { useI18n, useTiptap, MasterKeys } from '../../../hooks'
 import {
@@ -110,7 +117,7 @@ const verifySource = ref('')
 const password = ref('')
 const error = ref<Indexable>({
   error: false,
-  message: ''
+  message: '',
 })
 
 const meta = computed(() => {
@@ -164,13 +171,13 @@ async function onVerify() {
     } else {
       error.value = {
         error: true,
-        message: 'Incorrect password or tampered ciphertext/IV'
+        message: 'Incorrect password or tampered ciphertext/IV',
       }
     }
   } catch (err) {
     error.value = {
       error: true,
-      message: err.message
+      message: err.message,
     }
   }
 }
@@ -193,7 +200,7 @@ async function onDecrypt(source: string) {
     emit('action', {
       value: source,
       decrypted: true,
-      text
+      text,
     })
     popover.value?.setShow(false)
   } catch (err) {

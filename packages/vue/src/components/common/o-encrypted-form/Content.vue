@@ -15,9 +15,7 @@
       </o-textarea>
     </section>
     <footer class="actions">
-      <o-btn type="info"
-             :disabled="!passwordReady"
-             @click="onConfirm">
+      <o-btn type="info" :disabled="!passwordReady" @click="onConfirm">
         {{ tr('label.ok') }}
       </o-btn>
     </footer>
@@ -27,7 +25,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
-import { arrayToBase64, encryptText} from '@yiitap/core'
+import { arrayToBase64, encryptText } from '@yiitap/core'
 import { getEncryptionMeta } from '@yiitap/extension-encrypted'
 import { OBtn, OIcon, OTextarea } from '../../index'
 

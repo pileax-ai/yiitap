@@ -21,10 +21,10 @@ export default {
       friendly: 'Friendly',
       humorous: 'Humorous',
       inspirational: 'Inspirational',
-      mysterious: 'Mysterious'
+      mysterious: 'Mysterious',
     },
     translate: 'Translate to',
-    write: 'Write anything'
+    write: 'Write anything',
   },
   diagram: {
     class: 'Class Diagram',
@@ -33,7 +33,7 @@ export default {
     name: 'Text Diagram',
     sequence: 'Sequence Diagram',
     state: 'State Diagram',
-    tips: 'Generation of diagram and chart from text in a similar manner as markdown'
+    tips: 'Generation of diagram and chart from text in a similar manner as markdown',
   },
   editor: {
     add: 'Add',
@@ -124,7 +124,7 @@ export default {
     untoggleHeading: 'Untoggle',
     url: 'URL',
     video: 'Insert Video',
-    viewSource: 'View Source'
+    viewSource: 'View Source',
   },
   emojiGroup: {
     activities: 'Activities',
@@ -136,7 +136,7 @@ export default {
     recent: 'Recent',
     smileys: 'Smileys & Emotion',
     symbols: 'Symbols',
-    travel: 'Travel & Places'
+    travel: 'Travel & Places',
   },
   image: {
     height: 'Height',
@@ -154,7 +154,7 @@ export default {
     src: 'Image Source',
     unlockAspectRatio: 'Unlock aspect ratio',
     width: 'Width',
-    zoom: 'Zoom'
+    zoom: 'Zoom',
   },
   label: {
     advanced: 'Advanced',
@@ -178,7 +178,8 @@ export default {
     embed: 'Embed',
     embedAdd: 'Embed (PDFs, Youtube, Google Docs, Spotify...)',
     empty: 'Empty',
-    emptyTips: 'Press Enter to continue with an empty note, or select following',
+    emptyTips:
+      'Press Enter to continue with an empty note, or select following',
     emptyToggle: 'Empty toggle',
     encrypted: {
       block: 'Encrypted Block',
@@ -196,7 +197,7 @@ export default {
       passwordTips: 'Password tips',
       rePassword: 'Password again',
       reveal: 'Reveal',
-      verify: 'Verify'
+      verify: 'Verify',
     },
     example: 'Example',
     generate: 'Generate',
@@ -211,7 +212,7 @@ export default {
     linkPlaceholder: {
       image: 'Image link',
       model: 'Model link',
-      video: 'Video link'
+      video: 'Video link',
     },
     media: 'Media',
     model: 'Model',
@@ -236,7 +237,7 @@ export default {
     think: 'Think',
     toc: 'Table of Contents',
     turnInto: 'Turn into',
-    typeForCommands: 'Type \'/\' for commands',
+    typeForCommands: "Type '/' for commands",
     untitled: 'Untitled',
     update: 'Update',
     upload: 'Upload',
@@ -244,12 +245,12 @@ export default {
       failed: 'Upload failed',
       notConfigured: 'Upload is not configured',
       tips: 'Drag files here, or click to upload.',
-      uploading: 'Uploading'
+      uploading: 'Uploading',
     },
     video: 'Video',
     videoAdd: 'Add a video',
     view: 'View',
-    write: 'Write'
+    write: 'Write',
   },
   language: {
     chineseSimplified: 'Simplified Chinese',
@@ -265,14 +266,14 @@ export default {
     portuguese: 'Portuguese',
     russian: 'Russian',
     spanish: 'Spanish',
-    vietnamese: 'Vietnamese'
+    vietnamese: 'Vietnamese',
   },
   link: {
     back: 'Back to main menu',
     edit: 'Edit Link',
     off: 'Disable Link',
     open: 'Open Link',
-    openInNewTab: 'Open in new tab'
+    openInNewTab: 'Open in new tab',
   },
   table: {
     addColumn: 'Add Column',
@@ -289,6 +290,6 @@ export default {
     removeRow: 'Remove Row',
     selectColumn: 'Select Column',
     selectRow: 'Select Row',
-    split: 'Split Cells'
-  }
+    split: 'Split Cells',
+  },
 }

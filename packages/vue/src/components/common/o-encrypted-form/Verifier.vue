@@ -7,7 +7,7 @@
         :placeholder="tr('label.encrypted.password')"
         type="password"
         autocomplete="new-password"
-        :class="{ 'error': error.error }"
+        :class="{ error: error.error }"
         autofocus
         clearable
       >
@@ -19,10 +19,12 @@
             {{ error.message }}
           </span>
           <div v-else-if="meta?.tips">
-            <o-icon-label icon="info"
-                          :label="meta.tips"
-                          class="o-tips"
-                          icon-class="small" />
+            <o-icon-label
+              icon="info"
+              :label="meta.tips"
+              class="o-tips"
+              icon-class="small"
+            />
           </div>
         </template>
       </o-input>
@@ -38,7 +40,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Editor } from '@tiptap/core'
-import { arrayToBase64, verifyMasterPassword, type MasterPasswordMeta } from '@yiitap/core'
+import {
+  arrayToBase64,
+  verifyMasterPassword,
+  type MasterPasswordMeta,
+} from '@yiitap/core'
 import { getEncryptionMeta } from '@yiitap/extension-encrypted'
 import { OBtn, OIcon, OIconLabel, OInput } from '../../index'
 import { useI18n, MasterKeys } from '../../../hooks'
@@ -91,12 +97,15 @@ async function onConfirm() {
       masterKey.value = result.key
       emit('next', 'content')
     } else {
-      error.value = { error: true, message: 'Incorrect password or tampered ciphertext/IV' }
+      error.value = {
+        error: true,
+        message: 'Incorrect password or tampered ciphertext/IV',
+      }
     }
   } catch (err) {
     error.value = {
       error: true,
-      message: err.message
+      message: err.message,
     }
   }
 }
@@ -110,7 +119,7 @@ function validate() {
     }
     return false
   } else {
-    error.value = { }
+    error.value = {}
   }
 
   return true

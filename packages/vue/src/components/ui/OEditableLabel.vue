@@ -1,9 +1,11 @@
 <template>
-  <div class="o-editable-label"
-       ref="labelRef"
-       :contenteditable="editing"
-       @click="startEdit"
-       @blur="stopEdit">
+  <div
+    class="o-editable-label"
+    ref="labelRef"
+    :contenteditable="editing"
+    @click="startEdit"
+    @blur="stopEdit"
+  >
     {{ text }}
   </div>
 </template>
@@ -14,12 +16,12 @@ import { computed, ref, nextTick } from 'vue'
 const props = defineProps({
   modelValue: {
     type: String,
-    default: ''
+    default: '',
   },
   editable: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 const emit = defineEmits(['update:modelValue'])
 
@@ -32,7 +34,7 @@ const text = computed({
   },
   set(value) {
     emit('update:modelValue', value)
-  }
+  },
 })
 
 const startEdit = async (event: MouseEvent) => {
@@ -63,7 +65,7 @@ const stopEdit = () => {
     outline: none;
   }
 
-  &[contenteditable="true"]::before {
+  &[contenteditable='true']::before {
     content: '';
     position: absolute;
     inset: -4px;

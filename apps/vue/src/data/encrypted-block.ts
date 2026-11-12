@@ -3,139 +3,101 @@
  */
 
 export const EncryptedBlock = {
-  "type": "doc",
-  "content": [
+  type: 'doc',
+  content: [
     {
-      "type": "encryptionMeta",
-      "attrs": {
-        "version": "v1",
-        "tips": "123456",
-        "salt": [
-          17,
-          126,
-          209,
-          76,
-          99,
-          81,
-          34,
-          247,
-          213,
-          120,
-          57,
-          200,
-          102,
-          114,
-          224,
-          168
+      type: 'encryptionMeta',
+      attrs: {
+        version: 'v1',
+        tips: '123456',
+        salt: [
+          17, 126, 209, 76, 99, 81, 34, 247, 213, 120, 57, 200, 102, 114, 224,
+          168,
         ],
-        "ciphertext": "zgi8m1iq/IqkBJJoLlwzaT4RSDpUGkndf1YnnRVek1/UmuEa2VjrjKee98kUYp5E",
-        "iv": [
-          199,
-          146,
-          53,
-          188,
-          83,
-          30,
-          223,
-          36,
-          240,
-          227,
-          96,
-          142
-        ]
-      }
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "id": "c6f802a9-77be-4a48-8e11-de1a7d7d4250",
-        "textAlign": null,
-        "level": 1
+        ciphertext:
+          'zgi8m1iq/IqkBJJoLlwzaT4RSDpUGkndf1YnnRVek1/UmuEa2VjrjKee98kUYp5E',
+        iv: [199, 146, 53, 188, 83, 30, 223, 36, 240, 227, 96, 142],
       },
-      "content": [
-        {
-          "type": "text",
-          "text": "Encrypted"
-        }
-      ]
     },
     {
-      "type": "heading",
-      "attrs": {
-        "id": "3083715f-496a-4e10-8be0-788705c49089",
-        "textAlign": null,
-        "level": 2
+      type: 'heading',
+      attrs: {
+        id: 'c6f802a9-77be-4a48-8e11-de1a7d7d4250',
+        textAlign: null,
+        level: 1,
       },
-      "content": [
+      content: [
         {
-          "type": "text",
-          "text": "Encrypted Blocks"
-        }
-      ]
+          type: 'text',
+          text: 'Encrypted',
+        },
+      ],
     },
     {
-      "type": "heading",
-      "attrs": {
-        "id": "d57f3511-54f0-411d-902a-3f4e8b875723",
-        "textAlign": null,
-        "level": 3
+      type: 'heading',
+      attrs: {
+        id: '3083715f-496a-4e10-8be0-788705c49089',
+        textAlign: null,
+        level: 2,
       },
-      "content": [
+      content: [
         {
-          "type": "text",
-          "text": "Empty"
-        }
-      ]
+          type: 'text',
+          text: 'Encrypted Blocks',
+        },
+      ],
     },
     {
-      "type": "encryptedBlock",
-      "attrs": {
-        "ciphertext": "",
-        "iv": []
-      }
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "id": "41555b0a-f0b7-4c93-bb66-0e1cd34b92a0",
-        "textAlign": null,
-        "level": 3
+      type: 'heading',
+      attrs: {
+        id: 'd57f3511-54f0-411d-902a-3f4e8b875723',
+        textAlign: null,
+        level: 3,
       },
-      "content": [
+      content: [
         {
-          "type": "text",
-          "text": "Block"
-        }
-      ]
+          type: 'text',
+          text: 'Empty',
+        },
+      ],
     },
     {
-      "type": "encryptedBlock",
-      "attrs": {
-        "ciphertext": "RxIEBYqqhpZ0Wimmu6X7RLY6LapxqaiBgMQ7VvvzIqopopwC5FEIvdprdfB7EHDCVhsPS8mQTilYY1WdjtYUb6ldh7LyZe81rOoYmAHZRGgOnU8jQ8N5V1nLwlU7VsOjlqQmUZyHoMqPr5zCm8tZSuhRUxFLPor7iKWOyOHlmsiHR7Iciwjh+bkjToruX1NGGFQn76qlP7ZezwLTILlLuiIH8MrrrQVvXyYix5AnvNY2uJ2v+y4jspe4poDLOsLEQnRvUmzSCtm3NMqqWZYcAJmfunimINXm",
-        "iv": [
-          105,
-          105,
-          159,
-          160,
-          152,
-          67,
-          207,
-          149,
-          41,
-          132,
-          226,
-          178
-        ]
-      }
+      type: 'encryptedBlock',
+      attrs: {
+        ciphertext: '',
+        iv: [],
+      },
     },
     {
-      "type": "paragraph",
-      "attrs": {
-        "id": "97598221-dba9-470d-b89d-dd02b90c5345",
-        "textAlign": null
-      }
-    }
-  ]
+      type: 'heading',
+      attrs: {
+        id: '41555b0a-f0b7-4c93-bb66-0e1cd34b92a0',
+        textAlign: null,
+        level: 3,
+      },
+      content: [
+        {
+          type: 'text',
+          text: 'Block',
+        },
+      ],
+    },
+    {
+      type: 'encryptedBlock',
+      attrs: {
+        ciphertext:
+          'RxIEBYqqhpZ0Wimmu6X7RLY6LapxqaiBgMQ7VvvzIqopopwC5FEIvdprdfB7EHDCVhsPS8mQTilYY1WdjtYUb6ldh7LyZe81rOoYmAHZRGgOnU8jQ8N5V1nLwlU7VsOjlqQmUZyHoMqPr5zCm8tZSuhRUxFLPor7iKWOyOHlmsiHR7Iciwjh+bkjToruX1NGGFQn76qlP7ZezwLTILlLuiIH8MrrrQVvXyYix5AnvNY2uJ2v+y4jspe4poDLOsLEQnRvUmzSCtm3NMqqWZYcAJmfunimINXm',
+        iv: [105, 105, 159, 160, 152, 67, 207, 149, 41, 132, 226, 178],
+      },
+    },
+    {
+      type: 'paragraph',
+      attrs: {
+        id: '97598221-dba9-470d-b89d-dd02b90c5345',
+        textAlign: null,
+      },
+    },
+  ],
 }
 
 export const EncryptedBlockZh = `
