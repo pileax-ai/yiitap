@@ -263,5 +263,12 @@
   "table.removeRow": "947fa341",
   "table.selectColumn": "c9397e93",
   "table.selectRow": "b2997ed7",
-  "table.split": "488d0742"
+  "table.split": "488d0742",
+  "label.findAndReplace.matchCase": "53f06d24",
+  "label.findAndReplace.next": "4c88221e",
+  "label.findAndReplace.previous": "7828ca76",
+  "label.findAndReplace.toggleReplace": "e5a6c55e",
+  "label.findAndReplace.useRegex": "8afc795f",
+  "label.findAndReplace.wholeWord": "acc6cb92",
+  "label.replaceAll": "06eb4976"
 }

@@ -264,5 +264,12 @@
   "table.removeRow": "d312b9cc",
   "table.selectColumn": "53baa16c",
   "table.selectRow": "1953384c",
-  "table.split": "3068f60f"
+  "table.split": "3068f60f",
+  "label.findAndReplace.matchCase": "c949475b",
+  "label.findAndReplace.next": "00f8ed31",
+  "label.findAndReplace.previous": "d767cbd3",
+  "label.findAndReplace.toggleReplace": "de6a07fd",
+  "label.findAndReplace.useRegex": "2f04f3e6",
+  "label.findAndReplace.wholeWord": "42374c8f",
+  "label.replaceAll": "59b31899"
 }

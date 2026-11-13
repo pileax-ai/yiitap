@@ -5,6 +5,7 @@
         class="o-menubar-btn o-command-btn o-btn"
         :class="contentClass"
         :style="contentStyle"
+        :disabled="disabled"
         @click="emit('click', $event)"
       >
         <o-icon :name="icon" :color="color" :class="iconClass" v-if="icon" />

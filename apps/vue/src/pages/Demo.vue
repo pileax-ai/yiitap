@@ -126,6 +126,7 @@
 
         <aside class="layout-right">
           <div class="sticky-top">
+            <o-find-menu :editor="yiiEditor.editor" v-if="yiiEditor?.editor" />
             <o-doc-toc
               ref="tocRef"
               :editor="yiiEditor?.editor"
@@ -162,6 +163,7 @@ import {
   OEncryptionKit,
   OIcon,
   OMainMenu,
+  OFindMenu,
   OStarterKit,
   OUploadManager,
   createSlashSuggestion,
@@ -239,13 +241,14 @@ const editorOptions = computed(() => {
         enabled: () => headingCollapsible.value,
       },
     },
+    'FindAndReplace',
     'InlineMath',
     'Markdown',
     'OAudio',
     'OColon',
     'OBlockMath',
     'OColorHighlighter',
-    'ODetails',
+    // 'ODetails',
     'OEmbed',
     'OImage',
     'OModelViewer',
