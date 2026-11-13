@@ -17,7 +17,7 @@
     </o-main-menu>
 
     <!-- Find and Replace -->
-    <o-find-menu :editor="editor" v-if="editor" />
+    <o-find-menu :editor="editor" v-if="editor && showFindMenu" />
 
     <!-- Bubble/Floating Menu -->
     <o-bubble-menu
@@ -39,6 +39,8 @@
       :class="`${pageView}-view`"
       :editor="editor"
     />
+
+    <slot></slot>
   </main>
 </template>
 
@@ -142,6 +144,13 @@ const props = defineProps({
    * Show bubble menu or not.
    */
   showBubbleMenu: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * Show find and replace menu or not.
+   */
+  showFindMenu: {
     type: Boolean,
     default: false,
   },

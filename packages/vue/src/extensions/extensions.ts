@@ -43,7 +43,9 @@ import Collaboration, {
 import CollaborationCaret, {
   type CollaborationCaretOptions,
 } from '@tiptap/extension-collaboration-caret'
-import FindAndReplace, { type FindAndReplaceOptions } from '@tiptap/extension-find-and-replace'
+import FindAndReplace, {
+  type FindAndReplaceOptions,
+} from '@tiptap/extension-find-and-replace'
 import Highlight, { type HighlightOptions } from '@tiptap/extension-highlight'
 import { type HorizontalRuleOptions } from '@tiptap/extension-horizontal-rule'
 import Image, { type ImageOptions } from '@tiptap/extension-image'

@@ -226,7 +226,11 @@ export const extensionRegistry: {
   Collaboration: (opts?) => Collaboration.configure(opts),
   CollaborationCaret: (opts?) => CollaborationCaret.configure(opts),
   Color: (opts?) => Color.configure(opts),
-  FindAndReplace: (opts?) => FindAndReplace.configure(opts),
+  FindAndReplace: (opts?) =>
+    FindAndReplace.configure({
+      searchDebounceMs: 0,
+      ...opts,
+    }),
   Focus: (opts?) => Focus.configure(opts),
   FontFamily: (opts?) => FontFamily.configure(opts),
   Highlight: (opts?) => Highlight.configure({ multicolor: true, ...opts }),

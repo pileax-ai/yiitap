@@ -2,24 +2,29 @@
   <section class="o-find-menu-wrapper">
     <o-popover
       ref="popover"
-      placement="left"
+      placement="left-start"
       size="medium"
       trigger="manual"
       class="o-encrypted-block-toolbar"
-      tippy-class="o-encrypted-block-toolbar-popover"
+      tippy-class="o-find-menu-popover"
       :offset="[0, 46]"
-      :show-arrow="false">
+      :show-arrow="false"
+      @update:show="onShow"
+    >
       <template #trigger>
-        <div></div>
+        <div class="o-find-menu-trigger"></div>
       </template>
 
       <section class="o-find-menu" v-if="editor">
         <!-- Left -->
         <section class="left">
-          <o-command-btn icon="navigate_next"
-                         :icon-class="{ 'rotate-90': replaceEnabled }"
-                         tooltip="Toggle Replace"
-                         @click="toggleReplace"/>
+          <o-command-btn
+            icon="navigate_next"
+            :icon-class="{ 'rotate-90': replaceEnabled }"
+            :tooltip="tr('label.findAndReplace.toggleReplace')"
+            :disabled="!editor.isEditable"
+            @click="toggleReplace"
+          />
         </section>
 
         <!-- Right -->
@@ -27,66 +32,85 @@
           <div class="search-item">
             <o-input
               ref="searchInput"
-              placeholder="Search"
+              :placeholder="tr('label.search')"
               v-model="findAndReplace.searchTerm"
               @update:modelValue="setSearchTerm"
-              @keydown.enter.exact="editor.commands.goToNextResult()"
-              @keydown.shift.enter="editor.commands.goToPreviousResult()"
+              @keydown.enter.exact="goToNextResult"
+              @keydown.shift.enter="goToPreviousResult"
               data-testid="search-input"
               tabindex="1"
               clearable
             >
               <template #suffix>
                 <div class="rules">
-                  <o-command-btn icon="match_case"
-                                 tooltip="Match Case"
-                                 :content-class="{ 'active': caseSensitive }"
-                                 @click="toggleCaseSensitive" />
-                  <o-command-btn icon="match_word"
-                                 tooltip="Match Whole World"
-                                 :content-class="{ 'active': wholeWord }"
-                                 @click="toggleWholeWord" />
-                  <o-command-btn icon="regular_expression"
-                                 tooltip="Use Regular Expression"
-                                 :content-class="{ 'active': useRegex }"
-                                 @click="toggleUseRegex" />
+                  <o-command-btn
+                    icon="match_case"
+                    :tooltip="tr('label.findAndReplace.matchCase')"
+                    :content-class="{ active: caseSensitive }"
+                    @click="toggleCaseSensitive"
+                  />
+                  <o-command-btn
+                    icon="match_word"
+                    :tooltip="tr('label.findAndReplace.wholeWord')"
+                    :content-class="{ active: wholeWord }"
+                    @click="toggleWholeWord"
+                  />
+                  <o-command-btn
+                    icon="regular_expression"
+                    :tooltip="tr('label.findAndReplace.useRegex')"
+                    :content-class="{ active: useRegex }"
+                    @click="toggleUseRegex"
+                  />
                 </div>
               </template>
             </o-input>
             <div class="result">{{ resultCount }}</div>
-            <o-command-btn icon="arrow_back" icon-class="rotate-90"
-                           :tooltip="`Previous Match (${convertShortcut('shift+Enter', true)})`"
-                           :disabled="findAndReplace.results.length === 0"
-                           @click="editor.commands.goToPreviousResult()" />
-            <o-command-btn icon="arrow_back" icon-class="rotate-270"
-                           :tooltip="`Next Match (Enter)`"
-                           :disabled="findAndReplace.results.length === 0"
-                           @click="editor.commands.goToNextResult()" />
-            <o-command-btn icon="close" icon-class="rotate-270"
-                           :tooltip="`${tr('label.close')} (ESC)`"
-                           @click="showMenu(false)" />
+            <o-command-btn
+              icon="arrow_back"
+              icon-class="rotate-90"
+              :tooltip="`${tr('label.findAndReplace.previous')} (${convertShortcut('shift+Enter', true)})`"
+              :disabled="findAndReplace.results.length === 0"
+              @click="goToPreviousResult"
+            />
+            <o-command-btn
+              icon="arrow_back"
+              icon-class="rotate-270"
+              :tooltip="`${tr('label.findAndReplace.next')} (Enter)`"
+              :disabled="findAndReplace.results.length === 0"
+              @click="goToNextResult"
+            />
+            <o-command-btn
+              icon="close"
+              icon-class="rotate-270"
+              :tooltip="`${tr('label.close')} (ESC)`"
+              @click="showMenu(false)"
+            />
           </div>
           <div class="replace-item" v-if="replaceEnabled">
             <o-input
               ref="replaceInput"
-              placeholder="Replace"
+              :placeholder="tr('label.replace')"
               aria-label="Replace"
               v-model="findAndReplace.replaceTerm"
               @update:modelValue="setReplaceTerm"
-              @keydown.enter.exact="editor.commands.replace()"
+              @keydown.enter.exact="replace"
               @keydown.meta.enter="editor.commands.replaceAll()"
               data-testid="replace-input"
               tabindex="2"
               clearable
             />
-            <o-command-btn icon="arrow_back" icon-class="rotate-90"
-                           :disabled="findAndReplace.results.length === 0"
-                           :tooltip="`Replace (Enter)`"
-                           @click="editor?.commands.replace" />
-            <o-command-btn icon="arrow_back" icon-class="rotate-270"
-                           :disabled="findAndReplace.results.length === 0"
-                           :tooltip="`Replace All (${convertShortcut('meta+Enter', true)})`"
-                           @click="editor?.commands.replaceAll" />
+            <o-command-btn
+              icon="replace"
+              :disabled="findAndReplace.results.length === 0"
+              :tooltip="`${tr('label.replace')} (Enter)`"
+              @click="replace"
+            />
+            <o-command-btn
+              icon="replace_all"
+              :disabled="findAndReplace.results.length === 0"
+              :tooltip="`${tr('label.replaceAll')} (${convertShortcut('meta+Enter', true)})`"
+              @click="editor?.commands.replaceAll"
+            />
           </div>
         </section>
       </section>
@@ -95,18 +119,22 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onBeforeMount, onMounted, ref} from 'vue'
+import { computed, onBeforeMount, onMounted, ref } from 'vue'
 import { Editor } from '@tiptap/core'
 import type { FindAndReplaceStorage } from '@tiptap/extension-find-and-replace'
 
 import { OCommandBtn, OInput, OPopover } from '../index'
 import { useI18n } from '../../hooks'
-import { convertShortcut } from '../../utils'
+import { convertShortcut, isExtensionInstalled } from '../../utils'
 
 const props = defineProps({
   editor: {
     type: Editor,
-    required: true
+    required: true,
+  },
+  enabled: {
+    type: Boolean,
+    default: false,
   },
 })
 const { tr } = useI18n()
@@ -120,10 +148,16 @@ const wholeWord = ref(false)
 const useRegex = ref(false)
 const findAndReplace = ref<FindAndReplaceStorage>(createFindAndReplaceState())
 
+const enabled = computed(() => {
+  return isExtensionInstalled(props.editor, 'findAndReplace')
+})
+
 const resultCount = computed(() => {
   const { results, currentIndex } = findAndReplace.value
 
-  return results.length === 0 ? 'No results' : `${(currentIndex ?? 0) + 1} / ${results.length}`
+  return results.length === 0
+    ? tr('label.noResults')
+    : `${(currentIndex ?? 0) + 1} / ${results.length}`
 })
 
 function createFindAndReplaceState(): FindAndReplaceStorage {
@@ -173,6 +207,35 @@ function setSearchTerm(term: string) {
   props.editor.commands.setSearchTerm(term)
 }
 
+function goToNextResult() {
+  props.editor.commands.goToNextResult()
+  scrollToCurrentResult()
+}
+
+function goToPreviousResult() {
+  props.editor.commands.goToPreviousResult()
+  scrollToCurrentResult()
+}
+
+function replace() {
+  props.editor.commands.replace()
+  scrollToCurrentResult()
+}
+
+function scrollToCurrentResult() {
+  setTimeout(() => {
+    const activeEl = props.editor.view.dom.querySelector(
+      '.find-and-replace-result-current'
+    )
+    if (activeEl) {
+      activeEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
+    }
+  }, 50)
+}
+
 function setReplaceTerm(term: string) {
   props.editor.commands.setReplaceTerm(term)
 }
@@ -181,8 +244,6 @@ function showMenu(value: boolean) {
   popover.value?.setShow(value)
   if (value) {
     searchInput.value?.focus()
-  } else {
-    props.editor.commands.clearSearch()
   }
 }
 
@@ -201,6 +262,15 @@ const onKeyDown = (e: KeyboardEvent) => {
   }
 }
 
+function onShow(value: boolean) {
+  console.log('show', value)
+  if (value) {
+    props.editor.view.dom.classList.add('is-searching')
+  } else {
+    props.editor.view.dom.classList.remove('is-searching')
+  }
+}
+
 onMounted(() => {
   props.editor.on('transaction', updateFindAndReplace)
   document.addEventListener('keydown', onKeyDown)
@@ -215,10 +285,10 @@ onBeforeMount(() => {
 <style lang="scss">
 .o-find-menu-wrapper {
   position: absolute;
-  top: 36px;
+  top: 10px;
   right: 20px;
-
 }
+
 .o-find-menu {
   border-radius: 8px;
   background: var(--yii-tippy-popover-bg-color);
@@ -239,7 +309,8 @@ onBeforeMount(() => {
   }
 
   .right {
-    .search-item, .replace-item {
+    .search-item,
+    .replace-item {
       display: flex;
       align-items: center;
       gap: 4px;
@@ -286,6 +357,26 @@ onBeforeMount(() => {
 
   .o-divider {
     height: 24px;
+  }
+}
+
+.tiptap {
+  .find-and-replace-result {
+    background-color: unset !important;
+  }
+
+  .find-and-replace-result-current {
+    background-color: unset !important;
+  }
+
+  &.is-searching {
+    .find-and-replace-result {
+      background-color: rgb(255 225 0 / 0.4) !important;
+    }
+
+    .find-and-replace-result-current {
+      background-color: rgb(255 165 0 / 0.55) !important;
+    }
   }
 }
 </style>

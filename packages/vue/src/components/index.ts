@@ -63,4 +63,5 @@ export { default as OTooltip } from './ui/OTooltip.vue'
 // Menu
 export { default as OMainMenu } from './menus/OMainMenu.vue'
 export { default as OAiMenu } from './menus/OAiMenu.vue'
+export { default as OFindMenu } from './menus/OFindMenu.vue'
 export { default as OInlineMathMenu } from './menus/OInlineMathMenu.vue'
